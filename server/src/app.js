@@ -1,11 +1,16 @@
 const Koa = require('koa');
+const Router = require('koa-router');
+const indexRouter = require('./routes');
 
 const app = new Koa();
+const router = new Router();
+const port = process.env.PORT || 3000;
 
-app.use((ctx) => {
-  ctx.body = 'hello world';
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+app.listen(port, () => {
+  console.log(`Koa server is listening to port ${port}`);
 });
 
-app.listen(3000, () => {
-  console.log('Koa server is listening to port 3000');
-});
+router.use('/', indexRouter.routes());
