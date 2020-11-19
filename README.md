@@ -4,9 +4,13 @@
 <div align="center">
    
 ![Javascript](https://img.shields.io/badge/JavaScript-ES6+-yellow?logo=javascript)
+![TypeScript](https://img.shields.io/badge/TypeScript-v4.0.5-blue?logo=TypeScript)
 ![react](https://img.shields.io/badge/React-17.0.1-1cf?logo=react)
+![styled-components](https://img.shields.io/badge/styled_components-pink?logo=styled-components)
+![MobX](https://img.shields.io/badge/MobX-17.0.1-orange?logo=MobX)
 ![NodeJS](https://img.shields.io/badge/node.js-v14.5.0-green?logo=node.js)
-![express](https://img.shields.io/badge/Express-4.16.1-skyblue?logo=Node.js)
+![Koa](https://img.shields.io/badge/koa-2.13.0-white?logo=koa)
+![Jest](https://img.shields.io/badge/Jest-26.6.3-C21325?logo=jest)
 ![Babel](https://img.shields.io/badge/@babel/core-7.12.3-yellow?logo=babel) 
 ![Webpack](https://img.shields.io/badge/Webpack-5.3.1-blue?logo=Webpack) 
 ![MySQL](https://img.shields.io/badge/MySQL-v5.7.32-blue?logo=mysql)
