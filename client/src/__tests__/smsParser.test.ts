@@ -3,7 +3,7 @@ describe('sms parser', () => {
     const inisis = `
     [WEB발신]
     [kg이니시스]
-    464.000원 익월
+    464,000원 익월
     합산요금청구
     `;
   });
