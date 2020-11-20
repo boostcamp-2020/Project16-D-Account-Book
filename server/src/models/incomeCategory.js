@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define(
-    'user',
+  const incomeCategory = sequelize.define(
+    'income_category',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -8,35 +8,29 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      provider: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      email: {
+      color: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      nickname: {
-        type: DataTypes.STRING,
+      is_deleted: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
-      },
-      profileUrl: {
-        type: DataTypes.STRING(500),
-        allowNull: true,
       },
     },
     {
-      tableName: 'user',
+      tableName: 'income_category',
       underscored: true,
     },
   );
 
-  comment.associate = (models) => {
-    issue.belongsToMany(models.accountbook, {
-      through: 'user_accountbook',
-      as: 'accountbooks',
-    });
+  incomeCategory.associate = (models) => {
+    incomeCategory.belongsTo(models.accountbook, { foreignKey: 'accountbookId' });
+    incomeCategory.hasMany(models.income, { as: 'incomes' });
   };
 
-  return user;
+  return incomeCategory;
 };
