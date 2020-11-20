@@ -30,7 +30,7 @@ module.exports = (sequelize,DataTypes)=>{
   );
 
   accountBook.associate = (models)=>{
-    const foreignKey : 'accountbook_id';
+    const foreignKey : 'accountbookId';
 
     accountBook.hasMany(models.userAccountbook,{
       foreignKey

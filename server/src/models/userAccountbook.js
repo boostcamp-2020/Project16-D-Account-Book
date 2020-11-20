@@ -14,10 +14,10 @@ module.exports = (sequelize,DataTypes)=>{
 
   userAccountbook.associate = (models)=>{
     userAccountbook.belongsTo(models.user,{
-      foreignKey:'accountbook_id',
+      foreignKey:'accountbookId',
     });
     userAccountbook.belongsTo(models.accountbook,{
-      foreignKey:'user_id',
+      foreignKey:'userId',
     });
   }
 
