@@ -18,7 +18,7 @@ module.exports = (sequelize,DataTypes)=>{
         type:DataTypes.STRING,
         allowNull:false,
       },
-      start_day:{
+      startDay:{
         type:DataTypes.BOOLEAN,
         allowNull:false
       }
