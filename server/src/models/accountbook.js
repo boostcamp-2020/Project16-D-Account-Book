@@ -23,7 +23,7 @@ module.exports = (sequelize,DataTypes)=>{
         allowNull:false
       }
     },{
-      tableName:'ACCOUNTBOOK',
+      tableName:'accountbook',
       underscored:true,
       paranoid:true,
     }
