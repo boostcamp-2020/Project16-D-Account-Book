@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const incomeCategory = sequelize.define(
-    'income_category',
+    'incomeCategory',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -16,20 +16,27 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      is_deleted: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-      },
     },
     {
       tableName: 'income_category',
       underscored: true,
+      paranoid: true,
     },
   );
 
   incomeCategory.associate = (models) => {
-    incomeCategory.belongsTo(models.accountbook, { foreignKey: 'accountbookId' });
-    incomeCategory.hasMany(models.income, { as: 'incomes' });
+    incomeCategory.belongsTo(models.accountbook, {
+      foreignKey: {
+        name: 'accountbookId',
+        allowNull: false,
+      },
+    });
+    incomeCategory.hasMany(models.income, {
+      foreignKey: {
+        name: 'incomeCategoryId',
+        allowNull: false,
+      },
+    });
   };
 
   return incomeCategory;
