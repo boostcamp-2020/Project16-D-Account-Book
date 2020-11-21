@@ -1,7 +1,6 @@
 module.exports = (sequelize,DataTypes)=>{
-  const accountBook = sequelize.define(
-    'accountbook'
-    ,{
+  const accountbook = sequelize.define(
+    'accountbook',{
       title:{
         type:DataTypes.STRING,
         allowNull:false,
@@ -18,44 +17,45 @@ module.exports = (sequelize,DataTypes)=>{
         type:DataTypes.STRING,
         allowNull:false,
       },
-      start_day:{
+      startDay:{
         type:DataTypes.BOOLEAN,
-        allowNull:false
-      }
-    },{
+        allowNull:false,
+      },
+    },
+    {
       tableName:'accountbook',
       underscored:true,
       paranoid:true,
     }
   );
 
-  accountBook.associate = (models)=>{
-    const foreignKey : 'accountbookId';
+  accountbook.associate = (models)=>{
+    const foreignKey = 'accountbookId';
 
-    accountBook.hasMany(models.userAccountbook,{
-      foreignKey
-    });
-
-    accountBook.hasMany(models.incomeCategory,{
+    accountbook.hasMany(models.userAccountbook,{
       foreignKey,
     });
 
-    accountBook.hasMany(models.income,{
-      foreignKey
+    accountbook.hasMany(models.incomeCategory,{
+      foreignKey,
     });
 
-    accountBook.hasMany(models.account,{
-      foreignKey
+    accountbook.hasMany(models.income,{
+      foreignKey,
     });
 
-    accountBook.hasMany(models.expenditure,{
-      foreignKey
+    accountbook.hasMany(models.account,{
+      foreignKey,
     });
 
-    accountBook.hasMany(models.expenditureCategory,{
-      foreignKey
+    accountbook.hasMany(models.expenditure,{
+      foreignKey,
     });
-  }
 
-  return accountBook;
+    accountbook.hasMany(models.expenditureCategory,{
+      foreignKey,
+    });
+  };
+
+  return accountbook;
 };
