@@ -1,5 +1,5 @@
 const koa = require('./koa');
-const mysql = require("./mysql");
+const mysql = require('./mysql');
 
 const server = async (app) => {
   await mysql();
