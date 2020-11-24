@@ -1,6 +1,6 @@
 import React from 'react';
 
-function App(): React.ReactNode {
+function App(): JSX.Element {
   return <div>하이</div>;
 }
 
