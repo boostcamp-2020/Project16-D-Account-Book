@@ -6,9 +6,7 @@ export default {
   component: ColorPicker,
 };
 
-export const DefaultColorPicker = () => {
+export const DefaultColorPicker = (): JSX.Element => {
   const [color, setColor] = useState('#ffff00');
-  return (
-    <ColorPicker color={color} setColor={setColor} />
-  );
+  return <ColorPicker color={color} setColor={setColor} />;
 };
