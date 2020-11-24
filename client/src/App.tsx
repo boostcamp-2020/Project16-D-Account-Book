@@ -1,11 +1,7 @@
 import React from 'react';
 
-function App() {
-  return (
-    <div>
-      하이
-    </div>
-  );
+function App(): void {
+  return;
 }
 
 export default App;
