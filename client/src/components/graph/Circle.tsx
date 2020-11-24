@@ -1,21 +1,26 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-interface CircleSVGProps {
+export interface CircleSVGProps {
   beforePercent: number;
   myPercent: number;
   color: string;
   viewBox: number
 }
 
-interface CircleProp extends CircleSVGProps {
-  color: string;
-  remainPercent: number;
-  CircleDiameter: number;
+export interface StyledCircleSVG {
+  cx:number;
+  cy:number;
+  r:number;
+  beforePercent:number;
+  myPercent:number;
+  remainPercent:number;
+  color:string;
+  CircleDiameter:number;
 }
 
 
-const CircleAnimation = (AnimationProps: CircleProp) => keyframes`
+const CircleAnimation = (AnimationProps: StyledCircleSVG) => keyframes`
 100%{
   stroke-dasharray:${(() => {
 
@@ -32,12 +37,18 @@ const CircleAnimation = (AnimationProps: CircleProp) => keyframes`
   }
 `;
 
-const Circle = styled.circle`
+
+
+const Circle = styled.circle.attrs<StyledCircleSVG>(props=>({
+  cx:props.cx,
+  cy:props.cy,
+  r:props.r
+}))<StyledCircleSVG>`
 fill: transparent;
-stroke: ${(props: CircleProp) => props.color};
+stroke: ${(props) => props.color};
 stroke-width: 15;
-stroke-dasharray: 0, 0, 0, ${(props: CircleProp) => props.CircleDiameter};
-animation: ${(props: CircleProp) => CircleAnimation(props)} 1s ease-in both;
+stroke-dasharray: 0, 0, 0, ${(props) => props.CircleDiameter};
+animation: ${(props) => CircleAnimation(props)} 1s ease-in both;
 `;
 
 const CircleSVG = (props: CircleSVGProps) => {
@@ -50,7 +61,7 @@ const CircleSVG = (props: CircleSVGProps) => {
   }
 
 
-  const getCircleArea = (): object => {
+  const getCircleArea = (): {beforePercent:number,myPercent:number,remainPercent:number} => {
     const remain = 100 - (props.beforePercent + props.myPercent);
     const beforePercent = getLengthByRatio(props.beforePercent);
     const myPercent = getLengthByRatio(props.myPercent);
@@ -71,8 +82,10 @@ const CircleSVG = (props: CircleSVGProps) => {
       r={radius}
       color={props.color}
       CircleDiameter={CircleDiameter}
-      {...Areas}
-    ></Circle>
+      beforePercent={Areas.beforePercent}
+      myPercent={Areas.myPercent}
+      remainPercent={Areas.remainPercent}
+    />
   )
 }
 
