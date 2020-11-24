@@ -11,7 +11,12 @@ interface PropsCallback {
 const UseClickElement: React.FC<PropsCallback> = ({ callBack }: PropsCallback) => {
   const divRef = useRef<HTMLDivElement>(null);
   useClickMe(divRef, callBack);
-  return <div ref={divRef}>target</div>;
+  return (
+    <div ref={divRef}>
+      target
+      <div>targetChildren</div>
+    </div>
+  );
 };
 const NextElement: React.FC = () => {
   return <div>NextElement</div>;
@@ -52,5 +57,11 @@ describe('useClickMe 테스트', () => {
     const target = screen.getByText('target');
     userEvent.click(target);
     expect(isCalled).toHaveBeenCalledTimes(1);
+  });
+
+  test('자기 자신의 자식 컴포넌트가 클릭되어져 이벤트 버블이 일어나도 반응하지 않아야 한다.', () => {
+    const targetChildren = screen.getByText('targetChildren');
+    userEvent.click(targetChildren);
+    expect(isCalled).toHaveBeenCalledTimes(0);
   });
 });
