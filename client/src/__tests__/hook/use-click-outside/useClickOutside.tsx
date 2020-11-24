@@ -26,7 +26,6 @@ const RootElement: React.FC<PropsCallback> = ({ callBack }: PropsCallback) => {
   );
 };
 
-// given -> when -> then
 describe('useClickOutside 테스트', () => {
   //given
   const isCalled = jest.fn();
@@ -38,6 +37,7 @@ describe('useClickOutside 테스트', () => {
     render(<RootElement callBack={isCallWrapper} />);
   });
 
+  //when
   test('자신 이외의 컴포넌트가 클릭되면 callback이 호출되어야한다.', () => {
     const next = screen.getByText('NextElement');
     userEvent.click(next);
@@ -45,6 +45,8 @@ describe('useClickOutside 테스트', () => {
     userEvent.click(root);
     expect(isCalled).toHaveBeenCalledTimes(2);
   });
+
+  //when
   test('안쪽이 눌리면 어떠한 동작도 이루어지지 말아야 한다.', () => {
     const target = screen.getByText('target');
     userEvent.click(target);
