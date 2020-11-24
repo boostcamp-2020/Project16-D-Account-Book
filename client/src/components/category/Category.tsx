@@ -2,7 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 import { getTextColor } from '../../utils/color';
 
-const Div = Styled.div<{ bgColor: string; textColor: string }>`
+const CategoryWrapper = Styled.div<{ bgColor: string; textColor: string }>`
   width: 115px;
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};
@@ -24,9 +24,9 @@ interface CategoryProps {
 const Category = ({ text, bgColor }: CategoryProps): JSX.Element => {
   const textColor = getTextColor(bgColor);
   return (
-    <Div bgColor={bgColor} textColor={textColor}>
+    <CategoryWrapper bgColor={bgColor} textColor={textColor}>
       {text}
-    </Div>
+    </CategoryWrapper>
   );
 };
 
