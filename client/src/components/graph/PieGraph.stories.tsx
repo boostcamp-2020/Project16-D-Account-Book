@@ -1,9 +1,9 @@
 import React from 'react';
-import PieGraphSVG,{PieGraphProps} from './PieGraph';
+import PieGraphSVG, { PieGraphProps } from './PieGraph';
 
-interface StoriesDefault{
-  component:React.ReactNode;
-  title:string;
+interface StoriesDefault {
+  component: React.ReactNode;
+  title: string;
 }
 
 export default {
@@ -11,32 +11,36 @@ export default {
   title: 'PieGraphSVG',
 } as StoriesDefault;
 
-export const PieGraphDefault = ()=>{
-  const pieProps:PieGraphProps = {
-    transactionData:[{ title: '상품', color: 'green', ratio: 20 },
-  { title: '토마토', color: 'tomato', ratio: 30 },
-  { title: '물', color: 'blue', ratio: 10 },
-  { title: '닷져블루', color: 'dodgerblue', ratio: 40 }]
-}
-  return(
-    <PieGraphSVG transactionData={pieProps.transactionData}/>
-  )
-}
-
-export const SmallSVG = ()=>{
-  const pieProps:PieGraphProps = {
-    transactionData:[{ title: '상품', color: 'green', ratio: 20 },
+export const PieGraphDefault = (): React.ReactNode => {
+  const pieProps: PieGraphProps = {
+    transactionData: [
+      { title: '상품', color: 'green', ratio: 20 },
       { title: '토마토', color: 'tomato', ratio: 30 },
       { title: '물', color: 'blue', ratio: 10 },
-      { title: '닷져블루', color: 'dodgerblue', ratio: 40 }]
-  }
+      { title: '닷져블루', color: 'dodgerblue', ratio: 40 },
+    ],
+  };
+  return <PieGraphSVG transactionData={pieProps.transactionData} />;
+};
 
-  return(
-    <div style={{
-      width:"200px",
-      height:"200px",
-    }}>
-      <PieGraphSVG {...pieProps}/>
+export const SmallSVG = (): React.ReactNode => {
+  const pieProps: PieGraphProps = {
+    transactionData: [
+      { title: '상품', color: 'green', ratio: 20 },
+      { title: '토마토', color: 'tomato', ratio: 30 },
+      { title: '물', color: 'blue', ratio: 10 },
+      { title: '닷져블루', color: 'dodgerblue', ratio: 40 },
+    ],
+  };
+
+  return (
+    <div
+      style={{
+        width: '200px',
+        height: '200px',
+      }}
+    >
+      <PieGraphSVG {...pieProps} />
     </div>
-  )
-}
+  );
+};
