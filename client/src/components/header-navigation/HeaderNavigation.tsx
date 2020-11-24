@@ -1,18 +1,27 @@
 import React from 'react';
 import Styled from 'styled-components';
 import ProfileImage from '../profile-image/ProfileImage';
+import { BLUE } from '../../constants/color';
 
 const NavigationWrapper = Styled.div`
   display: flex;
   width: 200px;
   hgieht: 50px;
-  border: 1px solid black;
 `;
 
-const NavigationItem = Styled.div`
+const NavigationItem = Styled.div<{ currentPage: string }>`
   width: 24%;
   padding-top: 4px;
   text-align: center;
+  &:nth-child(1) {
+    color: ${({ currentPage }) => (currentPage == 'transaction' ? BLUE : 'black')};
+  }
+  &:nth-child(2) {
+    color: ${({ currentPage }) => (currentPage == 'calendar' ? BLUE : 'black')};
+  }
+  &:nth-child(3) {
+    color: ${({ currentPage }) => (currentPage == 'statistics' ? BLUE : 'black')};
+  }
   &:nth-child(4) {
     width: 28%;
     display: flex;
@@ -24,13 +33,17 @@ const NavigationItem = Styled.div`
 const sampleProfileImage =
   'https://media.istockphoto.com/vectors/profile-icon-man-icon-with-circle-shape-on-gray-background-vector-id1033334196?k=6&m=1033334196&s=170667a&w=0&h=wijawNlDG-1XWl-uXkYPKfJCv4mlNHb_QkqgtMwNSHY=';
 
-const HeaderNavigation = (): JSX.Element => {
+interface HeaderNavigationProps {
+  currentPage: string;
+}
+
+const HeaderNavigation = ({ currentPage }: HeaderNavigationProps): JSX.Element => {
   return (
     <NavigationWrapper>
-      <NavigationItem>내역</NavigationItem>
-      <NavigationItem>달력</NavigationItem>
-      <NavigationItem>통계</NavigationItem>
-      <NavigationItem>
+      <NavigationItem currentPage={currentPage}>내역</NavigationItem>
+      <NavigationItem currentPage={currentPage}>달력</NavigationItem>
+      <NavigationItem currentPage={currentPage}>통계</NavigationItem>
+      <NavigationItem currentPage={''}>
         <ProfileImage src={sampleProfileImage} />
       </NavigationItem>
     </NavigationWrapper>
