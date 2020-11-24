@@ -5,25 +5,23 @@ export interface CircleSVGProps {
   beforePercent: number;
   myPercent: number;
   color: string;
-  viewBox: number
+  viewBox: number;
 }
 
 export interface StyledCircleSVG {
-  cx:number;
-  cy:number;
-  r:number;
-  beforePercent:number;
-  myPercent:number;
-  remainPercent:number;
-  color:string;
-  CircleDiameter:number;
+  cx: number;
+  cy: number;
+  r: number;
+  beforePercent: number;
+  myPercent: number;
+  remainPercent: number;
+  color: string;
+  CircleDiameter: number;
 }
-
 
 const CircleAnimation = (AnimationProps: StyledCircleSVG) => keyframes`
 100%{
   stroke-dasharray:${(() => {
-
     if (AnimationProps.beforePercent === 0) {
       return `${AnimationProps.myPercent} 
       ${AnimationProps.remainPercent} 0 0`;
@@ -37,31 +35,28 @@ const CircleAnimation = (AnimationProps: StyledCircleSVG) => keyframes`
   }
 `;
 
-
-
-const Circle = styled.circle.attrs<StyledCircleSVG>(props=>({
-  cx:props.cx,
-  cy:props.cy,
-  r:props.r
+const Circle = styled.circle.attrs<StyledCircleSVG>((props) => ({
+  cx: props.cx,
+  cy: props.cy,
+  r: props.r,
 }))<StyledCircleSVG>`
-fill: transparent;
-stroke: ${(props) => props.color};
-stroke-width: 15;
-stroke-dasharray: 0, 0, 0, ${(props) => props.CircleDiameter};
-animation: ${(props) => CircleAnimation(props)} 1s ease-in both;
+  fill: transparent;
+  stroke: ${(props) => props.color};
+  stroke-width: 15;
+  stroke-dasharray: 0, 0, 0, ${(props) => props.CircleDiameter};
+  animation: ${(props) => CircleAnimation(props)} 1s ease-in both;
 `;
 
-const CircleSVG = (props: CircleSVGProps) => {
+const CircleSVG = (props: CircleSVGProps): React.ReactNode => {
   const circlePosition = props.viewBox / 2;
   const radius = props.viewBox / 4;
   const CircleDiameter = Math.PI * radius * 2;
 
   const getLengthByRatio = (ratio: number): number => {
     return (CircleDiameter / 100) * ratio;
-  }
+  };
 
-
-  const getCircleArea = (): {beforePercent:number,myPercent:number,remainPercent:number} => {
+  const getCircleArea = (): { beforePercent: number; myPercent: number; remainPercent: number } => {
     const remain = 100 - (props.beforePercent + props.myPercent);
     const beforePercent = getLengthByRatio(props.beforePercent);
     const myPercent = getLengthByRatio(props.myPercent);
@@ -69,9 +64,9 @@ const CircleSVG = (props: CircleSVGProps) => {
     return {
       beforePercent,
       myPercent,
-      remainPercent
-    }
-  }
+      remainPercent,
+    };
+  };
 
   const Areas = getCircleArea();
 
@@ -86,7 +81,7 @@ const CircleSVG = (props: CircleSVGProps) => {
       myPercent={Areas.myPercent}
       remainPercent={Areas.remainPercent}
     />
-  )
-}
+  );
+};
 
 export default CircleSVG;
