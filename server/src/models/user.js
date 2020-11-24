@@ -32,9 +32,11 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   user.associate = (models) => {
-    user.belongsTo(models.accountbook, {
-      through: 'user_accountbook',
-      as: 'accountbooks',
+    user.hasMany(models.userAccountbook, {
+      foreignKey: {
+        name: 'userId',
+        allowNull: false,
+      },
     });
   };
 

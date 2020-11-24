@@ -25,7 +25,7 @@ interface PieDrawInfo {
   ratio: number;
 }
 
-interface PieGraphProps {
+export interface PieGraphProps {
   transactionData: PieDrawInfo[];
 }
 

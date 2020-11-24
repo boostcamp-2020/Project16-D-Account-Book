@@ -15,6 +15,7 @@
     "mobx": "^6.0.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-input-color": "^3.0.1",
     "react-scripts": "4.0.0",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
@@ -31,7 +32,10 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "import/no-anonymous-default-export": 0
+    }
   },
   "browserslist": {
     "production": [
