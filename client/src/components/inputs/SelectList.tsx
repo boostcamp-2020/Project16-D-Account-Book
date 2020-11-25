@@ -19,6 +19,8 @@ const ListUL = styled.ul`
   border: 1px solid lightgray;
   border-radius: 4px;
   box-sizing: border-box;
+  background-color: white;
+  z-index: 5;
 `;
 const SelectList: React.FC<SelectListProps> = ({ options }: SelectListProps) => {
   return (
