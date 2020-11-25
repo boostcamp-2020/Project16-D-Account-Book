@@ -3,8 +3,8 @@ import Styled from 'styled-components';
 import Category from '../category/Category';
 import { numberWithCommas } from '../../utils/number';
 import { RED, BLUE } from '../../constants/color';
-import income from '../../types/income';
-import expenditure from '../../types/expenditure';
+import Income, { isIncome } from '../../types/income';
+import Expenditure from '../../types/expenditure';
 
 const TransactionItemWrapper = Styled.div`
   display: flex;
@@ -60,13 +60,12 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
 
 interface TrasnsactionItemProps {
   category: { name: string; color: string };
-  income?: income;
-  expenditure?: expenditure;
+  transaction: Income | Expenditure;
   account: string;
-  isIncome: boolean;
+  //isIncome: boolean;
 }
 
-const TransactionItem = ({ category, income, expenditure, account, isIncome }: TrasnsactionItemProps): JSX.Element => {
+const TransactionItem = ({ category, transaction, account }: TrasnsactionItemProps): JSX.Element => {
   return (
     <TransactionItemWrapper>
       <ContentItemWrapper>
@@ -75,15 +74,15 @@ const TransactionItem = ({ category, income, expenditure, account, isIncome }: T
         </CategoryWrapper>
       </ContentItemWrapper>
       <ContentItemWrapper>
-        <div className="ellipsis">{isIncome ? income?.content : expenditure?.place}</div>
+        <div className="ellipsis">{isIncome(transaction) ? transaction.content : transaction.place}</div>
         <div className="ellipsis">{account}</div>
       </ContentItemWrapper>
       <ContentItemWrapper>
-        <div className="ellipsis">{isIncome ? income?.memo : expenditure?.memo}</div>
+        <div className="ellipsis">{isIncome(transaction) ? transaction.memo : transaction.memo}</div>
       </ContentItemWrapper>
-      <ContentItemWrapper isIncome={isIncome}>
+      <ContentItemWrapper isIncome={isIncome(transaction)}>
         <div className="amount">
-          {isIncome ? numberWithCommas(income?.amount) : '-' + numberWithCommas(expenditure?.amount)}원
+          {isIncome(transaction) ? numberWithCommas(transaction.amount) : '-' + numberWithCommas(transaction.amount)}원
         </div>
       </ContentItemWrapper>
     </TransactionItemWrapper>

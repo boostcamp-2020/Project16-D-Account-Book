@@ -24,9 +24,9 @@ const expenditure = {
 };
 
 export const Income = (): JSX.Element => {
-  return <TransactionItem category={category1} income={income} account={'현금'} isIncome={true} />;
+  return <TransactionItem category={category1} transaction={income} account={'현금'} />;
 };
 
 export const Expenditure = (): JSX.Element => {
-  return <TransactionItem category={category2} expenditure={expenditure} account={'현금'} isIncome={false} />;
+  return <TransactionItem category={category2} transaction={expenditure} account={'현금'} />;
 };
