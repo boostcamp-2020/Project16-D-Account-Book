@@ -7,14 +7,7 @@ export default {
 };
 
 export const ModalBackgroundDefault: React.FC = () => {
-  return (
-    <ModalBackground
-      show={true}
-      closeModal={(): void => {
-        1 + 1;
-      }}
-    />
-  );
+  return <ModalBackground show={true} />;
 };
 
 export const ModalBackgroundExample: React.FC = () => {

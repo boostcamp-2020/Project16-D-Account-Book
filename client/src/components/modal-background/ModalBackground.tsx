@@ -4,7 +4,7 @@ import styled from 'styled-components';
 interface ModalBackgroundProps {
   children?: React.ReactNode;
   show: boolean;
-  closeModal: () => void;
+  closeModal?: () => void;
 }
 
 interface ModalWrapperProps {
@@ -30,7 +30,9 @@ const ChildrenWrapper = styled.div`
 
 const ModalBackground: React.FC<ModalBackgroundProps> = ({ children, show, closeModal }: ModalBackgroundProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
-  useClickMe(modalRef, closeModal);
+  if (closeModal !== undefined) {
+    useClickMe(modalRef, closeModal);
+  }
   return (
     <ModalBackgroundWrapper ref={modalRef} show={show}>
       <ChildrenWrapper>{children}</ChildrenWrapper>
