@@ -20,10 +20,10 @@ const DayTransactionHeader = Styled.div<{ totalAmount: number }>`
   padding-bottom: 10px;
   .header-item {
     &:nth-child(1) {
-      width: 12%;
+      width: 20%;
     }
     &:nth-child(2) {
-      width: 72%;
+      width: 64%;
     }
     &:nth-child(3) {
       width: 16%;
@@ -61,7 +61,10 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
         </div>
       </DayTransactionHeader>
       {transactions.map((transaction) => (
-        <TransactionItem key={'transaction' + transaction.id} transaction={transaction}></TransactionItem>
+        <TransactionItem
+          key={'transaction' + transaction.id + transaction.category.name}
+          transaction={transaction}
+        ></TransactionItem>
       ))}
     </Container>
   );

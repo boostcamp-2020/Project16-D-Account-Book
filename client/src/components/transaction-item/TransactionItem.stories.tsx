@@ -1,6 +1,6 @@
 import React from 'react';
 import TransactionItem from './TransactionItem';
-import { incomes, expenditures } from '../../utils/sampleData';
+import { incomes, expenditures } from '../../utils/dummyData';
 
 export default {
   title: 'transaction-item/transactionItem',
