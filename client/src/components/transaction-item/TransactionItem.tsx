@@ -59,13 +59,12 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
 `;
 
 interface TrasnsactionItemProps {
-  category: { name: string; color: string };
   transaction: Income | Expenditure;
-  account: string;
-  //isIncome: boolean;
 }
 
-const TransactionItem = ({ category, transaction, account }: TrasnsactionItemProps): JSX.Element => {
+const TransactionItem = ({ transaction }: TrasnsactionItemProps): JSX.Element => {
+  const { category, account } = transaction;
+
   return (
     <TransactionItemWrapper>
       <ContentItemWrapper>
@@ -75,7 +74,7 @@ const TransactionItem = ({ category, transaction, account }: TrasnsactionItemPro
       </ContentItemWrapper>
       <ContentItemWrapper>
         <div className="ellipsis">{isIncome(transaction) ? transaction.content : transaction.place}</div>
-        <div className="ellipsis">{account}</div>
+        <div className="ellipsis">{account.name}</div>
       </ContentItemWrapper>
       <ContentItemWrapper>
         <div className="ellipsis">{isIncome(transaction) ? transaction.memo : transaction.memo}</div>
