@@ -44,7 +44,7 @@ const Circle = styled.circle.attrs<StyledCircleSVG>((props) => ({
   stroke: ${(props) => props.color};
   stroke-width: 15;
   stroke-dasharray: 0, 0, 0, ${(props) => props.CircleDiameter};
-  animation: ${(props) => CircleAnimation(props)} 1s ease-in both;
+  animation: ${(props) => CircleAnimation(props)} 1s ease both;
 `;
 
 const CircleSVG = (props: CircleSVGProps): JSX.Element => {
