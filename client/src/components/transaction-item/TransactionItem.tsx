@@ -2,6 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 import Category from '../category/Category';
 import { numberWithCommas } from '../../utils/number';
+import { RED, BLUE } from '../../constants/color';
 
 const TransactionItemWrapper = Styled.div`
   display: flex;
@@ -19,7 +20,7 @@ const CategoryWrapper = Styled.div`
   width: 100%;
 `;
 
-const ContentItemWrapper = Styled.div`
+const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
   display: flex;
   text-align: center;
   justify-content: center;
@@ -49,6 +50,10 @@ const ContentItemWrapper = Styled.div`
     overflow: hidden;
     width: 100%;
   }
+  .amount {
+    color: ${({ isIncome }) => (isIncome === true ? BLUE : RED)};
+
+  }
 `;
 
 interface TrasnsactionItemProps {
@@ -60,6 +65,7 @@ interface TrasnsactionItemProps {
 }
 
 const TransactionItem = ({ category, income, expenditure, account, isIncome }: TrasnsactionItemProps): JSX.Element => {
+  console.log(isIncome);
   return (
     <TransactionItemWrapper>
       <ContentItemWrapper>
@@ -74,8 +80,10 @@ const TransactionItem = ({ category, income, expenditure, account, isIncome }: T
       <ContentItemWrapper>
         <div className="ellipsis">{isIncome ? income?.memo : expenditure?.memo}</div>
       </ContentItemWrapper>
-      <ContentItemWrapper>
-        <div>{isIncome ? numberWithCommas(income?.amount) : '-' + numberWithCommas(expenditure?.amount)}원</div>
+      <ContentItemWrapper isIncome={isIncome}>
+        <div className="amount">
+          {isIncome ? numberWithCommas(income?.amount) : '-' + numberWithCommas(expenditure?.amount)}원
+        </div>
       </ContentItemWrapper>
     </TransactionItemWrapper>
   );
