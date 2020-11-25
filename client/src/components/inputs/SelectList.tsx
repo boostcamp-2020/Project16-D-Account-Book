@@ -1,0 +1,40 @@
+import React from 'react';
+import { Options } from './Select';
+import SelectItem from './SelectItem';
+import styled from 'styled-components';
+
+interface SelectListProps {
+  options?: Options[];
+  onChange?: () => void;
+}
+
+const ListUL = styled.ul`
+  padding: 5px 10px;
+  margin: 0px;
+  width: 100%;
+  position: absolute;
+  height: 500%;
+  overflow-y: scroll;
+  transform: translateY(20px);
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  box-sizing: border-box;
+`;
+const SelectList: React.FC<SelectListProps> = ({ options }: SelectListProps) => {
+  return (
+    <ListUL>
+      {options &&
+        options.map((selectItem) => (
+          <SelectItem
+            key={selectItem.value}
+            label={selectItem.label}
+            value={selectItem.value}
+            checked={selectItem.checked}
+            onChange={selectItem.onChange}
+          />
+        ))}
+    </ListUL>
+  );
+};
+
+export default SelectList;
