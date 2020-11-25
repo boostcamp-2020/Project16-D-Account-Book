@@ -47,7 +47,7 @@ const Circle = styled.circle.attrs<StyledCircleSVG>((props) => ({
   animation: ${(props) => CircleAnimation(props)} 1s ease-in both;
 `;
 
-const CircleSVG = (props: CircleSVGProps): React.ReactNode => {
+const CircleSVG = (props: CircleSVGProps): JSX.Element => {
   const circlePosition = props.viewBox / 2;
   const radius = props.viewBox / 4;
   const CircleDiameter = Math.PI * radius * 2;

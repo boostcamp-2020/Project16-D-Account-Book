@@ -11,7 +11,7 @@ export default {
   title: 'PieGraphSVG',
 } as StoriesDefault;
 
-export const PieGraphDefault = (): React.ReactNode => {
+export const PieGraphDefault = (): JSX.Element => {
   const pieProps: PieGraphProps = {
     transactionData: [
       { title: '상품', color: 'green', ratio: 20 },

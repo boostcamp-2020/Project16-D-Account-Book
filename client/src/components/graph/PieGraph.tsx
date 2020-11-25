@@ -29,7 +29,7 @@ export interface PieGraphProps {
   transactionData: PieDrawInfo[];
 }
 
-const PieGraphSVG = ({ transactionData }: PieGraphProps): React.ReactNode => {
+const PieGraphSVG = ({ transactionData }: PieGraphProps): JSX.Element => {
   const svgViewBox = 100;
 
   const PieGraphs = useMemo(() => {
