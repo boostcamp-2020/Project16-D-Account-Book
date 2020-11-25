@@ -15,7 +15,7 @@ export const InputTextDefault: React.FC = () => {
 };
 
 export const SelectDefault: React.FC = () => {
-  return <Select options={dummyOptions} defaultValue={'스토리북'} />;
+  return <Select options={dummyOptions} defaultValue={'스토리북'} showDropDown={false} />;
 };
 
 export const SmallSelect: React.FC = () => {
@@ -25,7 +25,8 @@ export const SmallSelect: React.FC = () => {
         width: '400px',
       }}
     >
-      <Select options={dummyOptions} defaultValue={'스토리북'} />
+      <Select options={dummyOptions} defaultValue={'스토리북'} showDropDown={false} />
+      <Select options={dummyOptions} defaultValue={'스토리북'} showDropDown={true} />
     </div>
   );
 };

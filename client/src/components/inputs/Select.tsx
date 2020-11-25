@@ -13,6 +13,7 @@ interface SelectProps {
   options?: Options[];
   defaultValue?: string;
   onChange?: () => void;
+  showDropDown?: boolean;
 }
 
 const SelectWrapper = styled.div`
@@ -30,15 +31,11 @@ const SelectTitle = styled.p`
   color: #7d7d7d;
 `;
 
-const Select: React.FC<SelectProps> = ({ options, defaultValue = '', onChange }: SelectProps) => {
-  const [optionShow, setOptionShow] = useState(false);
-  const titleClicked = (): void => {
-    setOptionShow((state) => !state);
-  };
+const Select: React.FC<SelectProps> = ({ options, defaultValue = '', onChange, showDropDown }: SelectProps) => {
   return (
     <SelectWrapper>
-      <SelectTitle onClick={titleClicked}>{defaultValue}</SelectTitle>
-      {optionShow && <SelectList options={options} onChange={onChange} />}
+      <SelectTitle>{defaultValue}</SelectTitle>
+      {showDropDown && <SelectList options={options} onChange={onChange} />}
     </SelectWrapper>
   );
 };
