@@ -3,6 +3,8 @@ import Styled from 'styled-components';
 import Category from '../category/Category';
 import { numberWithCommas } from '../../utils/number';
 import { RED, BLUE } from '../../constants/color';
+import income from '../../types/income';
+import expenditure from '../../types/expenditure';
 
 const TransactionItemWrapper = Styled.div`
   display: flex;
@@ -58,14 +60,13 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
 
 interface TrasnsactionItemProps {
   category: { name: string; color: string };
-  income?: { id: number; amount: number; content: string; date: Date; memo: string };
-  expenditure?: { id: number; amount: number; place: string; date: Date; memo: string };
+  income?: income;
+  expenditure?: expenditure;
   account: string;
   isIncome: boolean;
 }
 
 const TransactionItem = ({ category, income, expenditure, account, isIncome }: TrasnsactionItemProps): JSX.Element => {
-  console.log(isIncome);
   return (
     <TransactionItemWrapper>
       <ContentItemWrapper>
