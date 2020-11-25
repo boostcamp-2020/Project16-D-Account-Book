@@ -1,6 +1,6 @@
 import React from 'react';
 import TransactionItem from './TransactionItem';
-import { income, expenditure } from '../../utils/sampleData';
+import { incomes, expenditures } from '../../utils/sampleData';
 
 export default {
   title: 'transaction-item/transactionItem',
@@ -8,9 +8,9 @@ export default {
 };
 
 export const Income = (): JSX.Element => {
-  return <TransactionItem transaction={income} />;
+  return <TransactionItem transaction={incomes[0]} />;
 };
 
 export const Expenditure = (): JSX.Element => {
-  return <TransactionItem transaction={expenditure} />;
+  return <TransactionItem transaction={expenditures[0]} />;
 };
