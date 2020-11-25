@@ -45,6 +45,8 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
     flex-direction: column;
     font-size: 20px;
     width: 16%;
+    text-align: right;
+    padding-right: 10px;
   }
   .ellipsis {
     white-space: nowrap;
@@ -81,7 +83,10 @@ const TransactionItem = ({ transaction }: TrasnsactionItemProps): JSX.Element =>
       </ContentItemWrapper>
       <ContentItemWrapper isIncome={isIncome(transaction)}>
         <div className="amount">
-          {isIncome(transaction) ? numberWithCommas(transaction.amount) : '-' + numberWithCommas(transaction.amount)}원
+          {isIncome(transaction)
+            ? '+' + numberWithCommas(transaction.amount)
+            : '-' + numberWithCommas(transaction.amount)}
+          원
         </div>
       </ContentItemWrapper>
     </TransactionItemWrapper>
