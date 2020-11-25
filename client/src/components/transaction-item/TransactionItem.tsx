@@ -29,18 +29,19 @@ const ContentItemWrapper = Styled.div`
   }
   &:nth-child(2) {
     flex-direction: column;
-    width: 14%;
+    width: 16%;
     text-align: left;
     padding-left: 10px;
   }
   &:nth-child(3) {
     flex-direction: column;
-    width: 59%;
+    text-align: left;
+    width: 56%;
   }
   &:nth-child(4) {
     flex-direction: column;
     font-size: 20px;
-    width: 15%;
+    width: 16%;
   }
   .ellipsis {
     white-space: nowrap;
