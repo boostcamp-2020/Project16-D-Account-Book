@@ -17,6 +17,9 @@ const SelectListItem = styled.li`
   align-items: center;
   padding: 5px 0px;
   border-bottom: 1px solid lightgray;
+  &:last-of-type {
+    border-bottom: 0px solid black;
+  }
 `;
 
 const ItemLabel = styled.p`
