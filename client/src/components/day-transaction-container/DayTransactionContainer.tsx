@@ -57,7 +57,7 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
         </div>
         <div className="header-item"></div>
         <div className="header-item total-amount">
-          {totalAmount >= 0 ? '+' + numberWithCommas(totalAmount) : '-' + numberWithCommas(totalAmount)}원
+          {totalAmount >= 0 ? '+' + numberWithCommas(totalAmount) : numberWithCommas(totalAmount)}원
         </div>
       </DayTransactionHeader>
       {transactions.map((transaction) => (
