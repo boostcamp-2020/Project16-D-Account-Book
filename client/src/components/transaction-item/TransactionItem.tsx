@@ -30,6 +30,10 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
   &:nth-child(1) {
     width: 12%;
     justify-content: flex-start;
+    @media only screen and (max-width: 768px) {
+      width: 20%;
+      padding-left: 10px;
+    }
   }
   &:nth-child(2) {
     flex-direction: column;
@@ -42,7 +46,7 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
     text-align: left;
     width: 56%;
     @media only screen and (max-width: 768px) {
-      width: 50%;
+      width: 42%;
       padding-left: 10px;
     }
   }
@@ -65,7 +69,7 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
   .amount {
     color: ${({ isIncome }) => (isIncome === true ? BLUE : RED)};
     @media only screen and (max-width: 768px) {
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 `;
