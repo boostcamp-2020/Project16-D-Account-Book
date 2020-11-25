@@ -1,5 +1,4 @@
 import React from 'react';
-import Styled from 'styled-components';
 import DayTransactionContainer from '../day-transaction-container/DayTransactionContainer';
 import Income from '../../types/income';
 import Expenditure from '../../types/expenditure';

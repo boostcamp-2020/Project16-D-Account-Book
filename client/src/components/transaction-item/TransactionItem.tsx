@@ -41,6 +41,10 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
     flex-direction: column;
     text-align: left;
     width: 56%;
+    @media only screen and (max-width: 768px) {
+      width: 50%;
+      padding-left: 10px;
+    }
   }
   &:nth-child(4) {
     flex-direction: column;
@@ -48,6 +52,9 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
     width: 16%;
     text-align: right;
     padding-right: 10px;
+    @media only screen and (max-width: 768px) {
+      width: 22%;
+    }
   }
   .ellipsis {
     white-space: nowrap;
@@ -57,7 +64,9 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
   }
   .amount {
     color: ${({ isIncome }) => (isIncome === true ? BLUE : RED)};
-
+    @media only screen and (max-width: 768px) {
+      font-size: 16px;
+    }
   }
 `;
 
