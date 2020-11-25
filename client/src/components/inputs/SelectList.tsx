@@ -1,11 +1,11 @@
 import React from 'react';
 import { Options } from './Select';
 import SelectItem from './SelectItem';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 interface SelectListProps {
   options?: Options[];
-  onChange?: () => void;
+  onClick?: (value: string) => void;
 }
 
 const ListUL = styled.ul`
@@ -22,7 +22,8 @@ const ListUL = styled.ul`
   background-color: white;
   z-index: 5;
 `;
-const SelectList: React.FC<SelectListProps> = ({ options }: SelectListProps) => {
+
+const SelectList: React.FC<SelectListProps> = ({ options, onClick }: SelectListProps) => {
   return (
     <ListUL>
       {options &&
@@ -33,6 +34,7 @@ const SelectList: React.FC<SelectListProps> = ({ options }: SelectListProps) => 
             value={selectItem.value}
             checked={selectItem.checked}
             onChange={selectItem.onChange}
+            onClick={onClick}
           />
         ))}
     </ListUL>
