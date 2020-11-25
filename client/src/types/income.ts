@@ -1,5 +1,6 @@
-import { Income } from '../components/transaction-item/TransactionItem.stories';
 import Expenditure from './expenditure';
+import Category from './category';
+import Account from './account';
 
 export default interface Income {
   id: number;
@@ -7,6 +8,8 @@ export default interface Income {
   content: string;
   date: Date;
   memo: string;
+  category: Category;
+  account: Account;
 }
 
 export const isIncome = (transaction: Income | Expenditure): transaction is Income => {
