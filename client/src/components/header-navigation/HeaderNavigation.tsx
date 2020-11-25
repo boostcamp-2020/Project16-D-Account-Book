@@ -15,12 +15,15 @@ const NavigationItem = Styled.div<{ currentPage: string }>`
   text-align: center;
   &:nth-child(1) {
     color: ${({ currentPage }) => (currentPage == 'transaction' ? BLUE : 'black')};
+    font-weight: ${({ currentPage }) => (currentPage == 'transaction' ? 'bold' : 'normal')};
   }
   &:nth-child(2) {
     color: ${({ currentPage }) => (currentPage == 'calendar' ? BLUE : 'black')};
+    font-weight: ${({ currentPage }) => (currentPage == 'calendar' ? 'bold' : 'normal')};
   }
   &:nth-child(3) {
     color: ${({ currentPage }) => (currentPage == 'statistics' ? BLUE : 'black')};
+    font-weight: ${({ currentPage }) => (currentPage == 'statistics' ? 'bold' : 'normal')};
   }
   &:nth-child(4) {
     width: 28%;
