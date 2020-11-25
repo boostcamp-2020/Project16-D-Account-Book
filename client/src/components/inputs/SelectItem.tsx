@@ -6,7 +6,7 @@ interface SelectItemProps {
   label: string;
   value: string | number;
   checked?: boolean;
-  onChange: () => void;
+  onClick: (value: string) => void;
 }
 
 const SelectListItem = styled.li`
@@ -32,9 +32,13 @@ const ItemChecked = styled.div`
   width: 1.2rem;
 `;
 
-const SelectItem: React.FC<SelectItemProps> = ({ label, value, checked, onChange }: SelectItemProps) => {
+const SelectItem: React.FC<SelectItemProps> = ({ label, value, checked, onClick }: SelectItemProps) => {
   return (
-    <SelectListItem onChange={onChange}>
+    <SelectListItem
+      onClick={() => {
+        onClick(value);
+      }}
+    >
       <ItemLabel>{label}</ItemLabel>
       {checked && (
         <ItemChecked>
