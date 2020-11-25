@@ -9,8 +9,9 @@ import Expenditure from '../../types/expenditure';
 const TransactionItemWrapper = Styled.div`
   display: flex;
   width: 100%;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
   margin-auto: 0;
   cursor: pointer;
   &:hover {

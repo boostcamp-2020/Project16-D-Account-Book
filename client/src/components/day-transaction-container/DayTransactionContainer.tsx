@@ -1,9 +1,10 @@
 import React from 'react';
 import Styled from 'styled-components';
-import Income from '../../types/income';
+import Income, { isIncome } from '../../types/income';
 import Expenditure from '../../types/expenditure';
 import { numberWithCommas } from '../../utils/number';
 import { RED, BLUE, GREY } from '../../constants/color';
+import TransactionItem from '../transaction-item/TransactionItem';
 
 const Container = Styled.div`
   display: flex;
@@ -45,7 +46,7 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
   const date = new Date(transactions[0].date).getDate();
   const day = days[new Date(transactions[0].date).getDay()];
   const totalAmount = transactions.reduce((sum, transaction) => {
-    return sum + transaction.amount;
+    return isIncome(transaction) ? sum + transaction.amount : sum - transaction.amount;
   }, 0);
 
   return (
@@ -59,6 +60,9 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
           {totalAmount >= 0 ? '+' + numberWithCommas(totalAmount) : '-' + numberWithCommas(totalAmount)}원
         </div>
       </DayTransactionHeader>
+      {transactions.map((transaction) => (
+        <TransactionItem key={'transaction' + transaction.id} transaction={transaction}></TransactionItem>
+      ))}
     </Container>
   );
 };
