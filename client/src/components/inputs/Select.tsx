@@ -12,11 +12,17 @@ export interface Options {
 interface SelectProps {
   options?: Options[];
   defaultValue?: string;
-  onChange?: () => void;
+  headerClick?: () => void;
+  itemClick?: (value: string) => void;
   showDropDown?: boolean;
+  targetRef?: React.RefObject<HTMLElement>;
 }
 
-const SelectWrapper = styled.div`
+interface SelectWrapperProps {
+  ref?: React.RefObject<HTMLElement>;
+}
+
+const SelectWrapper = styled.div<SelectWrapperProps>`
   width: 100%;
   padding: 0px;
   font-size: 1.2rem;
@@ -29,13 +35,23 @@ const SelectTitle = styled.p`
   padding: 5px;
   margin: 0px;
   color: #7d7d7d;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
-const Select: React.FC<SelectProps> = ({ options, defaultValue = '', onChange, showDropDown }: SelectProps) => {
+const Select: React.FC<SelectProps> = ({
+  options,
+  defaultValue = '',
+  headerClick,
+  itemClick,
+  showDropDown,
+  targetRef,
+}: SelectProps) => {
   return (
-    <SelectWrapper>
-      <SelectTitle>{defaultValue}</SelectTitle>
-      {showDropDown && <SelectList options={options} onChange={onChange} />}
+    <SelectWrapper ref={targetRef}>
+      <SelectTitle onClick={headerClick}>{defaultValue}</SelectTitle>
+      {showDropDown && <SelectList options={options} onClick={itemClick} />}
     </SelectWrapper>
   );
 };
