@@ -33,7 +33,6 @@ const SelectList: React.FC<SelectListProps> = ({ options, onClick }: SelectListP
             label={selectItem.label}
             value={selectItem.value}
             checked={selectItem.checked}
-            onChange={selectItem.onChange}
             onClick={onClick}
           />
         ))}

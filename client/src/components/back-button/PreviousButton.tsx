@@ -4,7 +4,7 @@ interface PreviousButton {
   onClick?: () => void;
 }
 
-const PreviousButton: React.FC<BackButton> = ({ onClick }: BackButton) => {
+const PreviousButton: React.FC<PreviousButton> = ({ onClick }: PreviousButton) => {
   return (
     <svg x="0px" y="0px" viewBox="0 0 306 306" onClick={onClick}>
       <g>
