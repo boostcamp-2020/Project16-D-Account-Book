@@ -5,7 +5,7 @@ import useClickOutSide from '../../../hook/use-click-outside/useClickOutside';
 interface InputDropDownProps {
   items: Options[];
   header: string;
-  selectValue?: string[];
+  selectValue?: string[] | undefined | string;
   onChange?: (value: string) => void;
   multi?: boolean;
 }
