@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: '127.0.0.1:5000',
+  baseURL: process.env.REACT_APP_BASE_URL,
 });
 
 instance.interceptors.request.use(
@@ -12,21 +12,19 @@ instance.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log(error);
     return Promise.reject(error);
   },
 );
 
 instance.interceptors.response.use(
   (response) => {
-    console.error('sdfsdf');
-    return response;
+    return response.data;
   },
   (error) => {
-    console.log(error);
     if (error.response.status === 401) {
       localStorage.removeItem('token');
       window.location.href = '/';
+    }
     return Promise.reject(error);
   },
 );
