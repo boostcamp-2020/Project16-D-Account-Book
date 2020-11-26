@@ -2,7 +2,7 @@ import React from 'react';
 import HamburgerButton from './HamburgerButton';
 
 export default {
-  title: '햄버거 버튼',
+  title: 'hamburger-button/HamburgerButton',
   component: HamburgerButton,
 };
 
