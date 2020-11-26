@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import InputText from './input-text/InputText';
 import Select, { Options } from './select/Select';
-import InputDropDown from './Input-drop-down/InputDropDown';
+import InputDropDown from './input-drop-down/InputDropDown';
 import styled from 'styled-components';
 import dummyOptions from '../../__dummy-data__/components/inputs/dummyOptions';
 import { stat } from 'fs';
+import MultiInputDropDown from './multi-input-dropdown/MultiInputDropdown';
 
 const SmallDiv = styled.div`
   width: 300px;
@@ -68,6 +69,14 @@ export const InputDropDownMultiUsage: React.FC = () => {
   return (
     <SmallDiv>
       <InputDropDown items={dummyOptions} selectValue={[...select]} header={header} multi={true} onChange={onChange} />
+    </SmallDiv>
+  );
+};
+
+export const MultiInputDropDownDefault: React.FC = () => {
+  return (
+    <SmallDiv>
+      <MultiInputDropDown placeholder={'multi'} items={dummyOptions} />
     </SmallDiv>
   );
 };
