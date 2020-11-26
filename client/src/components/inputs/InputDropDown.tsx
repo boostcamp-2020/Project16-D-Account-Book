@@ -20,7 +20,7 @@ const InputDropDown: React.FC<InputDropDownProps> = ({
   const [show, setShow] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const clickHeader = (): void => {
-    setShow((state) => !state);
+    setShow(!show);
   };
 
   useClickOutSide(ref, () => {
