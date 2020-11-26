@@ -1,10 +1,10 @@
 import React from 'react';
 import AllTransactionCotainer from './AllTransactionContainer';
-import { transactions } from '../../utils/dummyData';
+import { transactions } from '../../../utils/dummyData';
 import styled from 'styled-components';
 
 export default {
-  title: 'all-transaction-container/AllTransactionContainer',
+  title: 'transactions/all-transaction-container/AllTransactionContainer',
   component: AllTransactionCotainer,
 };
 

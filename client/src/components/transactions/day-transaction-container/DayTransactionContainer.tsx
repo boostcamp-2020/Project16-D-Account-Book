@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Income, { isIncome } from '../../types/income';
-import Expenditure from '../../types/expenditure';
-import { numberWithCommas } from '../../utils/number';
-import { RED, BLUE, GREY } from '../../constants/color';
+import Income, { isIncome } from '../../../types/income';
+import Expenditure from '../../../types/expenditure';
+import { numberWithCommas } from '../../../utils/number';
+import { RED, BLUE, GREY } from '../../../constants/color';
 import TransactionItem from '../transaction-item/TransactionItem';
 
 const Container = styled.div`
