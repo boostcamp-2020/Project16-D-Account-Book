@@ -1,4 +1,4 @@
-import { Options } from '../../../components/inputs/Select/Select';
+import { Options } from '../../../components/inputs/select/Select';
 const dummyOptions: Options[] = [
   {
     label: 'optionLabel1',

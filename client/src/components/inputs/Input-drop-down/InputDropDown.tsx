@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import Select, { Options } from '../Select/Select';
+import Select, { Options } from '../select/Select';
 import { createRenderData } from '../../../hook/use-drop-down';
 import useClickOutSide from '../../../hook/use-click-outside/useClickOutside';
 interface InputDropDownProps {
