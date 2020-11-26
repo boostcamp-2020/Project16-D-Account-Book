@@ -3,12 +3,15 @@ import Styled from 'styled-components';
 import Category from '../category/Category';
 import { numberWithCommas } from '../../utils/number';
 import { RED, BLUE } from '../../constants/color';
+import Income, { isIncome } from '../../types/income';
+import Expenditure from '../../types/expenditure';
 
 const TransactionItemWrapper = Styled.div`
   display: flex;
   width: 100%;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
   margin-auto: 0;
   cursor: pointer;
   &:hover {
@@ -27,6 +30,10 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
   &:nth-child(1) {
     width: 12%;
     justify-content: flex-start;
+    @media only screen and (max-width: 768px) {
+      width: 20%;
+      padding-left: 10px;
+    }
   }
   &:nth-child(2) {
     flex-direction: column;
@@ -38,11 +45,20 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
     flex-direction: column;
     text-align: left;
     width: 56%;
+    @media only screen and (max-width: 768px) {
+      width: 42%;
+      padding-left: 10px;
+    }
   }
   &:nth-child(4) {
     flex-direction: column;
     font-size: 20px;
     width: 16%;
+    text-align: right;
+    padding-right: 10px;
+    @media only screen and (max-width: 768px) {
+      width: 22%;
+    }
   }
   .ellipsis {
     white-space: nowrap;
@@ -52,20 +68,19 @@ const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
   }
   .amount {
     color: ${({ isIncome }) => (isIncome === true ? BLUE : RED)};
-
+    @media only screen and (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 `;
 
 interface TrasnsactionItemProps {
-  category: { name: string; color: string };
-  income?: { id: number; amount: number; content: string; date: Date; memo: string };
-  expenditure?: { id: number; amount: number; place: string; date: Date; memo: string };
-  account: string;
-  isIncome: boolean;
+  transaction: Income | Expenditure;
 }
 
-const TransactionItem = ({ category, income, expenditure, account, isIncome }: TrasnsactionItemProps): JSX.Element => {
-  console.log(isIncome);
+const TransactionItem = ({ transaction }: TrasnsactionItemProps): JSX.Element => {
+  const { category, account } = transaction;
+
   return (
     <TransactionItemWrapper>
       <ContentItemWrapper>
@@ -74,15 +89,18 @@ const TransactionItem = ({ category, income, expenditure, account, isIncome }: T
         </CategoryWrapper>
       </ContentItemWrapper>
       <ContentItemWrapper>
-        <div className="ellipsis">{isIncome ? income?.content : expenditure?.place}</div>
-        <div className="ellipsis">{account}</div>
+        <div className="ellipsis">{isIncome(transaction) ? transaction.content : transaction.place}</div>
+        <div className="ellipsis">{account.name}</div>
       </ContentItemWrapper>
       <ContentItemWrapper>
-        <div className="ellipsis">{isIncome ? income?.memo : expenditure?.memo}</div>
+        <div className="ellipsis">{isIncome(transaction) ? transaction.memo : transaction.memo}</div>
       </ContentItemWrapper>
-      <ContentItemWrapper isIncome={isIncome}>
+      <ContentItemWrapper isIncome={isIncome(transaction)}>
         <div className="amount">
-          {isIncome ? numberWithCommas(income?.amount) : '-' + numberWithCommas(expenditure?.amount)}원
+          {isIncome(transaction)
+            ? '+' + numberWithCommas(transaction.amount)
+            : '-' + numberWithCommas(transaction.amount)}
+          원
         </div>
       </ContentItemWrapper>
     </TransactionItemWrapper>
