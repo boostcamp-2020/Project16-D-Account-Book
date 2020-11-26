@@ -15,3 +15,16 @@ export const isEndOfMonth = (year: number, month: number, day: number): boolean 
 
   return day == 28;
 };
+
+export const getEndOfMonth = (year: number, month: number): number => {
+  const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  if (month != 2) {
+    return monthDays[month - 1];
+  }
+
+  if (isLeapYear(year)) {
+    return 29;
+  }
+
+  return 28;
+};
