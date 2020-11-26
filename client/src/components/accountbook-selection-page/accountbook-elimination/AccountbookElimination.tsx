@@ -17,7 +17,6 @@ interface CategoryProps {
 
 const AccountbookElimination = ({ bgColor }: CategoryProps): JSX.Element => {
   const itemColor = getTextColor(bgColor);
-  console.log(itemColor);
   return (
     <Wrapper itemColor={itemColor}>
       <svg viewBox="0 0 329.26933 329" className="elimination">
