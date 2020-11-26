@@ -2,7 +2,7 @@ import React from 'react';
 import PlusButton from './PlusButton';
 
 export default {
-  title: '플러스 버튼',
+  title: 'plus-button/PlusButton',
   component: PlusButton,
 };
 
