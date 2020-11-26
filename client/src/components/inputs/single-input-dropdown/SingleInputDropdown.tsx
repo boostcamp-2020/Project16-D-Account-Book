@@ -4,20 +4,22 @@ import InputDropDown from '../input-drop-down/InputDropDown';
 interface Props {
   items: Options[];
   placeholder: string;
-  onChange: (target: string) => void;
+  onChange?: (target: string) => void;
 }
 const SingleInputDropDown: React.FC<Props> = ({ items, placeholder, onChange }: Props) => {
   const [select, setSelect] = useState<string>();
 
-  const displayHeader = select ? select : placeholder;
+  const findSelectedItem = items.find((item) => item.value === select);
+  const displayHeader = findSelectedItem ? findSelectedItem.label : placeholder;
 
   const selectChange = (value: string): void => {
-    const find = items.find((item) => item.value === value);
-    setSelect(find?.label);
-    onChange(value);
+    setSelect(value);
+    if (onChange !== undefined) {
+      onChange(value);
+    }
   };
 
-  return <InputDropDown items={items} header={displayHeader + ''} selectValue={[select]} onChange={selectChange} />;
+  return <InputDropDown items={items} header={displayHeader + ''} selectValue={select} onChange={selectChange} />;
 };
 
 export default SingleInputDropDown;
