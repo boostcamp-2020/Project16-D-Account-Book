@@ -1,18 +1,18 @@
 import React from 'react';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 import Income, { isIncome } from '../../types/income';
 import Expenditure from '../../types/expenditure';
 import { numberWithCommas } from '../../utils/number';
 import { RED, BLUE, GREY } from '../../constants/color';
 import TransactionItem from '../transaction-item/TransactionItem';
 
-const Container = Styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   widhth: 100%;
 `;
 
-const DayTransactionHeader = Styled.div<{ totalAmount: number }>`
+const DayTransactionHeader = styled.div<{ totalAmount: number }>`
   display: flex;
   width: 100%;
   border-bottom: 2px solid ${GREY};

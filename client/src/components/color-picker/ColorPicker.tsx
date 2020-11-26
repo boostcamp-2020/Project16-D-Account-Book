@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 import InputColor from 'react-input-color';
 
-const ColorPickerWrapper = Styled.div`
+const ColorPickerWrapper = styled.div`
   width: 26px;
   height: 26px;
   svg {

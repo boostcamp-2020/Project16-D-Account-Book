@@ -1,14 +1,14 @@
 import React from 'react';
 import AllTransactionCotainer from './AllTransactionContainer';
 import { transactions } from '../../utils/dummyData';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 
 export default {
   title: 'all-transaction-container/AllTransactionContainer',
   component: AllTransactionCotainer,
 };
 
-const Wrapper = Styled.div`
+const Wrapper = styled.div`
   margin: 0 auto;
   width: 70%;
   @media only screen and (max-width: 768px) {
