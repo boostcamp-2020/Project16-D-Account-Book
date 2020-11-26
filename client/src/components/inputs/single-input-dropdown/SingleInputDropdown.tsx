@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Options } from '../select/Select';
-import InputDropDown from '../Input-drop-down/InputDropDown';
+import InputDropDown from '../input-drop-down/InputDropDown';
 interface Props {
   items: Options[];
   placeholder: string;
@@ -12,7 +12,8 @@ const SingleInputDropDown: React.FC<Props> = ({ items, placeholder, onChange }: 
   const displayHeader = select ? select : placeholder;
 
   const selectChange = (value: string): void => {
-    setSelect(value);
+    const find = items.find((item) => item.value === value);
+    setSelect(find?.label);
     onChange(value);
   };
 
