@@ -1,13 +1,7 @@
-import React from 'react';
-import { Options } from '../select/Select';
-interface Props {
-  items: Options[];
-  placeholder: string;
-  onChange?: (selected: string[]) => void;
-}
+import MultiInputDropDownHOC from '../multi-input-dropdown/MultiInputHOC';
 
-const SelectPaymentMethod: React.FC<Props> = ({ items, placeholder, onChange }: Props) => {
-  return <div>placeholder</div>;
+const createPlaceHolderName = (set: Set<string>): string => {
+  return set.size + '개 결제수단';
 };
 
-export default SelectPaymentMethod;
+export default MultiInputDropDownHOC(createPlaceHolderName);
