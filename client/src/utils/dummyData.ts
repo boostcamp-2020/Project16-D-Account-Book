@@ -1,7 +1,7 @@
 const categories = [
   { id: 1, name: '급여', color: '#ffff00' },
   { id: 2, name: '생활', color: '#000000' },
-  { id: 2, name: '금융수입', color: '#ffa8d6' },
+  { id: 3, name: '금융수입', color: '#ffa8d6' },
 ];
 
 const accounts = [
