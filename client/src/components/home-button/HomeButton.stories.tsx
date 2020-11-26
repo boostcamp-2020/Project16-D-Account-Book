@@ -2,7 +2,7 @@ import React from 'react';
 import HomeButton from './HomeButton';
 
 export default {
-  title: '홈 버튼',
+  title: 'home-button/HomeButton',
   component: HomeButton,
 };
 
