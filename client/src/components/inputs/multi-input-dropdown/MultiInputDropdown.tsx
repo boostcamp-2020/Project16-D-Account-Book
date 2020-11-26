@@ -9,12 +9,8 @@ interface Props {
 }
 
 const joinWithComma = (set: Set<string>, items: Options[]): string => {
-  return items.reduce((acc, curr) => {
-    if (set.has(curr.value)) {
-      return acc + ',' + curr.label;
-    }
-    return acc + '';
-  }, '');
+  const filterItem = items.filter((curr) => set.has(curr.value));
+  return filterItem.map((item) => item.label).join(',');
 };
 
 const MultiInputDropDown: React.FC<Props> = ({ placeholder, items, onChange }: Props) => {
@@ -32,7 +28,16 @@ const MultiInputDropDown: React.FC<Props> = ({ placeholder, items, onChange }: P
     }
   };
   const displayHeader = selected.size === 0 ? placeholder : joinWithComma(selected, items);
-  return <InputDropDown items={items} header={displayHeader} onChange={selectChange} multi={true} />;
+  const selectedValue = Array.from(selected);
+  return (
+    <InputDropDown
+      items={items}
+      selectValue={selectedValue}
+      header={displayHeader}
+      onChange={selectChange}
+      multi={true}
+    />
+  );
 };
 
 export default MultiInputDropDown;
