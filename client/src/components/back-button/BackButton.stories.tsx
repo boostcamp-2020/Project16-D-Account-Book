@@ -1,17 +1,17 @@
 import React from 'react';
-import BackButton from './BackButton';
-import OvenBackButton from './OvenBackButton';
+import PreviousButton from './PreviousButton';
+import ModalBackButton from './ModalBackButton';
 
 export default {
   title: '뒤로가기 버튼',
-  component: BackButton,
+  component: PreviousButton,
 };
 
-export const BackButtonDefault: React.FC = () => {
-  return <BackButton />;
+export const PreviousButtonDefault: React.FC = () => {
+  return <PreviousButton />;
 };
 
-export const SmallBackButtonDefault: React.FC = () => {
+export const SmallPreviousButtonDefault: React.FC = () => {
   return (
     <div
       style={{
@@ -19,11 +19,11 @@ export const SmallBackButtonDefault: React.FC = () => {
         height: '100px',
       }}
     >
-      <BackButton />
+      <PreviousButton />
     </div>
   );
 };
 
-export const OvenBackButtonDefault: React.FC = () => {
-  return <OvenBackButton />;
+export const ModalBackButtonDefault: React.FC = () => {
+  return <ModalBackButton />;
 };
