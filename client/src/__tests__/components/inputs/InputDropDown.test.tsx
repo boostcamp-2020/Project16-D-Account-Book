@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import InputDropDown from '../../../components/inputs/Input-drop-down/InputDropDown';
+import InputDropDown from '../../../components/inputs/input-drop-down/InputDropDown';
 import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions';
 describe('단일 선택만 가능한 dropdown input 컴포넌트 테스트', () => {
   test('헤더에는 무조건 title이 출력된다.', () => {
@@ -33,7 +33,7 @@ describe('단일 선택만 가능한 dropdown input 컴포넌트 테스트', () 
     userEvent.click(screen.getByText('title'));
     userEvent.click(screen.getByText(/optionLabel1/));
     expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy.mock.calls[0][0]).toBe('optionLabel1');
+    expect(spy.mock.calls[0][0]).toBe('optionValue1');
   });
   test('header와 dropdown 영역 외의 것이 클릭되어져도 리스트가 닫혀야한다.', () => {
     const Root: React.FC = () => {
@@ -55,9 +55,9 @@ describe('단일 선택만 가능한 dropdown input 컴포넌트 테스트', () 
     render(<InputDropDown multi={true} items={dummyOptions} header={'title'} onChange={spy} />);
     userEvent.click(screen.getByText('title'));
     userEvent.click(screen.getByText(/optionLabel1/));
-    expect(spy.mock.calls[0][0]).toBe('optionLabel1');
+    expect(spy.mock.calls[0][0]).toBe('optionValue1');
     userEvent.click(screen.getByText(/optionLabel2/));
     expect(spy).toHaveBeenCalledTimes(2);
-    expect(spy.mock.calls[1][0]).toBe('optionLabel2');
+    expect(spy.mock.calls[1][0]).toBe('optionValue2');
   });
 });
