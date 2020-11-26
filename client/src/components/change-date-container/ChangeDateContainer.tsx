@@ -7,6 +7,11 @@ import { isEndOfYear, isStartOfYear } from '../../utils/date';
 const Container = styled.div`
   display: flex;
   width: 100%;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
 `;
 
 const PreviousButtonWrapper = styled.div`
@@ -16,6 +21,7 @@ const PreviousButtonWrapper = styled.div`
   svg {
     width: 2rem;
     height: 2rem;
+    cursor: pointer;
   }
 `;
 
@@ -26,6 +32,7 @@ const NextButtonWrapper = styled.div`
   svg {
     width: 2rem;
     height: 2rem;
+    cursor: pointer;
   }
 `;
 const DateWrapper = styled.div`
