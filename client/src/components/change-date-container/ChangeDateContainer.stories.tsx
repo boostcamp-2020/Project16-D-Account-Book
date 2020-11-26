@@ -19,8 +19,8 @@ export const Default: React.FC = () => {
 };
 
 export const ApplyWrapper: React.FC = () => {
-  const [year, setYear] = useState(12);
-  const [month, setMonth] = useState(10);
+  const [year, setYear] = useState(2020);
+  const [month, setMonth] = useState(11);
   return (
     <Wrapper>
       <ChangeDateContainer year={year} month={month} setYear={setYear} setMonth={setMonth} />

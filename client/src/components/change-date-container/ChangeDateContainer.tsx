@@ -50,13 +50,24 @@ const ChangeDateContainer: React.FC<Props> = ({ year, month, setYear, setMonth }
     if (isEndOfYear(month)) {
       setYear(year + 1);
       setMonth(1);
+    } else {
+      setMonth(month + 1);
     }
-    setMonth(month + 1);
   };
+
+  const onClickPreviousButton = () => {
+    if (isStartOfYear(month)) {
+      setYear(year - 1);
+      setMonth(12);
+    } else {
+      setMonth(month - 1);
+    }
+  };
+
   return (
     <Container>
       <PreviousButtonWrapper>
-        <PreviousButton />
+        <PreviousButton onClick={onClickPreviousButton} />
       </PreviousButtonWrapper>
       <DateWrapper>
         <div>{year}</div>
