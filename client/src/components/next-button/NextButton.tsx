@@ -4,14 +4,11 @@ interface NextButtonProps {
   onClick?: () => void;
 }
 
-const NextButton: React.FC<NextButtonProps> = ({ onClick }) => {
+const NextButton: React.FC<NextButtonProps> = ({ onClick }: NextButtonProps) => {
   return (
-    <svg x="0px" y="0px" viewBox="0 0 306 306" onClick={onClick}>
-      <g>
-        <g id="chevron-left">
-          <polygon points="247.35,35.7 211.65,0 58.65,153 211.65,306 247.35,270.3 130.05,153   " />
-        </g>
-      </g>
+    <svg viewBox="0 0 24 24" onClick={onClick}>
+      <path d="M0 0h24v24H0V0z" fill="none" />
+      <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
     </svg>
   );
 };
