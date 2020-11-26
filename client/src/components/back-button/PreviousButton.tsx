@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface BackButton {
+interface PreviousButton {
   onClick?: () => void;
 }
 
-const BackButton: React.FC<BackButton> = ({ onClick }: BackButton) => {
+const PreviousButton: React.FC<BackButton> = ({ onClick }: BackButton) => {
   return (
     <svg x="0px" y="0px" viewBox="0 0 306 306" onClick={onClick}>
       <g>
@@ -16,4 +16,4 @@ const BackButton: React.FC<BackButton> = ({ onClick }: BackButton) => {
   );
 };
 
-export default BackButton;
+export default PreviousButton;

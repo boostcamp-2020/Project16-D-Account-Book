@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface OvenBackButtonProps {
+interface ModalBackButton {
   onClick?: () => void;
 }
 
-const OvenBackButton: React.FC<OvenBackButtonProps> = ({ onClick }: OvenBackButtonProps) => {
+const ModalBackButton: React.FC<ModalBackButton> = ({ onClick }: ModalBackButton) => {
   return (
     <svg onClick={onClick} width="32" height="32" viewBox="0 0 32 32" fill="#000000" data-svg-content="true">
       <g>
@@ -14,4 +14,4 @@ const OvenBackButton: React.FC<OvenBackButtonProps> = ({ onClick }: OvenBackButt
   );
 };
 
-export default OvenBackButton;
+export default ModalBackButton;
