@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
-import Select, { Options } from './Select';
-import { createRenderData } from '../../hook/use-drop-down';
-import useClickOutSide from '../../hook/use-click-outside/useClickOutside';
+import Select, { Options } from '../Select/Select';
+import { createRenderData } from '../../../hook/use-drop-down';
+import useClickOutSide from '../../../hook/use-click-outside/useClickOutside';
 interface InputDropDownProps {
   items: Options[];
   header: string;
