@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
-import Select, { Options } from './Select';
-import { createRenderData } from '../../hook/use-drop-down';
-import useClickOutSide from '../../hook/use-click-outside/useClickOutside';
+import Select, { Options } from '../select/Select';
+import { createRenderData } from '../../../hook/use-drop-down';
+import useClickOutSide from '../../../hook/use-click-outside/useClickOutside';
 interface InputDropDownProps {
   items: Options[];
   header: string;
-  selectValue?: string[];
+  selectValue?: string[] | undefined | string;
   onChange?: (value: string) => void;
   multi?: boolean;
 }
@@ -37,7 +37,6 @@ const InputDropDown: React.FC<InputDropDownProps> = ({
   };
 
   const checkedData = createRenderData(items, selectValue);
-
   return (
     <Select
       options={checkedData}

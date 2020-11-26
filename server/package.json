@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "jest"
+    "test": "jest",
+    "deploy": "pm2 start src/app.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "prettier": "2.1.2"
   },
   "dependencies": {
+    "@koa/cors": "^3.1.0",
     "axios": "^0.21.0",
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
