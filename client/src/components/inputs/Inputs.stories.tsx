@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import InputText from './InputText';
-import Select, { Options } from './Select';
-import InputDropDown from './InputDropDown';
+import InputText from './InputText/InputText';
+import Select, { Options } from './Select/Select';
+import InputDropDown from './InputDropDown/InputDropDown';
 import styled from 'styled-components';
 import dummyOptions from '../../__dummy-data__/components/inputs/dummyOptions';
 import { stat } from 'fs';
