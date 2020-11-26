@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PreviousButton from '../back-button/PreviousButton';
 import NextButton from '../next-button/NextButton';
+import { isEndOfYear, isStartOfYear } from '../../utils/date';
 
 const Container = styled.div`
   display: flex;
@@ -37,18 +38,32 @@ const DateWrapper = styled.div`
   }
 `;
 
-const ChangeDateContainer: React.FC = () => {
+interface Props {
+  year: number;
+  month: number;
+  setYear: (year: number) => void;
+  setMonth: (month: number) => void;
+}
+
+const ChangeDateContainer: React.FC<Props> = ({ year, month, setYear, setMonth }: Props) => {
+  const onClickNextButton = () => {
+    if (isEndOfYear(month)) {
+      setYear(year + 1);
+      setMonth(1);
+    }
+    setMonth(month + 1);
+  };
   return (
     <Container>
       <PreviousButtonWrapper>
         <PreviousButton />
       </PreviousButtonWrapper>
       <DateWrapper>
-        <div>2020</div>
-        <div className="month">11</div>
+        <div>{year}</div>
+        <div className="month">{month}</div>
       </DateWrapper>
       <NextButtonWrapper>
-        <NextButton />
+        <NextButton onClick={onClickNextButton} />
       </NextButtonWrapper>
     </Container>
   );

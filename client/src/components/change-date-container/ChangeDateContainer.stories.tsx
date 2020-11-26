@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ChangeDateContainer from './ChangeDateContainer';
 import styled from 'styled-components';
 
@@ -13,13 +13,17 @@ const Wrapper = styled.div`
 `;
 
 export const Default: React.FC = () => {
-  return <ChangeDateContainer />;
+  const [year, setYear] = useState(2020);
+  const [month, setMonth] = useState(11);
+  return <ChangeDateContainer year={year} month={month} setYear={setYear} setMonth={setMonth} />;
 };
 
 export const ApplyWrapper: React.FC = () => {
+  const [year, setYear] = useState(12);
+  const [month, setMonth] = useState(10);
   return (
     <Wrapper>
-      <ChangeDateContainer />
+      <ChangeDateContainer year={year} month={month} setYear={setYear} setMonth={setMonth} />
     </Wrapper>
   );
 };
