@@ -6,7 +6,7 @@ interface SelectItemProps {
   label: string;
   value: string | number;
   checked?: boolean;
-  onClick: (value: string) => void;
+  onClick?: (value: string) => void | undefined;
 }
 
 const SelectListItem = styled.li`
@@ -36,7 +36,9 @@ const SelectItem: React.FC<SelectItemProps> = ({ label, value, checked, onClick 
   return (
     <SelectListItem
       onClick={() => {
-        onClick(value);
+        if (onClick !== undefined) {
+          onClick(value as string);
+        }
       }}
     >
       <ItemLabel>{label}</ItemLabel>
