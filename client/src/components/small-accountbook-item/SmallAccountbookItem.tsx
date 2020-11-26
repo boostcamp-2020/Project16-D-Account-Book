@@ -3,31 +3,32 @@ import Styled from 'styled-components';
 import { getTextColor } from '../../utils/color';
 
 const SmallAccountbookItemWrapper = Styled.div<{ bgColor: string; textColor: string }>`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};
   box-sizing: border-box;
   text-align: center;
   border-radius: 5px;
   font-size: 1.7rem;
-  padding: 12px 10px 12px 10px;
+  padding: 8px 6px;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 20px auto;
 `;
 
 interface SmallAccountbookItemProps {
-  text: string;
+  id: number;
   bgColor: string;
 }
 
-const SmallAccountbookItem = ({ text, bgColor }: SmallAccountbookItemProps): JSX.Element => {
+const SmallAccountbookItem = ({ id, bgColor }: SmallAccountbookItemProps): JSX.Element => {
   const textColor = getTextColor(bgColor);
   return (
     <SmallAccountbookItemWrapper bgColor={bgColor} textColor={textColor}>
-      {text}
+      {id}
     </SmallAccountbookItemWrapper>
   );
 };
