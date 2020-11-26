@@ -49,7 +49,7 @@ const Select: React.FC<SelectProps> = ({
   targetRef,
 }: SelectProps) => {
   return (
-    <SelectWrapper ref={targetRef}>
+    <SelectWrapper ref={targetRef as any}>
       <SelectTitle onClick={headerClick}>{defaultValue}</SelectTitle>
       {showDropDown && <SelectList options={options} onClick={itemClick} />}
     </SelectWrapper>

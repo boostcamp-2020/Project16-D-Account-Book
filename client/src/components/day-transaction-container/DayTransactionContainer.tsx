@@ -3,7 +3,7 @@ import Styled from 'styled-components';
 import Income, { isIncome } from '../../types/income';
 import Expenditure from '../../types/expenditure';
 import { numberWithCommas } from '../../utils/number';
-import { RED, BLUE, GREY } from '../../constants/color';
+import { RED, BLUE, GRAY } from '../../constants/color';
 import TransactionItem from '../transaction-item/TransactionItem';
 
 const Container = Styled.div`
@@ -15,7 +15,7 @@ const Container = Styled.div`
 const DayTransactionHeader = Styled.div<{ totalAmount: number }>`
   display: flex;
   width: 100%;
-  border-bottom: 2px solid ${GREY};
+  border-bottom: 2px solid ${GRAY};
   margin-bottom: 20px;
   padding-bottom: 10px;
   .header-item {
