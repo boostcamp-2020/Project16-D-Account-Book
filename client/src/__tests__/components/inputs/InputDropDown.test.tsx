@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import InputDropDown from '../../../components/inputs/input-drop-down/InputDropDown';
+import InputDropDown from '../../../components/common/inputs/input-drop-down/InputDropDown';
 import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions';
 describe('단일 선택만 가능한 dropdown input 컴포넌트 테스트', () => {
   test('헤더에는 무조건 title이 출력된다.', () => {

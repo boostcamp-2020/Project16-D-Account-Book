@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getTextColor } from '../../utils/color';
+import { getTextColor } from '../../../utils/color';
 
 interface SmallAccountbookItemWrapperProps {
   bgColor: string;

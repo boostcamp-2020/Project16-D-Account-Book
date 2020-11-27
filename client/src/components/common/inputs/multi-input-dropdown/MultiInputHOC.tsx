@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Options } from '../select/Select';
 import InputDropDown from '../input-drop-down/InputDropDown';
-import { setImmutable } from '../../../utils/immutable/setImmutable';
+import { setImmutable } from '../../../../utils/immutable/setImmutable';
 interface Props {
   placeholder: string;
   items: Options[];

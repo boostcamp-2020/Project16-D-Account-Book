@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PreviousButton from '../back-button/PreviousButton';
 import NextButton from '../next-button/NextButton';
-import { isEndOfYear, isStartOfYear } from '../../utils/date';
+import { isEndOfYear, isStartOfYear } from '../../../utils/date';
 
 const Container = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const Container = styled.div`
 const PreviousButtonWrapper = styled.div`
   width: 32%;
   padding-top: 0.5rem;
-  text-align right;
+  text-align: right;
   svg {
     width: 2rem;
     height: 2rem;
@@ -28,7 +28,7 @@ const PreviousButtonWrapper = styled.div`
 const NextButtonWrapper = styled.div`
   width: 32%;
   padding-top: 0.5rem;
-  text-align left;
+  text-align: left;
   svg {
     width: 2rem;
     height: 2rem;
