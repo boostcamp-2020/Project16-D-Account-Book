@@ -1,8 +1,8 @@
 import React from 'react';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 import { getTextColor } from '../../utils/color';
 
-const CategoryWrapper = Styled.div<{ bgColor: string; textColor: string }>`
+const CategoryWrapper = styled.div<{ bgColor: string; textColor: string }>`
   width: 100%;
   max-width: 115px;
   height: 100%;

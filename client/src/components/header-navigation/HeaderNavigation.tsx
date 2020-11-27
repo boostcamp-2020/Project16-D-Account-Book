@@ -1,15 +1,15 @@
 import React from 'react';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 import ProfileImage from '../profile-image/ProfileImage';
 import { BLUE } from '../../constants/color';
 
-const NavigationWrapper = Styled.div`
+const NavigationWrapper = styled.div`
   display: flex;
   width: 200px;
   hgieht: 50px;
 `;
 
-const NavigationItem = Styled.div<{ currentPage: string }>`
+const NavigationItem = styled.div<{ currentPage: string }>`
   width: 24%;
   padding-top: 4px;
   text-align: center;

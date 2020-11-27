@@ -1,12 +1,12 @@
 import React from 'react';
-import Styled from 'styled-components';
-import Category from '../category/Category';
-import { numberWithCommas } from '../../utils/number';
-import { RED, BLUE } from '../../constants/color';
-import Income, { isIncome } from '../../types/income';
-import Expenditure from '../../types/expenditure';
+import styled from 'styled-components';
+import Category from '../../category/Category';
+import { numberWithCommas } from '../../../utils/number';
+import { RED, BLUE } from '../../../constants/color';
+import Income, { isIncome } from '../../../types/income';
+import Expenditure from '../../../types/expenditure';
 
-const TransactionItemWrapper = Styled.div`
+const TransactionItemWrapper = styled.div`
   display: flex;
   width: 100%;
   padding-top: 5px;
@@ -15,15 +15,15 @@ const TransactionItemWrapper = Styled.div`
   margin-auto: 0;
   cursor: pointer;
   &:hover {
-    background-color: #F7F7F7;
+    background-color: #f7f7f7;
   }
 `;
 
-const CategoryWrapper = Styled.div`
+const CategoryWrapper = styled.div`
   width: 100%;
 `;
 
-const ContentItemWrapper = Styled.div<{ isIncome?: boolean }>`
+const ContentItemWrapper = styled.div<{ isIncome?: boolean }>`
   display: flex;
   text-align: center;
   justify-content: center;

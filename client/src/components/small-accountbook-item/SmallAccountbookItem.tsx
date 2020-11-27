@@ -1,5 +1,5 @@
 import React from 'react';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 import { getTextColor } from '../../utils/color';
 
 interface SmallAccountbookItemWrapperProps {
