@@ -7,7 +7,7 @@ export default {
 };
 
 export const HomeButtonDefault: React.FC = () => {
-  return <HomeButton />;
+  return <HomeButton show={true} />;
 };
 
 export const SidebarHomeButton: React.FC = () => {
@@ -18,7 +18,7 @@ export const SidebarHomeButton: React.FC = () => {
         height: '100px',
       }}
     >
-      <HomeButton />
+      <HomeButton show={true} />
     </div>
   );
 };
