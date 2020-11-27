@@ -1,5 +1,5 @@
 import React from 'react';
-import Select, { Options } from '../../../components/inputs/select/Select';
+import Select, { Options } from '../../../components/common/inputs/select/Select';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions';

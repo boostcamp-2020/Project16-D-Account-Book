@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import Income, { isIncome } from '../../../types/income';
-import Expenditure from '../../../types/expenditure';
-import { numberWithCommas } from '../../../utils/number';
-import { RED, BLUE, GRAY } from '../../../constants/color';
+import Income, { isIncome } from '../../../../types/income';
+import Expenditure from '../../../../types/expenditure';
+import { numberWithCommas } from '../../../../utils/number';
+import { RED, BLUE, GRAY } from '../../../../constants/color';
 import TransactionItem from '../transaction-item/TransactionItem';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  widhth: 100%;
+  width: 100%;
 `;
 
 const DayTransactionHeader = styled.div<{ totalAmount: number }>`

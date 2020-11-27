@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Category from '../../category/Category';
-import { numberWithCommas } from '../../../utils/number';
-import { RED, BLUE } from '../../../constants/color';
-import Income, { isIncome } from '../../../types/income';
-import Expenditure from '../../../types/expenditure';
+import { numberWithCommas } from '../../../../utils/number';
+import { RED, BLUE } from '../../../../constants/color';
+import Income, { isIncome } from '../../../../types/income';
+import Expenditure from '../../../../types/expenditure';
 
 const TransactionItemWrapper = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const TransactionItemWrapper = styled.div`
   padding-top: 5px;
   padding-bottom: 5px;
   margin-bottom: 15px;
-  margin-auto: 0;
+  margin: 0 auto;
   cursor: pointer;
   &:hover {
     background-color: #f7f7f7;

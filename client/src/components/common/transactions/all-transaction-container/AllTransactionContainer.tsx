@@ -1,7 +1,7 @@
 import React from 'react';
 import DayTransactionContainer from '../day-transaction-container/DayTransactionContainer';
-import Income from '../../../types/income';
-import Expenditure from '../../../types/expenditure';
+import Income from '../../../../types/income';
+import Expenditure from '../../../../types/expenditure';
 
 interface Props {
   transactions: Array<Income | Expenditure>;

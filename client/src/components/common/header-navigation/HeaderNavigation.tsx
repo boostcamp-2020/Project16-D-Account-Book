@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ProfileImage from '../profile-image/ProfileImage';
-import { BLUE } from '../../constants/color';
+import { BLUE } from '../../../constants/color';
 
 const NavigationWrapper = styled.div`
   display: flex;

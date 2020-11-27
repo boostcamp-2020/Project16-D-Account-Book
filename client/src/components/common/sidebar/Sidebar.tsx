@@ -4,7 +4,7 @@ import HomeButton from '../home-button/HomeButton';
 import HamburgerButton from '../hamburger-button/HamburgerButton';
 import PlusButton from '../plus-button/PlusButton';
 import SmallAccountbookItem from '../small-accountbook-item/SmallAccountbookItem';
-import { GRAY } from '../../constants/color';
+import { GRAY } from '../../../constants/color';
 
 interface SidebarProps {
   smallAccountbooks: { id: number; color: string }[];

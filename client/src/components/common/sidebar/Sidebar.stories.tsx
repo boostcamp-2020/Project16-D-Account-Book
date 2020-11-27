@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from './Sidebar';
-import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
+import { smallAccountbookItems } from '../../../__dummy-data__/components/smallAccountbookItem/dummyData';
 
 export default {
   title: 'sidebar/Sidebar',
