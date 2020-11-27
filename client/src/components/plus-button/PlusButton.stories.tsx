@@ -7,7 +7,7 @@ export default {
 };
 
 export const PlusButtonDefault: React.FC = () => {
-  return <PlusButton />;
+  return <PlusButton show={true} />;
 };
 
 export const SidebarPlusButton: React.FC = () => {
@@ -18,7 +18,7 @@ export const SidebarPlusButton: React.FC = () => {
         height: '50px',
       }}
     >
-      <PlusButton />
+      <PlusButton show={true} />
     </div>
   );
 };

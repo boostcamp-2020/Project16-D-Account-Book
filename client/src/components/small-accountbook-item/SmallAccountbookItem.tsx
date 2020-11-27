@@ -9,7 +9,7 @@ interface SmallAccountbookItemWrapperProps {
   onClick?: () => void;
 }
 
-const SmallAccountbookItemWrapper = Styled.div<SmallAccountbookItemWrapperProps>`
+const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>`
   width: ${({ show }) => (show ? '40px' : '0')};
   height: ${({ show }) => (show ? '40px' : '0')};
   background-color: ${({ bgColor }) => bgColor};
