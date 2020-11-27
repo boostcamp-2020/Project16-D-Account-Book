@@ -1,6 +1,6 @@
 import React from 'react';
 import AllTransactionCotainer from './AllTransactionContainer';
-import { transactions } from '../../__dummy-data__/components/dummyData';
+import { transactions } from '../../__dummy-data__/components/transactions/dummyData';
 import Styled from 'styled-components';
 
 export default {

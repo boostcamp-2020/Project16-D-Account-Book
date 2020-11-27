@@ -1,6 +1,6 @@
 import React from 'react';
 import DayTransactionCotainer from './DayTransactionContainer';
-import { transactions } from '../../__dummy-data__/dummyData';
+import { transactions } from '../../__dummy-data__/components/transactions/dummyData';
 
 export default {
   title: 'day-transaction-container/DayTransactionContainer',
