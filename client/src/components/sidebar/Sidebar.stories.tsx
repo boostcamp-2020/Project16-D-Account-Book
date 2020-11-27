@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from './Sidebar';
-import { smallAccountbookitems } from '../../__dummy-data__/dummyData';
+import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 
 export default {
   title: 'sidebar/Sidebar',
@@ -8,5 +8,5 @@ export default {
 };
 
 export const SidebarDefault = (): JSX.Element => {
-  return <Sidebar smallAccountbooks={smallAccountbookitems} />;
+  return <Sidebar smallAccountbooks={smallAccountbookItems} />;
 };
