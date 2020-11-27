@@ -4,6 +4,7 @@ import HomeButton from '../home-button/HomeButton';
 import HamburgerButton from '../hamburger-button/HamburgerButton';
 import PlusButton from '../plus-button/PlusButton';
 import SmallAccountbookItem from '../small-accountbook-item/SmallAccountbookItem';
+import { GRAY } from '../../constants/color';
 
 interface SidebarProps {
   smallAccountbooks: { id: number; color: string }[];
@@ -14,15 +15,15 @@ interface SidebarWrapperProps {
 }
 
 const SidebarWrapper = styled.div<SidebarWrapperProps>`
-  background-color: rgba(0, 0, 0, 0.1);
-  width: 5%;
+  background-color: ${GRAY};
+  width: ${({ show }) => (show ? '5%' : '0')};
   height: 100%;
   position: fixed;
   top: 0%;
   left: 0%;
-  display: ${({ show }) => (show ? 'block' : 'none')};
+  display: 'block';
   z-index: -1;
-  transition: 0.5s;
+  transition: all ease 0.3s 0s;
   padding-top: 40px;
 `;
 
@@ -37,16 +38,16 @@ const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
   };
 
   const SmallAccountbooks = smallAccountbooks.map((item) => (
-    <SmallAccountbookItem key={item.id} id={item.id} bgColor={item.color} />
+    <SmallAccountbookItem key={item.id} id={item.id} bgColor={item.color} show={isOpen} />
   ));
   return (
     <div>
-      <HamburgerButton onClick={toggleButton}></HamburgerButton>
+      <HamburgerButton onClick={toggleButton} />
       <SidebarWrapper show={isOpen}>
         <ChildrenWrapper>
-          <HomeButton></HomeButton>
+          <HomeButton show={isOpen} />
           {SmallAccountbooks}
-          <PlusButton></PlusButton>
+          <PlusButton show={isOpen} />
         </ChildrenWrapper>
       </SidebarWrapper>
     </div>
