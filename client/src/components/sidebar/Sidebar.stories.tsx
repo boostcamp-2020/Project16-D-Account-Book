@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Sidebar from './Sidebar';
-import HamburgerButton from '../hamburger-button/HamburgerButton';
-import { smallAccountbookitems } from '../../utils/dummyData';
+import { smallAccountbookitems } from '../../__dummy-data__/dummyData';
 
 export default {
   title: 'sidebar/Sidebar',
