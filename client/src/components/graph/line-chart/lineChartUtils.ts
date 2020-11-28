@@ -1,4 +1,3 @@
-import { transaction } from 'mobx';
 import { ITransaction } from '../../../types/lineChartValue';
 
 export enum ValueUnit {
@@ -79,10 +78,6 @@ export const createDotPosition = (
   const gap = gapBetweenDays(start, end, xWidth - chartGap);
   const datePosition = today.date.getDate() - start.getDate();
   return [gap * datePosition + chartGap, yHeight - (today.value / highestValue) * (yHeight - chartGap)];
-};
-
-export const createPath = (): string => {
-  return '안녕ㅎ';
 };
 
 const immutableTransaction = (transactions: ITransaction[]): ITransaction[] => {
