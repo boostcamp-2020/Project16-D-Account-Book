@@ -31,6 +31,13 @@ const ChildrenWrapper = styled.div`
   margin-top: 55px;
 `;
 
+const HamburgerButtonWrapper = styled.div`
+  position: fixed;
+  left: 0%;
+  width: 5%;
+  border: 1px solid black;
+`;
+
 const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleButton = (): void => {
@@ -42,7 +49,9 @@ const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
   ));
   return (
     <div>
-      <HamburgerButton onClick={toggleButton} />
+      <HamburgerButtonWrapper>
+        <HamburgerButton onClick={toggleButton} />
+      </HamburgerButtonWrapper>
       <SidebarWrapper show={isOpen}>
         <ChildrenWrapper>
           <HomeButton show={isOpen} />
