@@ -1,6 +1,6 @@
 import React from 'react';
-import MenuBackground from './MenuBackground';
-import { SvgWrapper } from './FilterButton';
+import MenuBackground from '../menu-background/MenuBackground';
+import { SvgWrapper } from '../filter-button/FilterButton';
 
 interface Props {
   width: number;

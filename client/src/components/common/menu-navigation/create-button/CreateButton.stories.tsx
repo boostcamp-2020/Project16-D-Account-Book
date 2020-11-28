@@ -3,7 +3,7 @@ import CreateButton from './CreateButton';
 import styled from 'styled-components';
 
 export default {
-  title: 'common/menu-navigation/CreateButton',
+  title: 'common/menu-navigation/create-button/CreateButton',
   component: CreateButton,
 };
 

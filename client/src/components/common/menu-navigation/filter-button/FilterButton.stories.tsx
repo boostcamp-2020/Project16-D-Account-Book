@@ -1,10 +1,10 @@
 import React from 'react';
-import MenuBackground from './MenuBackground';
+import FilterButton from './FilterButton';
 import styled from 'styled-components';
 
 export default {
-  title: 'common/menu-navigation/MenuBackground',
-  component: MenuBackground,
+  title: 'common/menu-navigation/filter-button/FilterButton',
+  component: FilterButton,
 };
 
 const Wrapper = styled.div`
@@ -13,10 +13,14 @@ const Wrapper = styled.div`
   border: 1px solid black;
 `;
 
+export const Default: React.FC = () => {
+  return <FilterButton width={24} height={24} />;
+};
+
 export const ApplyWrapper: React.FC = () => {
   return (
     <Wrapper>
-      <MenuBackground />
+      <FilterButton width={24} height={24} />
     </Wrapper>
   );
 };

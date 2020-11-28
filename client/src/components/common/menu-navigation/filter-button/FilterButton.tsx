@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import MenuBackground from './MenuBackground';
+import MenuBackground from '../menu-background/MenuBackground';
 
 export const SvgWrapper = styled.svg<{ width: number; height: number }>`
   position: relative;
