@@ -14,7 +14,7 @@ const PageWrapper = styled.div`
   margin: 0 auto;
 `;
 const HeaderNavigationWrapper = styled.div`
-  position: fixed;
+  position: absolute;
   right: 2%;
   top: 2%;
 `;
