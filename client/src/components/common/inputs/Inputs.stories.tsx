@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions';
 import MultiInputDropDown from './multi-input-dropdown/MultiInputDropdown';
 import SingleInputDropDown from './single-input-dropdown/SingleInputDropdown';
+import SelectPaymentMethod from './select-payment-method/SelectPaymentMethod';
 
 const SmallDiv = styled.div`
   width: 300px;
@@ -39,7 +40,7 @@ export const MultiInputDropDownDefault: React.FC = () => {
 export const SelectPaymentMethodDefault: React.FC = () => {
   return (
     <SmallDiv>
-      <MultiInputDropDown placeholder={'갯수'} items={dummyOptions} />
+      <SelectPaymentMethod placeholder={'갯수'} items={dummyOptions} />
     </SmallDiv>
   );
 };
