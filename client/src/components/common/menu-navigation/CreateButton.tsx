@@ -1,19 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
 import MenuBackground from './MenuBackground';
-
-export const SvgWrapper = styled.svg<{ width: number; height: number }>`
-  position: relative;
-  left: ${({ width }) => `calc(50% - ${width / 2}px)`};
-  top: ${({ height }) => `calc(50% - ${height / 2}px)`};
-`;
+import { SvgWrapper } from './FilterButton';
 
 interface Props {
   width: number;
   height: number;
 }
 
-const FilterButton: React.FC<Props> = ({ width, height }: Props) => {
+const CreateButton: React.FC<Props> = ({ width, height }: Props) => {
   return (
     <MenuBackground>
       <SvgWrapper width={width} height={height}>
@@ -27,4 +21,4 @@ const FilterButton: React.FC<Props> = ({ width, height }: Props) => {
   );
 };
 
-export default FilterButton;
+export default CreateButton;
