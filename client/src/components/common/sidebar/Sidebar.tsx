@@ -22,7 +22,7 @@ const SidebarWrapper = styled.div<SidebarWrapperProps>`
   top: 0%;
   left: 0%;
   display: 'block';
-  z-index: -1;
+  z-index: 0;
   transition: all ease 0.3s 0s;
   padding-top: 40px;
 `;
@@ -35,6 +35,8 @@ const HamburgerButtonWrapper = styled.div`
   position: fixed;
   left: 0%;
   width: 5%;
+  top: 2%;
+  z-index: 10;
 `;
 
 const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {

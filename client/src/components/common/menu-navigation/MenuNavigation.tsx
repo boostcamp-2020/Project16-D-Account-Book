@@ -7,8 +7,11 @@ import styled from 'styled-components';
 const NavigationWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  right: 2%;
+  bottom: 2%;
+  width: 40px;
+  height: 140px;
 `;
 
 const ButtonWrapper = styled.div`

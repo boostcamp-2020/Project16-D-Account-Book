@@ -7,19 +7,6 @@ export default {
   component: MenuNavigation,
 };
 
-const Wrapper = styled.div`
-  width: 40px;
-  height: 140px;
-`;
-
 export const Default: React.FC = () => {
   return <MenuNavigation />;
-};
-
-export const ApplyWrapper: React.FC = () => {
-  return (
-    <Wrapper>
-      <MenuNavigation />
-    </Wrapper>
-  );
 };

@@ -8,10 +8,10 @@ const AmountWrapper = styled.div<{ text: string }>`
   display: flex;
   color: ${({ text }) => (text == '지출' ? RED : BLUE)};
   .text {
-    width: 17%;
+    width: 20%;
   }
   .amount {
-    width: 83%;
+    width: 80%;
     text-align: right;
   }
 `;
