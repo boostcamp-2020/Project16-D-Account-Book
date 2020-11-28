@@ -35,7 +35,6 @@ const HamburgerButtonWrapper = styled.div`
   position: fixed;
   left: 0%;
   width: 5%;
-  border: 1px solid black;
 `;
 
 const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {

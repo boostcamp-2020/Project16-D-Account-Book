@@ -6,7 +6,6 @@ import { BLUE } from '../../../constants/color';
 const NavigationWrapper = styled.div`
   display: flex;
   width: 200px;
-  hgieht: 50px;
 `;
 
 const NavigationItem = styled.div<{ currentPage: string }>`
@@ -31,6 +30,9 @@ const NavigationItem = styled.div<{ currentPage: string }>`
     flex-direction: row-reverse;
     padding: 0;
   }
+  .text {
+    cursor: pointer;
+  }
 `;
 
 const sampleProfileImage =
@@ -43,9 +45,15 @@ interface HeaderNavigationProps {
 const HeaderNavigation = ({ currentPage }: HeaderNavigationProps): JSX.Element => {
   return (
     <NavigationWrapper>
-      <NavigationItem currentPage={currentPage}>내역</NavigationItem>
-      <NavigationItem currentPage={currentPage}>달력</NavigationItem>
-      <NavigationItem currentPage={currentPage}>통계</NavigationItem>
+      <NavigationItem currentPage={currentPage}>
+        <span className="text">내역</span>
+      </NavigationItem>
+      <NavigationItem currentPage={currentPage}>
+        <span className="text">달력</span>
+      </NavigationItem>
+      <NavigationItem currentPage={currentPage}>
+        <span className="text">통계</span>
+      </NavigationItem>
       <NavigationItem currentPage={''}>
         <ProfileImage src={sampleProfileImage} />
       </NavigationItem>
