@@ -8,6 +8,9 @@ const Background = styled.div`
   border-radius: 50%;
   background-color: ${GRAY};
   cursor: pointer;
+  &:hover {
+    border: 2px solid white;
+  }
 `;
 
 interface Props {
