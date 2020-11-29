@@ -1,0 +1,6 @@
+{
+	"watch": ["src", ".env"],
+	"ext": "js, json",
+	"delay": "2500",
+	"exec": "babel-node ./src/app.js"
+  }
