@@ -63,7 +63,7 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
       </DayTransactionHeader>
       {transactions.map((transaction) => (
         <TransactionItem
-          key={'transaction' + transaction.id + transaction.category.name}
+          key={isIncome(transaction) ? `incometr${transaction.id}` : `expendituretr${transaction.id}`}
           transaction={transaction}
         ></TransactionItem>
       ))}
