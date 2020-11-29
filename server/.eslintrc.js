@@ -20,4 +20,9 @@ module.exports = {
     ],
     'no-unused-vars': 'warn',
   },
+  settings: {
+    'import/resolver': {
+      'babel-module': {},
+    },
+  },
 };
