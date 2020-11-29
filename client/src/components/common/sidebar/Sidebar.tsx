@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import styled from 'styled-components';
 import HomeButton from '../home-button/HomeButton';
 import HamburgerButton from '../hamburger-button/HamburgerButton';
@@ -64,4 +64,4 @@ const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
   );
 };
 
-export default Sidebar;
+export default memo(Sidebar);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Sidebar from '../../components/common/sidebar/Sidebar';
 import HeaderNavigation from '../../components/common/header-navigation/HeaderNavigation';
@@ -8,7 +8,6 @@ import AllTransactionContainer from '../../components/common/transactions/all-tr
 import { transactions } from '../../__dummy-data__/components/transactions/dummyData';
 import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
-import { useObserver } from 'mobx-react';
 
 const PageWrapper = styled.div`
   width: 70%;
