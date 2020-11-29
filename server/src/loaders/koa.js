@@ -25,7 +25,7 @@ const koa = async (app) => {
   app.use(router.routes());
   app.use(router.allowedMethods());
 
-  router.use('api/', indexRouter.routes());
+  router.use('/api/', indexRouter.routes());
 };
 
 module.exports = koa;
