@@ -17,7 +17,7 @@ export const fullTransaction: ITransaction[] = [
 ];
 
 export const duplicatedTransaction: ITransaction[] = [
-  { date: new Date('2020-11-01'), value: 1000 },
+  { date: new Date('2020-11-02'), value: 1000 },
   { date: new Date('2020-11-03'), value: 20000 },
   { date: new Date('2020-11-03'), value: 45000 },
   { date: new Date('2020-11-03'), value: 80000 },
