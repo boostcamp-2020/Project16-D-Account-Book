@@ -2,7 +2,7 @@ import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import SingleInputDropDown from '../../../components/inputs/single-input-dropdown/SingleInputDropdown';
+import SingleInputDropDown from '../../../components/common/inputs/single-input-dropdown/SingleInputDropdown';
 
 describe('싱글 인풋 DropDown 테스트', () => {
   const placeholder = 'SingleInput';
