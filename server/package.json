@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon",
     "test": "jest",
-    "deploy": "pm2 start src/app.js"
+    "deploy": "pm2 start ./src/app.js --interpreter ./node_modules/.bin/babel-node"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +35,7 @@
     "koa-logger": "^3.2.1",
     "koa-router": "^10.0.0",
     "mysql2": "^2.2.5",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "uuid": "^8.3.1"
   }
 }
