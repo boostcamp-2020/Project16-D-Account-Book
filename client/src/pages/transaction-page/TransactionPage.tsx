@@ -8,6 +8,7 @@ import AllTransactionContainer from '../../components/common/transactions/all-tr
 import { transactions } from '../../__dummy-data__/components/transactions/dummyData';
 import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
+import { useObserver } from 'mobx-react';
 
 const PageWrapper = styled.div`
   width: 70%;
@@ -35,9 +36,6 @@ const AmountWrapper = styled.div`
 `;
 
 const TransactionPage: React.FC = () => {
-  const [year, setYear] = useState(new Date().getFullYear());
-  const [month, setMonth] = useState(new Date().getMonth() + 1);
-
   return (
     <>
       <Sidebar smallAccountbooks={smallAccountbookItems} />
@@ -47,7 +45,7 @@ const TransactionPage: React.FC = () => {
       </HeaderNavigationWrapper>
       <PageWrapper>
         <TransactionHeaderWrapper>
-          <ChangeDateContainer year={year} month={month} setYear={setYear} setMonth={setMonth} />
+          <ChangeDateContainer />
           <AmountWrapper>
             <Amount text={'수입'} amount={3000000} />
           </AmountWrapper>
