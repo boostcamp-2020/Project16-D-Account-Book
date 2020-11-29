@@ -1,5 +1,6 @@
 import { observable, action, makeObservable } from 'mobx';
 import { isEndOfYear, isStartOfYear } from '../utils/date';
+import React, { createContext } from 'react';
 
 export default class DateStore {
   @observable startDate: Date;
@@ -47,4 +48,8 @@ export default class DateStore {
   }
 }
 
-export const dateStore = new DateStore();
+export const DateContext = createContext<DateStore>(new DateStore());
+
+export const DateProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
+  return <DateContext.Provider value={new DateStore()}>{children}</DateContext.Provider>;
+};

@@ -8,6 +8,7 @@ import AllTransactionContainer from '../../components/common/transactions/all-tr
 import { transactions } from '../../__dummy-data__/components/transactions/dummyData';
 import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
+import { DateProvider } from '../../store/dateStore';
 
 const PageWrapper = styled.div`
   width: 70%;
@@ -36,25 +37,27 @@ const AmountWrapper = styled.div`
 
 const TransactionPage: React.FC = () => {
   return (
-    <>
-      <Sidebar smallAccountbooks={smallAccountbookItems} />
-      <MenuNavigation />
-      <HeaderNavigationWrapper>
-        <HeaderNavigation currentPage={'transaction'} />
-      </HeaderNavigationWrapper>
-      <PageWrapper>
-        <TransactionHeaderWrapper>
-          <ChangeDateContainer />
-          <AmountWrapper>
-            <Amount text={'수입'} amount={3000000} />
-          </AmountWrapper>
-          <AmountWrapper>
-            <Amount text={'지출'} amount={10000} />
-          </AmountWrapper>
-        </TransactionHeaderWrapper>
-        <AllTransactionContainer transactions={transactions} />
-      </PageWrapper>
-    </>
+    <DateProvider>
+      <>
+        <Sidebar smallAccountbooks={smallAccountbookItems} />
+        <MenuNavigation />
+        <HeaderNavigationWrapper>
+          <HeaderNavigation currentPage={'transaction'} />
+        </HeaderNavigationWrapper>
+        <PageWrapper>
+          <TransactionHeaderWrapper>
+            <ChangeDateContainer />
+            <AmountWrapper>
+              <Amount text={'수입'} amount={3000000} />
+            </AmountWrapper>
+            <AmountWrapper>
+              <Amount text={'지출'} amount={10000} />
+            </AmountWrapper>
+          </TransactionHeaderWrapper>
+          <AllTransactionContainer transactions={transactions} />
+        </PageWrapper>
+      </>
+    </DateProvider>
   );
 };
 

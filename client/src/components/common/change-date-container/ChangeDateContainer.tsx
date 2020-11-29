@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import PreviousButton from '../back-button/PreviousButton';
 import NextButton from '../next-button/NextButton';
-import { isEndOfYear, isStartOfYear } from '../../../utils/date';
 import useStore from '../../../hook/use-store/useStore';
 import { useObserver } from 'mobx-react';
 
