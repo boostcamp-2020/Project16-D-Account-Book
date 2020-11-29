@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
+    "start": "nodemon",
     "test": "jest",
     "deploy": "pm2 start src/app.js"
   },
@@ -13,6 +12,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/node": "^7.12.6",
+    "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^7.12.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.14.0",
