@@ -3,6 +3,6 @@ const oauthRouter = require('./oauth');
 
 const router = new Router();
 
-router.use('oauth', oauthRouter.routes());
+router.use('api/', oauthRouter.routes());
 
 module.exports = router;
