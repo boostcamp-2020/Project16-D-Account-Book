@@ -1,6 +1,10 @@
 import DateStore, { dateStore } from '../../store/dateStore';
 
-const useStore = (): { dateStore: DateStore } => {
+interface Store {
+  dateStore: DateStore;
+}
+
+const useStore = (): Store => {
   return { dateStore };
 };
 
