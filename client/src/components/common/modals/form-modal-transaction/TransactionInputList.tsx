@@ -53,7 +53,7 @@ const InputWrapper = styled.div`
 `;
 
 const InputLabel = styled.div`
-  width: 30%;
+  width: 20%;
   padding: 0%;
   margin: 0%;
 `;
