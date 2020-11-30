@@ -19,11 +19,12 @@ export const inputs = {
     items: dummyOptions,
   },
 };
+
 export const changes = {
   dateRage: (e: string): void => {
     console.log(e);
   },
-  payment: (e: string): void => {
+  payment: (e: string[]): void => {
     console.log(e);
   },
   incomeCategories: (e: string[]): void => {
