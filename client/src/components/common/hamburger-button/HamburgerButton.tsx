@@ -4,6 +4,7 @@ import Styled from 'styled-components';
 const HamburgerButtonWrapper = Styled.div`
   box-sizing: border-box;
   margin: 0 auto;
+  width: 30px;
 `;
 
 interface HamburgerButton {

@@ -1,6 +1,6 @@
 const Koa = require('koa');
-const server = require('./loaders');
-const serverConfig = require('./config/server');
+const server = require('@loaders');
+const serverConfig = require('@config/server');
 
 const startServer = async () => {
   const app = new Koa();

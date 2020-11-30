@@ -13,17 +13,13 @@ const Wrapper = styled.div`
 `;
 
 export const Default: React.FC = () => {
-  const [year, setYear] = useState(2020);
-  const [month, setMonth] = useState(11);
-  return <ChangeDateContainer year={year} month={month} setYear={setYear} setMonth={setMonth} />;
+  return <ChangeDateContainer />;
 };
 
 export const ApplyWrapper: React.FC = () => {
-  const [year, setYear] = useState(2020);
-  const [month, setMonth] = useState(11);
   return (
     <Wrapper>
-      <ChangeDateContainer year={year} month={month} setYear={setYear} setMonth={setMonth} />
+      <ChangeDateContainer />
     </Wrapper>
   );
 };

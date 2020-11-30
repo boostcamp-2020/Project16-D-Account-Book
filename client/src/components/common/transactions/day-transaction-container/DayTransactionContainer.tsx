@@ -10,6 +10,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 2.5rem;
 `;
 
 const DayTransactionHeader = styled.div<{ totalAmount: number }>`
@@ -62,7 +63,7 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
       </DayTransactionHeader>
       {transactions.map((transaction) => (
         <TransactionItem
-          key={'transaction' + transaction.id + transaction.category.name}
+          key={isIncome(transaction) ? `incometr${transaction.id}` : `expendituretr${transaction.id}`}
           transaction={transaction}
         ></TransactionItem>
       ))}

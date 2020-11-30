@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Options } from '../select/Select';
 import InputDropDown from '../input-drop-down/InputDropDown';
 import { setImmutable } from '../../../../utils/immutable/setImmutable';
+import useMultiDropDown from '../../../../hook/use-drop-down/useMultiDropDown';
 interface Props {
   placeholder: string;
   items: Options[];
@@ -14,19 +15,8 @@ interface createPlaceHolder {
 
 export default function MultiInputDropDownHOC(createPlaceName: createPlaceHolder): React.FC<Props> {
   const MultiInputDropDown: React.FC<Props> = ({ placeholder, items, onChange }: Props) => {
-    const [selected, setSelected] = useState<Set<string>>(new Set<string>());
+    const [selected, setSelected, selectChange] = useMultiDropDown(onChange);
 
-    const selectChange = (value: string): void => {
-      if (selected.has(value)) {
-        selected.delete(value);
-      } else {
-        selected.add(value);
-      }
-      setSelected(setImmutable(selected));
-      if (onChange !== undefined) {
-        onChange(Array.from(selected));
-      }
-    };
     const displayHeader = selected.size === 0 ? placeholder : createPlaceName(selected, items);
     const selectedValue = Array.from(selected);
     return (
