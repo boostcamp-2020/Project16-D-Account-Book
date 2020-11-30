@@ -3,6 +3,7 @@ import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions
 import AcoountbookDeleteByAdminModal from './accountbook-delete-by-admin/AccountbookDeleteByAdminModal';
 import FormModalHeader from './form-modal-header/FormModalHeader';
 import TransactionInputList from './form-modal-transaction/TransactionInputList';
+import { inputs, changes } from '../../../__dummy-data__/components/modal/modalTransactions';
 export default {
   title: 'Modal Example',
 };
@@ -32,45 +33,6 @@ export const AccountbookDeleteByAdminDefault: React.FC = () => {
 
 export const FormModalHeaderDefault: React.FC = () => {
   return <FormModalHeader modalName={'내역 변경'} blueName={'완료'} redName={'삭제'} />;
-};
-
-const inputs = {
-  price: 1000,
-  classify: true,
-  categories: {
-    placeholder: '카테고리',
-    items: dummyOptions,
-  },
-  accounts: {
-    placeholder: '결제수단',
-    items: dummyOptions,
-  },
-  date: '',
-};
-
-const changes = {
-  price: (e: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log(e.target.value);
-  },
-  classify: {
-    income: () => {
-      //
-    },
-    expenditure: () => {
-      //
-    },
-  },
-  categories: (change: string) => {
-    console.log(change);
-    //
-  },
-  accounts: (change: string) => {
-    console.log(change);
-  },
-  date: (e: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log(e.target.value);
-    //
-  },
 };
 
 export const TransactionInputListDefault: React.FC = () => {
