@@ -4,6 +4,7 @@ import { Options } from '../../../../types/options';
 import InputText from '../../inputs/input-text/InputText';
 import ModalClassify from '../../inputs/modal-classify/ModalClassify';
 import SingleInputDropdown from '../../inputs/single-input-dropdown/SingleInputDropdown';
+import InputDateTime from '../../inputs/input-datetime/InputDateTime';
 interface ITransactionInputList {
   inputs: {
     classify: boolean;
@@ -108,7 +109,9 @@ const TransactionInputList: React.FC<ITransactionInputList> = ({ inputs, changes
       </InputWrapper>
       <InputWrapper>
         <InputLabel>거래처</InputLabel>
-        <Inputs></Inputs>
+        <Inputs>
+          <InputDateTime value={inputs.date} onChange={changes.date} />
+        </Inputs>
       </InputWrapper>
     </InputListWrapper>
   );

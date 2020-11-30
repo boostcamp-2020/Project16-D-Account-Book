@@ -45,6 +45,7 @@ const inputs = {
     placeholder: '결제수단',
     items: dummyOptions,
   },
+  date: '',
 };
 
 const changes = {
@@ -65,6 +66,10 @@ const changes = {
   },
   accounts: (change: string) => {
     console.log(change);
+  },
+  date: (e: React.ChangeEvent<HTMLInputElement>): void => {
+    console.log(e.target.value);
+    //
   },
 };
 
