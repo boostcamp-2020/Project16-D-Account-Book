@@ -32,7 +32,7 @@ interface ITransactionInputList {
     accounts: (change: string) => void;
     content?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     date?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    memo?: (change: string) => void;
+    memo?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   };
 }
 
