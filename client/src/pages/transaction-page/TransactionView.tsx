@@ -43,7 +43,6 @@ interface Props {
 const TransactionView: React.FC<Props> = ({ accountbookId }: Props) => {
   const { dateStore, transactionStore } = useStore();
 
-  // TODO: accountbook_id를 1로 고정해놨는데 추후에 현재 사용자가 선택한 accountbook_id를 사용하도록 수정해야함
   useEffect(() => {
     transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
   }, []);
