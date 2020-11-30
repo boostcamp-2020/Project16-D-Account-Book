@@ -5,13 +5,11 @@ import HeaderNavigation from '../../components/common/header-navigation/HeaderNa
 import ChangeDateContainer from '../../components/common/change-date-container/ChangeDateContainer';
 import Amount from '../../components/common/amount/Amonut';
 import AllTransactionContainer from '../../components/common/transactions/all-transaction-container/AllTransactionContainer';
-import { transactions } from '../../__dummy-data__/components/transactions/dummyData';
 import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
-import { DateProvider } from '../../store/DateStore';
-import { getTransactions } from '../../services/transaction';
 import useStore from '../../hook/use-store/useStore';
 import { useObserver } from 'mobx-react';
+import { isIncome } from '../../types/income';
 
 const PageWrapper = styled.div`
   width: 70%;
@@ -41,9 +39,20 @@ const AmountWrapper = styled.div`
 const TransactionPage: React.FC = () => {
   const { dateStore, transactionStore } = useStore();
 
+  // TODO: accountbook_id를 1로 고정해놨는데 추후에 현재 사용자가 선택한 accountbook_id를 사용하도록 수정해야함
   useEffect(() => {
     transactionStore.findTransactions(1, dateStore.startDate, dateStore.endDate);
   }, []);
+
+  let totalIncome = 0;
+  let totalExpenditure = 0;
+  transactionStore.transactions.forEach((transaction) => {
+    if (isIncome(transaction)) {
+      totalIncome += transaction.amount;
+    } else {
+      totalExpenditure += transaction.amount;
+    }
+  });
 
   return useObserver(() => (
     <>
@@ -56,10 +65,10 @@ const TransactionPage: React.FC = () => {
         <TransactionHeaderWrapper>
           <ChangeDateContainer />
           <AmountWrapper>
-            <Amount text={'수입'} amount={10000} />
+            <Amount text={'수입'} amount={totalIncome} />
           </AmountWrapper>
           <AmountWrapper>
-            <Amount text={'지출'} amount={10000} />
+            <Amount text={'지출'} amount={totalExpenditure} />
           </AmountWrapper>
         </TransactionHeaderWrapper>
         <AllTransactionContainer transactions={transactionStore.transactions} />
