@@ -16,8 +16,8 @@ const ModalClassifyWrapper = styled.div<WrapperProps>`
   margin: 0px;
   text-align: center;
   cursor: pointer;
-  background-color: ${(props) => (props.classify ? '#ffffff' : '#52ACE8')};
-  color: ${(props) => (props.classify ? 'black' : 'white')};
+  background-color: ${(props) => (props.classify ? '#52ACE8' : '#ffffff')};
+  color: ${(props) => (props.classify ? 'white' : 'black')};
 `;
 
 const ModalClassify: React.FC<ModalClassify> = ({ value, onChange, classify }: ModalClassify) => {
