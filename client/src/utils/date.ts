@@ -66,8 +66,7 @@ export const getFirstDateOfNextMonth = (currentDate: Date): Date => {
     month = month + 1;
   }
 
-  const date = new Date(`${year}-${month}-1`);
-  date.setHours(0, 0, 0, 0);
+  const date = new Date(`${year}.${month}.1`);
   return date;
 };
 
@@ -83,7 +82,6 @@ export const getFirstDateOfPreviousMonth = (currentDate: Date): Date => {
     month = month - 1;
   }
 
-  const date = new Date(`${year}-${month}-1`);
-  date.setHours(0, 0, 0, 0);
+  const date = new Date(`${year}.${month}.1`);
   return date;
 };

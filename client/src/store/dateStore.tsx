@@ -9,8 +9,7 @@ export default class DateStore {
   constructor() {
     makeObservable(this);
     const currentDate = new Date();
-    this.startDate = new Date(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-1`);
-    this.startDate.setHours(0, 0, 0, 0);
+    this.startDate = new Date(`${currentDate.getFullYear()}.${currentDate.getMonth() + 1}.1`);
     this.endDate = getFirstDateOfNextMonth(this.startDate);
   }
 
