@@ -3,17 +3,18 @@ import styled from 'styled-components';
 import { Options } from '../../../../types/options';
 import InputText from '../../inputs/input-text/InputText';
 import ModalClassify from '../../inputs/modal-classify/ModalClassify';
+import SingleInputDropdown from '../../inputs/single-input-dropdown/SingleInputDropdown';
 interface ITransactionInputList {
   inputs: {
     classify: boolean;
     price?: number;
-    categories?: {
+    categories: {
       placeholder: string;
-      items: Options;
+      items: Options[];
     };
     accounts?: {
       placeholder: string;
-      items: Options;
+      items: Options[];
     };
     content?: string;
     date?: string;
@@ -26,7 +27,7 @@ interface ITransactionInputList {
       expenditure: () => void;
     };
     price?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    categories?: (change: string) => void;
+    categories: (change: string) => void;
     accounts?: (change: string) => void;
     content?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     date?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -87,6 +88,12 @@ const TransactionInputList: React.FC<ITransactionInputList> = ({ inputs, changes
         <InputLabel>금액</InputLabel>
         <Inputs>
           <InputText placeholder={'금액'} value={inputs.price} onChange={changes.price} />
+        </Inputs>
+      </InputWrapper>
+      <InputWrapper>
+        <InputLabel>카테고리</InputLabel>
+        <Inputs>
+          <SingleInputDropdown placeholder={'카테고리'} items={inputs.categories.items} onChange={changes.categories} />
         </Inputs>
       </InputWrapper>
     </InputListWrapper>

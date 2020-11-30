@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions';
 import AcoountbookDeleteByAdminModal from './accountbook-delete-by-admin/AccountbookDeleteByAdminModal';
 import FormModalHeader from './form-modal-header/FormModalHeader';
 import TransactionInputList from './form-modal-transaction/TransactionInputList';
@@ -36,6 +37,10 @@ export const FormModalHeaderDefault: React.FC = () => {
 const inputs = {
   price: 1000,
   classify: true,
+  categories: {
+    placeholder: '카테고리',
+    items: dummyOptions,
+  },
 };
 
 const changes = {
@@ -50,12 +55,15 @@ const changes = {
       //
     },
   },
+  categories: (change: string) => {
+    //
+  },
 };
 
 export const TransactionInputListDefault: React.FC = () => {
   return (
-    <div style={{ backgroundColor: 'gray' }}>
-      <TransactionInputList inputs={inputs} changes={changes} />;
+    <div style={{ backgroundColor: '#ECECEC' }}>
+      <TransactionInputList inputs={inputs} changes={changes} />
     </div>
   );
 };
