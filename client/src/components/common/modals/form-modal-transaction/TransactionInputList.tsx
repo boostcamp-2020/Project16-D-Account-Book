@@ -12,7 +12,7 @@ interface ITransactionInputList {
       placeholder: string;
       items: Options[];
     };
-    accounts?: {
+    accounts: {
       placeholder: string;
       items: Options[];
     };
@@ -28,7 +28,7 @@ interface ITransactionInputList {
     };
     price?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     categories: (change: string) => void;
-    accounts?: (change: string) => void;
+    accounts: (change: string) => void;
     content?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     date?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     memo?: (change: string) => void;
@@ -95,6 +95,20 @@ const TransactionInputList: React.FC<ITransactionInputList> = ({ inputs, changes
         <Inputs>
           <SingleInputDropdown placeholder={'카테고리'} items={inputs.categories.items} onChange={changes.categories} />
         </Inputs>
+      </InputWrapper>
+      <InputWrapper>
+        <InputLabel>결제수단</InputLabel>
+        <Inputs>
+          <SingleInputDropdown
+            placeholder={'결제수단을 선택하세요'}
+            items={inputs.accounts?.items}
+            onChange={changes.accounts}
+          />
+        </Inputs>
+      </InputWrapper>
+      <InputWrapper>
+        <InputLabel>거래처</InputLabel>
+        <Inputs></Inputs>
       </InputWrapper>
     </InputListWrapper>
   );

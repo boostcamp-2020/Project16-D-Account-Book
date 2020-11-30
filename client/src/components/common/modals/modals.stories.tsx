@@ -41,11 +41,15 @@ const inputs = {
     placeholder: '카테고리',
     items: dummyOptions,
   },
+  accounts: {
+    placeholder: '결제수단',
+    items: dummyOptions,
+  },
 };
 
 const changes = {
   price: (e: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log(e);
+    console.log(e.target.value);
   },
   classify: {
     income: () => {
@@ -56,7 +60,11 @@ const changes = {
     },
   },
   categories: (change: string) => {
+    console.log(change);
     //
+  },
+  accounts: (change: string) => {
+    console.log(change);
   },
 };
 
