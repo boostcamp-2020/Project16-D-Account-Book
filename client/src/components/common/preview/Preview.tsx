@@ -30,7 +30,6 @@ const PreviewContentText = styled.p<PreviewContentProps>`
 `;
 
 const Preview: React.FC<PreviewProps> = ({ title, description, color, onChange }: PreviewProps) => {
-  console.log(color);
   const fontColor = getTextColor(color);
   return (
     <PreviewWrapper>
