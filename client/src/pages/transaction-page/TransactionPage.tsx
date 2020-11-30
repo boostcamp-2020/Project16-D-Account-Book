@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../../components/common/sidebar/Sidebar';
 import HeaderNavigation from '../../components/common/header-navigation/HeaderNavigation';
@@ -8,7 +8,10 @@ import AllTransactionContainer from '../../components/common/transactions/all-tr
 import { transactions } from '../../__dummy-data__/components/transactions/dummyData';
 import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
-import { DateProvider } from '../../store/dateStore';
+import { DateProvider } from '../../store/DateStore';
+import { getTransactions } from '../../services/transaction';
+import useStore from '../../hook/use-store/useStore';
+import { useObserver } from 'mobx-react';
 
 const PageWrapper = styled.div`
   width: 70%;
@@ -36,29 +39,33 @@ const AmountWrapper = styled.div`
 `;
 
 const TransactionPage: React.FC = () => {
-  return (
-    <DateProvider>
-      <>
-        <Sidebar smallAccountbooks={smallAccountbookItems} />
-        <MenuNavigation />
-        <HeaderNavigationWrapper>
-          <HeaderNavigation currentPage={'transaction'} />
-        </HeaderNavigationWrapper>
-        <PageWrapper>
-          <TransactionHeaderWrapper>
-            <ChangeDateContainer />
-            <AmountWrapper>
-              <Amount text={'수입'} amount={3000000} />
-            </AmountWrapper>
-            <AmountWrapper>
-              <Amount text={'지출'} amount={10000} />
-            </AmountWrapper>
-          </TransactionHeaderWrapper>
-          <AllTransactionContainer transactions={transactions} />
-        </PageWrapper>
-      </>
-    </DateProvider>
-  );
+  const { dateStore, transactionStore } = useStore();
+
+  useEffect(() => {
+    transactionStore.findTransactions(1, dateStore.startDate, dateStore.endDate);
+  }, []);
+
+  return useObserver(() => (
+    <>
+      <Sidebar smallAccountbooks={smallAccountbookItems} />
+      <MenuNavigation />
+      <HeaderNavigationWrapper>
+        <HeaderNavigation currentPage={'transaction'} />
+      </HeaderNavigationWrapper>
+      <PageWrapper>
+        <TransactionHeaderWrapper>
+          <ChangeDateContainer />
+          <AmountWrapper>
+            <Amount text={'수입'} amount={10000} />
+          </AmountWrapper>
+          <AmountWrapper>
+            <Amount text={'지출'} amount={10000} />
+          </AmountWrapper>
+        </TransactionHeaderWrapper>
+        <AllTransactionContainer transactions={transactionStore.transactions} />
+      </PageWrapper>
+    </>
+  ));
 };
 
 export default TransactionPage;

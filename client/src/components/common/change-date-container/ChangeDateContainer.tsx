@@ -47,16 +47,18 @@ const DateWrapper = styled.div`
 `;
 
 const ChangeDateContainer: React.FC = () => {
-  const { dateStore } = useStore();
+  const { dateStore, transactionStore } = useStore();
   const onClickNextButton = () => {
     dateStore.moveToNextMonth();
+    transactionStore.findTransactions(1, dateStore.startDate, dateStore.endDate);
   };
 
   const onClickPreviousButton = () => {
     dateStore.moveToPreviousMonth();
+    transactionStore.findTransactions(1, dateStore.startDate, dateStore.endDate);
   };
 
-  return useObserver(() => (
+  return (
     <Container>
       <PreviousButtonWrapper>
         <PreviousButton onClick={onClickPreviousButton} />
@@ -69,7 +71,7 @@ const ChangeDateContainer: React.FC = () => {
         <NextButton onClick={onClickNextButton} />
       </NextButtonWrapper>
     </Container>
-  ));
+  );
 };
 
 export default ChangeDateContainer;
