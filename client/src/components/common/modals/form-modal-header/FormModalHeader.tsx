@@ -36,13 +36,13 @@ const ModalName = styled.p`
 
 const RedButton = styled.p`
   cursor: pointer;
-  color:tomato;
+  color: tomato;
   margin-right: 1em;
 `;
 
 const BlueButton = styled.p`
   cursor: pointer;
-  color:dodgerblue;
+  color: dodgerblue;
 `;
 
 const FormModalHeader: React.FC<IFormModalHeaderProps> = ({
