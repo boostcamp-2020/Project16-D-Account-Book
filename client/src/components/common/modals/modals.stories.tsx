@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AcoountbookDeleteByAdminModal from './accountbook-delete-by-admin/AccountbookDeleteByAdminModal';
-
+import FormModalHeader from './form-modal-header/FormModalHeader';
 export default {
   title: 'Modal Example',
 };
@@ -26,4 +26,8 @@ export const AccountbookDeleteByAdminDefault: React.FC = () => {
       closeModal={closeModal}
     />
   );
+};
+
+export const FormModalHeaderDefault: React.FC = () => {
+  return <FormModalHeader modalName={'내역 변경'} blueName={'완료'} redName={'삭제'} />;
 };
