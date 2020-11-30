@@ -9,14 +9,14 @@ export const AccountbookDeleteByAdminDefault: React.FC = () => {
   const [state, setState] = useState<boolean>(true);
 
   const closeModal = () => {
-    console.log('outside click');
+    // 모달을 닫는 함수
   };
   const cancelClick = () => {
-    console.log('click cancel');
+    // 선택 취소를 누르는 함수
   };
 
   const deleteClick = () => {
-    console.log('delete Click');
+    // 삭제 버튼을 누르는 함수
   };
   return (
     <AcoountbookDeleteByAdminModal
