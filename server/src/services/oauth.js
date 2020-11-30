@@ -2,8 +2,8 @@ const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const qs = require('querystring');
 
-const { oauthConfig, jwtConfig } = require('../config/oauth');
-const db = require('../models');
+const { oauthConfig, jwtConfig } = require('@config/oauth');
+const db = require('@models');
 
 const getNaverToken = async (code, state) => {
   const { data } = await axios.get(oauthConfig.naver.userTokenURL, {

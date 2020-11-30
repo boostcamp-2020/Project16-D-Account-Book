@@ -1,4 +1,4 @@
-const oauthService = require('../../services/oauth');
+const oauthService = require('@services/oauth');
 
 const naverLogin = async (ctx) => {
   const { code, state } = ctx.request.query;
