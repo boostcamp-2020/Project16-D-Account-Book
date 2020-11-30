@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AcoountbookDeleteByAdminModal from './accountbook-delete-by-admin/AccountbookDeleteByAdminModal';
 import FormModalHeader from './form-modal-header/FormModalHeader';
+import TransactionInputList from './form-modal-transaction/TransactionInputList';
 export default {
   title: 'Modal Example',
 };
@@ -30,4 +31,18 @@ export const AccountbookDeleteByAdminDefault: React.FC = () => {
 
 export const FormModalHeaderDefault: React.FC = () => {
   return <FormModalHeader modalName={'내역 변경'} blueName={'완료'} redName={'삭제'} />;
+};
+
+const inputs = {
+  price: 1000,
+};
+
+const changes = {
+  price: (e: string): void => {
+    console.log(e);
+  },
+};
+
+export const TransactionInputListDefault: React.FC = () => {
+  return <TransactionInputList inputs={inputs} changes={changes} />;
 };
