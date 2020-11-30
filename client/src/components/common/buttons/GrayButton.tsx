@@ -1,11 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ModalCommonButton } from '../../../types/buttonTypes';
 import { MODAL_GRAY } from '../../../constants/color';
 
-interface IProps {
-  onClick?: () => void;
-  children?: React.ReactNode;
-}
 const Wrapper = styled.div`
   background-color: ${MODAL_GRAY};
   padding: 10px;
@@ -15,7 +12,7 @@ const Wrapper = styled.div`
   cursor: pointer;
 `;
 
-const GrayButton: React.FC<IProps> = ({ children, onClick }: IProps) => {
+const GrayButton: React.FC<ModalCommonButton> = ({ children, onClick }: ModalCommonButton) => {
   return <Wrapper onClick={onClick}>{children}</Wrapper>;
 };
 
