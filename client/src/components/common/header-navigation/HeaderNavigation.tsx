@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProfileImage from '../profile-image/ProfileImage';
+import ProfileDropdown from '../profile-dropdown/ProfileDropdown';
 import { BLUE } from '../../../constants/color';
 
 const NavigationWrapper = styled.div`
@@ -55,7 +55,7 @@ const HeaderNavigation = ({ currentPage }: HeaderNavigationProps): JSX.Element =
         <span className="text">통계</span>
       </NavigationItem>
       <NavigationItem currentPage={''}>
-        <ProfileImage src={sampleProfileImage} />
+        <ProfileDropdown src={sampleProfileImage} />
       </NavigationItem>
     </NavigationWrapper>
   );
