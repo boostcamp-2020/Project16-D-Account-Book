@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Options } from '../../../../types/options';
 import SingleInputDropdown from '../../inputs/single-input-dropdown/SingleInputDropdown';
-import SelectPaymentMethod from '../../inputs/select-payment-method';
+import SelectPaymentMethod from '../../inputs/select-payment-method/SelectPaymentMethod';
 import MultiInputDropdownWithCheckBox from '../../inputs/multi-input-dropdown/MultiInputDropdownWithCheckBox';
 
 interface IFormModalFilter {
@@ -70,7 +70,7 @@ const FormModalFilter: React.FC<IFormModalFilter> = ({ inputs, changes }: IFormM
       </InputWrapper>
       <InputWrapper>
         <InputLabel>결제수단</InputLabel>
-        <SingleInputDropdown placeholder={'결제수단'} items={inputs.payment.items} onChange={changes.payment} />
+        <SelectPaymentMethod placeholder={'결제수단'} items={inputs.payment.items} onChange={changes.payment} />
       </InputWrapper>
       <InputWrapper>
         <InputLabel>카테고리</InputLabel>
