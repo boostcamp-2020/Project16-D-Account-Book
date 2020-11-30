@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import SelectList from './SelectList';
 
 export interface Options {
-  value: string | number;
+  value: string;
   label: string;
   checked?: boolean;
 }
