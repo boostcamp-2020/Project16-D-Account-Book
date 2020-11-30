@@ -53,3 +53,37 @@ export const isEndOfYear = (month: number): boolean => {
 export const isStartOfYear = (month: number): boolean => {
   return month == 1;
 };
+
+// 다음달 1일 0시0분 시간을 반환하는 함수
+export const getFirstDateOfNextMonth = (currentDate: Date): Date => {
+  let year = currentDate.getFullYear();
+  let month = currentDate.getMonth() + 1;
+
+  if (isEndOfYear(month)) {
+    year = year + 1;
+    month = 1;
+  } else {
+    month = month + 1;
+  }
+
+  const date = new Date(`${year}-${month}-1`);
+  date.setHours(0, 0, 0, 0);
+  return date;
+};
+
+// 이전달 1일 0시0분 시간을 반환하는 함수
+export const getFirstDateOfPreviousMonth = (currentDate: Date): Date => {
+  let year = currentDate.getFullYear();
+  let month = currentDate.getMonth() + 1;
+
+  if (isStartOfYear(month)) {
+    year = year - 1;
+    month = 12;
+  } else {
+    month = month - 1;
+  }
+
+  const date = new Date(`${year}-${month}-1`);
+  date.setHours(0, 0, 0, 0);
+  return date;
+};

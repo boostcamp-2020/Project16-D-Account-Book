@@ -10,12 +10,14 @@ interface SmallAccountbookItemWrapperProps {
 }
 
 const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: ${({ show }) => (show ? '40px' : '0')};
   height: ${({ show }) => (show ? '40px' : '0')};
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};
   box-sizing: border-box;
-  text-align: center;
   border-radius: 5px;
   font-size: 1.7rem;
   padding: ${({ show }) => (show ? '8px 6px' : '0')};
@@ -33,6 +35,9 @@ const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>
     font-size: 1.9em;
     cursor: pointer;
   }
+  .text {
+    text-align: center;
+  }
 `;
 
 interface SmallAccountbookItemProps {
@@ -46,7 +51,7 @@ const SmallAccountbookItem = ({ id, bgColor, show, onClick }: SmallAccountbookIt
   const textColor = getTextColor(bgColor);
   return (
     <SmallAccountbookItemWrapper bgColor={bgColor} textColor={textColor} show={show} onClick={onClick}>
-      {id}
+      <div className="text">{id}</div>
     </SmallAccountbookItemWrapper>
   );
 };

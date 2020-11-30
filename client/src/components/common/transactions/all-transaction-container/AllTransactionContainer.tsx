@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import DayTransactionContainer from '../day-transaction-container/DayTransactionContainer';
-import Income from '../../../../types/income';
+import Income, { isIncome } from '../../../../types/income';
 import Expenditure from '../../../../types/expenditure';
 
 interface Props {
@@ -22,7 +22,7 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
     const currentDate = new Date(transaction.date);
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
-    const currentDay = currentDate.getDay();
+    const currentDay = currentDate.getDate();
 
     if (beforeYear == currentYear && beforeMonth == currentMonth && beforeDay == currentDay) {
       sameDateTransactions[index].push(transaction);
@@ -40,18 +40,13 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
     <>
       {sameDateTransactions.map((transactions) => {
         return (
-          <>
-            {transactions.length > 0 && (
-              <DayTransactionContainer
-                key={'dayTransactions' + transactions[0].id}
-                transactions={transactions}
-              ></DayTransactionContainer>
-            )}
-          </>
+          <div key={isIncome(transactions[0]) ? `income${transactions[0].id}` : `expenditure${transactions[0].id}`}>
+            {transactions.length > 0 && <DayTransactionContainer transactions={transactions}></DayTransactionContainer>}
+          </div>
         );
       })}
     </>
   );
 };
 
-export default AllTransactionContainer;
+export default memo(AllTransactionContainer);

@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PreviousButton from '../back-button/PreviousButton';
 import NextButton from '../next-button/NextButton';
-import { isEndOfYear, isStartOfYear } from '../../../utils/date';
+import useStore from '../../../hook/use-store/useStore';
+import { useObserver } from 'mobx-react';
 
 const Container = styled.div`
   display: flex;
@@ -45,46 +46,30 @@ const DateWrapper = styled.div`
   }
 `;
 
-interface Props {
-  year: number;
-  month: number;
-  setYear: (year: number) => void;
-  setMonth: (month: number) => void;
-}
-
-const ChangeDateContainer: React.FC<Props> = ({ year, month, setYear, setMonth }: Props) => {
+const ChangeDateContainer: React.FC = () => {
+  const { dateStore } = useStore();
   const onClickNextButton = () => {
-    if (isEndOfYear(month)) {
-      setYear(year + 1);
-      setMonth(1);
-    } else {
-      setMonth(month + 1);
-    }
+    dateStore.moveToNextMonth();
   };
 
   const onClickPreviousButton = () => {
-    if (isStartOfYear(month)) {
-      setYear(year - 1);
-      setMonth(12);
-    } else {
-      setMonth(month - 1);
-    }
+    dateStore.moveToPreviousMonth();
   };
 
-  return (
+  return useObserver(() => (
     <Container>
       <PreviousButtonWrapper>
         <PreviousButton onClick={onClickPreviousButton} />
       </PreviousButtonWrapper>
       <DateWrapper>
-        <div>{year}</div>
-        <div className="month">{month}</div>
+        <div>{dateStore.startDate.getFullYear()}</div>
+        <div className="month">{dateStore.startDate.getMonth() + 1}</div>
       </DateWrapper>
       <NextButtonWrapper>
         <NextButton onClick={onClickNextButton} />
       </NextButtonWrapper>
     </Container>
-  );
+  ));
 };
 
 export default ChangeDateContainer;

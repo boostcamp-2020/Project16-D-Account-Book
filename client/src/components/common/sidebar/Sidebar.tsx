@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import styled from 'styled-components';
 import HomeButton from '../home-button/HomeButton';
 import HamburgerButton from '../hamburger-button/HamburgerButton';
@@ -22,13 +22,21 @@ const SidebarWrapper = styled.div<SidebarWrapperProps>`
   top: 0%;
   left: 0%;
   display: 'block';
-  z-index: -1;
+  z-index: 0;
   transition: all ease 0.3s 0s;
   padding-top: 40px;
 `;
 
 const ChildrenWrapper = styled.div`
   margin-top: 55px;
+`;
+
+const HamburgerButtonWrapper = styled.div`
+  position: fixed;
+  left: 0%;
+  width: 5%;
+  top: 2%;
+  z-index: 10;
 `;
 
 const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
@@ -42,7 +50,9 @@ const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
   ));
   return (
     <div>
-      <HamburgerButton onClick={toggleButton} />
+      <HamburgerButtonWrapper>
+        <HamburgerButton onClick={toggleButton} />
+      </HamburgerButtonWrapper>
       <SidebarWrapper show={isOpen}>
         <ChildrenWrapper>
           <HomeButton show={isOpen} />
@@ -54,4 +64,4 @@ const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
   );
 };
 
-export default Sidebar;
+export default memo(Sidebar);
