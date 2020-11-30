@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AcoountbookDeleteByAdminModal from './AccountbookDeleteByAdminModal';
+import AcoountbookDeleteByAdminModal from './accountbook-delete-by-admin/AccountbookDeleteByAdminModal';
 
 export default {
   title: 'Modal Example',
