@@ -5,6 +5,7 @@ const HamburgerButtonWrapper = Styled.div`
   box-sizing: border-box;
   margin: 0 auto;
   width: 30px;
+  cursor: pointer;
 `;
 
 interface HamburgerButton {
