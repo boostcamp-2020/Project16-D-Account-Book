@@ -1,6 +1,6 @@
 const transactionService = require('@services/transaction');
 
-const getTransactions = async (ctx) => {
+const findTransactions = async (ctx) => {
   const { start_date, end_date, accountbook_id } = ctx.request.query;
   const incomes = await transactionService.findIncomes(accountbook_id, start_date, end_date);
   const expenditures = await transactionService.findExpenditures(accountbook_id, start_date, end_date);
@@ -9,5 +9,5 @@ const getTransactions = async (ctx) => {
 };
 
 module.exports = {
-  getTransactions,
+  findTransactions,
 };
