@@ -2,18 +2,22 @@ const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const qs = require('querystring');
 
-const { oauthConfig, jwtConfig } = require('@config/oauth');
+const { jwtConfig } = require('@config/oauth');
 const db = require('@models');
 
-const getNaverToken = async (code, state) => {
-  const { data } = await axios.get(oauthConfig.naver.userTokenURL, {
-    params: {
-      grant_type: 'authorization_code',
-      client_id: oauthConfig.naver.clientId,
-      client_secret: oauthConfig.naver.clientSecret,
-      code,
-      state,
-    },
+const getToken = async (code, state, config) => {
+  const requestParams = {
+    grant_type: 'authorization_code',
+    client_id: config.clientId,
+    client_secret: config.clientSecret,
+    redirect_uri: config.redirectURI,
+    code,
+    state,
+  };
+  const params = qs.stringify(requestParams);
+
+  const { data } = await axios.post(config.userTokenURL, params, {
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;' },
   });
 
   return {
@@ -24,14 +28,30 @@ const getNaverToken = async (code, state) => {
   };
 };
 
-const getNaverUserInfo = async (code, state) => {
-  const { accessToken } = await getNaverToken(code, state);
-  const { data: userInfo } = await axios.get(oauthConfig.naver.userInfoURL, {
+const getUserInfo = async (code, state, config) => {
+  const { accessToken } = await getToken(code, state, config);
+  const { data } = await axios.get(config.userInfoURL, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
   });
 
+  let userInfo;
+  if (config.provider === 'naver') {
+    userInfo = {
+      provider: config.provider,
+      email: data.response.email,
+      nickname: data.response.nickname,
+      profileUrl: data.response.profile_image,
+    };
+  } else if (config.provider === 'kakao') {
+    userInfo = {
+      provider: config.provider,
+      email: data.kakao_account.email,
+      nickname: data.properties.nickname,
+      profileUrl: data.properties.profile_image,
+    };
+  }
   return userInfo;
 };
 
@@ -49,70 +69,20 @@ const generateToken = (user) => {
   return jwtToken;
 };
 
-const findOrCreateUser = async (data) => {
+const findOrCreateUser = async (oauthUser) => {
   const [user] = await db.user.findOrCreate({
     where: {
-      provider: 'naver',
-      email: data.email,
-      nickname: data.nickname,
-      profileUrl: data.profile_image,
+      provider: oauthUser.provider,
+      email: oauthUser.email,
+      nickname: oauthUser.nickname,
+      profileUrl: oauthUser.profileUrl,
     },
   });
-
-  return user;
-};
-
-const getKakaoToken = async (code, state) => {
-  const requestParams = {
-    grant_type: 'authorization_code',
-    client_id: oauthConfig.kakao.clientId,
-    client_secret: oauthConfig.kakao.clientSecret,
-    redirect_uri: oauthConfig.kakao.redirectURI,
-    code,
-    state,
-  };
-  const params = qs.stringify(requestParams);
-
-  const { data } = await axios.post(oauthConfig.kakao.userTokenURL, params, {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded;' },
-  });
-
-  return {
-    accessToken: data.access_token,
-    refreshToken: data.refresh_token,
-    expiresIn: data.expires_in,
-    tokenType: data.token_type,
-  };
-};
-
-const getKakaoUserInfo = async (code, state) => {
-  const { accessToken } = await getKakaoToken(code, state);
-  const { data: userInfo } = await axios.get(oauthConfig.kakao.userInfoURL, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  return userInfo;
-};
-
-const findOrCreateKakaoUser = async (data) => {
-  const [user] = await db.user.findOrCreate({
-    where: {
-      provider: 'kakao',
-      email: data.kakao_account.email,
-      nickname: data.properties.nickname,
-      profileUrl: data.properties.profile_image,
-    },
-  });
-
   return user;
 };
 
 module.exports = {
-  getNaverUserInfo,
+  getUserInfo,
   generateToken,
   findOrCreateUser,
-  getKakaoUserInfo,
-  findOrCreateKakaoUser,
 };
