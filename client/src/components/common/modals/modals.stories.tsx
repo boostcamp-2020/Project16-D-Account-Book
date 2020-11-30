@@ -35,14 +35,27 @@ export const FormModalHeaderDefault: React.FC = () => {
 
 const inputs = {
   price: 1000,
+  classify: true,
 };
 
 const changes = {
   price: (e: React.ChangeEvent<HTMLInputElement>): void => {
     console.log(e);
   },
+  classify: {
+    income: () => {
+      //
+    },
+    expenditure: () => {
+      //
+    },
+  },
 };
 
 export const TransactionInputListDefault: React.FC = () => {
-  return <TransactionInputList inputs={inputs} changes={changes} />;
+  return (
+    <div style={{ backgroundColor: 'gray' }}>
+      <TransactionInputList inputs={inputs} changes={changes} />;
+    </div>
+  );
 };

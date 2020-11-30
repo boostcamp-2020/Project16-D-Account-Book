@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { Options } from '../../../../types/options';
 import InputText from '../../inputs/input-text/InputText';
-
+import ModalClassify from '../../inputs/modal-classify/ModalClassify';
 interface ITransactionInputList {
   inputs: {
-    classify?: boolean;
+    classify: boolean;
     price?: number;
     categories?: {
       placeholder: string;
@@ -21,12 +21,15 @@ interface ITransactionInputList {
   };
 
   changes: {
-    classify?: (change: boolean) => void;
+    classify?: {
+      income: () => void;
+      expenditure: () => void;
+    };
     price?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     categories?: (change: string) => void;
     accounts?: (change: string) => void;
-    content?: (change: string) => void;
-    date?: (change: string) => void;
+    content?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    date?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     memo?: (change: string) => void;
   };
 }
@@ -44,6 +47,7 @@ const InputWrapper = styled.div`
   margin: 0%;
   display: flex;
   align-items: center;
+  margin-top: 10px;
 `;
 
 const InputLabel = styled.div`
@@ -56,11 +60,29 @@ const Inputs = styled.div`
   flex: 1;
   padding: 0%;
   margin: 0%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const ClassifyWrapper = styled.div`
+  width: 45%;
 `;
 
 const TransactionInputList: React.FC<ITransactionInputList> = ({ inputs, changes }: ITransactionInputList) => {
   return (
     <InputListWrapper>
+      <InputWrapper>
+        <InputLabel>분류</InputLabel>
+        <Inputs>
+          <ClassifyWrapper>
+            <ModalClassify value={'수입'} classify={inputs.classify} onChange={changes.classify?.income} />
+          </ClassifyWrapper>
+          <ClassifyWrapper>
+            <ModalClassify value={'지출'} classify={!inputs.classify} onChange={changes.classify?.expenditure} />
+          </ClassifyWrapper>
+        </Inputs>
+      </InputWrapper>
       <InputWrapper>
         <InputLabel>금액</InputLabel>
         <Inputs>
