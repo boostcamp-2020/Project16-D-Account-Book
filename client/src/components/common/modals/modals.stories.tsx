@@ -38,7 +38,7 @@ const inputs = {
 };
 
 const changes = {
-  price: (e: string): void => {
+  price: (e: React.ChangeEvent<HTMLInputElement>): void => {
     console.log(e);
   },
 };

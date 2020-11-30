@@ -22,7 +22,7 @@ interface ITransactionInputList {
 
   changes: {
     classify?: (change: boolean) => void;
-    price?: (change: number | string) => void;
+    price?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     categories?: (change: string) => void;
     accounts?: (change: string) => void;
     content?: (change: string) => void;

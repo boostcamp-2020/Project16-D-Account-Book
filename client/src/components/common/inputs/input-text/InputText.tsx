@@ -16,9 +16,9 @@ const InputTextContainer = styled.input.attrs<InputType>({
 `;
 
 interface InputTextProps {
-  placeholder: string;
-  value: string | number;
-  onChange: (e: string | number) => void;
+  placeholder?: string;
+  value?: string | number;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputText: React.FC<InputTextProps> = ({ placeholder, value, onChange }: InputTextProps) => {

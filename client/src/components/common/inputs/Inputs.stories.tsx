@@ -60,7 +60,7 @@ export const SelectPaymentMethodDefault: React.FC = () => {
 };
 
 export const ModalIncome: React.FC = () => {
-  const onChange = (e: boolean) => {
+  const onChange = () => {
     //
   };
   return (

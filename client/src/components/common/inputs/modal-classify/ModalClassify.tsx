@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface ModalClassify {
   value: string;
-  onChange: (target: boolean) => void;
+  onChange?: () => void;
   classify: boolean;
 }
 
@@ -22,7 +22,7 @@ const ModalClassifyWrapper = styled.div<WrapperProps>`
 
 const ModalClassify: React.FC<ModalClassify> = ({ value, onChange, classify }: ModalClassify) => {
   return (
-    <ModalClassifyWrapper classify={classify} onChange={onChange}>
+    <ModalClassifyWrapper classify={classify} onClick={onChange}>
       {value}
     </ModalClassifyWrapper>
   );
