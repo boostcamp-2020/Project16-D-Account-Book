@@ -6,6 +6,8 @@ import MultiInputDropDown from './multi-input-dropdown/MultiInputDropdown';
 import SingleInputDropDown from './single-input-dropdown/SingleInputDropdown';
 import SelectPaymentMethod from './select-payment-method/SelectPaymentMethod';
 import MultiInputDropdownWithCheckBox from './multi-input-dropdown/MultiInputDropdownWithCheckBox';
+import ModalClassify from './modal-classify/ModalClassify';
+
 const SmallDiv = styled.div`
   width: 300px;
 `;
@@ -53,6 +55,17 @@ export const SelectPaymentMethodDefault: React.FC = () => {
   return (
     <SmallDiv>
       <SelectPaymentMethod placeholder={'지출'} items={dummyOptions} />
+    </SmallDiv>
+  );
+};
+
+export const ModalIncome: React.FC = () => {
+  const onChange = (e: boolean) => {
+    //
+  };
+  return (
+    <SmallDiv>
+      <ModalClassify classify={false} onChange={onChange} value={'지출'} />
     </SmallDiv>
   );
 };
