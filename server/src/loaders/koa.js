@@ -3,7 +3,7 @@ const bodyParser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const cors = require('@koa/cors');
 
-const indexRouter = require('../api/routes');
+const indexRouter = require('@routes');
 
 const router = new Router();
 
@@ -25,7 +25,7 @@ const koa = async (app) => {
   app.use(router.routes());
   app.use(router.allowedMethods());
 
-  router.use('/', indexRouter.routes());
+  router.use('/api/', indexRouter.routes());
 };
 
 module.exports = koa;
