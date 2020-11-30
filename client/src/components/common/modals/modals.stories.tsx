@@ -3,7 +3,9 @@ import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions
 import AcoountbookDeleteByAdminModal from './accountbook-delete-by-admin/AccountbookDeleteByAdminModal';
 import FormModalHeader from './form-modal-header/FormModalHeader';
 import TransactionInputList from './form-modal-transaction/TransactionInputList';
+import FormFilter from './form-modal-filter/FormFilter';
 import { inputs, changes } from '../../../__dummy-data__/components/modal/modalTransactions';
+import { inputs as filterInputs, changes as filterChanges } from '../../../__dummy-data__/components/modal/modalFilter';
 export default {
   title: 'Modal Example',
 };
@@ -39,6 +41,14 @@ export const TransactionInputListDefault: React.FC = () => {
   return (
     <div style={{ backgroundColor: '#ECECEC' }}>
       <TransactionInputList inputs={inputs} changes={changes} />
+    </div>
+  );
+};
+
+export const FormFilterDefault: React.FC = () => {
+  return (
+    <div style={{ backgroundColor: '#ECECEC' }}>
+      <FormFilter inputs={filterInputs} changes={filterChanges} />
     </div>
   );
 };
