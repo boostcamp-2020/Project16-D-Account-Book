@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import DayTransactionContainer from '../day-transaction-container/DayTransactionContainer';
 import Income, { isIncome } from '../../../../types/income';
 import Expenditure from '../../../../types/expenditure';
+import NotFoundTransaction from '../../not-found-transaction/NotFoundTransaction';
 
 interface Props {
   transactions: Array<Income | Expenditure>;
@@ -35,6 +36,8 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
     beforeMonth = currentMonth;
     beforeDay = currentDay;
   });
+
+  if (transactions.length == 0) return <NotFoundTransaction />;
 
   return (
     <>
