@@ -12,10 +12,12 @@ interface ITransactionInputList {
     categories: {
       placeholder: string;
       items: Options[];
+      selected?: string;
     };
     accounts: {
       placeholder: string;
       items: Options[];
+      selected?: string;
     };
     content?: string;
     date?: string;
