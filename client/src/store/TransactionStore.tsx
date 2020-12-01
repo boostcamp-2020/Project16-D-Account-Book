@@ -27,7 +27,7 @@ export default class TransactionStore {
     const transactions = await getTransactions(accountbookId, startDate, endDate);
     runInAction(() => {
       this.transactions = transactions;
-      this.rootStore.setLoading(false);
+      //this.rootStore.setLoading(false);
     });
   }
 
