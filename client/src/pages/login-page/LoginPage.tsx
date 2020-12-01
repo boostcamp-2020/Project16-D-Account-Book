@@ -31,14 +31,20 @@ const SmallLoginButtonContainer = styled.div`
   display: none;
 
   @media screen and (max-width: 992px) {
-    padding-top: 80px;
+    padding-top: 50px;
     display: flex;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding-top: 30px;
+    flex-direction: column;
     margin: 0 auto;
   }
 `;
 
 const Title = styled.div`
-  font-size: 60px;
+  font-size: 80px;
   width: max-content;
   font-weight: 800;
   font-family: 'Spoqa Han Sans';
@@ -48,13 +54,12 @@ const Title = styled.div`
   line-height: 97%;
 
   @media screen and (max-width: 992px) {
-    font-size: 50px;
     text-align: center;
     margin: 0 auto;
   }
 
   @media screen and (max-width: 600px) {
-    font-size: 35px;
+    font-size: 40px;
     text-align: center;
     margin: 0 auto;
   }
@@ -69,12 +74,12 @@ const LoginPage: React.FC = () => {
         Accountbook
       </Title>
       <LargeLoginButtonContainer>
-        <LargeKakaoLoginButton width={200} />
-        <LargeNaverLoginButton width={200} />
+        <LargeKakaoLoginButton />
+        <LargeNaverLoginButton />
       </LargeLoginButtonContainer>
       <SmallLoginButtonContainer>
-        <SmallKakaoLoginButton width={150} />
-        <SmallNaverLoginButton width={150} />
+        <SmallKakaoLoginButton />
+        <SmallNaverLoginButton />
       </SmallLoginButtonContainer>
     </MainContainer>
   );
