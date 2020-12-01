@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface InputType {
-  type: string;
+  type: string | number;
 }
 
 const InputTextContainer = styled.input.attrs<InputType>({
@@ -16,9 +16,9 @@ const InputTextContainer = styled.input.attrs<InputType>({
 `;
 
 interface InputTextProps {
-  placeholder: string;
-  value: string;
-  onChange: () => void;
+  placeholder?: string;
+  value?: string | number;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputText: React.FC<InputTextProps> = ({ placeholder, value, onChange }: InputTextProps) => {

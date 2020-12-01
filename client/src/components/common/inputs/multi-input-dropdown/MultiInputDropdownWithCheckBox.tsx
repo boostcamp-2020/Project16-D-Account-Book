@@ -66,7 +66,7 @@ const MultiInputDropdownWithCheckBox: React.FC<Props> = ({ placeholder, items, c
   return (
     <ComponentWrapper>
       <CheckBoxArea>
-        <CheckBox type="checkbox" checked={checkBoxClicked} onClick={checkBoxToggle} />
+        <CheckBox type="checkbox" checked={checkBoxClicked} onChange={checkBoxToggle} />
         <Label onClick={checkBoxToggle}>{checkBoxName}</Label>
       </CheckBoxArea>
       <DropdownWrapper>
