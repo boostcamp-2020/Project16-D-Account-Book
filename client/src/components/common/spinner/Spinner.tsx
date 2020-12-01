@@ -4,8 +4,8 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   text-align: center;
   position: absolute;
-  left: 47%;
-  top: 43%;
+  left: calc(50% - 32px);
+  top: calc(50% - 32px);
 `;
 
 const Spinner = (): JSX.Element => (
