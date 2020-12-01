@@ -1,9 +1,7 @@
-const axios = require('axios');
-const jwt = require('jsonwebtoken');
-const qs = require('querystring');
-
-const jwtConfig = require('@config/jwt');
 const db = require('@models');
+
+const axios = require('axios');
+const qs = require('querystring');
 
 const getAccessToken = async (code, state, config) => {
   const requestParams = {
@@ -50,20 +48,6 @@ const getUserInfo = async (code, state, config) => {
   return userInfo;
 };
 
-const generateToken = (user) => {
-  const jwtToken = jwt.sign(
-    {
-      provider: user.provider,
-      email: user.email,
-      nickname: user.nickname,
-      profileUrl: user.profileUrl,
-    },
-    jwtConfig.jwtSecretKey,
-    { expiresIn: jwtConfig.jwtExpiresIn },
-  );
-  return jwtToken;
-};
-
 const findOrCreateUser = async (oauthUser) => {
   const [user] = await db.user.findOrCreate({
     where: {
@@ -78,6 +62,5 @@ const findOrCreateUser = async (oauthUser) => {
 
 module.exports = {
   getUserInfo,
-  generateToken,
   findOrCreateUser,
 };

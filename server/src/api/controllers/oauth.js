@@ -1,6 +1,7 @@
-const oauthService = require('@services/oauth');
 const oauthConfig = require('@config/oauth');
 const jwtConfig = require('@config/jwt');
+const oauthService = require('@services/oauth');
+const { generateToken } = require('@utils/jwt-utils');
 
 const { v4 } = require('uuid');
 
@@ -34,7 +35,7 @@ const login = async (ctx) => {
     const config = getConfig(provider);
     const oauthUser = await oauthService.getUserInfo(code, state, config);
     const ourServiceUser = await oauthService.findOrCreateUser(oauthUser);
-    const jwtToken = oauthService.generateToken(ourServiceUser.toJSON());
+    const jwtToken = generateToken(ourServiceUser.toJSON());
     ctx.cookies.set('jwt', jwtToken, {
       httpOnly: true,
       maxAge: jwtConfig.cookieExpiresIn,
