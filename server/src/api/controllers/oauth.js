@@ -22,7 +22,7 @@ const redirectToOauthLoginPage = async (ctx) => {
     const oauthLoginPageURL = `${config.authorizationURL}?client_id=${config.clientId}&response_type=code&redirect_uri=${config.redirectURI}&state=${state}`;
     ctx.redirect(oauthLoginPageURL);
   } catch (err) {
-    console.log(err);
+    ctx.throw(500, err);
     // TODO: 에러 핸들링 추후 학습하여 개선 필요
   }
 };
@@ -39,8 +39,9 @@ const login = async (ctx) => {
       httpOnly: true,
       maxAge: jwtConfig.cookieExpiresIn,
     });
+    ctx.body = { ourServiceUser, jwtToken };
   } catch (err) {
-    console.log(err);
+    ctx.throw(500, err);
     // TODO : 에러 핸들링 추후 학습하여 개선 필요
   }
 };
