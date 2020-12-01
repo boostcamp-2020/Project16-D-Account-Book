@@ -14,11 +14,15 @@ const SettingsSidebarWrapper = styled.div`
   background-color: ${GRAY};
 `;
 
-const SettingsSidebar = (): JSX.Element => {
+interface SettingsSidebarProps {
+  currentPage: string;
+}
+
+const SettingsSidebar = ({ currentPage }: SettingsSidebarProps): JSX.Element => {
   return (
     <SettingsSidebarWrapper>
       <SettingsSidebarHeader />
-      <SettingsSidebarBody />
+      <SettingsSidebarBody currentPage={currentPage} />
     </SettingsSidebarWrapper>
   );
 };

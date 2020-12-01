@@ -7,5 +7,5 @@ export default {
 };
 
 export const Default = (): JSX.Element => {
-  return <SettingsSidebar></SettingsSidebar>;
+  return <SettingsSidebar currentPage={'accountbook'}></SettingsSidebar>;
 };
