@@ -6,6 +6,22 @@ export default {
   component: SettingsSidebarBody,
 };
 
-export const Default = (): JSX.Element => {
-  return <SettingsSidebarBody />;
+export const AccountbookSettingsPage = (): JSX.Element => {
+  return <SettingsSidebarBody currentPage={'accountbook'} />;
+};
+
+export const CategoriesSettingsPage = (): JSX.Element => {
+  return <SettingsSidebarBody currentPage={'categories'} />;
+};
+
+export const AccountsSettingsPage = (): JSX.Element => {
+  return <SettingsSidebarBody currentPage={'accounts'} />;
+};
+
+export const SocialSettingsPage = (): JSX.Element => {
+  return <SettingsSidebarBody currentPage={'social'} />;
+};
+
+export const CsvSettingsPage = (): JSX.Element => {
+  return <SettingsSidebarBody currentPage={'csv'} />;
 };
