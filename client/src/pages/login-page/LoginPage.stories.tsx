@@ -1,6 +1,5 @@
 import React from 'react';
 import LoginPage from './LoginPage';
-import styled from 'styled-components';
 
 export default {
   title: 'Login-Page/LoginPage',
