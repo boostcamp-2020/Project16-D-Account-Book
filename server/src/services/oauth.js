@@ -2,10 +2,10 @@ const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const qs = require('querystring');
 
-const { jwtConfig } = require('@config/oauth');
+const jwtConfig = require('@config/jwt');
 const db = require('@models');
 
-const getToken = async (code, state, config) => {
+const getAccessToken = async (code, state, config) => {
   const requestParams = {
     grant_type: 'authorization_code',
     client_id: config.clientId,
@@ -20,16 +20,11 @@ const getToken = async (code, state, config) => {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded;' },
   });
 
-  return {
-    accessToken: data.access_token,
-    refreshToken: data.refresh_token,
-    expiresIn: data.expires_in,
-    tokenType: data.token_type,
-  };
+  return data.access_token;
 };
 
 const getUserInfo = async (code, state, config) => {
-  const { accessToken } = await getToken(code, state, config);
+  const accessToken = await getAccessToken(code, state, config);
   const { data } = await axios.get(config.userInfoURL, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
