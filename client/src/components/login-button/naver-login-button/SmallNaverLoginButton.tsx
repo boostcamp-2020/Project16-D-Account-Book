@@ -3,17 +3,23 @@ import styled from 'styled-components';
 import smallNaverLoginButtonImage from '../../../assets/images/naver-login-small.png';
 import LoginButton from '../../../types/loginButton';
 
-const StyledDiv = styled.div<{ width: number }>`
+const StyledDiv = styled.div`
   cursor: pointer;
   img {
-    width: ${(props) => props.width};
+    width: 150px;
+  }
+
+  @media screen and (max-width: 600px) {
+    img {
+      width: 80px;
+    }
   }
 `;
 
-const SmallNaverLoginButton: React.FC<LoginButton> = ({ onClick, width }: LoginButton) => {
+const SmallNaverLoginButton: React.FC<LoginButton> = ({ onClick }: LoginButton) => {
   return (
-    <StyledDiv onClick={onClick} width={width}>
-      <img src={String(smallNaverLoginButtonImage)} alt="naver_login_button" width="150" />
+    <StyledDiv onClick={onClick}>
+      <img src={String(smallNaverLoginButtonImage)} alt="naver_login_button" />
     </StyledDiv>
   );
 };
