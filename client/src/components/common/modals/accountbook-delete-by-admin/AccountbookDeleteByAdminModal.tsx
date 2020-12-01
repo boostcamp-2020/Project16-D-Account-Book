@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import GrayButton from '../../buttons/GrayButton';
 import RedButton from '../../buttons/RedButton';
-import ModalBackground from '../../modal-background/ModalBackground';
+import ModalBackground from '../modal-background/ModalBackground';
 
 interface IProps {
   cancelClick?: () => void;
