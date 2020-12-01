@@ -15,6 +15,12 @@ const generateToken = (user) => {
   return jwtToken;
 };
 
+const decodeToken = (token) => {
+  const decodedToken = jwt.verify(token, jwtConfig.jwtSecretKey);
+  return decodedToken;
+};
+
 module.exports = {
   generateToken,
+  decodeToken,
 };
