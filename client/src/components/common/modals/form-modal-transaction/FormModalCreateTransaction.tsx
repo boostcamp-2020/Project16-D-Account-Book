@@ -3,6 +3,7 @@ import TransactionInputList from './TransactionInputList';
 import UseTransactionForm from '../../../../hook/use-transaction-form/UseTransactionForm';
 import FormModalWrapper from '../form-modal-template/FormModalWrapper';
 import ModalBackground from '../modal-background/ModalBackground';
+import FormModalHeader from '../form-modal-header/FormModalHeader';
 
 //임시용
 import dummyOptions from '../../../../__dummy-data__/components/inputs/dummyOptions';
@@ -33,6 +34,7 @@ const FormModalTransaction: React.FC = () => {
   return (
     <ModalBackground show={true}>
       <FormModalWrapper>
+        <FormModalHeader modalName={'내역작성'} blueName={'완료'} />
         <TransactionInputList inputs={inputListInputs} changes={changes} />
       </FormModalWrapper>
     </ModalBackground>

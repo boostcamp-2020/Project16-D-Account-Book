@@ -27,22 +27,30 @@ const CloseModalButtonWrapper = styled.div`
 
 const Right = styled.p`
   margin-left: auto;
+  margin-top: 0%;
+  margin-bottom: 0%;
 `;
 
 const ModalName = styled.p`
   cursor: pointer;
   font-size: 1.3em;
+  margin-top: 0%;
+  margin-bottom: 0%;
 `;
 
 const RedButton = styled.p`
   cursor: pointer;
   color: tomato;
   margin-right: 1em;
+  margin-top: 0%;
+  margin-bottom: 0%;
 `;
 
 const BlueButton = styled.p`
   cursor: pointer;
   color: dodgerblue;
+  margin-top: 0%;
+  margin-bottom: 0%;
 `;
 
 const FormModalHeader: React.FC<IFormModalHeaderProps> = ({
