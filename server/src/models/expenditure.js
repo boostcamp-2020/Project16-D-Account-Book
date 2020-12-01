@@ -38,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         name: 'expenditureCategoryId',
         allowNull: false,
       },
+      as: 'category',
     });
     expenditure.belongsTo(models.accountbook, {
       foreignKey: {

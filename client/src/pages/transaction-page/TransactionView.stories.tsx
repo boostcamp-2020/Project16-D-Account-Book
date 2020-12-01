@@ -1,5 +1,7 @@
 import React from 'react';
 import TransactionPage from './TransactionPage';
+import TransactionView from './TransactionView';
+import { RootProvider } from '../../store/RootStore';
 
 export default {
   title: 'pages/transaction-page/TransactionPage',
@@ -7,5 +9,9 @@ export default {
 };
 
 export const Default: React.FC = () => {
-  return <TransactionPage />;
+  return (
+    <RootProvider>
+      <TransactionView accountbookId={1} />
+    </RootProvider>
+  );
 };

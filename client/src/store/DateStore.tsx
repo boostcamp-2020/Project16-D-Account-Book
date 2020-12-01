@@ -1,17 +1,19 @@
 import { observable, action, makeObservable } from 'mobx';
 import { getFirstDateOfPreviousMonth, getFirstDateOfNextMonth } from '../utils/date';
 import React, { createContext } from 'react';
+import RootStore from './RootStore';
 
 export default class DateStore {
+  rootStore;
   @observable startDate: Date;
   @observable endDate: Date;
 
-  constructor() {
+  constructor(rootStore: RootStore) {
     makeObservable(this);
     const currentDate = new Date();
-    this.startDate = new Date(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-1`);
-    this.startDate.setHours(0, 0, 0, 0);
+    this.startDate = new Date(`${currentDate.getFullYear()}.${currentDate.getMonth() + 1}.1`);
     this.endDate = getFirstDateOfNextMonth(this.startDate);
+    this.rootStore = rootStore;
   }
 
   @action
@@ -26,9 +28,3 @@ export default class DateStore {
     this.endDate = getFirstDateOfNextMonth(this.startDate);
   }
 }
-
-export const DateContext = createContext<DateStore>(new DateStore());
-
-export const DateProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
-  return <DateContext.Provider value={new DateStore()}>{children}</DateContext.Provider>;
-};

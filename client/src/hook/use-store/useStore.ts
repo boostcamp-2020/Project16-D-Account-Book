@@ -1,13 +1,13 @@
-import DateStore, { DateContext } from '../../store/dateStore';
+import RootStore, { RootContext } from '../../store/RootStore';
 import { useContext } from 'react';
 
 interface Store {
-  dateStore: DateStore;
+  rootStore: RootStore;
 }
 
 // TODO: store 생성 시 이곳에서 return 부분에 추가하면 됩니다!
 const useStore = (): Store => {
-  return { dateStore: useContext(DateContext) };
+  return { rootStore: useContext(RootContext) };
 };
 
 export default useStore;
