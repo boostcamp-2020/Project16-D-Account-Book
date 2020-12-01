@@ -6,8 +6,6 @@ export default {
   component: SettingsAccountbookPage,
 };
 
-const test = 'black';
-
 export const Default = (): JSX.Element => {
-  return <SettingsAccountbookPage color={test} />;
+  return <SettingsAccountbookPage />;
 };
