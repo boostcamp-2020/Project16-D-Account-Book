@@ -37,7 +37,7 @@ export const filtering = (
     filteredTransactions = [...filteredTransactions, ...filteredList];
   }
 
-  return filteredTransactions as Array<Income | Expenditure>;
+  return filteredTransactions;
 };
 
 const incomeCategoryFilter = (

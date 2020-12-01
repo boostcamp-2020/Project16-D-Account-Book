@@ -11,9 +11,6 @@ import useStore from '../../hook/use-store/useStore';
 import { useObserver } from 'mobx-react';
 import { isIncome } from '../../types/income';
 import { ParsedQuery } from 'query-string';
-import Spinner from '../../components/common/spinner/Spinner';
-import { filtering } from '../../utils/filter';
-import { runInAction } from 'mobx';
 
 const ViewWrapper = styled.div`
   width: 70%;
