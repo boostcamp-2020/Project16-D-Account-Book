@@ -9,7 +9,12 @@ const SettingsSidebarBodyWrapper = styled.div`
   padding-top: 3em;
 `;
 
-const SettingsSidebarMenuItem = styled.div<{ currentPage: string }>`
+interface SettingsSidebarMenuItemProps {
+  currentPage: string;
+  onClick?: void;
+}
+
+const SettingsSidebarMenuItem = styled.div<SettingsSidebarMenuItemProps>`
   padding: 12px 20px;
   cursor: pointer;
   font-size: 1.2rem;
