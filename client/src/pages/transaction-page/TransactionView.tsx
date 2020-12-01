@@ -49,7 +49,7 @@ interface Props {
 const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
   const { dateStore, transactionStore } = rootStore;
-
+  console.log('hi');
   useEffect(() => {
     if (!query) {
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);

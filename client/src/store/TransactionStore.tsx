@@ -27,6 +27,7 @@ export default class TransactionStore {
     const transactions = await getTransactions(accountbookId, startDate, endDate);
     runInAction(() => {
       this.transactions = transactions;
+      this.rootStore.setLoading(false);
     });
   }
 
@@ -38,6 +39,7 @@ export default class TransactionStore {
     await this.findTransactions(accountbookId, new Date(startDate as string), new Date(endDate as string));
     runInAction(() => {
       this.transactions = filtering(this.transactions, { account, incomeCategory, expenditureCategory });
+      this.rootStore.setLoading(false);
     });
   }
 }

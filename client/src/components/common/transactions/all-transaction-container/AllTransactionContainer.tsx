@@ -4,12 +4,15 @@ import Income, { isIncome } from '../../../../types/income';
 import Expenditure from '../../../../types/expenditure';
 import NotFoundTransaction from '../../not-found-transaction/NotFoundTransaction';
 import { useObserver } from 'mobx-react';
+import Spinner from '../../spinner/Spinner';
+import useStore from '../../../../hook/use-store/useStore';
 
 interface Props {
   transactions: Array<Income | Expenditure>;
 }
 
 const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
+  const { rootStore } = useStore();
   transactions.sort((transaction1, transaction2) => {
     return new Date(transaction2.date).getTime() - new Date(transaction1.date).getTime();
   });
@@ -38,6 +41,7 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
     beforeDay = currentDay;
   });
 
+  if (rootStore.loading) return <Spinner />;
   if (transactions.length == 0) return <NotFoundTransaction />;
 
   return (
