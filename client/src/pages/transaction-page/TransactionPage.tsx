@@ -1,6 +1,4 @@
 import React from 'react';
-import { DateProvider } from '../../store/DateStore';
-import { TransactionProvider } from '../../store/TransactionStore';
 import { match } from 'react-router-dom';
 import TransactionView from './TransactionView';
 
@@ -9,13 +7,7 @@ interface Props {
 }
 
 const TransactionPage: React.FC<Props> = ({ match }: Props) => {
-  return (
-    <DateProvider>
-      <TransactionProvider>
-        <TransactionView accountbookId={Number(match.params.id)} />
-      </TransactionProvider>
-    </DateProvider>
-  );
+  return <TransactionView accountbookId={Number(match.params.id)} />;
 };
 
 export default TransactionPage;

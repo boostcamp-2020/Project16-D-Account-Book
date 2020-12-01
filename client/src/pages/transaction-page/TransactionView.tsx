@@ -41,7 +41,7 @@ interface Props {
 }
 
 const TransactionView: React.FC<Props> = ({ accountbookId }: Props) => {
-  const { dateStore, transactionStore } = useStore();
+  const { dateStore, transactionStore } = useStore().rootStore;
 
   useEffect(() => {
     transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);

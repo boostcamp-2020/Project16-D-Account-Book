@@ -3,12 +3,15 @@ import React, { createContext } from 'react';
 import Income from '../types/income';
 import Expenditure from '../types/expenditure';
 import { getTransactions } from '../services/transaction';
+import RootStore from './RootStore';
 
 export default class TransactionStore {
   @observable transactions: Array<Income | Expenditure> = [];
+  rootStore;
 
-  constructor() {
+  constructor(rootStore: RootStore) {
     makeObservable(this);
+    this.rootStore = rootStore;
   }
 
   @action
@@ -19,9 +22,3 @@ export default class TransactionStore {
     });
   }
 }
-
-export const TransactionContext = createContext<TransactionStore>(new TransactionStore());
-
-export const TransactionProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
-  return <TransactionContext.Provider value={new TransactionStore()}>{children}</TransactionContext.Provider>;
-};

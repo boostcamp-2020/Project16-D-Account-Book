@@ -47,7 +47,7 @@ const DateWrapper = styled.div`
 `;
 
 const ChangeDateContainer: React.FC = () => {
-  const { dateStore, transactionStore } = useStore();
+  const { dateStore, transactionStore } = useStore().rootStore;
   const onClickNextButton = () => {
     dateStore.moveToNextMonth();
     transactionStore.findTransactions(1, dateStore.startDate, dateStore.endDate);
