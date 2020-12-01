@@ -7,14 +7,14 @@ import SingleInputDropdown from '../../inputs/single-input-dropdown/SingleInputD
 import InputDateTime from '../../inputs/input-datetime/InputDateTime';
 interface ITransactionInputList {
   inputs: {
-    classify: boolean;
+    classify?: boolean;
     price?: number;
-    categories: {
+    categories?: {
       placeholder: string;
       items: Options[];
       selected?: string;
     };
-    accounts: {
+    accounts?: {
       placeholder: string;
       items: Options[];
       selected?: string;
