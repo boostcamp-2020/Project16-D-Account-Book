@@ -57,14 +57,61 @@ export function formReducer(state: ITransactionForm, action: FormChangeAction): 
   }
 }
 
-const UseTransactionForm = () => {
-  const [calssify, setClassify] = useState<boolean>(false);
-  const [price, setPrice] = useState<number>();
-  const [categories, setCategories] = useState<number>();
-  const [accounts, setAccounts] = useState<number>();
-  const [content, useContent] = useState<string>();
-  const [date, useDate] = useState<string>();
-  const [memo, useMemo] = useState<string>();
+const UseTransactionForm = (initial: ITransactionForm): [ITransactionForm, ITransactionFormChange] => {
+  const [state, dispatch] = useReducer(formReducer, initial);
+  const changes: ITransactionFormChange = {
+    classify: {
+      income: () => {
+        dispatch({
+          type: FormActionType.CLASSIFY_CHANGE,
+          data: true,
+        });
+      },
+      expenditure: () => {
+        dispatch({
+          type: FormActionType.CLASSIFY_CHANGE,
+          data: false,
+        });
+      },
+    },
+    price: (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch({
+        type: FormActionType.PRICE_CHANGE,
+        data: parseInt(e.target.value),
+      });
+    },
+    categories: (change: string) => {
+      dispatch({
+        type: FormActionType.CATEGORIES_CHANGE,
+        data: change,
+      });
+    },
+    accounts: (change: string) => {
+      dispatch({
+        type: FormActionType.ACCOUNTS_CHANGE,
+        data: change,
+      });
+    },
+    content: (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch({
+        type: FormActionType.CONTENT_CHANGE,
+        data: e.target.value,
+      });
+    },
+    date: (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch({
+        type: FormActionType.DATE_CHANGE,
+        data: e.target.value,
+      });
+    },
+    memo: (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch({
+        type: FormActionType.MEMO_CHANGE,
+        data: e.target.value,
+      });
+    },
+  };
+  return [state, changes];
 };
 
 export default UseTransactionForm;
