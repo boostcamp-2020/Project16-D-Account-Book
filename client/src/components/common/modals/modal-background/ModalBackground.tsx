@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import useClickMe from '../../../hook/use-click-me/useClickMe';
+import useClickMe from '../../../../hook/use-click-me/useClickMe';
 import styled from 'styled-components';
 interface ModalBackgroundProps {
   children?: React.ReactNode;
@@ -25,6 +25,7 @@ const ChildrenWrapper = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
+  width: 100%;
   transform: translate(-50%, -50%);
 `;
 
