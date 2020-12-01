@@ -6,6 +6,8 @@ import TransactionInputList from './form-modal-transaction/TransactionInputList'
 import FormFilter from './form-modal-filter/FormFilter';
 import { inputs, changes } from '../../../__dummy-data__/components/modal/modalTransactions';
 import { inputs as filterInputs, changes as filterChanges } from '../../../__dummy-data__/components/modal/modalFilter';
+import FormModalTransaction from './form-modal-transaction/FormModalTransaction';
+
 export default {
   title: 'Modal Example',
 };
@@ -51,4 +53,8 @@ export const FormFilterDefault: React.FC = () => {
       <FormFilter inputs={filterInputs} changes={filterChanges} />
     </div>
   );
+};
+
+export const FormModalTransactionDefault: React.FC = () => {
+  return <FormModalTransaction />;
 };
