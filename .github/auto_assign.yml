@@ -1,0 +1,12 @@
+addReviewers: true
+
+addAssignees: author
+
+reviewers:
+    - mu1616
+    - bbbyung2
+    - lacomaco
+    - Mong-Gu
+    - boostcamp-2020/accountbook_mentor
+
+numberOfReviewers: 0
