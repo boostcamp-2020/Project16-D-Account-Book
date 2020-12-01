@@ -7,7 +7,8 @@ import GlobalFonts from './assets/fonts/GlobalFonts';
 
 function App(): JSX.Element {
   return (
-    <GlobalFonts>
+    <>
+      <GlobalFonts />
       <RootProvider>
         <Router>
           <Switch>
@@ -16,7 +17,7 @@ function App(): JSX.Element {
           </Switch>
         </Router>
       </RootProvider>
-    </GlobalFonts>
+    </>
   );
 }
 

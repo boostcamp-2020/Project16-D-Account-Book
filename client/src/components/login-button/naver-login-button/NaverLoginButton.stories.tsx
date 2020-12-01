@@ -7,9 +7,9 @@ export default {
 };
 
 export const LargeButton = (): JSX.Element => {
-  return <LargeNaverLoginButton />;
+  return <LargeNaverLoginButton width={200} />;
 };
 
 export const SmallButton = (): JSX.Element => {
-  return <SmallNaverLoginButton />;
+  return <SmallNaverLoginButton width={200} />;
 };
