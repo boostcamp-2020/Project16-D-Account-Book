@@ -8,9 +8,9 @@ import GlobalFonts from './assets/fonts/GlobalFonts';
 function App(): JSX.Element {
   return (
     <>
-      <GlobalFonts />
       <RootProvider>
         <Router>
+          <GlobalFonts />
           <Switch>
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/accountbooks/:id/transactions" component={TransactionPage} />

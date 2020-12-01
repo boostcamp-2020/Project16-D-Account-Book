@@ -11,10 +11,11 @@ import useStore from '../../hook/use-store/useStore';
 import { useObserver } from 'mobx-react';
 import { isIncome } from '../../types/income';
 
-const PageWrapper = styled.div`
+const ViewWrapper = styled.div`
   width: 70%;
   margin: 0 auto;
 `;
+
 const HeaderNavigationWrapper = styled.div`
   position: absolute;
   right: 2%;
@@ -64,7 +65,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId }: Props) => {
       <HeaderNavigationWrapper>
         <HeaderNavigation currentPage={'transaction'} />
       </HeaderNavigationWrapper>
-      <PageWrapper>
+      <ViewWrapper>
         <TransactionHeaderWrapper>
           <ChangeDateContainer />
           <AmountWrapper>
@@ -75,7 +76,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId }: Props) => {
           </AmountWrapper>
         </TransactionHeaderWrapper>
         <AllTransactionContainer transactions={transactionStore.transactions} />
-      </PageWrapper>
+      </ViewWrapper>
     </>
   ));
 };
