@@ -3,6 +3,7 @@ import DayTransactionContainer from '../day-transaction-container/DayTransaction
 import Income, { isIncome } from '../../../../types/income';
 import Expenditure from '../../../../types/expenditure';
 import NotFoundTransaction from '../../not-found-transaction/NotFoundTransaction';
+import { useObserver } from 'mobx-react';
 
 interface Props {
   transactions: Array<Income | Expenditure>;

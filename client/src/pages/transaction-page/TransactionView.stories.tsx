@@ -11,7 +11,7 @@ export default {
 export const Default: React.FC = () => {
   return (
     <RootProvider>
-      <TransactionView accountbookId={1} />
+      <TransactionView accountbookId={1} query={null} />
     </RootProvider>
   );
 };
