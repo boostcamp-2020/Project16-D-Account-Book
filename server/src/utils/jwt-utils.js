@@ -7,6 +7,7 @@ const generateToken = (user) => {
       iss: 'moa',
       userId: user.id,
       provider: user.provider,
+      email: user.email,
       nickname: user.email.match(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@/g)[0].replace('@', ''),
     },
     jwtConfig.jwtSecretKey,
