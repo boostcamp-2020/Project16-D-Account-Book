@@ -22,9 +22,10 @@
 [![GitHub Open PR](https://img.shields.io/github/issues-pr-raw/boostcamp-2020/Project16-D-Account-Book?color=green)](https://github.com/boostcamp-2020/Project16-D-Account-Book/issues)
 [![GitHub Closed PR](https://img.shields.io/github/issues-pr-closed-raw/boostcamp-2020/Project16-D-Account-Book?color=red)](https://github.com/boostcamp-2020/Project16-D-Account-Book/issues)
 
+<img src="https://i.imgur.com/q2Rkxp9.png" width=300/>
+
 </div>
 <br><br><br>
-
 
 ## 프로젝트 소개 💸
 > ***Manage Our Accountbook!***
