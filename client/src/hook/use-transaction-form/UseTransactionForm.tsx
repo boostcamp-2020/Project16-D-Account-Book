@@ -57,7 +57,17 @@ export function formReducer(state: ITransactionForm, action: FormChangeAction): 
   }
 }
 
-const UseTransactionForm = (initial: ITransactionForm): [ITransactionForm, ITransactionFormChange] => {
+const defaultState: ITransactionForm = {
+  classify: true,
+  price: '',
+  categories: undefined,
+  accounts: undefined,
+  content: '',
+  date: '',
+  memo: '',
+};
+
+const UseTransactionForm = (initial: ITransactionForm = defaultState): [ITransactionForm, ITransactionFormChange] => {
   const [state, dispatch] = useReducer(formReducer, initial);
   const changes: ITransactionFormChange = {
     classify: {
@@ -75,10 +85,23 @@ const UseTransactionForm = (initial: ITransactionForm): [ITransactionForm, ITran
       },
     },
     price: (e: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch({
-        type: FormActionType.PRICE_CHANGE,
-        data: parseInt(e.target.value),
-      });
+      try {
+        const number = parseInt(e.target.value);
+        if (isNaN(number)) {
+          dispatch({
+            type: FormActionType.PRICE_CHANGE,
+            data: '',
+          });
+          return;
+        }
+
+        dispatch({
+          type: FormActionType.PRICE_CHANGE,
+          data: number,
+        });
+      } catch (e) {
+        throw new Error('숫자만 들어와야해요.');
+      }
     },
     categories: (change: string) => {
       dispatch({

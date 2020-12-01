@@ -1,13 +1,13 @@
 import { Options } from './options';
 
 export interface ITransactionForm {
-  classify: boolean | undefined;
-  price: number | undefined;
-  categories: string | undefined;
-  accounts: string | undefined;
-  content: string | undefined;
-  date: string | undefined;
-  memo: string | undefined;
+  classify?: boolean | undefined;
+  price?: number | undefined | string;
+  categories?: string | undefined;
+  accounts?: string | undefined;
+  content?: string | undefined;
+  date?: string | undefined;
+  memo?: string | undefined;
 }
 
 export interface ITransactionFormChange {
@@ -39,7 +39,7 @@ interface CLASSIFY_CHANGE_ACTION {
 }
 
 interface PRICE_CHANGE_ACTION {
-  data: number;
+  data: number | string;
   type: FormActionType.PRICE_CHANGE;
 }
 
