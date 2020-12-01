@@ -7,9 +7,9 @@ export default {
 };
 
 export const LargeButton = (): JSX.Element => {
-  return <LargeKakaoLoginButton width={200} />;
+  return <LargeKakaoLoginButton />;
 };
 
 export const SmallButton = (): JSX.Element => {
-  return <SmallKakaoLoginButton width={200} />;
+  return <SmallKakaoLoginButton />;
 };
