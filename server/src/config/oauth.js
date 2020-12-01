@@ -6,7 +6,7 @@ if (envFound.error) {
   throw new Error(`Could't find .env file `);
 }
 
-const oauthConfig = {
+module.exports = {
   naver: {
     provider: 'naver',
     clientId: process.env.NAVER_CLIENT_ID,
@@ -25,14 +25,4 @@ const oauthConfig = {
     userTokenURL: 'https://kauth.kakao.com/oauth/token',
     userInfoURL: 'https://kapi.kakao.com/v2/user/me',
   },
-};
-
-const jwtConfig = {
-  jwtSecretKey: process.env.JWT_SECRET_KEY,
-  jwtExpiresIn: process.env.JWT_EXPIRES_IN,
-};
-
-module.exports = {
-  oauthConfig,
-  jwtConfig,
 };
