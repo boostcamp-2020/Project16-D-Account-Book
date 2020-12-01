@@ -5,7 +5,7 @@ import SettingsSidebarHeader from './settings-sidebar-header/SettingsSidebarHead
 import SettingsSidebarBody from './settings-sidebar-body/SettingsSidebarBody';
 
 const SettingsSidebarWrapper = styled.div`
-  width: 14em;
+  width: 18%;
   height: 100vh;
   overflow: auto;
   position: fixed;
