@@ -1,5 +1,6 @@
 const oauthService = require('@services/oauth');
-const { oauthConfig } = require('@config/oauth');
+const oauthConfig = require('@config/oauth');
+const jwtConfig = require('@config/jwt');
 
 const { v4 } = require('uuid');
 
@@ -34,7 +35,10 @@ const login = async (ctx) => {
     const oauthUser = await oauthService.getUserInfo(code, state, config);
     const ourServiceUser = await oauthService.findOrCreateUser(oauthUser);
     const jwtToken = oauthService.generateToken(ourServiceUser.toJSON());
-    ctx.body = { ourServiceUser, jwtToken };
+    ctx.cookies.set('jwt', jwtToken, {
+      httpOnly: true,
+      maxAge: jwtConfig.cookieExpiresIn,
+    });
   } catch (err) {
     console.log(err);
     // TODO : 에러 핸들링 추후 학습하여 개선 필요
