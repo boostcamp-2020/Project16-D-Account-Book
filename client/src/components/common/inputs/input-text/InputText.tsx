@@ -9,6 +9,7 @@ const InputTextContainer = styled.input.attrs<InputType>({
   type: 'text',
 })`
   width: 100%;
+  height: ${(props) => props.height};
   padding: 5px 10px;
   font-size: 1.2rem;
   border-radius: 5px;
@@ -16,13 +17,21 @@ const InputTextContainer = styled.input.attrs<InputType>({
 `;
 
 interface InputTextProps {
+  height?: number | string;
   placeholder?: string;
   value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputText: React.FC<InputTextProps> = ({ placeholder, value, onChange }: InputTextProps) => {
-  return <InputTextContainer value={value} placeholder={placeholder} onChange={onChange}></InputTextContainer>;
+const InputText: React.FC<InputTextProps> = ({ height, placeholder, value, onChange }: InputTextProps) => {
+  return (
+    <InputTextContainer
+      height={height}
+      value={value}
+      placeholder={placeholder}
+      onChange={onChange}
+    ></InputTextContainer>
+  );
 };
 
 export default InputText;
