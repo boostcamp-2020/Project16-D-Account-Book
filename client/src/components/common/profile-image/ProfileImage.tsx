@@ -5,6 +5,7 @@ const Image = styled.img`
   width: 30px;
   height: 30px;
   border-radius: 15px;
+  cursor: pointer;
 `;
 
 interface ProfileImageProps {
