@@ -34,14 +34,14 @@ const getUserInfo = async (code, state, config) => {
     userInfo = {
       provider: config.provider,
       email: data.response.email,
-      nickname: data.response.email.user.email.match(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@/g)[0].replace('@', ''),
+      nickname: data.response.email.match(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@/g)[0].replace('@', ''),
       profileUrl: data.response.profile_image,
     };
   } else if (config.provider === 'kakao') {
     userInfo = {
       provider: config.provider,
       email: data.kakao_account.email,
-      nickname: data.kakao_account.email.user.email.match(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@/g)[0].replace('@', ''),
+      nickname: data.kakao_account.email.match(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@/g)[0].replace('@', ''),
       profileUrl: data.properties.profile_image,
     };
   }
