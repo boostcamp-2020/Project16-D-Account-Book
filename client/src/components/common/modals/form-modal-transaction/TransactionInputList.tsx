@@ -8,7 +8,7 @@ import InputDateTime from '../../inputs/input-datetime/InputDateTime';
 interface ITransactionInputList {
   inputs: {
     classify?: boolean;
-    price?: number;
+    price?: number | string | undefined;
     categories?: {
       placeholder: string;
       items: Options[];

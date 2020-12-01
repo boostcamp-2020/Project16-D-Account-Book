@@ -25,7 +25,7 @@ const FormModalTransaction: React.FC = () => {
     },
     accounts: {
       placeholder: '계좌',
-      items: category,
+      items: accounts,
       selected: inputs.accounts,
     },
   };
