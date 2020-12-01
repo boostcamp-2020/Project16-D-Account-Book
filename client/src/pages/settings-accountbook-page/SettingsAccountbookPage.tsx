@@ -55,6 +55,14 @@ const SettingsAccountbookPage = (): JSX.Element => {
     setInputColor(color.hex);
   };
 
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const onChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDescription(e.target.value);
+  };
+
   return (
     <SettingsAccountbookPageWrapper>
       <SettingsSidebar currentPage={'accountbook'} />
@@ -65,11 +73,21 @@ const SettingsAccountbookPage = (): JSX.Element => {
         </PreviewWrapper>
         <SettingsItemWrapper>
           <Label>가계부 별칭</Label>
-          <InputText height={'5vh'} placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'} value={title} />
+          <InputText
+            height={'5vh'}
+            placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
+            value={title}
+            onChange={onChangeTitle}
+          />
         </SettingsItemWrapper>
         <SettingsItemWrapper>
           <Label>가계부 설명</Label>
-          <InputText height={'5vh'} placeholder={'가계부에 대한 설명을 기재해주세요.'} value={description} />
+          <InputText
+            height={'5vh'}
+            placeholder={'가계부에 대한 설명을 기재해주세요.'}
+            value={description}
+            onChange={onChangeDescription}
+          />
         </SettingsItemWrapper>
         <SettingsItemWrapper>
           <Label>한 주의 시작 요일 설정</Label>
