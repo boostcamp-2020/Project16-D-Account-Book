@@ -4,7 +4,8 @@ const router = new Router();
 
 const oauthController = require('@controllers/oauth');
 
-router.get('naver', oauthController.naverLogin);
-router.get('kakao', oauthController.kakaoLogin);
+router.get(':provider', oauthController.redirectToOauthLoginPage);
+
+router.get('callback/:provider', oauthController.login);
 
 module.exports = router;
