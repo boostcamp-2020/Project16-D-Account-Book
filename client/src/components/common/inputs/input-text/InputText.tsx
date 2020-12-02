@@ -3,30 +3,31 @@ import styled from 'styled-components';
 
 interface InputType {
   type: string | number;
+  maxLength: number;
 }
 
-const InputTextContainer = styled.input.attrs<InputType>({
+const InputTextContainer = styled.input.attrs((props) => ({
   type: 'text',
-})`
+  maxLength: props.maxLength,
+}))<InputType>`
   width: 100%;
-  height: ${(props) => props.height};
-  padding: 5px 10px;
+  padding: 15px 10px;
   font-size: 1.2rem;
   border-radius: 5px;
   border: 1px solid lightgray;
 `;
 
 interface InputTextProps {
-  height?: number | string;
   placeholder?: string;
   value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  maxLength?: number;
 }
 
-const InputText: React.FC<InputTextProps> = ({ height, placeholder, value, onChange }: InputTextProps) => {
+const InputText: React.FC<InputTextProps> = ({ maxLength, placeholder, value, onChange }: InputTextProps) => {
   return (
     <InputTextContainer
-      height={height}
+      maxLength={maxLength}
       value={value}
       placeholder={placeholder}
       onChange={onChange}
