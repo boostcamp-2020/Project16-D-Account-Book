@@ -13,8 +13,8 @@ const ListUL = styled.ul`
   margin: 0px;
   width: 100%;
   position: absolute;
-  height: 500%;
   overflow-y: scroll;
+  max-height: 250px;
   transform: translateY(20px);
   border: 1px solid lightgray;
   border-radius: 4px;
