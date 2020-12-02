@@ -12,6 +12,7 @@ import { useObserver } from 'mobx-react';
 import { isIncome } from '../../types/income';
 import { ParsedQuery } from 'query-string';
 import FilterOption from '../../components/transaction-page/filter-option/FilterOption';
+import { useHistory } from 'react-router-dom';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -47,12 +48,13 @@ interface Props {
 const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
   const { dateStore, transactionStore } = rootStore;
-
+  const history = useHistory();
   useEffect(() => {
     if (!query) {
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
       return;
     }
+
     const { start_date, end_date, account, income_category, expenditure_category } = query;
     transactionStore.filterTransactions(accountbookId, {
       startDate: start_date,
@@ -61,7 +63,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       incomeCategory: income_category,
       expenditureCategory: expenditure_category,
     });
-  }, []);
+  }, [query]);
 
   let totalIncome = 0;
   let totalExpenditure = 0;
@@ -82,6 +84,15 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       </HeaderNavigationWrapper>
       <ViewWrapper>
         <TransactionHeaderWrapper>
+          <button
+            onClick={() =>
+              history.push(
+                `/accountbooks/1?start_date=2020.01.01&end_date=2021.01.01&income_category=%EA%B8%88%EC%9C%B5%EC%88%98%EC%9E%85&account=%EB%86%8D%ED%98%91`,
+              )
+            }
+          >
+            필터
+          </button>
           {query ? (
             <FilterOption
               query={{
@@ -94,7 +105,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
               accountbookId={accountbookId}
             />
           ) : (
-            <ChangeDateContainer />
+            <ChangeDateContainer accountbookId={accountbookId} />
           )}
           <AmountWrapper>
             <Amount text={'수입'} amount={totalIncome} />

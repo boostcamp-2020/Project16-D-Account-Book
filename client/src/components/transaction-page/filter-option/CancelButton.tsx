@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 interface Props {
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const CancelButton = ({ onClick }: Props): JSX.Element => {

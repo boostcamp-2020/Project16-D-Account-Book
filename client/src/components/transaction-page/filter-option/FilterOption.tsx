@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CancelButton from './CancelButton';
 import Query from '../../../types/query';
 import { getFormattedDate } from '../../../utils/date';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ const FilterOption: React.FC<Props> = ({ query, accountbookId }: Props) => {
   const { startDate, endDate, account, incomeCategory, expenditureCategory } = query;
   const history = useHistory();
   const onClickCancel = () => {
-    history.push('/accountbooks/1');
+    history.push(`/accountbooks/${accountbookId}`);
   };
 
   return (
