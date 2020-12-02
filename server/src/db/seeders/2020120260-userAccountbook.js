@@ -1,7 +1,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const id = [1, 2, 3, 4];
-    const authority = [true, true, true, true];
+    const authority = [true, false, false, false];
     const description = [
       '테스트용 accountbook',
       '테스트용 accountbook',
