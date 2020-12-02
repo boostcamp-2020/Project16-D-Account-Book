@@ -9,7 +9,8 @@ import { smallAccountbookItems } from '../../__dummy-data__/components/smallAcco
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
 import useStore from '../../hook/use-store/useStore';
 import { useObserver } from 'mobx-react';
-import { isIncome } from '../../types/income';
+import Income, { isIncome } from '../../types/income';
+import Expenditure from '../../types/expenditure';
 import { ParsedQuery } from 'query-string';
 import FilterOption from '../../components/transaction-page/filter-option/FilterOption';
 import { useHistory } from 'react-router-dom';
@@ -46,10 +47,25 @@ interface Props {
   query: ParsedQuery<string> | null;
 }
 
+const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<number> => {
+  let totalIncome = 0;
+  let totalExpenditure = 0;
+  transactions.forEach((transaction) => {
+    if (isIncome(transaction)) {
+      totalIncome += transaction.amount;
+    } else {
+      totalExpenditure += transaction.amount;
+    }
+  });
+  return [totalIncome, totalExpenditure];
+};
+
 const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
   const { dateStore, transactionStore } = rootStore;
   const history = useHistory();
+  const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
+
   useEffect(() => {
     if (!query) {
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
@@ -65,16 +81,6 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       expenditureCategory: expenditure_category,
     });
   }, [query]);
-
-  let totalIncome = 0;
-  let totalExpenditure = 0;
-  transactionStore.transactions.forEach((transaction) => {
-    if (isIncome(transaction)) {
-      totalIncome += transaction.amount;
-    } else {
-      totalExpenditure += transaction.amount;
-    }
-  });
 
   return useObserver(() => (
     <>
