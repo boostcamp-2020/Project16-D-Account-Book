@@ -1,5 +1,7 @@
+const oauthConfig = require('@config/oauth');
+const jwtConfig = require('@config/jwt');
 const oauthService = require('@services/oauth');
-const { oauthConfig } = require('@config/oauth');
+const { generateToken } = require('@utils/jwt-utils');
 
 const { v4 } = require('uuid');
 
@@ -21,8 +23,7 @@ const redirectToOauthLoginPage = async (ctx) => {
     const oauthLoginPageURL = `${config.authorizationURL}?client_id=${config.clientId}&response_type=code&redirect_uri=${config.redirectURI}&state=${state}`;
     ctx.redirect(oauthLoginPageURL);
   } catch (err) {
-    console.log(err);
-    // TODO: 에러 핸들링 추후 학습하여 개선 필요
+    ctx.throw(500, err);
   }
 };
 
@@ -33,11 +34,14 @@ const login = async (ctx) => {
     const config = getConfig(provider);
     const oauthUser = await oauthService.getUserInfo(code, state, config);
     const ourServiceUser = await oauthService.findOrCreateUser(oauthUser);
-    const jwtToken = oauthService.generateToken(ourServiceUser.toJSON());
+    const jwtToken = generateToken(ourServiceUser.toJSON());
+    ctx.cookies.set('jwt', jwtToken, {
+      httpOnly: true,
+      maxAge: jwtConfig.cookieExpiresIn,
+    });
     ctx.body = { ourServiceUser, jwtToken };
   } catch (err) {
-    console.log(err);
-    // TODO : 에러 핸들링 추후 학습하여 개선 필요
+    ctx.throw(500, err);
   }
 };
 
