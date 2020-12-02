@@ -13,6 +13,7 @@ import { isIncome } from '../../types/income';
 import { ParsedQuery } from 'query-string';
 import FilterOption from '../../components/transaction-page/filter-option/FilterOption';
 import { useHistory } from 'react-router-dom';
+import FormModalFilter from '../../components/common/modals/form-modal-filter/FormModalFilter';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -77,6 +78,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
 
   return useObserver(() => (
     <>
+      <FormModalFilter />
       <Sidebar smallAccountbooks={smallAccountbookItems} />
       <MenuNavigation />
       <HeaderNavigationWrapper>
