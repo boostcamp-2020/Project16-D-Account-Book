@@ -41,7 +41,7 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
     beforeDay = currentDay;
   });
 
-  if (transactionStore.loading) return <Spinner />;
+  if (transactionStore.isLoading) return <Spinner />;
   if (transactions.length == 0) return <NotFoundTransaction />;
 
   return (
