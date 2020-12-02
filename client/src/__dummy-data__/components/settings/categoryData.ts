@@ -1,4 +1,4 @@
-export const expenditureCategories = [
+export const expenditureCategoriesDummy = [
   { id: 1, name: '식사', color: '#ed8484' },
   { id: 2, name: '카페/간식', color: '#9B59B6' },
   { id: 3, name: '의료/건강', color: '#F1C40F' },
@@ -15,7 +15,7 @@ export const expenditureCategories = [
   { id: 14, name: '경조사', color: '#97AAAC' },
 ];
 
-export const incomeCategories = [
+export const incomeCategoriesDummy = [
   { id: 1, name: '타행이체', color: '#9FEADB' },
   { id: 2, name: '더치페이', color: '#7ABC1A' },
   { id: 3, name: '급여', color: '#E19CCD' },
