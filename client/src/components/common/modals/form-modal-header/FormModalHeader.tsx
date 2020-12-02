@@ -36,6 +36,7 @@ const ModalName = styled.p`
   font-size: 1.3em;
   margin-top: 0%;
   margin-bottom: 0%;
+  margin-left: 10px;
 `;
 
 const RedButton = styled.p`
