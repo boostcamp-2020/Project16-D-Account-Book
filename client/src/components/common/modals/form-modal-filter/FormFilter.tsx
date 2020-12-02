@@ -65,7 +65,12 @@ const FormModalFilter: React.FC<IFormModalFilter> = ({ inputs, changes }: IFormM
     <ItemWrapper>
       <InputWrapper>
         <InputLabel>기간</InputLabel>
-        <SingleInputDropdown placeholder={'기간'} items={inputs.dateRange.items} onChange={changes?.dateRage} />
+        <SingleInputDropdown
+          placeholder={'기간'}
+          items={inputs.dateRange.items}
+          onChange={changes?.dateRage}
+          defaultSelectValue={'전체'}
+        />
         <DateRange>
           <p>{inputs.startDate}</p>
           <p>{inputs.endDate}</p>

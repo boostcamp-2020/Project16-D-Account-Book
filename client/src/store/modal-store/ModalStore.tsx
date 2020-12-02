@@ -4,11 +4,10 @@ import { observable, action, makeObservable } from 'mobx';
 
 export default class ModalStore {
   rootStore;
-  FormFilterStore;
+  formFilterStore;
 
   constructor(rootStore: RootStore) {
-    makeObservable(this);
-    this.FormFilterStore = new FormFilterStore(rootStore);
+    this.formFilterStore = new FormFilterStore(rootStore);
     this.rootStore = rootStore;
   }
 }
