@@ -15,7 +15,7 @@ const DivWrapper = styled.div`
 const AddAccountbookCard: React.FC = () => {
   return (
     <DivWrapper>
-      <PlusInCircle />
+      <PlusInCircle sideLength={'2rem'} />
     </DivWrapper>
   );
 };
