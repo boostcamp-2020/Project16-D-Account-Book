@@ -10,7 +10,8 @@
         "@config": "./src/config",
         "@loaders": "./src/loaders",
         "@models": "./src/models",
-        "@services": "./src/services"
+        "@services": "./src/services",
+        "@utils": "./src/utils"
       }
     }]
   ]

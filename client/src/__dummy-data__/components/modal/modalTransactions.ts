@@ -1,7 +1,8 @@
 import dummyOptions from '../inputs/dummyOptions';
+import { ITransactionForm, ITransactionFormChange } from '../../../types/TransactionForm';
 export const inputs = {
-  price: 1000,
   classify: true,
+  price: 1000,
   categories: {
     placeholder: '카테고리',
     items: dummyOptions,
@@ -10,10 +11,24 @@ export const inputs = {
     placeholder: '결제수단',
     items: dummyOptions,
   },
-  date: '',
+  date: '2020-12-01T05:33:50',
+  content: '콘텐츠입니다.',
+  memo: '메모입니다.',
 };
 
-export const changes = {
+export const createDummyTransactionFormReducerState = (): ITransactionForm => {
+  return {
+    classify: true,
+    price: 1000,
+    categories: '',
+    accounts: '',
+    date: '2020-12-01T05:33:50',
+    content: '콘텐츠입니다.',
+    memo: '메모입니다.',
+  };
+};
+
+export const changes: ITransactionFormChange = {
   price: (e: React.ChangeEvent<HTMLInputElement>): void => {
     console.log(e.target.value);
   },

@@ -5,9 +5,11 @@ interface Props {
   items: Options[];
   placeholder: string;
   onChange?: (target: string) => void;
+  defaultSelectValue?: string;
 }
-const SingleInputDropDown: React.FC<Props> = ({ items, placeholder, onChange }: Props) => {
-  const [select, setSelect] = useState<string>();
+
+const SingleInputDropDown: React.FC<Props> = ({ items, placeholder, onChange, defaultSelectValue }: Props) => {
+  const [select, setSelect] = useState<string | undefined>(defaultSelectValue);
 
   const findSelectedItem = items.find((item) => item.value === select);
   const displayHeader = findSelectedItem ? findSelectedItem.label : placeholder;

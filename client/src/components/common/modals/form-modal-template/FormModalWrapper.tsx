@@ -8,8 +8,12 @@ interface IFormModal {
 
 const FormModalWrapper = styled.div`
   background-color: ${MODAL_WHITE};
-  width: 80%;
+  width: 60%;
   padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const FormModal: React.FC<IFormModal> = ({ children }: IFormModal) => {
