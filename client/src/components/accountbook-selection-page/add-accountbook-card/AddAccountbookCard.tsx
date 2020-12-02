@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { GRAY } from '../../../constants/color';
-import PlusInCircle from '../plus-in-circle/PlusInCircle';
+import PlusInCircle from '../../common/plus-in-circle/PlusInCircle';
 
 const DivWrapper = styled.div`
   width: 100%;
