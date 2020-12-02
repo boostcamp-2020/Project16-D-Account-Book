@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     'accountbook',
     {
       title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(15),
         allowNull: false,
       },
       gmt: {
