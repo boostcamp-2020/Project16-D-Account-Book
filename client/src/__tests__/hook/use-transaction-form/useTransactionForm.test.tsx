@@ -2,7 +2,7 @@ import React from 'react';
 import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions';
 import { ITransactionForm, FormActionType } from '../../../types/TransactionForm';
 import { createDummyTransactionFormReducerState } from '../../../__dummy-data__/components/modal/modalTransactions';
-import { formReducer } from '../../../hook/use-transaction-form/UseTransactionForm';
+import { formReducer } from '../../../hook/use-transaction-form/useTransactionForm';
 describe('TransactionFormReducer 테스트', () => {
   let reducerState: ITransactionForm;
   beforeEach(() => {

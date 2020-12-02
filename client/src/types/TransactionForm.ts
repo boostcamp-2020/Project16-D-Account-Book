@@ -1,13 +1,13 @@
 import { Options } from './options';
 
 export interface ITransactionForm {
-  classify?: boolean | undefined;
-  price?: number | undefined | string;
-  categories?: string | undefined;
-  accounts?: string | undefined;
-  content?: string | undefined;
-  date?: string | undefined;
-  memo?: string | undefined;
+  classify: boolean;
+  price: number | string;
+  categories: string | undefined; 
+  accounts: string | undefined;
+  content: string;
+  date: string;
+  memo: string;
 }
 
 export interface ITransactionFormChange {
