@@ -50,13 +50,13 @@ const SettingsCategoriesPage = (): JSX.Element => {
 
   const ExpenditureCategoryItems = expenditureCategories.map((item) => (
     <CategoryItemWrapper key={item.id}>
-      <Category key={item.id} text={item.name} bgColor={item.color} />
+      <Category key={item.id} text={item.name} bgColor={item.color} shadow={true} />
     </CategoryItemWrapper>
   ));
 
   const IncomeCategoryItems = incomeCategories.map((item) => (
     <CategoryItemWrapper key={item.id}>
-      <Category key={item.id} text={item.name} bgColor={item.color} />
+      <Category key={item.id} text={item.name} bgColor={item.color} shadow={true} />
     </CategoryItemWrapper>
   ));
 

@@ -14,6 +14,10 @@ const CategoryWrapper = styled.div`
   cursor: pointer;
   display: flex;
   justify-content: center;
+
+  &:hover {
+    box-shadow: 2px 3px 7px gray;
+  }
 `;
 
 const PlusInCircleWrapper = styled.div`
