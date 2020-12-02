@@ -1,6 +1,8 @@
+import { action } from 'mobx';
 import React, { createContext } from 'react';
 import DateStore from './DateStore';
 import TransactionStore from './TransactionStore';
+import { observable } from 'mobx';
 
 export default class RootStore {
   dateStore;

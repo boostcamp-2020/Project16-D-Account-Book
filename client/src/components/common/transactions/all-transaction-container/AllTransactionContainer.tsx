@@ -1,13 +1,18 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import DayTransactionContainer from '../day-transaction-container/DayTransactionContainer';
 import Income, { isIncome } from '../../../../types/income';
 import Expenditure from '../../../../types/expenditure';
+import NotFoundTransaction from '../../not-found-transaction/NotFoundTransaction';
+import { useObserver } from 'mobx-react';
+import Spinner from '../../spinner/Spinner';
+import useStore from '../../../../hook/use-store/useStore';
 
 interface Props {
   transactions: Array<Income | Expenditure>;
 }
 
 const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
+  const { transactionStore } = useStore().rootStore;
   transactions.sort((transaction1, transaction2) => {
     return new Date(transaction2.date).getTime() - new Date(transaction1.date).getTime();
   });
@@ -35,6 +40,9 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
     beforeMonth = currentMonth;
     beforeDay = currentDay;
   });
+
+  if (transactionStore.isLoading) return <Spinner />;
+  if (transactions.length == 0) return <NotFoundTransaction />;
 
   return (
     <>
