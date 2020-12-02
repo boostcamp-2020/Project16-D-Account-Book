@@ -51,6 +51,7 @@ const getOptionText = (account: string, incomeCategory: string, expenditureCateg
 const FilterOption: React.FC<Props> = ({ query, accountbookId }: Props) => {
   const { startDate, endDate, account, incomeCategory, expenditureCategory } = query;
   const history = useHistory();
+
   const onClickCancel = () => {
     history.push(`/accountbooks/${accountbookId}`);
   };
