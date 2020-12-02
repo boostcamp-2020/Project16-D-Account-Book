@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import DayTransactionContainer from '../day-transaction-container/DayTransactionContainer';
 import Income, { isIncome } from '../../../../types/income';
 import Expenditure from '../../../../types/expenditure';
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
-  const { rootStore } = useStore();
+  const { transactionStore } = useStore().rootStore;
   transactions.sort((transaction1, transaction2) => {
     return new Date(transaction2.date).getTime() - new Date(transaction1.date).getTime();
   });
@@ -41,7 +41,7 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
     beforeDay = currentDay;
   });
 
-  if (rootStore.loading) return <Spinner />;
+  if (transactionStore.loading) return <Spinner />;
   if (transactions.length == 0) return <NotFoundTransaction />;
 
   return (

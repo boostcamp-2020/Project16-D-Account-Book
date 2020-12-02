@@ -5,18 +5,12 @@ import TransactionStore from './TransactionStore';
 import { observable } from 'mobx';
 
 export default class RootStore {
-  @observable loading = true;
   dateStore;
   transactionStore;
 
   constructor() {
     this.dateStore = new DateStore(this);
     this.transactionStore = new TransactionStore(this);
-  }
-
-  @action
-  setLoading(status: boolean): void {
-    this.loading = status;
   }
 }
 
