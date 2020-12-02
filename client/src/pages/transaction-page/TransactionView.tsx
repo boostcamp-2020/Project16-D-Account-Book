@@ -11,6 +11,7 @@ import useStore from '../../hook/use-store/useStore';
 import { useObserver } from 'mobx-react';
 import { isIncome } from '../../types/income';
 import { ParsedQuery } from 'query-string';
+import FilterOption from '../../components/transaction-page/filter-option/FilterOption';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -52,7 +53,6 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
       return;
     }
-
     const { start_date, end_date, account, income_category, expenditure_category } = query;
     transactionStore.filterTransactions(accountbookId, {
       startDate: start_date,
@@ -82,7 +82,19 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       </HeaderNavigationWrapper>
       <ViewWrapper>
         <TransactionHeaderWrapper>
-          <ChangeDateContainer />
+          {query ? (
+            <FilterOption
+              query={{
+                startDate: query.start_date,
+                endDate: query.end_date,
+                account: query.account,
+                incomeCategory: query.income_category,
+                expenditureCategory: query.expenditure_category,
+              }}
+            />
+          ) : (
+            <ChangeDateContainer />
+          )}
           <AmountWrapper>
             <Amount text={'수입'} amount={totalIncome} />
           </AmountWrapper>
