@@ -13,13 +13,13 @@ const Wrapper = styled.div`
 `;
 
 export const Default: React.FC = () => {
-  return <ChangeDateContainer />;
+  return <ChangeDateContainer accountbookId={1} />;
 };
 
 export const ApplyWrapper: React.FC = () => {
   return (
     <Wrapper>
-      <ChangeDateContainer />
+      <ChangeDateContainer accountbookId={1} />
     </Wrapper>
   );
 };
