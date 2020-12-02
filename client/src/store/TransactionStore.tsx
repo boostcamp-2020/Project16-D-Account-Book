@@ -15,7 +15,7 @@ interface Query {
 
 export default class TransactionStore {
   @observable transactions: Array<Income | Expenditure> = [];
-  @observable filterMode = false;
+  @observable isFilterMode = false;
   @observable isLoading = true;
   rootStore;
 
@@ -41,7 +41,7 @@ export default class TransactionStore {
     await this.findTransactions(accountbookId, new Date(startDate as string), new Date(endDate as string));
     runInAction(() => {
       this.transactions = filtering(this.transactions, { account, incomeCategory, expenditureCategory });
-      this.filterMode = true;
+      this.isFilterMode = true;
       this.isLoading = false;
     });
   }

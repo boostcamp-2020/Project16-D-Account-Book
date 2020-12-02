@@ -57,7 +57,7 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
     <Container>
       <DayTransactionHeader totalAmount={totalAmount}>
         <div className="header-item">
-          {transactionStore.filterMode && `${month}월`}&nbsp;
+          {transactionStore.isFilterMode && `${month}월`}&nbsp;
           {date}일 {day}
         </div>
         <div className="header-item"></div>
