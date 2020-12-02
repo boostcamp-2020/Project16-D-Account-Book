@@ -6,7 +6,7 @@ import TransactionInputList from './form-modal-transaction/TransactionInputList'
 import FormFilter from './form-modal-filter/FormFilter';
 import { inputs, changes } from '../../../__dummy-data__/components/modal/modalTransactions';
 import { inputs as filterInputs, changes as filterChanges } from '../../../__dummy-data__/components/modal/modalFilter';
-import FormModalTransaction from './form-modal-transaction/FormModalTransaction';
+import FormModalTransaction from './form-modal-transaction/FormModalCreateTransaction';
 
 export default {
   title: 'Modal Example',
