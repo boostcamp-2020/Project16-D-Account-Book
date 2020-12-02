@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CancelButton from './CancelButton';
 import Query from '../../../types/query';
 import { getFormattedDate } from '../../../utils/date';
+import { useHistory } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,6 +25,7 @@ const Option = styled.div`
 
 interface Props {
   query: Query;
+  accountbookId: number;
 }
 
 const getDateText = (startDate: string, endDate: string): string => {
@@ -46,8 +48,13 @@ const getOptionText = (account: string, incomeCategory: string, expenditureCateg
   return text.substring(0, text.length - 2);
 };
 
-const FilterOption: React.FC<Props> = ({ query }: Props) => {
+const FilterOption: React.FC<Props> = ({ query, accountbookId }: Props) => {
   const { startDate, endDate, account, incomeCategory, expenditureCategory } = query;
+  const history = useHistory();
+  const onClickCancel = () => {
+    history.push('/accountbooks/1');
+  };
+
   return (
     <Wrapper>
       <h3>{getDateText(startDate as string, endDate as string)}</h3>
@@ -56,7 +63,7 @@ const FilterOption: React.FC<Props> = ({ query }: Props) => {
           {getOptionText(account as string, incomeCategory as string, expenditureCategory as string)}
         </div>
         <div className="btn">
-          <CancelButton />
+          <CancelButton onClick={onClickCancel} />
         </div>
       </Option>
     </Wrapper>

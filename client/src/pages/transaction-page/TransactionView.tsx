@@ -25,7 +25,7 @@ const HeaderNavigationWrapper = styled.div`
 `;
 
 const TransactionHeaderWrapper = styled.div`
-  width: 220px;
+  width: 230px;
   margin: 0 auto;
   margin-top: 2%;
   margin-bottom: 2.5rem;
@@ -91,6 +91,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
                 incomeCategory: query.income_category,
                 expenditureCategory: query.expenditure_category,
               }}
+              accountbookId={accountbookId}
             />
           ) : (
             <ChangeDateContainer />

@@ -19,13 +19,13 @@ const query = {
 };
 
 export const Default = (): JSX.Element => {
-  return <FilterOption query={query} />;
+  return <FilterOption query={query} accountbookId={1} />;
 };
 
 export const ApplyWrapper = (): JSX.Element => {
   return (
     <Wrapper>
-      <FilterOption query={query} />
+      <FilterOption query={query} accountbookId={1} />
     </Wrapper>
   );
 };
