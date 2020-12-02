@@ -8,7 +8,7 @@ module.exports = async (ctx, next) => {
       throw new Error('jwt토큰 없음');
     }
     const decodedToken = decodeToken(token);
-    if (Date.now() / 1000 - decodedToken.iat > 60 * 60 * 24) {
+    if (Date.now() / 1000 - decodedToken.iat > 60 * 60 * 2) {
       const newToken = generateToken(decodedToken);
       ctx.cookies.set('jwt', newToken, {
         httpOnly: true,
