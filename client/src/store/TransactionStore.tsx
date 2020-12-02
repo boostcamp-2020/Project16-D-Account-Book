@@ -4,14 +4,7 @@ import Expenditure from '../types/expenditure';
 import { getTransactions } from '../services/transaction';
 import RootStore from './RootStore';
 import { filtering } from '../utils/filter';
-
-interface Query {
-  startDate: string | string[] | null;
-  endDate: string | string[] | null;
-  incomeCategory: string | string[] | null;
-  expenditureCategory: string | string[] | null;
-  account: string | string[] | null;
-}
+import Query from '../types/query';
 
 export default class TransactionStore {
   @observable transactions: Array<Income | Expenditure> = [];
