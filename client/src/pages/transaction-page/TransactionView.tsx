@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../../components/common/sidebar/Sidebar';
 import HeaderNavigation from '../../components/common/header-navigation/HeaderNavigation';
@@ -10,6 +10,7 @@ import MenuNavigation from '../../components/common/menu-navigation/MenuNavigati
 import useStore from '../../hook/use-store/useStore';
 import { useObserver } from 'mobx-react';
 import { isIncome } from '../../types/income';
+import { ParsedQuery } from 'query-string';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -39,13 +40,27 @@ const AmountWrapper = styled.div`
 
 interface Props {
   accountbookId: number;
+  query: ParsedQuery<string> | null;
 }
 
-const TransactionView: React.FC<Props> = ({ accountbookId }: Props) => {
-  const { dateStore, transactionStore } = useStore().rootStore;
+const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
+  const { rootStore } = useStore();
+  const { dateStore, transactionStore } = rootStore;
 
   useEffect(() => {
-    transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
+    if (!query) {
+      transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
+      return;
+    }
+
+    const { start_date, end_date, account, income_category, expenditure_category } = query;
+    transactionStore.filterTransactions(accountbookId, {
+      startDate: start_date,
+      endDate: end_date,
+      account: account,
+      incomeCategory: income_category,
+      expenditureCategory: expenditure_category,
+    });
   }, []);
 
   let totalIncome = 0;

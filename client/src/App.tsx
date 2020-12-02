@@ -13,7 +13,7 @@ function App(): JSX.Element {
           <GlobalFonts />
           <Switch>
             <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/accountbooks/:id/transactions" component={TransactionPage} />
+            <Route exact path="/accountbooks/:id" component={TransactionPage} />
           </Switch>
         </Router>
       </RootProvider>

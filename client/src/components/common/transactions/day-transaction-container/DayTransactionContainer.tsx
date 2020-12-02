@@ -5,6 +5,7 @@ import Expenditure from '../../../../types/expenditure';
 import { numberWithCommas } from '../../../../utils/number';
 import { RED, BLUE, GRAY } from '../../../../constants/color';
 import TransactionItem from '../transaction-item/TransactionItem';
+import useStore from '../../../../hook/use-store/useStore';
 
 const Container = styled.div`
   display: flex;
@@ -44,6 +45,8 @@ interface Props {
 const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 
 const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
+  const { transactionStore } = useStore().rootStore;
+  const month = new Date(transactions[0].date).getMonth() + 1;
   const date = new Date(transactions[0].date).getDate();
   const day = days[new Date(transactions[0].date).getDay()];
   const totalAmount = transactions.reduce((sum, transaction) => {
@@ -54,6 +57,7 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
     <Container>
       <DayTransactionHeader totalAmount={totalAmount}>
         <div className="header-item">
+          {transactionStore.isFilterMode && `${month}월`}&nbsp;
           {date}일 {day}
         </div>
         <div className="header-item"></div>
