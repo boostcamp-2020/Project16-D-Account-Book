@@ -74,7 +74,7 @@ const SettingsAccountbookPage = (): JSX.Element => {
         <SettingsItemWrapper>
           <Label>가계부 별칭</Label>
           <InputText
-            height={'5vh'}
+            maxLength={15}
             placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
             value={title}
             onChange={onChangeTitle}
@@ -83,7 +83,7 @@ const SettingsAccountbookPage = (): JSX.Element => {
         <SettingsItemWrapper>
           <Label>가계부 설명</Label>
           <InputText
-            height={'5vh'}
+            maxLength={30}
             placeholder={'가계부에 대한 설명을 기재해주세요.'}
             value={description}
             onChange={onChangeDescription}
