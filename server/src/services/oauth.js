@@ -42,7 +42,7 @@ const getUserInfo = async (code, state, config) => {
       provider: config.provider,
       email: data.kakao_account.email,
       nickname: data.kakao_account.email.match(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@/g)[0].replace('@', ''),
-      profileUrl: data.properties.profile_image,
+      profileUrl: data.properties.profile_image ? data.properties.profile_image : 'https://i.imgur.com/0kGli9o.jpg',
     };
   }
   return userInfo;
