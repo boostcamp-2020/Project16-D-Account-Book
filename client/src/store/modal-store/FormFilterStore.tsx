@@ -50,7 +50,7 @@ export default class FormFilterStore {
   @action
   onChangeDate = (period: string): void => {
     const startDate = new Date();
-    const endDate = new Date();
+    const endDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24);
 
     switch (period) {
       case datePeriod.ALL:
