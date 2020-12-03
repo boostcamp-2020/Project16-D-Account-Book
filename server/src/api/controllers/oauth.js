@@ -34,7 +34,7 @@ const login = async (ctx) => {
     const config = getConfig(provider);
     const oauthUser = await oauthService.getUserInfo(code, state, config);
     const ourServiceUser = await oauthService.findOrCreateUser(oauthUser);
-    const jwtToken = generateToken(ourServiceUser.toJSON());
+    const jwtToken = await generateToken(ourServiceUser.toJSON());
     ctx.cookies.set('jwt', jwtToken, {
       httpOnly: true,
       maxAge: jwtConfig.cookieExpiresIn,
