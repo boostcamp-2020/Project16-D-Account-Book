@@ -8,7 +8,7 @@ module.exports = {
       '테스트용 accountbook',
       '테스트용 accountbook',
     ];
-    const color = ['dodgerblue', 'dodgerblue', 'dodgerblue', 'dodgerblue'];
+    const color = ['1E90FF', '1E90FF', '1E90FF', '1E90FF'];
     // eslint-disable-next-line camelcase
     const accountbook_id = [1, 1, 1, 1];
     // eslint-disable-next-line camelcase
