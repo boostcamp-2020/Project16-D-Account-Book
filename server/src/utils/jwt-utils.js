@@ -20,21 +20,23 @@ const generateToken = async (user) => {
 
 const decodeToken = async (token) => {
   const decodedToken = jwt.verify(token, jwtConfig.jwtSecretKey, (err, decoded) => {
-    // jwt secret이 잘못되었다면
     if (err) {
       throw new Error('jwt secret이 잘못되었음');
     }
     return decoded;
   });
-  const user = await db.user.findByPk(decodedToken.userId);
-  // 유저가 존재하지 않는다면
+  let user = await db.user.findOne({
+    where: { id: decodedToken.userId },
+    attributes: ['id', 'provider', 'nickname', 'profileUrl', 'token'],
+  });
   if (!user) {
     throw new Error('decoded payload에 기재된 유저가 없음');
   }
-  // 유저가 존재하지만 토큰값이 일치하지 않는다면
   if (user.token !== token) {
     throw new Error('decoded payload에 기재된 유저는 있지만, 서버에서 발행해준 jwt값과 일치하지 않음');
   }
+  user = user.toJSON();
+  delete user.token;
   return [user, decodedToken];
 };
 
