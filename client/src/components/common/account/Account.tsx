@@ -3,10 +3,8 @@ import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
 
 const AccountWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean }>`
-  width: 100%;
-  max-width: 300px;
-  height: 100%;
-  max-height: 190px;
+  width: 17vw;
+  height: 10vw;
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};
   box-sizing: border-box;
