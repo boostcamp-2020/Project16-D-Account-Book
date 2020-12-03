@@ -3,7 +3,7 @@ import { Options } from './options';
 export interface ITransactionForm {
   classify: boolean;
   price: number | string;
-  categories: string | undefined; 
+  categories: string | undefined;
   accounts: string | undefined;
   content: string;
   date: string;
