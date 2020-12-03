@@ -23,6 +23,7 @@ export default class TransactionStore {
     runInAction(() => {
       this.transactions = transactions;
       this.isLoading = false;
+      this.isFilterMode = false;
     });
   }
 
