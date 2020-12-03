@@ -101,7 +101,6 @@ export default class FormFilterStore {
 
   @computed
   get getQuery(): string {
-    console.log(this.endDate.date);
     const startDateQuery = `start_date=${getFormattedDate({ date: this.startDate.date, format: '.' })}`;
     const endDateQuery = `end_date=${getFormattedDate({ date: this.endDate.date, format: '.' })}`;
     const accountQuery = `account=${this.selectedAccounts.join('+')}`;
