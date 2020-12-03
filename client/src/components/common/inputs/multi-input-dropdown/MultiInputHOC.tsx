@@ -3,11 +3,13 @@ import { Options } from '../select/Select';
 import InputDropDown from '../input-drop-down/InputDropDown';
 import { setImmutable } from '../../../../utils/immutable/setImmutable';
 import useMultiDropDown from '../../../../hook/use-drop-down/useMultiDropDown';
+import { useObserver } from 'mobx-react';
 
 interface Props {
   placeholder: string;
   items: Options[];
   onChange?: (selected: string[]) => void;
+  defaultValue?: string[];
 }
 
 interface createPlaceHolder {
@@ -15,12 +17,11 @@ interface createPlaceHolder {
 }
 
 export default function MultiInputDropDownHOC(createPlaceName: createPlaceHolder): React.FC<Props> {
-  const MultiInputDropDown: React.FC<Props> = ({ placeholder, items, onChange }: Props) => {
-    const [selected, setSelected, selectChange] = useMultiDropDown(onChange);
+  const MultiInputDropDown: React.FC<Props> = ({ placeholder, items, onChange, defaultValue }: Props) => {
+    const [selected, setSelected, selectChange] = useMultiDropDown(onChange, defaultValue);
 
     useEffect(() => {
-      const checkedItems = items.filter((item) => item.checked);
-      setSelected(new Set(checkedItems.map((item) => item.value)));
+      setSelected(new Set(defaultValue));
     }, [items]);
 
     const displayHeader = selected.size === 0 ? placeholder : createPlaceName(selected, items);

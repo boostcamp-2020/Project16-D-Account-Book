@@ -64,7 +64,7 @@ const DateRange = styled.div`
 
 const FormModalFilter: React.FC<IFormModalFilter> = ({ inputs, changes }: IFormModalFilter) => {
   const { formFilterStore } = useStore().rootStore.modalStore;
-  console.log('hi');
+
   return useObserver(() => (
     <ItemWrapper>
       <InputWrapper>
@@ -86,6 +86,7 @@ const FormModalFilter: React.FC<IFormModalFilter> = ({ inputs, changes }: IFormM
           placeholder={'결제수단'}
           items={formFilterStore.accountOptions}
           onChange={formFilterStore.onChangeAcoount}
+          defaultValue={formFilterStore.selectedAccounts}
         />
       </InputWrapper>
       <InputWrapper>
@@ -95,12 +96,14 @@ const FormModalFilter: React.FC<IFormModalFilter> = ({ inputs, changes }: IFormM
           checkBoxName={'지출'}
           items={formFilterStore.expenditureCategoryOptions}
           onChange={formFilterStore.onChangeExpenditureCategory}
+          defaultValue={formFilterStore.selectedExpenditureCategories}
         />
         <MultiInputDropdownWithCheckBox
           placeholder={'수입'}
           checkBoxName={'수입'}
           items={formFilterStore.incomeCategoryOptions}
           onChange={formFilterStore.onChangeIncomeCategory}
+          defaultValue={formFilterStore.selectedIncomeCategories}
         />
       </InputWrapper>
     </ItemWrapper>

@@ -17,11 +17,11 @@ export default class FormFilterStore {
   @observable startDate = { text: '', date: new Date(0) };
   @observable endDate = { text: '', date: new Date() };
   @observable accountOptions = accountOptions;
-  @observable selectedAccounts: string[] = [];
+  @observable selectedAccounts: string[] = accountOptions.map((option) => option.value);
   @observable incomeCategoryOptions = incomeCategoryOptions;
-  @observable selectedIncomeCategories: string[] = [];
+  @observable selectedIncomeCategories: string[] = incomeCategoryOptions.map((option) => option.value);
   @observable expenditureCategoryOptions = expenditureCategoryOptions;
-  @observable selectedExpenditureCategories: string[] = [];
+  @observable selectedExpenditureCategories: string[] = expenditureCategoryOptions.map((option) => option.value);
 
   constructor(rootStore: RootStore) {
     makeObservable(this);
@@ -35,11 +35,11 @@ export default class FormFilterStore {
     this.startDate = { text: '', date: new Date(0) };
     this.endDate = { text: '', date: new Date() };
     this.accountOptions = accountOptions;
-    this.selectedAccounts = [];
+    this.selectedAccounts = accountOptions.map((option) => option.value);
     this.incomeCategoryOptions = incomeCategoryOptions;
-    this.selectedIncomeCategories = [];
+    this.selectedIncomeCategories = incomeCategoryOptions.map((option) => option.value);
     this.expenditureCategoryOptions = expenditureCategoryOptions;
-    this.selectedExpenditureCategories = [];
+    this.selectedExpenditureCategories = expenditureCategoryOptions.map((option) => option.value);
   };
 
   @action

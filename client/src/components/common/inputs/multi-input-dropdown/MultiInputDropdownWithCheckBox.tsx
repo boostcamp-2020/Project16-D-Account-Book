@@ -9,6 +9,7 @@ interface Props {
   items: Options[];
   checkBoxName: string;
   onChange?: (selected: string[]) => void;
+  defaultValue?: string[];
 }
 
 const ComponentWrapper = styled.div`
@@ -42,15 +43,20 @@ const CheckBox = styled.input.attrs(() => ({
 
 const Label = styled.label``;
 
-const MultiInputDropdownWithCheckBox: React.FC<Props> = ({ placeholder, items, checkBoxName, onChange }: Props) => {
-  const [selected, setSelected, selectChange] = useMultiDropDown(onChange);
+const MultiInputDropdownWithCheckBox: React.FC<Props> = ({
+  placeholder,
+  items,
+  checkBoxName,
+  onChange,
+  defaultValue,
+}: Props) => {
+  const [selected, setSelected, selectChange] = useMultiDropDown(onChange, defaultValue);
   const [checkBoxClicked, setCheckBoxClicked] = useState<boolean>(false);
   const displayHeader = selected.size === 0 ? placeholder : joinWithComma(selected, items);
   const selectedValue = Array.from(selected);
 
   useEffect(() => {
-    const checkedItems = items.filter((item) => item.checked);
-    setSelected(new Set(checkedItems.map((item) => item.value)));
+    setSelected(new Set(defaultValue));
   }, [items]);
 
   useEffect(() => {

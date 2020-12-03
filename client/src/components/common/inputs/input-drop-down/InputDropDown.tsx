@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import Select, { Options } from '../select/Select';
 import { createRenderData } from '../../../../hook/use-drop-down';
 import useClickOutSide from '../../../../hook/use-click-outside/useClickOutside';
+import { useObserver } from 'mobx-react';
+
 interface InputDropDownProps {
   items: Options[];
   header: string;
@@ -38,7 +40,7 @@ const InputDropDown: React.FC<InputDropDownProps> = ({
 
   const checkedData = createRenderData(items, selectValue);
 
-  return (
+  return useObserver(() => (
     <Select
       options={checkedData}
       defaultValue={header}
@@ -47,7 +49,7 @@ const InputDropDown: React.FC<InputDropDownProps> = ({
       headerClick={clickHeader}
       targetRef={ref}
     />
-  );
+  ));
 };
 
 export default InputDropDown;
