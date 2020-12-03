@@ -1,11 +1,6 @@
 import Income from '../types/income';
 import Expenditure from '../types/expenditure';
-
-interface Query {
-  incomeCategory: string | string[] | null;
-  expenditureCategory: string | string[] | null;
-  account: string | string[] | null;
-}
+import Query from '../types/query';
 
 export const filtering = (
   transactions: Array<Income | Expenditure>,

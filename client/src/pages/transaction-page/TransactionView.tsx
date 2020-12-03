@@ -9,8 +9,12 @@ import { smallAccountbookItems } from '../../__dummy-data__/components/smallAcco
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
 import useStore from '../../hook/use-store/useStore';
 import { useObserver } from 'mobx-react';
-import { isIncome } from '../../types/income';
+import Income, { isIncome } from '../../types/income';
+import Expenditure from '../../types/expenditure';
 import { ParsedQuery } from 'query-string';
+import FilterOption from '../../components/transaction-page/filter-option/FilterOption';
+import { useHistory } from 'react-router-dom';
+import FormModalFilter from '../../components/common/modals/form-modal-filter/FormModalFilter';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -24,7 +28,7 @@ const HeaderNavigationWrapper = styled.div`
 `;
 
 const TransactionHeaderWrapper = styled.div`
-  width: 220px;
+  width: 230px;
   margin: 0 auto;
   margin-top: 2%;
   margin-bottom: 2.5rem;
@@ -43,9 +47,24 @@ interface Props {
   query: ParsedQuery<string> | null;
 }
 
+const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<number> => {
+  let totalIncome = 0;
+  let totalExpenditure = 0;
+  transactions.forEach((transaction) => {
+    if (isIncome(transaction)) {
+      totalIncome += transaction.amount;
+    } else {
+      totalExpenditure += transaction.amount;
+    }
+  });
+  return [totalIncome, totalExpenditure];
+};
+
 const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
   const { dateStore, transactionStore } = rootStore;
+  const history = useHistory();
+  const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
   useEffect(() => {
     if (!query) {
@@ -61,20 +80,11 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       incomeCategory: income_category,
       expenditureCategory: expenditure_category,
     });
-  }, []);
-
-  let totalIncome = 0;
-  let totalExpenditure = 0;
-  transactionStore.transactions.forEach((transaction) => {
-    if (isIncome(transaction)) {
-      totalIncome += transaction.amount;
-    } else {
-      totalExpenditure += transaction.amount;
-    }
-  });
+  }, [query]);
 
   return useObserver(() => (
     <>
+      <FormModalFilter />
       <Sidebar smallAccountbooks={smallAccountbookItems} />
       <MenuNavigation />
       <HeaderNavigationWrapper>
@@ -82,7 +92,29 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       </HeaderNavigationWrapper>
       <ViewWrapper>
         <TransactionHeaderWrapper>
-          <ChangeDateContainer />
+          <button
+            onClick={() =>
+              history.push(
+                `/accountbooks/1?start_date=2020.01.01&end_date=2021.01.01&income_category=%EA%B8%88%EC%9C%B5%EC%88%98%EC%9E%85&account=%EB%86%8D%ED%98%91`,
+              )
+            }
+          >
+            필터
+          </button>
+          {query ? (
+            <FilterOption
+              query={{
+                startDate: query.start_date,
+                endDate: query.end_date,
+                account: query.account,
+                incomeCategory: query.income_category,
+                expenditureCategory: query.expenditure_category,
+              }}
+              accountbookId={accountbookId}
+            />
+          ) : (
+            <ChangeDateContainer accountbookId={accountbookId} />
+          )}
           <AmountWrapper>
             <Amount text={'수입'} amount={totalIncome} />
           </AmountWrapper>

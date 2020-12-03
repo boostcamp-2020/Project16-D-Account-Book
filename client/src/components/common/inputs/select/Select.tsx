@@ -30,6 +30,7 @@ const SelectWrapper = styled.div<SelectWrapperProps>`
   border: 1px solid lightgray;
   position: relative;
   background-color: white;
+  cursor: pointer;
 `;
 
 const SelectTitle = styled.p`

@@ -46,16 +46,20 @@ const DateWrapper = styled.div`
   }
 `;
 
-const ChangeDateContainer: React.FC = () => {
+interface Props {
+  accountbookId: number;
+}
+
+const ChangeDateContainer: React.FC<Props> = ({ accountbookId }: Props) => {
   const { dateStore, transactionStore } = useStore().rootStore;
   const onClickNextButton = () => {
     dateStore.moveToNextMonth();
-    transactionStore.findTransactions(1, dateStore.startDate, dateStore.endDate);
+    transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
   };
 
   const onClickPreviousButton = () => {
     dateStore.moveToPreviousMonth();
-    transactionStore.findTransactions(1, dateStore.startDate, dateStore.endDate);
+    transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
   };
 
   return (

@@ -4,9 +4,11 @@ import AcoountbookDeleteByAdminModal from './accountbook-delete-by-admin/Account
 import FormModalHeader from './form-modal-header/FormModalHeader';
 import TransactionInputList from './form-modal-transaction/TransactionInputList';
 import FormFilter from './form-modal-filter/FormFilter';
+import FormModalFilter from './form-modal-filter/FormModalFilter';
 import { inputs, changes } from '../../../__dummy-data__/components/modal/modalTransactions';
 import { inputs as filterInputs, changes as filterChanges } from '../../../__dummy-data__/components/modal/modalFilter';
 import FormModalTransaction from './form-modal-transaction/FormModalCreateTransaction';
+import styled from 'styled-components';
 
 export default {
   title: 'Modal Example',
@@ -52,6 +54,17 @@ export const FormFilterDefault: React.FC = () => {
     <div style={{ backgroundColor: '#ECECEC' }}>
       <FormFilter inputs={filterInputs} changes={filterChanges} />
     </div>
+  );
+};
+
+const Div = styled.div`
+  height: 1000px;
+`;
+export const FormModalFilterDefault: React.FC = () => {
+  return (
+    <>
+      <FormModalFilter />
+    </>
   );
 };
 
