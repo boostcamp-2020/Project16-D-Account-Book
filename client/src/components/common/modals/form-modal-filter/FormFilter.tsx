@@ -64,7 +64,7 @@ const DateRange = styled.div`
 
 const FormModalFilter: React.FC<IFormModalFilter> = ({ inputs, changes }: IFormModalFilter) => {
   const { formFilterStore } = useStore().rootStore.modalStore;
-
+  console.log('hi');
   return useObserver(() => (
     <ItemWrapper>
       <InputWrapper>
@@ -73,7 +73,7 @@ const FormModalFilter: React.FC<IFormModalFilter> = ({ inputs, changes }: IFormM
           placeholder={'기간'}
           items={formFilterStore.dateOptions}
           onChange={formFilterStore.onChangeDate}
-          defaultSelectValue={formFilterStore.dateOptions[0].value}
+          defaultSelectValue={formFilterStore.selectedDate}
         />
         <DateRange>
           <p>{formFilterStore.startDate.text}</p>

@@ -51,7 +51,7 @@ const MultiInputDropdownWithCheckBox: React.FC<Props> = ({ placeholder, items, c
   useEffect(() => {
     const checkedItems = items.filter((item) => item.checked);
     setSelected(new Set(checkedItems.map((item) => item.value)));
-  }, []);
+  }, [items]);
 
   useEffect(() => {
     if (isSelectAll(items, selected)) {

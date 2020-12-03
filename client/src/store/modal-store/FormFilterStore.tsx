@@ -13,6 +13,7 @@ export default class FormFilterStore {
   rootStore;
   @observable show = false;
   @observable dateOptions = dateOptions;
+  @observable selectedDate = datePeriod.ALL;
   @observable startDate = { text: '', date: new Date(0) };
   @observable endDate = { text: '', date: new Date() };
   @observable accountOptions = accountOptions;
@@ -26,6 +27,20 @@ export default class FormFilterStore {
     makeObservable(this);
     this.rootStore = rootStore;
   }
+
+  @action
+  init = (): void => {
+    this.dateOptions = dateOptions;
+    this.selectedDate = datePeriod.ALL;
+    this.startDate = { text: '', date: new Date(0) };
+    this.endDate = { text: '', date: new Date() };
+    this.accountOptions = accountOptions;
+    this.selectedAccounts = [];
+    this.incomeCategoryOptions = incomeCategoryOptions;
+    this.selectedIncomeCategories = [];
+    this.expenditureCategoryOptions = expenditureCategoryOptions;
+    this.selectedExpenditureCategories = [];
+  };
 
   @action
   setShow = (show: boolean): void => {
@@ -65,6 +80,7 @@ export default class FormFilterStore {
     this.endDate.date = endDate;
     this.startDate.text = `시작일 ${startDate.getFullYear()}년 ${startDate.getMonth() + 1}월 ${startDate.getDate()}일`;
     this.endDate.text = `마지막일 ${endDate.getFullYear()}년 ${endDate.getMonth() + 1}월 ${endDate.getDate()}일`;
+    this.selectedDate = period;
   };
 
   @action

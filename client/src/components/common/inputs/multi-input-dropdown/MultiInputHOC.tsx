@@ -3,6 +3,7 @@ import { Options } from '../select/Select';
 import InputDropDown from '../input-drop-down/InputDropDown';
 import { setImmutable } from '../../../../utils/immutable/setImmutable';
 import useMultiDropDown from '../../../../hook/use-drop-down/useMultiDropDown';
+
 interface Props {
   placeholder: string;
   items: Options[];
@@ -20,7 +21,7 @@ export default function MultiInputDropDownHOC(createPlaceName: createPlaceHolder
     useEffect(() => {
       const checkedItems = items.filter((item) => item.checked);
       setSelected(new Set(checkedItems.map((item) => item.value)));
-    }, []);
+    }, [items]);
 
     const displayHeader = selected.size === 0 ? placeholder : createPlaceName(selected, items);
     const selectedValue = Array.from(selected);

@@ -32,6 +32,7 @@ const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Elem
               redName={'초기화'}
               blueName={'적용'}
               clickBlue={onClickApply}
+              clickRed={formFilterStore.init}
               closeModal={closeModal}
             />
             <FormFilter inputs={inputs} changes={changes} />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Options } from '../select/Select';
 import InputDropDown from '../input-drop-down/InputDropDown';
 
@@ -11,6 +11,10 @@ interface Props {
 
 const SingleInputDropDown: React.FC<Props> = ({ items, placeholder, onChange, defaultSelectValue }: Props) => {
   const [select, setSelect] = useState<string | undefined>(defaultSelectValue);
+
+  useEffect(() => {
+    setSelect(defaultSelectValue);
+  }, [defaultSelectValue]);
 
   const findSelectedItem = items.find((item) => item.value === select);
   const displayHeader = findSelectedItem ? findSelectedItem.label : placeholder;
