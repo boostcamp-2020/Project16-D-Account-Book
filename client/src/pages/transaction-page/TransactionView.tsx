@@ -95,7 +95,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
           <button
             onClick={() =>
               history.push(
-                `/accountbooks/1?start_date=2020.01.01&end_date=2021.01.01&income_category=%EA%B8%88%EC%9C%B5%EC%88%98%EC%9E%85&account=%EB%86%8D%ED%98%91`,
+                `/accountbooks/1?start_date=2020.01.01&end_date=2021.01.01&income_category=급여&account=국민카드`,
               )
             }
           >
