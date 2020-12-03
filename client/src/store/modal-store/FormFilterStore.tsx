@@ -1,7 +1,13 @@
-import { observable, action, makeObservable } from 'mobx';
+import { observable, action, makeObservable, computed } from 'mobx';
 import RootStore from '../RootStore';
-import { dateOptions, accountOptions, incomeCategoryOptions } from '../../__dummy-data__/store/formFilterStore';
+import {
+  dateOptions,
+  accountOptions,
+  incomeCategoryOptions,
+  expenditureCategoryOptions,
+} from '../../__dummy-data__/store/formFilterStore';
 import datePeriod from '../../constants/datePeriod';
+import { getFormattedDate } from '../../utils/date';
 
 export default class FormFilterStore {
   rootStore;
@@ -13,6 +19,8 @@ export default class FormFilterStore {
   @observable selectedAccounts: string[] = [];
   @observable incomeCategoryOptions = incomeCategoryOptions;
   @observable selectedIncomeCategories: string[] = [];
+  @observable expenditureCategoryOptions = expenditureCategoryOptions;
+  @observable selectedExpenditureCategories: string[] = [];
 
   constructor(rootStore: RootStore) {
     makeObservable(this);
@@ -37,19 +45,19 @@ export default class FormFilterStore {
         this.endDate.text = '';
         return;
       case datePeriod.LAST_ONE_WEEK:
-        endDate.setDate(endDate.getDate() - 7);
+        startDate.setDate(endDate.getDate() - 7);
         break;
       case datePeriod.LAST_ONE_MONTH:
-        endDate.setMonth(endDate.getMonth() - 1);
+        startDate.setMonth(endDate.getMonth() - 1);
         break;
       case datePeriod.LAST_THREE_MONTH:
-        endDate.setMonth(endDate.getMonth() - 3);
+        startDate.setMonth(endDate.getMonth() - 3);
         break;
       case datePeriod.LAST_SIX_MONTH:
-        endDate.setMonth(endDate.getMonth() - 6);
+        startDate.setMonth(endDate.getMonth() - 6);
         break;
       case datePeriod.LAST_ONE_YEAR:
-        endDate.setFullYear(endDate.getFullYear() - 1);
+        startDate.setFullYear(endDate.getFullYear() - 1);
         break;
     }
 
@@ -60,12 +68,27 @@ export default class FormFilterStore {
   };
 
   @action
-  onChangeAcoount = (accounts: string[]): void => {
-    this.selectedAccounts = accounts;
+  onChangeAcoount = (selectedAccounts: string[]): void => {
+    this.selectedAccounts = selectedAccounts;
   };
 
   @action
-  onChangeIncomeCategory = (incomeCategories: string[]): void => {
-    this.selectedIncomeCategories = incomeCategories;
+  onChangeIncomeCategory = (selectedIncomeCategories: string[]): void => {
+    this.selectedIncomeCategories = selectedIncomeCategories;
   };
+
+  @action
+  onChangeExpenditureCategory = (selectedExpenditureCategories: string[]): void => {
+    this.selectedExpenditureCategories = selectedExpenditureCategories;
+  };
+
+  @computed
+  get getQuery(): string {
+    const startDateQuery = `start_date=${getFormattedDate({ date: this.startDate.date, format: '.' })}`;
+    const endDateQuery = `end_date=${getFormattedDate({ date: this.endDate.date, format: '.' })}`;
+    const accountQuery = `account=${this.selectedAccounts.join('+')}`;
+    const incomeCategoryQuery = `income_category=${this.selectedIncomeCategories.join('+')}`;
+    const expenditureCategoryQuery = `expenditure_category=${this.selectedExpenditureCategories.join('+')}`;
+    return `${startDateQuery}&${endDateQuery}&${accountQuery}&${incomeCategoryQuery}&${expenditureCategoryQuery}`;
+  }
 }

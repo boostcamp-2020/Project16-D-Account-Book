@@ -98,3 +98,46 @@ export const incomeCategoryOptions = [
     checked: true,
   },
 ];
+
+export const expenditureCategoryOptions = [
+  {
+    label: '식사',
+    value: '식사',
+    checked: true,
+  },
+  {
+    label: '생활',
+    value: '생활',
+    checked: true,
+  },
+  {
+    label: '경조사',
+    value: '경조사',
+    checked: true,
+  },
+  {
+    label: '교육',
+    value: '교육',
+    checked: true,
+  },
+  {
+    label: '주거/통신',
+    value: '주거/통신',
+    checked: true,
+  },
+  {
+    label: '술/유흥',
+    value: '술/유흥',
+    checked: true,
+  },
+  {
+    label: '문화/여가',
+    value: '문화/여가',
+    checked: true,
+  },
+  {
+    label: '교통',
+    value: '교통',
+    checked: true,
+  },
+];

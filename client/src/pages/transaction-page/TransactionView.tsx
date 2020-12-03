@@ -80,11 +80,11 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       incomeCategory: income_category,
       expenditureCategory: expenditure_category,
     });
-  }, [query]);
+  }, [query, accountbookId]);
 
   return useObserver(() => (
     <>
-      <FormModalFilter />
+      <FormModalFilter accountbookId={accountbookId} />
       <Sidebar smallAccountbooks={smallAccountbookItems} />
       <MenuNavigation />
       <HeaderNavigationWrapper>
