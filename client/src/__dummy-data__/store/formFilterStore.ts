@@ -37,3 +37,31 @@ export const dateOptions = [
     checked: false,
   },
 ];
+
+export const accountOptions = [
+  {
+    label: '삼성카드',
+    value: '삼성카드',
+    checked: true,
+  },
+  {
+    label: '국민카드',
+    value: '국민카드',
+    checked: true,
+  },
+  {
+    label: '농협카드',
+    value: '농협카드',
+    checked: true,
+  },
+  {
+    label: '우리카드',
+    value: '우리카드',
+    checked: true,
+  },
+  {
+    label: '신한카드',
+    value: '신한카드',
+    checked: true,
+  },
+];
