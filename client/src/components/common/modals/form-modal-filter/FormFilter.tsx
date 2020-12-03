@@ -99,8 +99,8 @@ const FormModalFilter: React.FC<IFormModalFilter> = ({ inputs, changes }: IFormM
         <MultiInputDropdownWithCheckBox
           placeholder={'수입'}
           checkBoxName={'수입'}
-          items={inputs.incomeCategories.items}
-          onChange={changes.expenditureCategories}
+          items={formFilterStore.incomeCategoryOptions}
+          onChange={formFilterStore.onChangeIncomeCategory}
         />
       </InputWrapper>
     </ItemWrapper>

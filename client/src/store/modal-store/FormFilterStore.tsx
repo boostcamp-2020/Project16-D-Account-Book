@@ -1,6 +1,6 @@
 import { observable, action, makeObservable } from 'mobx';
 import RootStore from '../RootStore';
-import { dateOptions, accountOptions } from '../../__dummy-data__/store/formFilterStore';
+import { dateOptions, accountOptions, incomeCategoryOptions } from '../../__dummy-data__/store/formFilterStore';
 import datePeriod from '../../constants/datePeriod';
 
 export default class FormFilterStore {
@@ -11,6 +11,8 @@ export default class FormFilterStore {
   @observable endDate = { text: '', date: new Date() };
   @observable accountOptions = accountOptions;
   @observable selectedAccounts: string[] = [];
+  @observable incomeCategoryOptions = incomeCategoryOptions;
+  @observable selectedIncomeCategories: string[] = [];
 
   constructor(rootStore: RootStore) {
     makeObservable(this);
@@ -60,5 +62,10 @@ export default class FormFilterStore {
   @action
   onChangeAcoount = (accounts: string[]): void => {
     this.selectedAccounts = accounts;
+  };
+
+  @action
+  onChangeIncomeCategory = (incomeCategories: string[]): void => {
+    this.selectedIncomeCategories = incomeCategories;
   };
 }

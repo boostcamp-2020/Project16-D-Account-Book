@@ -65,3 +65,36 @@ export const accountOptions = [
     checked: true,
   },
 ];
+
+export const incomeCategoryOptions = [
+  {
+    label: '타행이체',
+    value: '타행이체',
+    checked: true,
+  },
+  {
+    label: '중고판매',
+    value: '중고판매',
+    checked: true,
+  },
+  {
+    label: '급여',
+    value: '급여',
+    checked: true,
+  },
+  {
+    label: '용돈',
+    value: '용돈',
+    checked: true,
+  },
+  {
+    label: '사업수입',
+    value: '사업수입',
+    checked: true,
+  },
+  {
+    label: '금융수입',
+    value: '금융수윕',
+    checked: true,
+  },
+];
