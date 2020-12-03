@@ -16,7 +16,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
   timezone: '+09:00',
 });
 
-fs.readdirSync('./src/models')
+fs.readdirSync('./src/db/models')
   .filter((file) => {
     return file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js';
   })
