@@ -31,11 +31,6 @@ export const dateOptions = [
     value: datePeriod.LAST_ONE_YEAR,
     checked: false,
   },
-  {
-    label: datePeriod.USER_SETTING,
-    value: datePeriod.USER_SETTING,
-    checked: false,
-  },
 ];
 
 export const accountOptions = [
