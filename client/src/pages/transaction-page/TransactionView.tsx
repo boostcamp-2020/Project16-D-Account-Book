@@ -92,15 +92,6 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       </HeaderNavigationWrapper>
       <ViewWrapper>
         <TransactionHeaderWrapper>
-          <button
-            onClick={() =>
-              history.push(
-                `/accountbooks/1?start_date=2020.01.01&end_date=2021.01.01&income_category=급여&account=국민카드`,
-              )
-            }
-          >
-            필터
-          </button>
           {query ? (
             <FilterOption
               query={{
