@@ -27,7 +27,13 @@ const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Elem
       {formFilterStore.show ? (
         <ModalBackground show={true} closeModal={closeModal}>
           <FormModalWrapper>
-            <FormModalHeader modalName={'필터'} redName={'초기화'} blueName={'적용'} clickBlue={onClickApply} />
+            <FormModalHeader
+              modalName={'필터'}
+              redName={'초기화'}
+              blueName={'적용'}
+              clickBlue={onClickApply}
+              closeModal={closeModal}
+            />
             <FormFilter inputs={inputs} changes={changes} />
           </FormModalWrapper>
         </ModalBackground>
