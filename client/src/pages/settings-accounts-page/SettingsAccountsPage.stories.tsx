@@ -2,7 +2,7 @@ import React from 'react';
 import SettingsAccountsPage from './SettingsAccountsPage';
 
 export default {
-  title: 'settings-accounts-page/settings-accounts-page',
+  title: 'pages/settings-page/SettingsAccountsPage',
   component: SettingsAccountsPage,
 };
 

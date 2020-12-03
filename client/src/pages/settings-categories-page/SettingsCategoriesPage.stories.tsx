@@ -2,7 +2,7 @@ import React from 'react';
 import SettingsCategoriesPage from './SettingsCategoriesPage';
 
 export default {
-  title: 'settings-categories-page/settings-categories-page',
+  title: 'pages/settings-page/SettingsCategoriesPage',
   component: SettingsCategoriesPage,
 };
 
