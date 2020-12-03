@@ -16,6 +16,8 @@ const ComponentWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 15px;
+  cursor: pointer;
 `;
 
 const CheckBoxArea = styled.div`

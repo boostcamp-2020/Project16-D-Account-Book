@@ -4,6 +4,7 @@ import { Options } from '../../../../types/options';
 import SingleInputDropdown from '../../inputs/single-input-dropdown/SingleInputDropdown';
 import SelectPaymentMethod from '../../inputs/select-payment-method/SelectPaymentMethod';
 import MultiInputDropdownWithCheckBox from '../../inputs/multi-input-dropdown/MultiInputDropdownWithCheckBox';
+import { MODAL_WHITE } from '../../../../constants/color';
 
 interface IFormModalFilter {
   inputs: {
@@ -34,11 +35,13 @@ interface IFormModalFilter {
   };
 }
 
-const FormModalWrapper = styled.div`
+const ItemWrapper = styled.div`
+  background-color: ${MODAL_WHITE};
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
 `;
 
 const InputWrapper = styled.div`
@@ -59,10 +62,15 @@ const DateRange = styled.div`
 
 const FormModalFilter: React.FC<IFormModalFilter> = ({ inputs, changes }: IFormModalFilter) => {
   return (
-    <FormModalWrapper>
+    <ItemWrapper>
       <InputWrapper>
         <InputLabel>기간</InputLabel>
-        <SingleInputDropdown placeholder={'기간'} items={inputs.dateRange.items} onChange={changes?.dateRage} />
+        <SingleInputDropdown
+          placeholder={'기간'}
+          items={inputs.dateRange.items}
+          onChange={changes?.dateRage}
+          defaultSelectValue={'전체'}
+        />
         <DateRange>
           <p>{inputs.startDate}</p>
           <p>{inputs.endDate}</p>
@@ -87,7 +95,7 @@ const FormModalFilter: React.FC<IFormModalFilter> = ({ inputs, changes }: IFormM
           onChange={changes.expenditureCategories}
         />
       </InputWrapper>
-    </FormModalWrapper>
+    </ItemWrapper>
   );
 };
 

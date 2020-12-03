@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
 
-const CategoryWrapper = styled.div<{ bgColor: string; textColor: string }>`
+const CategoryWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean }>`
   width: 100%;
   max-width: 115px;
   height: 100%;
@@ -17,17 +17,23 @@ const CategoryWrapper = styled.div<{ bgColor: string; textColor: string }>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  &:hover {
+    box-shadow: ${({ shadow }) => (shadow === true ? '2px 3px 7px gray' : 0)};
+  }
 `;
 
 interface CategoryProps {
   text: string;
   bgColor: string;
+  shadow?: boolean;
+  onClick?: () => void;
 }
 
-const Category = ({ text, bgColor }: CategoryProps): JSX.Element => {
+const Category = ({ text, bgColor, shadow, onClick }: CategoryProps): JSX.Element => {
   const textColor = getTextColor(bgColor);
   return (
-    <CategoryWrapper bgColor={bgColor} textColor={textColor}>
+    <CategoryWrapper bgColor={bgColor} textColor={textColor} shadow={shadow} onClick={onClick}>
       {text}
     </CategoryWrapper>
   );

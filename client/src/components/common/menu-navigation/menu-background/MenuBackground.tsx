@@ -15,10 +15,11 @@ const Background = styled.div`
 
 interface Props {
   children?: JSX.Element;
+  onClick?: () => void;
 }
 
-const MenuBackground: React.FC<Props> = ({ children }: Props) => {
-  return <Background>{children}</Background>;
+const MenuBackground: React.FC<Props> = ({ children, onClick }: Props) => {
+  return <Background onClick={onClick}>{children}</Background>;
 };
 
 export default MenuBackground;

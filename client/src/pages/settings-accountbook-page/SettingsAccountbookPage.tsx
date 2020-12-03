@@ -4,7 +4,7 @@ import SettingsSidebar from '../../components/common/settings-sidebar/SettingsSi
 import Preview from '../../components/common/preview/Preview';
 import InputText from '../../components/common/inputs/input-text/InputText';
 import SingleInputDropDown from '../../components/common/inputs/single-input-dropdown/SingleInputDropdown';
-import GMT from '../../__dummy-data__/components/settings/dummyData';
+import GMT from '../../__dummy-data__/components/settings/gmtData';
 import InputRadio from '../../components/common/inputs/input-radio/InputRadio';
 import { DODGER_BLUE } from '../../constants/color';
 
