@@ -34,12 +34,12 @@ const login = async (ctx) => {
     const config = getConfig(provider);
     const oauthUser = await oauthService.getUserInfo(code, state, config);
     const ourServiceUser = await oauthService.findOrCreateUser(oauthUser);
-    const jwtToken = await generateToken(ourServiceUser.toJSON());
+    const jwtToken = await generateToken(ourServiceUser);
     ctx.cookies.set('jwt', jwtToken, {
       httpOnly: true,
       maxAge: jwtConfig.cookieExpiresIn,
     });
-    ctx.body = { ourServiceUser, jwtToken };
+    ctx.state.user = ourServiceUser;
   } catch (err) {
     ctx.throw(500, err);
   }
