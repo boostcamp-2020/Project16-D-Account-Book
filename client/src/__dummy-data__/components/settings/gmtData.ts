@@ -77,8 +77,8 @@ const dummyOptions: Options[] = [
     checked: false,
   },
   {
-    label: '(GMT +0:00)	SYD(시드니)',
-    value: '(GMT +0:00)	SYD(시드니)',
+    label: '(GMT +10:00)	SYD(시드니)',
+    value: '(GMT +10:00)	SYD(시드니)',
     checked: false,
   },
   {
