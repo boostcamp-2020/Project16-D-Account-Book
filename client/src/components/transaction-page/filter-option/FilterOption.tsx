@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CancelButton from './CancelButton';
 import Query from '../../../types/query';
 import { getFormattedDate } from '../../../utils/date';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;

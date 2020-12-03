@@ -1,9 +1,8 @@
-import React, { memo, useContext } from 'react';
+import React, { memo } from 'react';
 import DayTransactionContainer from '../day-transaction-container/DayTransactionContainer';
 import Income, { isIncome } from '../../../../types/income';
 import Expenditure from '../../../../types/expenditure';
 import NotFoundTransaction from '../../not-found-transaction/NotFoundTransaction';
-import { useObserver } from 'mobx-react';
 import Spinner from '../../spinner/Spinner';
 import useStore from '../../../../hook/use-store/useStore';
 

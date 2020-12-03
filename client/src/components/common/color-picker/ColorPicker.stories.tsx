@@ -7,7 +7,7 @@ export default {
 };
 
 export const DefaultColorPicker = (): JSX.Element => {
-  const [accountbook, setAccountbook] = useState({ id: 3, color: '#ffff00' });
+  const [accountbook] = useState({ id: 3, color: '#ffff00' });
   const [inputColor, setInputColor] = useState({ hex: accountbook.color });
   return <ColorPicker inputColor={inputColor} setInputColor={setInputColor} />;
 };
