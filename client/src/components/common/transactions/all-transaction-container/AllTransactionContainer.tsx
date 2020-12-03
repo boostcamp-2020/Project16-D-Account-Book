@@ -18,11 +18,11 @@ const calcSameDateTransactions = (transactions: Array<Income | Expenditure>): Ar
   let beforeMonth = 0;
   let beforeDay = 0;
 
-  transactions.forEach((transaction) => {
-    transactions.sort((transaction1, transaction2) => {
-      return new Date(transaction2.date).getTime() - new Date(transaction1.date).getTime();
-    });
+  transactions.sort((transaction1, transaction2) => {
+    return new Date(transaction2.date).getTime() - new Date(transaction1.date).getTime();
+  });
 
+  transactions.forEach((transaction) => {
     const currentDate = new Date(transaction.date);
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
