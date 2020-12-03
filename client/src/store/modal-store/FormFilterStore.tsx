@@ -15,7 +15,7 @@ export default class FormFilterStore {
   @observable dateOptions = dateOptions;
   @observable selectedDate = datePeriod.ALL;
   @observable startDate = { text: '', date: new Date(0) };
-  @observable endDate = { text: '', date: new Date() };
+  @observable endDate = { text: '', date: new Date(new Date().getTime() + 1000 * 60 * 60 * 24) };
   @observable accountOptions = accountOptions;
   @observable selectedAccounts: string[] = accountOptions.map((option) => option.value);
   @observable incomeCategoryOptions = incomeCategoryOptions;
@@ -33,7 +33,7 @@ export default class FormFilterStore {
     this.dateOptions = dateOptions;
     this.selectedDate = datePeriod.ALL;
     this.startDate = { text: '', date: new Date(0) };
-    this.endDate = { text: '', date: new Date() };
+    this.endDate = { text: '', date: new Date(new Date().getTime() + 1000 * 60 * 60 * 24) };
     this.accountOptions = accountOptions;
     this.selectedAccounts = accountOptions.map((option) => option.value);
     this.incomeCategoryOptions = incomeCategoryOptions;
@@ -55,9 +55,10 @@ export default class FormFilterStore {
     switch (period) {
       case datePeriod.ALL:
         this.startDate.date = new Date(0);
-        this.endDate.date = new Date();
+        this.endDate.date = endDate;
         this.startDate.text = '';
         this.endDate.text = '';
+        console.log(endDate);
         return;
       case datePeriod.LAST_ONE_WEEK:
         startDate.setDate(endDate.getDate() - 7);
@@ -100,6 +101,7 @@ export default class FormFilterStore {
 
   @computed
   get getQuery(): string {
+    console.log(this.endDate.date);
     const startDateQuery = `start_date=${getFormattedDate({ date: this.startDate.date, format: '.' })}`;
     const endDateQuery = `end_date=${getFormattedDate({ date: this.endDate.date, format: '.' })}`;
     const accountQuery = `account=${this.selectedAccounts.join('+')}`;
