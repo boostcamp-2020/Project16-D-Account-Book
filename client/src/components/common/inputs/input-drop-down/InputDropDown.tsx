@@ -37,6 +37,7 @@ const InputDropDown: React.FC<InputDropDownProps> = ({
   };
 
   const checkedData = createRenderData(items, selectValue);
+
   return (
     <Select
       options={checkedData}

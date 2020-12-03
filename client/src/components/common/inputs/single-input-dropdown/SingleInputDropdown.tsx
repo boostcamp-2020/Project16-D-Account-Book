@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Options } from '../select/Select';
 import InputDropDown from '../input-drop-down/InputDropDown';
+
 interface Props {
   items: Options[];
   placeholder: string;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Options } from '../select/Select';
 import InputDropDown from '../input-drop-down/InputDropDown';
 import { setImmutable } from '../../../../utils/immutable/setImmutable';
@@ -17,8 +17,14 @@ export default function MultiInputDropDownHOC(createPlaceName: createPlaceHolder
   const MultiInputDropDown: React.FC<Props> = ({ placeholder, items, onChange }: Props) => {
     const [selected, setSelected, selectChange] = useMultiDropDown(onChange);
 
+    useEffect(() => {
+      const checkedItems = items.filter((item) => item.checked);
+      setSelected(new Set(checkedItems.map((item) => item.value)));
+    }, []);
+
     const displayHeader = selected.size === 0 ? placeholder : createPlaceName(selected, items);
     const selectedValue = Array.from(selected);
+
     return (
       <InputDropDown
         items={items}
