@@ -7,5 +7,5 @@ export default {
 };
 
 export const Default = (): JSX.Element => {
-  return <PlusInCircle />;
+  return <PlusInCircle sideLength={'2rem'} />;
 };
