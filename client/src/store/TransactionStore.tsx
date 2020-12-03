@@ -18,25 +18,25 @@ export default class TransactionStore {
   }
 
   @action
-  async findTransactions(accountbookId: number, startDate: Date, endDate: Date): Promise<void> {
+  findTransactions = async (accountbookId: number, startDate: Date, endDate: Date): Promise<void> => {
     const transactions = await getTransactions(accountbookId, startDate, endDate);
     runInAction(() => {
       this.transactions = transactions;
       this.isLoading = false;
-      this.isFilterMode = false;
+      this.isFilterMode = true;
     });
-  }
+  };
 
   @action
-  async filterTransactions(
+  filterTransactions = async (
     accountbookId: number,
     { startDate, endDate, incomeCategory, expenditureCategory, account }: Query,
-  ): Promise<void> {
+  ): Promise<void> => {
     await this.findTransactions(accountbookId, new Date(startDate as string), new Date(endDate as string));
     runInAction(() => {
       this.transactions = filtering(this.transactions, { account, incomeCategory, expenditureCategory });
       this.isFilterMode = true;
       this.isLoading = false;
     });
-  }
+  };
 }

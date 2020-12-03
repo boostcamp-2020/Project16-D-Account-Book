@@ -17,14 +17,14 @@ export default class DateStore {
   }
 
   @action
-  moveToNextMonth(): void {
+  moveToNextMonth = (): void => {
     this.startDate = getFirstDateOfNextMonth(this.startDate);
     this.endDate = getFirstDateOfNextMonth(this.startDate);
-  }
+  };
 
   @action
-  moveToPreviousMonth(): void {
+  moveToPreviousMonth = (): void => {
     this.startDate = getFirstDateOfPreviousMonth(this.startDate);
     this.endDate = getFirstDateOfNextMonth(this.startDate);
-  }
+  };
 }
