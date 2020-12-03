@@ -9,7 +9,7 @@
         "@middlewares": "./src/api/middlewares",
         "@config": "./src/config",
         "@loaders": "./src/loaders",
-        "@models": "./src/models",
+        "@models": "./src/db/models",
         "@services": "./src/services",
         "@utils": "./src/utils"
       }
