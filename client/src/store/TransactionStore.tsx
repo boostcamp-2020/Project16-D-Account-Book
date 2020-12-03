@@ -1,7 +1,7 @@
 import { observable, makeObservable, runInAction, action, computed } from 'mobx';
 import Income from '../types/income';
 import Expenditure from '../types/expenditure';
-import { getTransactions } from '../services/transaction';
+import transactionService from '../services/transaction';
 import RootStore from './RootStore';
 import { filtering } from '../utils/filter';
 import Query from '../types/query';
@@ -19,7 +19,7 @@ export default class TransactionStore {
 
   @action
   findTransactions = async (accountbookId: number, startDate: Date, endDate: Date): Promise<void> => {
-    const transactions = await getTransactions(accountbookId, startDate, endDate);
+    const transactions = await transactionService.getTransactions(accountbookId, startDate, endDate);
     runInAction(() => {
       this.transactions = transactions;
       this.isLoading = false;
