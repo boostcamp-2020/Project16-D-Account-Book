@@ -20,10 +20,7 @@ instance.interceptors.response.use(
     return response.data;
   },
   (error) => {
-    if (error.response.status === 401) {
-      localStorage.removeItem('token');
-      window.location.href = '/';
-    }
+    console.error(error);
     return Promise.reject(error);
   },
 );

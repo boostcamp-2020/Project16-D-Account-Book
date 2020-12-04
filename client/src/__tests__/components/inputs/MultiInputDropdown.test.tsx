@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions';
-import MultiInputDropdown from '../../../components/inputs/multi-input-dropdown/MultiInputDropdown';
+import MultiInputDropdown from '../../../components/common/inputs/multi-input-dropdown/MultiInputDropdown';
 
 describe('MultiInputDropDown 테스트', () => {
   const spy = jest.fn();

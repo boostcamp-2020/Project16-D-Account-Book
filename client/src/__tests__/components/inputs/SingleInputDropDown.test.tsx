@@ -2,7 +2,7 @@ import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import SingleInputDropDown from '../../../components/inputs/single-input-dropdown/SingleInputDropdown';
+import SingleInputDropDown from '../../../components/common/inputs/single-input-dropdown/SingleInputDropdown';
 
 describe('싱글 인풋 DropDown 테스트', () => {
   const placeholder = 'SingleInput';
@@ -23,5 +23,16 @@ describe('싱글 인풋 DropDown 테스트', () => {
     userEvent.click(screen.getByText(placeholder));
     userEvent.click(screen.getByText(/optionLabel1/));
     expect(spy.mock.calls[0][0]).toBe('optionValue1');
+  });
+  test('미리 선택된 값을 입력하는것도 가능해야한다.', () => {
+    render(
+      <SingleInputDropDown
+        items={dummyOptions}
+        placeholder={placeholder}
+        onChange={spy}
+        defaultSelectValue={dummyOptions[0].value}
+      />,
+    );
+    screen.getByText(/optionLabel1/);
   });
 });

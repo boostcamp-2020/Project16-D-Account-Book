@@ -2,8 +2,10 @@ const Router = require('koa-router');
 
 const router = new Router();
 
-const naverLogin = require('../controllers/oauth');
+const oauthController = require('@controllers/oauth');
 
-router.get('/api/naver', naverLogin);
+router.get('/:provider', oauthController.redirectToOauthLoginPage);
+
+router.get('/callback/:provider', oauthController.login);
 
 module.exports = router;

@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "@api": "./src/api",
+        "@routes": "./src/api/routes",
+        "@controllers": "./src/api/controllers",
+        "@middlewares": "./src/api/middlewares",
+        "@config": "./src/config",
+        "@loaders": "./src/loaders",
+        "@models": "./src/db/models",
+        "@services": "./src/services",
+        "@utils": "./src/utils"
+      }
+    }]
+  ]
+}

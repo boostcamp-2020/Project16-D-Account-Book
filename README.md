@@ -2,20 +2,7 @@
 
 <div align="center">
 
-![Javascript](https://img.shields.io/badge/JavaScript-ES6+-yellow?logo=javascript)
-![TypeScript](https://img.shields.io/badge/TypeScript-v4.0.5-blue?logo=TypeScript)
-![react](https://img.shields.io/badge/React-v17.0.1-1cf?logo=react)
-![MobX](https://img.shields.io/badge/MobX-v17.0.1-orange?logo=MobX)
-
-![styled-components](https://img.shields.io/badge/styled_components-pink?logo=styled-components)
-![StoryBook](https://img.shields.io/badge/Storybook-v5.7.32-FF4785?logo=storybook)
-![Babel](https://img.shields.io/badge/@babel/core-v7.12.3-yellow?logo=babel) 
-![Webpack](https://img.shields.io/badge/Webpack-v5.3.1-blue?logo=Webpack) 
-
-![NodeJS](https://img.shields.io/badge/node.js-v14.5.0-green?logo=node.js)
-![Koa](https://img.shields.io/badge/koa-v2.13.0-white?logo=koa)
-![MySQL](https://img.shields.io/badge/MySQL-v5.7.32-blue?logo=mysql)
-![Jest](https://img.shields.io/badge/Jest-v26.6.3-C21325?logo=jest)
+<img src="https://i.imgur.com/q2Rkxp9.png" width=300/>
 
 [![GitHub Open Issues](https://img.shields.io/github/issues-raw/boostcamp-2020/Project16-D-Account-Book?color=green)](https://github.com/boostcamp-2020/Project16-D-Account-Book/issues)
 [![GitHub Closed Issues](https://img.shields.io/github/issues-closed-raw/boostcamp-2020/Project16-D-Account-Book?color=red)](https://github.com/boostcamp-2020/Project16-D-Account-Book/issues)
@@ -25,14 +12,17 @@
 </div>
 <br><br><br>
 
-
 ## 프로젝트 소개 💸
 > ***Manage Our Accountbook!***
 
 개인의 입출금 및 가계 재정을 시각화하고 분석할 수 있을 뿐만 아니라 공동 가계부까지 관리할 수 있는 웹 서비스입니다.
 
+<br>
 
-<br><br><br>
+## :exclamation: 배포 Link 
+- [http://moa.r-e.kr/](http://moa.r-e.kr/)    
+
+<br>
 
 ## 팀원 소개 👨🏻‍💻
 
