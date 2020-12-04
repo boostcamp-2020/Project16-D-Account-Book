@@ -16,7 +16,8 @@
     "noEmit": true,
     "jsx": "react",
     "experimentalDecorators": true,
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    "noImplicitAny": false
   },
   "include": ["src", "fonts"]
 }

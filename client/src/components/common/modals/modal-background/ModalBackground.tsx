@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import useClickMe from '../../../../hook/use-click-me/useClickMe';
 import styled from 'styled-components';
 

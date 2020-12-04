@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PreviousButton from '../back-button/PreviousButton';
 import NextButton from '../next-button/NextButton';
 import useStore from '../../../hook/use-store/useStore';
-import { useObserver } from 'mobx-react';
 
 const Container = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Options } from './Select';
 import SelectItem from './SelectItem';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 interface SelectListProps {
   options?: Options[];
