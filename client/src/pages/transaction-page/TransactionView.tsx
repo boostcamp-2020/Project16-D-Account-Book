@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../../components/common/sidebar/Sidebar';
 import HeaderNavigation from '../../components/common/header-navigation/HeaderNavigation';

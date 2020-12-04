@@ -1,8 +1,6 @@
 import { observable, action, makeObservable } from 'mobx';
 import { getFirstDateOfPreviousMonth, getFirstDateOfNextMonth } from '../utils/date';
-import React, { createContext } from 'react';
 import RootStore from './RootStore';
-
 export default class DateStore {
   rootStore;
   @observable startDate: Date;

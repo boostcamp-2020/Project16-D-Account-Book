@@ -1,19 +1,21 @@
 import { action } from 'mobx';
 import React, { createContext } from 'react';
 import DateStore from './DateStore';
+import CategoryStore from './CategoryStore';
 import TransactionStore from './TransactionStore';
-import { observable } from 'mobx';
 import ModalStore from './modal-store/ModalStore';
 
 export default class RootStore {
   dateStore;
   transactionStore;
   modalStore;
+  categoryStore;
 
   constructor() {
     this.dateStore = new DateStore(this);
     this.transactionStore = new TransactionStore(this);
     this.modalStore = new ModalStore(this);
+    this.categoryStore = new CategoryStore(this);
   }
 }
 
