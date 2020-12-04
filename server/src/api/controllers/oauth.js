@@ -29,17 +29,33 @@ const redirectToOauthLoginPage = async (ctx) => {
 
 const login = async (ctx) => {
   try {
-    const { code, state } = ctx.request.query;
+    // eslint-disable-next-line camelcase
+    const { code, state, err, error_description } = ctx.request.query;
+    if (err) {
+      throw new Error(error_description);
+    }
+
     const { provider } = ctx.params;
     const config = getConfig(provider);
     const oauthUser = await oauthService.getUserInfo(code, state, config);
     const ourServiceUser = await oauthService.findOrCreateUser(oauthUser);
-    const jwtToken = generateToken(ourServiceUser.toJSON());
+    const jwtToken = await generateToken(ourServiceUser);
     ctx.cookies.set('jwt', jwtToken, {
       httpOnly: true,
       maxAge: jwtConfig.cookieExpiresIn,
     });
-    ctx.body = { ourServiceUser, jwtToken };
+    ctx.state.user = ourServiceUser;
+    ctx.body = ourServiceUser;
+    console.log(ourServiceUser);
+    console.log(jwtToken);
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+};
+
+const logout = async (ctx) => {
+  try {
+    const { provider } = ctx.params;
   } catch (err) {
     ctx.throw(500, err);
   }
@@ -47,5 +63,6 @@ const login = async (ctx) => {
 
 module.exports = {
   login,
+  logout,
   redirectToOauthLoginPage,
 };
