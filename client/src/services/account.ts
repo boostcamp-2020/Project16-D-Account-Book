@@ -5,10 +5,6 @@ const accountAPIAddress = {
   getAccounts: '/api/accounts',
 };
 
-interface AxiosResponse2 {
-  data: Account[];
-}
-
 axios.get('');
 
 export default {
