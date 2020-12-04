@@ -17,7 +17,7 @@ interface InputRadioProps {
 const LabelRadioInput = styled.label.attrs((props) => ({
   for: props.id,
 }))`
-  font-size: 1.2rem;
+  font-size: 1rem;
   width: 100px;
   margin-top: 5px;
 `;

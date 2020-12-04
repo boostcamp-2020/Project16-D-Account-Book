@@ -12,7 +12,7 @@ const InputTextContainer = styled.input.attrs((props) => ({
 }))<InputType>`
   width: 100%;
   padding: 15px 10px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border-radius: 5px;
   border: 1px solid lightgray;
 `;

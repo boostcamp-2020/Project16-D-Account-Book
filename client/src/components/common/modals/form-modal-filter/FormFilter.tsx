@@ -53,7 +53,7 @@ const InputWrapper = styled.div`
 `;
 
 const InputLabel = styled.p`
-  font-size: 1.3em;
+  font-size: 1rem;
 `;
 
 const DateRange = styled.div`

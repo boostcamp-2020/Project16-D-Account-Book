@@ -29,7 +29,7 @@ const ItemLabel = styled.p`
 const ItemChecked = styled.div`
   padding: 0px;
   margin: 0px;
-  width: 1.2rem;
+  width: 1rem;
 `;
 
 const SelectItem: React.FC<SelectItemProps> = ({ label, value, checked, onClick }: SelectItemProps) => {
