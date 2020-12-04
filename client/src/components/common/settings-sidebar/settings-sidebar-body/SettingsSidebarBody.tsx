@@ -17,7 +17,7 @@ interface SettingsSidebarMenuItemProps {
 const SettingsSidebarMenuItem = styled.div<SettingsSidebarMenuItemProps>`
   padding: 12px 20px;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1rem;
   width: 100%;
 
   &:hover {
