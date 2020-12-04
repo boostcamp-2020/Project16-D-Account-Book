@@ -2,7 +2,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const id = [1, 2, 3, 4, 5, 6, 7, 8];
     const name = ['식사', '생활', '경조사', '교육', '주거/통신', '술/유흥', '문화/여가', '교통'];
-    const color = ['1E90FF', '0048BA', 'B0BF1A', '7CB9E8', 'C9FFE5', 'B284BE', '84DE02', 'D3212D'];
+    const color = ['#1E90FF', '#0048BA', '#B0BF1A', '#7CB9E8', '#C9FFE5', '#B284BE', '#84DE02', '#D3212D'];
     // eslint-disable-next-line camelcase
     const accountbook_id = [1, 1, 1, 1, 1, 1, 1, 1];
     // eslint-disable-next-line camelcase
