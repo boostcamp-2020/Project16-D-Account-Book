@@ -13,7 +13,7 @@ const SettingsCategoriesPageWrapper = styled.div`
 `;
 
 const SettingsBody = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0%;
   left: 25%;
   padding: 50px 50px;
