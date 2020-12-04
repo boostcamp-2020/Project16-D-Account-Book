@@ -6,7 +6,9 @@ import '@testing-library/jest-dom';
 import { setupServer } from 'msw/node';
 import { getExpenditureCategoriesHandler } from './__dummy-data__/api/category/getExpenditure';
 import { getIncomeCategoriesHandler } from './__dummy-data__/api/category/getIncome';
-const handlers = [getExpenditureCategoriesHandler, getIncomeCategoriesHandler];
+import { getAccountsHandler } from './__dummy-data__/api/account/getAccounts';
+
+const handlers = [getExpenditureCategoriesHandler, getIncomeCategoriesHandler, getAccountsHandler];
 
 const server = setupServer(...handlers);
 
