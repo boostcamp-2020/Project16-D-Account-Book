@@ -5,6 +5,8 @@ import SingleInputDropdown from '../../inputs/single-input-dropdown/SingleInputD
 import SelectPaymentMethod from '../../inputs/select-payment-method/SelectPaymentMethod';
 import MultiInputDropdownWithCheckBox from '../../inputs/multi-input-dropdown/MultiInputDropdownWithCheckBox';
 import { MODAL_WHITE } from '../../../../constants/color';
+import useStore from '../../../../hook/use-store/useStore';
+import { useObserver } from 'mobx-react';
 
 interface IFormModalFilter {
   inputs: {
@@ -61,42 +63,51 @@ const DateRange = styled.div`
 `;
 
 const FormModalFilter: React.FC<IFormModalFilter> = ({ inputs, changes }: IFormModalFilter) => {
-  return (
+  const { formFilterStore } = useStore().rootStore.modalStore;
+
+  return useObserver(() => (
     <ItemWrapper>
       <InputWrapper>
         <InputLabel>기간</InputLabel>
         <SingleInputDropdown
           placeholder={'기간'}
-          items={inputs.dateRange.items}
-          onChange={changes?.dateRage}
-          defaultSelectValue={'전체'}
+          items={formFilterStore.dateOptions}
+          onChange={formFilterStore.onChangeDate}
+          defaultSelectValue={formFilterStore.selectedDate}
         />
         <DateRange>
-          <p>{inputs.startDate}</p>
-          <p>{inputs.endDate}</p>
+          <p>{formFilterStore.startDate.text}</p>
+          <p>{formFilterStore.endDate.text}</p>
         </DateRange>
       </InputWrapper>
       <InputWrapper>
         <InputLabel>결제수단</InputLabel>
-        <SelectPaymentMethod placeholder={'결제수단'} items={inputs.payment.items} onChange={changes.payment} />
+        <SelectPaymentMethod
+          placeholder={'결제수단'}
+          items={formFilterStore.accountOptions}
+          onChange={formFilterStore.onChangeAcoount}
+          defaultValue={formFilterStore.selectedAccounts}
+        />
       </InputWrapper>
       <InputWrapper>
         <InputLabel>카테고리</InputLabel>
         <MultiInputDropdownWithCheckBox
           placeholder={'지출'}
           checkBoxName={'지출'}
-          items={inputs.expenditureCategories.items}
-          onChange={changes.expenditureCategories}
+          items={formFilterStore.expenditureCategoryOptions}
+          onChange={formFilterStore.onChangeExpenditureCategory}
+          defaultValue={formFilterStore.selectedExpenditureCategories}
         />
         <MultiInputDropdownWithCheckBox
           placeholder={'수입'}
           checkBoxName={'수입'}
-          items={inputs.incomeCategories.items}
-          onChange={changes.expenditureCategories}
+          items={formFilterStore.incomeCategoryOptions}
+          onChange={formFilterStore.onChangeIncomeCategory}
+          defaultValue={formFilterStore.selectedIncomeCategories}
         />
       </InputWrapper>
     </ItemWrapper>
-  );
+  ));
 };
 
 export default FormModalFilter;

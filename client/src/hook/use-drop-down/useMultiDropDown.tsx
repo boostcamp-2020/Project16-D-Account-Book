@@ -17,8 +17,9 @@ export const isSelectAll = (items: Options[], selected: Set<string>): boolean =>
 
 const useMultiDropDown = (
   onChange?: (selected: string[]) => void,
+  defaultValue?: string[],
 ): [Set<string>, (param: Set<string>) => void, (value: string) => void] => {
-  const [selected, setSelected] = useState<Set<string>>(new Set<string>());
+  const [selected, setSelected] = useState<Set<string>>(new Set<string>(defaultValue));
 
   useEffect(() => {
     if (onChange !== undefined) {

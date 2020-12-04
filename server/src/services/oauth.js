@@ -49,15 +49,32 @@ const getUserInfo = async (code, state, config) => {
 };
 
 const findOrCreateUser = async (oauthUser) => {
-  const [user] = await db.user.findOrCreate({
+  const [ourServiceUser, isNew] = await db.user.findOrCreate({
     where: {
+      provider: oauthUser.provider,
+      email: oauthUser.email,
+    },
+    defaults: {
       provider: oauthUser.provider,
       email: oauthUser.email,
       nickname: oauthUser.nickname,
       profileUrl: oauthUser.profileUrl,
     },
   });
-  return user;
+  if (!isNew) {
+    if (ourServiceUser.profileUrl !== oauthUser.profileUrl) {
+      await db.user.update({ profileUrl: oauthUser.profileUrl }, { where: { id: ourServiceUser.id } });
+    }
+  }
+
+  const ourServiceUserInfo = {
+    id: ourServiceUser.id,
+    provider: ourServiceUser.provider,
+    nickname: ourServiceUser.nickname,
+    profileUrl: ourServiceUser.profileUrl,
+  };
+
+  return ourServiceUserInfo;
 };
 
 module.exports = {

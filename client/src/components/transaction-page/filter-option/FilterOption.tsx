@@ -30,6 +30,7 @@ interface Props {
 
 const getDateText = (startDate: string, endDate: string): string => {
   if (!startDate || !endDate) return '';
+  if (new Date(startDate).getTime() <= 0) return '전체 기간';
   const end = getFormattedDate({ date: new Date(new Date(endDate).getTime() - 1000 * 60 * 60 * 24), format: '.' });
   return `${startDate} ~ ${end}`;
 };
