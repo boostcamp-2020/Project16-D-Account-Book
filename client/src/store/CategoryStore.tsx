@@ -17,12 +17,22 @@ export default class CategoryStore {
   }
 
   @action
-  updateIncomeCategories = async (id: number): Promise<void> => {
-    this.incomeCategories = await CategoryService.getIncomeCategoryById(id);
+  changeIncomeCategories = (category: Category[]): void => {
+    this.incomeCategories = category;
   };
 
   @action
+  changeExpenditureCategories = (category: Category[]): void => {
+    this.expenditureCategories = category;
+  };
+
+  updateIncomeCategories = async (id: number): Promise<void> => {
+    const incomeCategories = await CategoryService.getIncomeCategoryById(id);
+    this.changeIncomeCategories(incomeCategories);
+  };
+
   updateExpenditureCategories = async (id: number): Promise<void> => {
-    this.expenditureCategories = await CategoryService.getExpenditureCategoryById(id);
+    const expenditureCategories = await CategoryService.getExpenditureCategoryById(id);
+    this.changeExpenditureCategories(expenditureCategories);
   };
 }
