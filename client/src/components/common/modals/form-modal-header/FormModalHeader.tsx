@@ -32,7 +32,6 @@ const Right = styled.p`
 `;
 
 const ModalName = styled.p`
-  cursor: pointer;
   font-size: 1.3em;
   margin-top: 0%;
   margin-bottom: 0%;

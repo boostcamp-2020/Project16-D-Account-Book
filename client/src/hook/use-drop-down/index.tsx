@@ -30,7 +30,6 @@ const checkSelectValue = (memo: Set<string | number>, renderOptionData: Options[
       optionData.checked = false;
     }
   });
-
   return renderOptionData;
 };
 
