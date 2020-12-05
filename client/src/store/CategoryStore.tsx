@@ -1,7 +1,8 @@
-import { observable, action, makeObservable } from 'mobx';
+import { observable, action, makeObservable, computed } from 'mobx';
 import Category from '../types/category';
 import RootStore from './RootStore';
 import CategoryService from '../services/category';
+import { Options } from '../types/options';
 export default class CategoryStore {
   rootStore;
 
@@ -35,4 +36,28 @@ export default class CategoryStore {
     const expenditureCategories = await CategoryService.getExpenditureCategoryById(id);
     this.changeExpenditureCategories(expenditureCategories);
   };
+
+  @computed
+  get incomeOptions(): Options[] {
+    const data: Options[] = this.incomeCategories.map((income) => {
+      return {
+        value: income.id + '',
+        label: income.name,
+      };
+    });
+
+    return data;
+  }
+
+  @computed
+  get expenditureOptions(): Options[] {
+    const data: Options[] = this.expenditureCategories.map((income) => {
+      return {
+        value: income.id + '',
+        label: income.name,
+      };
+    });
+
+    return data;
+  }
 }
