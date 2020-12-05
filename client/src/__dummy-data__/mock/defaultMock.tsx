@@ -1,4 +1,4 @@
-import RootStore from '../store/RootStore';
+import RootStore from '../../store/RootStore';
 import React, { createContext } from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
 
