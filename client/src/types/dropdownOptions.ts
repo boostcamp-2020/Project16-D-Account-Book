@@ -3,3 +3,5 @@ export interface Options {
   label: string;
   checked?: boolean;
 }
+
+export default Options;
