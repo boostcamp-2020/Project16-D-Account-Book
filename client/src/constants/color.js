@@ -7,3 +7,4 @@ export const MODAL_GRAY = '#5E5E5E';
 export const MODAL_RED = '#E74C3C';
 export const MODAL_WHITE = '#ECECEC';
 export const DODGER_BLUE = '#1E90FF';
+export const LIGHT_GREEN = '#11CD6E';

@@ -2,10 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { BLUE } from '../../../constants/color';
 
-const ButtonWrapper = styled.div`
-  cursor: pointer;
-`;
-const AdmingSettingButton = (): JSX.Element => {
+const AdminSettingButton = (): JSX.Element => {
   return (
     <svg fill={BLUE} viewBox="0 0 1000 1000" enableBackground="new 0 0 1000 1000">
       <g>
@@ -15,4 +12,4 @@ const AdmingSettingButton = (): JSX.Element => {
   );
 };
 
-export default AdmingSettingButton;
+export default AdminSettingButton;
