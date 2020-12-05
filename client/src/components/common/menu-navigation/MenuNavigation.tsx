@@ -3,7 +3,7 @@ import FilterButton from './filter-button/FilterButton';
 import CreateButton from './create-button/CreateButton';
 import SettingButton from './setting-button/SettingButton';
 import styled from 'styled-components';
-
+import useStore from '../../../hook/use-store/useStore';
 const NavigationWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,6 +24,13 @@ const ButtonWrapper = styled.div`
 `;
 
 const MenuNavigation: React.FC = () => {
+  const { rootStore } = useStore();
+  const createTransactionForm = rootStore.modalStore.createTransactionFormStore;
+
+  const openCreateTransactionForm = (): void => {
+    createTransactionForm.toggleShow();
+  };
+
   return (
     <NavigationWrapper>
       <ButtonWrapper>
@@ -32,7 +39,7 @@ const MenuNavigation: React.FC = () => {
       <ButtonWrapper>
         <SettingButton width={24} height={24} />
       </ButtonWrapper>
-      <ButtonWrapper>
+      <ButtonWrapper onClick={openCreateTransactionForm}>
         <CreateButton width={24} height={24} />
       </ButtonWrapper>
     </NavigationWrapper>
