@@ -7,8 +7,14 @@ import { setupServer } from 'msw/node';
 import { getExpenditureCategoriesHandler } from './__dummy-data__/api/category/getExpenditure';
 import { getIncomeCategoriesHandler } from './__dummy-data__/api/category/getIncome';
 import { getAccountsHandler } from './__dummy-data__/api/account/getAccounts';
+import { getTransactionsHandler } from './__dummy-data__/api/transaction/getTransactions';
 
-const handlers = [getExpenditureCategoriesHandler, getIncomeCategoriesHandler, getAccountsHandler];
+const handlers = [
+  getExpenditureCategoriesHandler,
+  getIncomeCategoriesHandler,
+  getAccountsHandler,
+  getTransactionsHandler,
+];
 
 const server = setupServer(...handlers);
 
