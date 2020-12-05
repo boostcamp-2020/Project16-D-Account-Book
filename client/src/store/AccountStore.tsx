@@ -1,7 +1,8 @@
 import RootStore from './RootStore';
 import Account from '../types/account';
 import AccountService from '../services/account';
-import { observable, action, makeObservable } from 'mobx';
+import { observable, action, makeObservable, computed } from 'mobx';
+import { Options } from '../types/options';
 export default class AccountStore {
   rootStore;
 
@@ -22,4 +23,16 @@ export default class AccountStore {
     const accounts = await AccountService.getAccountsById(id);
     this.changeAccounts(accounts);
   };
+
+  @computed
+  get accountOptions(): Options[] {
+    const data: Options[] = this.accounts.map((account) => {
+      return {
+        value: account.id + '',
+        label: account.name,
+      };
+    });
+
+    return data;
+  }
 }
