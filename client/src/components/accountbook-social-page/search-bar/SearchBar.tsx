@@ -10,6 +10,7 @@ const SearchBarWrapper = styled.div`
 
 const InputText = styled.input.attrs(() => ({
   type: 'text',
+  placeholder: '사용자의 이메일을 입력해주세요.',
 }))`
   width: 85%;
   padding: 15px 10px;
