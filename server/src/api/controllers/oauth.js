@@ -53,9 +53,13 @@ const login = async (ctx) => {
   }
 };
 
-const logout = async (ctx) => {
+const logout = (ctx) => {
   try {
-    const { provider } = ctx.params;
+    ctx.cookies.set('jwt', null, {
+      maxAge: 0,
+      httpOnly: true,
+    });
+    ctx.status = 204;
   } catch (err) {
     ctx.throw(500, err);
   }
