@@ -26,6 +26,7 @@ export const Default = (): JSX.Element => {
 export const ApplyWrapper = (): JSX.Element => {
   return (
     <Wrapper>
+      <h3>가계부 구성원 목록</h3>
       <UserItem
         email={'mu1616@naver.com'}
         nickname={'mu1616'}
