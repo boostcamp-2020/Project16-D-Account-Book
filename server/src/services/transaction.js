@@ -87,8 +87,42 @@ const createIncome = async ({ accountbookId, incomeCategoryId, accountId, amount
   return createdIncome;
 };
 
+const createExpenditure = async ({ accountbookId, expenditureCategoryId, accountId, amount, place, date, memo }) => {
+  const accountbook = await getAccountbookById(accountbookId);
+
+  const expenditure = await accountbook.createExpenditure({
+    amount,
+    place,
+    date,
+    memo,
+    expenditureCategoryId,
+    accountId,
+  });
+
+  const createdExpenditure = await db.expenditure.findOne({
+    attributes: ['id', 'amount', 'place', 'date', 'memo'],
+    where: {
+      id: expenditure.id,
+    },
+    include: [
+      {
+        model: db.expenditureCategory,
+        as: 'category',
+        attributes: ['id', 'name', 'color'],
+      },
+      {
+        model: db.account,
+        attributes: ['id', 'name', 'color'],
+      },
+    ],
+  });
+
+  return createdExpenditure;
+};
+
 module.exports = {
   findIncomes,
   findExpenditures,
   createIncome,
+  createExpenditure,
 };
