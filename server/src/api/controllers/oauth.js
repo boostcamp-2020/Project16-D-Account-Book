@@ -46,15 +46,18 @@ const login = async (ctx) => {
     });
     ctx.state.user = ourServiceUser;
     ctx.body = ourServiceUser;
-    console.log(ourServiceUser);
-    console.log(jwtToken);
   } catch (e) {
     ctx.throw(500, e);
   }
 };
 
-const logout = (ctx) => {
+const logout = async (ctx) => {
+  const token = ctx.cookies.get('jwt');
   try {
+    if (!token) {
+      throw new Error('jwt 토큰 없는 유저가 로그아웃 시도');
+    }
+    await oauthService.logout(token);
     ctx.cookies.set('jwt', null, {
       maxAge: 0,
       httpOnly: true,
