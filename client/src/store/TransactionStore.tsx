@@ -1,6 +1,6 @@
 import { observable, makeObservable, runInAction, action, computed } from 'mobx';
-import Income from '../types/income';
-import Expenditure from '../types/expenditure';
+import Income, { IncomeRequest } from '../types/income';
+import Expenditure, { ExpenditureRequest } from '../types/expenditure';
 import transactionService from '../services/transaction';
 import RootStore from './RootStore';
 import { filtering } from '../utils/filter';
@@ -10,7 +10,7 @@ export default class TransactionStore {
   @observable transactions: Array<Income | Expenditure> = [];
   @observable isFilterMode = false;
   @observable isLoading = true;
-  rootStore;
+  rootStore: RootStore;
 
   constructor(rootStore: RootStore) {
     makeObservable(this);
@@ -38,5 +38,24 @@ export default class TransactionStore {
       this.isFilterMode = true;
       this.isLoading = false;
     });
+  };
+
+  createIncome = async (income: IncomeRequest): Promise<void> => {
+    const createdIncome = await transactionService.createIncome(income);
+    this.addNewTransaction(createdIncome);
+  };
+
+  createExpenditure = async (expenditure: ExpenditureRequest): Promise<void> => {
+    const createdExpenditure = await transactionService.createExpenditure(expenditure);
+    this.addNewTransaction(createdExpenditure);
+  };
+
+  @action
+  addNewTransaction = (transaction: Income | Expenditure): void => {
+    const date = new Date(transaction.date);
+    const currentDate = this.rootStore.dateStore.startDate;
+    if (date.getMonth() === currentDate.getMonth() && date.getFullYear() === currentDate.getFullYear()) {
+      this.transactions = [...this.transactions, transaction];
+    }
   };
 }
