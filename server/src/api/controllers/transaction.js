@@ -9,6 +9,13 @@ const findTransactions = async (ctx) => {
   ctx.body = transactions;
 };
 
+const createIncomeTransaction = async (ctx) => {
+  const incomeData = ctx.request.body;
+  const createdIncome = await transactionService.createIncome(incomeData);
+  ctx.body = createdIncome;
+};
+
 module.exports = {
   findTransactions,
+  createIncomeTransaction,
 };
