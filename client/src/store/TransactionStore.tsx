@@ -56,6 +56,17 @@ export default class TransactionStore {
     const currentDate = this.rootStore.dateStore.startDate;
     if (date.getMonth() === currentDate.getMonth() && date.getFullYear() === currentDate.getFullYear()) {
       this.transactions = [...this.transactions, transaction];
+      const {
+        selectedAccounts: account,
+        selectedIncomeCategories: incomeCategory,
+        selectedExpenditureCategories: expenditureCategory,
+      } = this.rootStore.modalStore.formFilterStore;
+
+      this.transactions = filtering(this.transactions, {
+        account: account.join(' '),
+        incomeCategory: incomeCategory.join(' '),
+        expenditureCategory: expenditureCategory.join(' '),
+      });
     }
   };
 }

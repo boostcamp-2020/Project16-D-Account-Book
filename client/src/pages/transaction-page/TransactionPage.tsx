@@ -22,7 +22,6 @@ interface Query {
 const TransactionPage: React.FC<Props> = ({ match, location }: Props) => {
   const { rootStore } = useStore();
   const query = location.search ? queryString.parse(location.search) : null;
-
   useEffect(() => {
     rootStore.accountStore.updateAccounts(Number(match.params.id));
     rootStore.categoryStore.updateIncomeCategories(Number(match.params.id));

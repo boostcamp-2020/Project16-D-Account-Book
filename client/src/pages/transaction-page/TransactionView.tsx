@@ -64,6 +64,7 @@ const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<numbe
 const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
   const { dateStore, transactionStore } = rootStore;
+  const { formFilterStore } = rootStore.modalStore;
   const history = useHistory();
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
