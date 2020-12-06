@@ -7,11 +7,11 @@ import ModalStore from './modal-store/ModalStore';
 import AccountStore from './AccountStore';
 
 export default class RootStore {
-  dateStore;
-  transactionStore;
-  modalStore;
-  categoryStore;
-  accountStore;
+  dateStore: DateStore;
+  transactionStore: TransactionStore;
+  modalStore: ModalStore;
+  categoryStore: CategoryStore;
+  accountStore: AccountStore;
 
   constructor() {
     this.dateStore = new DateStore(this);
