@@ -18,7 +18,7 @@ const generateToken = async (user) => {
   return jwtToken;
 };
 
-const decodeToken = async (token) => {
+const decodeTokenForValidation = async (token) => {
   const decodedToken = jwt.verify(token, jwtConfig.jwtSecretKey, (err, decoded) => {
     if (err) {
       throw new Error('jwt secret이 잘못되었음');
@@ -38,7 +38,13 @@ const decodeToken = async (token) => {
   return decodedToken;
 };
 
+const decodeToken = (token) => {
+  const decoded = jwt.verify(token, jwtConfig.jwtSecretKey);
+  return decoded;
+};
+
 module.exports = {
   generateToken,
   decodeToken,
+  decodeTokenForValidation,
 };
