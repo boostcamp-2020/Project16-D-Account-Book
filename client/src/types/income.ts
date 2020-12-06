@@ -6,10 +6,20 @@ export default interface Income {
   id: number;
   amount: number;
   content: string;
-  date: Date;
+  date: Date | string;
   memo: string;
   category: Category;
   account: Account;
+}
+
+export interface IncomeRequest {
+  accountbookId: number;
+  incomeCategoryId: number;
+  accountId: number;
+  amount: number;
+  content: string;
+  date: string;
+  memo: string;
 }
 
 export const isIncome = (transaction: Income | Expenditure): transaction is Income => {
