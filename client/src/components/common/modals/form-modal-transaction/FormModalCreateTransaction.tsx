@@ -32,7 +32,7 @@ const FormModalTransaction: React.FC = () => {
     ...inputs,
     categories: {
       placeholder: '카테고리',
-      items: incomeCategory,
+      items: inputs.classify ? incomeCategory : expenditureCategory,
       selected: inputs.categories,
     },
     accounts: {
