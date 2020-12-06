@@ -25,7 +25,7 @@ const decodeToken = async (token) => {
     }
     return decoded;
   });
-  let user = await db.user.findOne({
+  const user = await db.user.findOne({
     where: { id: decodedToken.userId },
     attributes: ['id', 'provider', 'nickname', 'profileUrl', 'token'],
   });
@@ -35,9 +35,7 @@ const decodeToken = async (token) => {
   if (user.token !== token) {
     throw new Error('decoded payload에 기재된 유저는 있지만, 서버에서 발행해준 jwt값과 일치하지 않음');
   }
-  user = user.toJSON();
-  delete user.token;
-  return [user, decodedToken];
+  return decodedToken;
 };
 
 module.exports = {
