@@ -7,13 +7,13 @@ const validateAccountbookId = (accountbookId) => {
 };
 
 const getIncomeCategories = async (ctx) => {
-  const { accountbookId } = ctx.request.query;
+  const { accountbook_id: accountbookId } = ctx.request.query;
   validateAccountbookId(accountbookId);
   const incomeCategories = await categoryService.getIncomeCategoriesByAccountbookId(accountbookId);
   ctx.body = incomeCategories;
 };
 const getExpenditureCategories = async (ctx) => {
-  const { accountbookId } = ctx.request.query;
+  const { accountbook_id: accountbookId } = ctx.request.query;
   validateAccountbookId(accountbookId);
   const expenditureCategories = await categoryService.getExpenditureCategoriesByAccountbookId(accountbookId);
   ctx.body = expenditureCategories;
