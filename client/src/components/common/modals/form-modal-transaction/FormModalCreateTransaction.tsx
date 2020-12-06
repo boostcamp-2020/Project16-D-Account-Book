@@ -5,22 +5,19 @@ import FormModalWrapper from '../form-modal-template/FormModalWrapper';
 import ModalBackground from '../modal-background/ModalBackground';
 import FormModalHeader from '../form-modal-header/FormModalHeader';
 import useStore from '../../../../hook/use-store/useStore';
-
+import { convertToIncome, convertToExpenditure } from '../formUtils';
 import { observer } from 'mobx-react';
-import { Options } from '../../../../types/options';
-import RootStore from '../../../../store/RootStore';
+import useGetParam from '../../../../hook/use-get-param/useGetParam';
 
 const FormModalTransaction: React.FC = () => {
   const { rootStore } = useStore();
+  const id = useGetParam();
   const toggle = rootStore.modalStore.createTransactionFormStore;
 
-  // 임시 카테고리
   const incomeCategory = rootStore.categoryStore.incomeOptions;
   const expenditureCategory = rootStore.categoryStore.expenditureOptions;
-  // 임시 accounts
   const accounts = rootStore.accountStore.accountOptions;
 
-  //임시로 빈 객체를 넣음
   const [inputs, changes] = UseTransactionForm();
 
   const { show } = toggle;
@@ -46,10 +43,36 @@ const FormModalTransaction: React.FC = () => {
     return null;
   }
 
+  const expenditureClick = () => {
+    try {
+      const expenditure = convertToExpenditure(inputs, id);
+      rootStore.transactionStore.createExpenditure(expenditure);
+    } catch (e) {
+      alert(e.message);
+    } finally {
+      modalToggle();
+    }
+  };
+  const incomeClick = () => {
+    try {
+      const income = convertToIncome(inputs, id);
+      rootStore.transactionStore.createIncome(income);
+    } catch (e) {
+      alert(e.message);
+    } finally {
+      modalToggle();
+    }
+  };
+
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
-        <FormModalHeader modalName={'내역작성'} blueName={'완료'} closeModal={modalToggle} />
+        <FormModalHeader
+          modalName={'내역작성'}
+          blueName={'완료'}
+          closeModal={modalToggle}
+          clickBlue={inputs.classify ? expenditureClick : incomeClick}
+        />
         <TransactionInputList inputs={inputListInputs} changes={changes} />
       </FormModalWrapper>
     </ModalBackground>
