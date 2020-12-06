@@ -1,7 +1,9 @@
-const db = require('@models');
-
 const axios = require('axios');
 const qs = require('querystring');
+const jwt = require('jsonwebtoken');
+
+const db = require('@models');
+const jwtConfig = require('@config/jwt');
 
 const getAccessToken = async (code, state, config) => {
   const requestParams = {
@@ -77,7 +79,13 @@ const findOrCreateUser = async (oauthUser) => {
   return ourServiceUserInfo;
 };
 
+const logout = async (token) => {
+  const decoded = jwt.verify(token, jwtConfig.jwtSecretKey);
+  await db.user.update({ token: null }, { where: { id: decoded.id } });
+};
+
 module.exports = {
   getUserInfo,
   findOrCreateUser,
+  logout,
 };
