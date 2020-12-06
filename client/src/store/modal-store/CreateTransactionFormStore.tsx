@@ -2,7 +2,7 @@ import { observable, action, makeAutoObservable } from 'mobx';
 import RootStore from '../RootStore';
 
 export default class CreateTransactionFormStore {
-  rootStore;
+  rootStore: RootStore;
 
   @observable
   show = false;
