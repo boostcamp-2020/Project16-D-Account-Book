@@ -8,12 +8,18 @@ import { getExpenditureCategoriesHandler } from './__dummy-data__/api/category/g
 import { getIncomeCategoriesHandler } from './__dummy-data__/api/category/getIncome';
 import { getAccountsHandler } from './__dummy-data__/api/account/getAccounts';
 import { getTransactionsHandler } from './__dummy-data__/api/transaction/getTransactions';
+import {
+  createIncomeHandler,
+  createExpenditureHandler,
+} from './__dummy-data__/api/transaction/createIncomeExpenditure';
 
 const handlers = [
   getExpenditureCategoriesHandler,
   getIncomeCategoriesHandler,
   getAccountsHandler,
   getTransactionsHandler,
+  createIncomeHandler,
+  createExpenditureHandler,
 ];
 
 const server = setupServer(...handlers);
