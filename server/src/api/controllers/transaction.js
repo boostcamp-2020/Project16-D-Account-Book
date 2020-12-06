@@ -15,7 +15,14 @@ const createIncomeTransaction = async (ctx) => {
   ctx.body = createdIncome;
 };
 
+const createExpenditureTransaction = async (ctx) => {
+  const expenditureData = ctx.request.body;
+  const createdExpenditure = await transactionService.createExpenditure(expenditureData);
+  ctx.body = createdExpenditure;
+};
+
 module.exports = {
   findTransactions,
   createIncomeTransaction,
+  createExpenditureTransaction,
 };
