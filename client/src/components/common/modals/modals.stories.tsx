@@ -9,6 +9,7 @@ import { inputs, changes } from '../../../__dummy-data__/components/modal/modalT
 import { inputs as filterInputs, changes as filterChanges } from '../../../__dummy-data__/components/modal/modalFilter';
 import FormModalTransaction from './form-modal-transaction/FormModalCreateTransaction';
 import FormModalAccount from './form-modal-account/FormModalCreateAccount';
+import FormModalCategory from './form-modal-category/FormModalCreateCategory';
 import styled from 'styled-components';
 
 export default {
@@ -75,4 +76,8 @@ export const FormModalTransactionDefault: React.FC = () => {
 
 export const FormModalAccountDefault: React.FC = () => {
   return <FormModalAccount />;
+};
+
+export const FormModalCategoryDefault: React.FC = () => {
+  return <FormModalCategory />;
 };
