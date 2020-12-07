@@ -16,6 +16,7 @@ import FilterOption from '../../components/transaction-page/filter-option/Filter
 import { useHistory } from 'react-router-dom';
 import FormModalFilter from '../../components/common/modals/form-modal-filter/FormModalFilter';
 import FormModalCreateTransaction from '../../components/common/modals/form-modal-transaction/FormModalCreateTransaction';
+import FormModalUpdateTransaction from '../../components/common/modals/form-modal-transaction/FormModalUpdateTransaction';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -88,7 +89,8 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
     <>
       <FormModalFilter accountbookId={accountbookId} />
       <FormModalCreateTransaction />
-      <Sidebar smallAccountbooks={smallAccountbookItems} />
+      <FormModalUpdateTransaction />
+      ) <Sidebar smallAccountbooks={smallAccountbookItems} />
       <MenuNavigation />
       <HeaderNavigationWrapper>
         <HeaderNavigation currentPage={'transaction'} />
