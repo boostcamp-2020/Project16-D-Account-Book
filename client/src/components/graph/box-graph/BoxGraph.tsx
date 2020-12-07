@@ -33,7 +33,7 @@ const BoxAnimation = (ratio: number) => keyframes`
   height:100%;
 }
 100%{
-  width:${ratio}%;
+  width:${ratio};
   height:100%;
 }
 `;
@@ -57,8 +57,8 @@ const BoxGraph: React.FC<BoxChartValue> = ({ title, color, ratio, value }: BoxCh
     <BoxGraphWrapper>
       <BoxGraphTitle>{title}</BoxGraphTitle>
       <BoxGraphRatio>{ratio}%</BoxGraphRatio>
-      <BoxGraphMain viewBox="0 0 100 2em">
-        <Box x="0" y="0" width={ratio} color={color} ratio={ratio} />
+      <BoxGraphMain>
+        <Box x="0" y="0" width={ratio} height={'100%'} color={color} ratio={ratio} />
       </BoxGraphMain>
       <BoxGraphValue>{value}원</BoxGraphValue>
     </BoxGraphWrapper>
