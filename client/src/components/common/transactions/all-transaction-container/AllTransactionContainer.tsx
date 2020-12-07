@@ -61,4 +61,4 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
   );
 };
 
-export default memo(AllTransactionContainer);
+export default AllTransactionContainer;

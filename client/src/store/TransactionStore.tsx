@@ -53,8 +53,17 @@ export default class TransactionStore {
   @action
   addNewTransaction = (transaction: Income | Expenditure): void => {
     const date = new Date(transaction.date);
-    const currentDate = this.rootStore.dateStore.startDate;
-    if (date.getMonth() === currentDate.getMonth() && date.getFullYear() === currentDate.getFullYear()) {
+    const startDate = this.rootStore.dateStore.startDate;
+    const endDate = this.rootStore.dateStore.endDate;
+    const filterFormStore = this.rootStore.modalStore.formFilterStore;
+    if (this.isFilterMode) {
+      if (date.getTime() >= startDate.getTime() && date.getTime() < endDate.getTime()) {
+        this.transactions = [...this.transactions, transaction];
+      }
+    } else if (
+      date.getTime() >= filterFormStore.startDate.date.getTime() &&
+      date.getTime() < filterFormStore.endDate.date.getTime()
+    ) {
       this.transactions = [...this.transactions, transaction];
       const {
         selectedAccounts: account,

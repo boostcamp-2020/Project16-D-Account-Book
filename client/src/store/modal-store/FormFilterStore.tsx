@@ -50,7 +50,7 @@ export default class FormFilterStore {
   @action
   onChangeDate = (period: string): void => {
     const startDate = new Date();
-    const endDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24);
+    let endDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24);
 
     switch (period) {
       case datePeriod.ALL:
@@ -58,7 +58,6 @@ export default class FormFilterStore {
         this.endDate.date = endDate;
         this.startDate.text = '';
         this.endDate.text = '';
-        console.log(endDate);
         return;
       case datePeriod.LAST_ONE_WEEK:
         startDate.setDate(endDate.getDate() - 7);
@@ -79,6 +78,7 @@ export default class FormFilterStore {
 
     this.startDate.date = startDate;
     this.endDate.date = endDate;
+    endDate = new Date(endDate.getTime() - 1000 * 60 * 60 * 24);
     this.startDate.text = `시작일 ${startDate.getFullYear()}년 ${startDate.getMonth() + 1}월 ${startDate.getDate()}일`;
     this.endDate.text = `마지막일 ${endDate.getFullYear()}년 ${endDate.getMonth() + 1}월 ${endDate.getDate()}일`;
     this.selectedDate = period;
@@ -108,4 +108,52 @@ export default class FormFilterStore {
     const expenditureCategoryQuery = `expenditure_category=${this.selectedExpenditureCategories.join('+')}`;
     return `${startDateQuery}&${endDateQuery}&${accountQuery}&${incomeCategoryQuery}&${expenditureCategoryQuery}`;
   }
+
+  @action
+  setInfo = (
+    startDate: string,
+    endDate: string,
+    account: string,
+    incomeCategory: string,
+    expenditureCategory: string,
+  ): void => {
+    this.selectedAccounts = account.length === 0 ? [] : account.split(' ');
+    this.selectedIncomeCategories = incomeCategory.length === 0 ? [] : incomeCategory.split(' ');
+    this.selectedExpenditureCategories = expenditureCategory.length === 0 ? [] : expenditureCategory.split(' ');
+    this.startDate.date = new Date(startDate);
+    this.endDate.date = new Date(endDate);
+
+    const day = 1000 * 60 * 60 * 24;
+    if (this.startDate.date.setFullYear(this.startDate.date.getFullYear() + 1) + day < this.endDate.date.getTime()) {
+      this.onChangeDate(datePeriod.ALL);
+      return;
+    }
+
+    this.startDate.date = new Date(startDate);
+    if (this.startDate.date.setMonth(this.startDate.date.getMonth() + 6) + day < this.endDate.date.getTime()) {
+      this.onChangeDate(datePeriod.LAST_ONE_YEAR);
+      return;
+    }
+
+    this.startDate.date = new Date(startDate);
+    if (this.startDate.date.setMonth(this.startDate.date.getMonth() + 3) + day < this.endDate.date.getTime()) {
+      this.onChangeDate(datePeriod.LAST_SIX_MONTH);
+      return;
+    }
+
+    this.startDate.date = new Date(startDate);
+    if (this.startDate.date.setMonth(this.startDate.date.getMonth() + 1) + day < this.endDate.date.getTime()) {
+      this.onChangeDate(datePeriod.LAST_THREE_MONTH);
+      return;
+    }
+
+    this.startDate.date = new Date(startDate);
+    if (this.startDate.date.setDate(this.startDate.date.getDate() + 7) < this.endDate.date.getTime()) {
+      this.onChangeDate(datePeriod.LAST_ONE_MONTH);
+      return;
+    }
+
+    this.startDate.date = new Date(startDate);
+    this.onChangeDate(datePeriod.LAST_ONE_WEEK);
+  };
 }

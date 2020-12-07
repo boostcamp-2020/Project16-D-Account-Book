@@ -13,7 +13,6 @@ import Income, { isIncome } from '../../types/income';
 import Expenditure from '../../types/expenditure';
 import { ParsedQuery } from 'query-string';
 import FilterOption from '../../components/transaction-page/filter-option/FilterOption';
-import { useHistory } from 'react-router-dom';
 import FormModalFilter from '../../components/common/modals/form-modal-filter/FormModalFilter';
 import FormModalCreateTransaction from '../../components/common/modals/form-modal-transaction/FormModalCreateTransaction';
 
@@ -65,7 +64,6 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
   const { dateStore, transactionStore } = rootStore;
   const { formFilterStore } = rootStore.modalStore;
-  const history = useHistory();
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
   useEffect(() => {
@@ -82,6 +80,13 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       incomeCategory: income_category,
       expenditureCategory: expenditure_category,
     });
+    formFilterStore.setInfo(
+      start_date as string,
+      end_date as string,
+      account as string,
+      income_category as string,
+      expenditure_category as string,
+    );
   }, [query, accountbookId]);
 
   return useObserver(() => (
