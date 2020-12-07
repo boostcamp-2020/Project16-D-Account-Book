@@ -18,8 +18,9 @@ const FormModalUpdateTransaction: React.FC = () => {
 
   const show = updateModalStore.show;
 
-  const [inputs, changes] = UseTransactionFrom();
+  const startInputData = updateModalStore.converIncomeExpenditureToTransactionForm;
 
+  const [inputs, changes] = UseTransactionFrom(startInputData);
   const inputListInputs = {
     ...inputs,
     categories: {
@@ -32,7 +33,9 @@ const FormModalUpdateTransaction: React.FC = () => {
       items: accounts,
       selected: inputs.accounts,
     },
+    date: inputs.date.replace(/Z/g, ''),
   };
+  changes.classify = undefined;
 
   const closeModal = (): void => {
     updateModalStore.setShowFalse();
