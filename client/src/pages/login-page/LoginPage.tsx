@@ -4,6 +4,11 @@ import LargeKakaoLoginButton from '../../components/login-button/kakao-login-but
 import SmallKakaoLoginButton from '../../components/login-button/kakao-login-button/SmallKakaoLoginButton';
 import LargeNaverLoginButton from '../../components/login-button/naver-login-button/LargeNaverLoginButton';
 import SmallNaverLoginButton from '../../components/login-button/naver-login-button/SmallNaverLoginButton';
+import useStore from '../../hook/use-store/useStore';
+import { useHistory } from 'react-router-dom';
+import { useObserver } from 'mobx-react';
+import authService from '../../services/auth';
+import User from '../../types/user';
 
 const MainContainer = styled.div`
   box-sizing: content-box;
@@ -66,7 +71,22 @@ const Title = styled.div`
 `;
 
 const LoginPage: React.FC = () => {
-  return (
+  const { rootStore } = useStore();
+  const history = useHistory();
+
+  const kakaoLogin = async () => {
+    const user: User = await authService.kakaoLogin;
+    rootStore.userStore.updateUser(user);
+    history.push('/');
+  };
+
+  const naverLogin = async () => {
+    const user: User = await authService.naverLogin;
+    rootStore.userStore.updateUser(user);
+    history.push('/');
+  };
+
+  return useObserver(() => (
     <MainContainer>
       <Title>
         Manage <br />
@@ -74,15 +94,15 @@ const LoginPage: React.FC = () => {
         Accountbook
       </Title>
       <LargeLoginButtonContainer>
-        <LargeKakaoLoginButton />
-        <LargeNaverLoginButton />
+        <LargeKakaoLoginButton onClick={kakaoLogin} />
+        <LargeNaverLoginButton onClick={naverLogin} />
       </LargeLoginButtonContainer>
       <SmallLoginButtonContainer>
-        <SmallKakaoLoginButton />
-        <SmallNaverLoginButton />
+        <SmallKakaoLoginButton onClick={kakaoLogin} />
+        <SmallNaverLoginButton onClick={naverLogin} />
       </SmallLoginButtonContainer>
     </MainContainer>
-  );
+  ));
 };
 
 export default LoginPage;
