@@ -19,7 +19,7 @@ export default class UserStore {
   }
 
   @action
-  login = (user: User): void => {
+  updateUser = (user: User): void => {
     this.userId = user.userId;
     this.provider = user.provider;
     this.nickname = user.nickname;
@@ -27,7 +27,7 @@ export default class UserStore {
   };
 
   @action
-  logout = (): void => {
+  deleteUser = (): void => {
     this.userId = null;
     this.provider = '';
     this.nickname = '';
