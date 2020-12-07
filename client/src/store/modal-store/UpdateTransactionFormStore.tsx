@@ -1,7 +1,8 @@
-import { observable, action, makeAutoObservable } from 'mobx';
+import { observable, action, makeAutoObservable, computed } from 'mobx';
 import RootStore from '../RootStore';
-import Income from '../../types/income';
+import Income, { isIncome } from '../../types/income';
 import Expenditure from '../../types/expenditure';
+import { ITransactionForm } from '../../types/TransactionForm';
 
 type IncomeExpenditure = Income | Expenditure;
 
@@ -38,4 +39,13 @@ export default class UpdateTransactionFormStore {
   loadIncomeExpenditure = (incomeExpenditure: IncomeExpenditure): void => {
     this.incomeExpenditure = incomeExpenditure;
   };
+
+  @computed
+  get isIncomeMode(): boolean | undefined {
+    if (this.incomeExpenditure === undefined) {
+      return undefined;
+    }
+
+    return isIncome(this.incomeExpenditure);
+  }
 }
