@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Category from '../../components/common/category/Category';
 import AddCategoryButton from '../../components/common/add-category-button/AddCategoryButton';
 import useStore from '../../hook/use-store/useStore';
-import { useObserver, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 
 const SettingsCategoryViewWrapper = styled.div`
   position: absolute;
