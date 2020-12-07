@@ -4,4 +4,11 @@ export interface Category {
   color: string;
 }
 
+export interface CategoryRequest {
+  accountbookId: number;
+  id: number;
+  name: string;
+  color: string;
+}
+
 export default Category;
