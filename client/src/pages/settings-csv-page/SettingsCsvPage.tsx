@@ -8,7 +8,7 @@ const SettingsCsvPageWrapper = styled.div`
   display: flex;
 `;
 
-const SettingsBody = styled.div`
+export const SettingsBody = styled.div`
   position: absolute;
   top: 0%;
   left: 25%;

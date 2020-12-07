@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { Options } from '../../types/options';
+import { Options } from '../../types/dropdownOptions';
 import {
   ITransactionForm,
   ITransactionFormChange,

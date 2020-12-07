@@ -46,19 +46,19 @@ const login = async (ctx) => {
     });
     ctx.state.user = ourServiceUser;
     ctx.body = ourServiceUser;
-    console.log(ourServiceUser);
-    console.log(jwtToken);
   } catch (e) {
     ctx.throw(500, e);
   }
 };
 
 const logout = async (ctx) => {
-  try {
-    const { provider } = ctx.params;
-  } catch (err) {
-    ctx.throw(500, err);
-  }
+  const token = ctx.cookies.get('jwt');
+  await oauthService.logout(token);
+  ctx.cookies.set('jwt', null, {
+    maxAge: 0,
+    httpOnly: true,
+  });
+  ctx.status = 204;
 };
 
 module.exports = {

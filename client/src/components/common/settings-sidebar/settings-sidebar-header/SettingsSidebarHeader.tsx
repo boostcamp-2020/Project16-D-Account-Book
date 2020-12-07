@@ -22,7 +22,7 @@ const BackButtonWrapper = styled.div`
 
 const SettingsTitle = styled.div`
   padding-top: 0.3em;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 `;
 
 const SettingsSidebarHeader = ({ goToPreviousPage }: SettingsSidebarHeaderProps): JSX.Element => {
