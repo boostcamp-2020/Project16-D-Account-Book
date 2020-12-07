@@ -6,9 +6,12 @@ interface PreviousButton {
 
 const PreviousButton: React.FC<PreviousButton> = ({ onClick }: PreviousButton) => {
   return (
-    <svg viewBox="0 0 24 24" onClick={onClick}>
-      <path d="M0 0h24v24H0V0z" fill="none" />
-      <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
+    <svg x="0px" y="0px" viewBox="0 0 256 256" onClick={onClick}>
+      <g>
+        <g>
+          <polygon points="207.093,30.187 176.907,0 48.907,128 176.907,256 207.093,225.813 109.28,128" />
+        </g>
+      </g>
     </svg>
   );
 };
