@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Options } from '../../../../types/options';
+import { Options } from '../../../../types/dropdownOptions';
 import InputText from '../../inputs/input-text/InputText';
 import ModalClassify from '../../inputs/modal-classify/ModalClassify';
 import SingleInputDropdown from '../../inputs/single-input-dropdown/SingleInputDropdown';

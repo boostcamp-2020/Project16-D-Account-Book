@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Options } from '../../../../types/options';
+import { Options } from '../../../../types/dropdownOptions';
 import SingleInputDropdown from '../../inputs/single-input-dropdown/SingleInputDropdown';
 import SelectPaymentMethod from '../../inputs/select-payment-method/SelectPaymentMethod';
 import MultiInputDropdownWithCheckBox from '../../inputs/multi-input-dropdown/MultiInputDropdownWithCheckBox';
@@ -53,7 +53,7 @@ const InputWrapper = styled.div`
 `;
 
 const InputLabel = styled.p`
-  font-size: 1.3em;
+  font-size: 1rem;
 `;
 
 const DateRange = styled.div`

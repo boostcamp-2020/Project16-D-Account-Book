@@ -2,7 +2,7 @@ import RootStore from './RootStore';
 import Account from '../types/account';
 import AccountService from '../services/account';
 import { observable, action, makeObservable, computed } from 'mobx';
-import { Options } from '../types/options';
+import Options from '../types/dropdownOptions';
 export default class AccountStore {
   rootStore;
 

@@ -1,4 +1,3 @@
-const db = require('@models');
 const { getAccountbookById } = require('@services/accountbook');
 
 const getIncomeCategoriesByAccountbookId = async (id) => {

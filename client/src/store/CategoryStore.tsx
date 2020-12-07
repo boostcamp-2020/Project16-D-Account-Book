@@ -2,7 +2,7 @@ import { observable, action, makeObservable, computed } from 'mobx';
 import Category from '../types/category';
 import RootStore from './RootStore';
 import CategoryService from '../services/category';
-import { Options } from '../types/options';
+import Options from '../types/dropdownOptions';
 export default class CategoryStore {
   rootStore;
 

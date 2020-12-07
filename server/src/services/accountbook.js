@@ -14,6 +14,17 @@ const getAccountbookById = async (id) => {
   return accountbook;
 };
 
+const getAccountbooksByUserId = async (userId) => {
+  const accountbooks = await db.userAccountbook.findAll({
+    where: {
+      userId,
+    },
+    attributes: ['id', 'authority', 'description', 'color', 'accountbookId'],
+  });
+  return accountbooks;
+};
+
 module.exports = {
   getAccountbookById,
+  getAccountbooksByUserId,
 };

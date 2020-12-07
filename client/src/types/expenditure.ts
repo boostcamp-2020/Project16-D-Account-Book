@@ -1,7 +1,7 @@
 import Category from './category';
 import Account from './account';
 
-export default interface Expenditure {
+export interface Expenditure {
   id: number;
   amount: number;
   place: string;
@@ -20,3 +20,5 @@ export interface ExpenditureRequest {
   date: string;
   memo: string;
 }
+
+export default Expenditure;
