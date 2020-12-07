@@ -2,6 +2,28 @@ const db = require('@models');
 const { Op } = require('sequelize');
 const { getAccountbookById } = require('@services/accountbook');
 
+const findIncomeById = async (id) => {
+  const income = await db.income.findOne({
+    attributes: ['id', 'amount', 'content', 'date', 'memo'],
+    where: {
+      id,
+    },
+    include: [
+      {
+        model: db.incomeCategory,
+        as: 'category',
+        attributes: ['id', 'name', 'color'],
+      },
+      {
+        model: db.account,
+        attributes: ['id', 'name', 'color'],
+      },
+    ],
+  });
+
+  return income;
+};
+
 const findIncomes = async (accountbookId, startDate, endDate) => {
   const incomes = await db.income.findAll({
     attributes: ['id', 'amount', 'content', 'date', 'memo'],
@@ -66,24 +88,7 @@ const createIncome = async ({ accountbookId, incomeCategoryId, accountId, amount
     accountId,
   });
 
-  const createdIncome = await db.income.findOne({
-    attributes: ['id', 'amount', 'content', 'date', 'memo'],
-    where: {
-      id: income.id,
-    },
-    include: [
-      {
-        model: db.incomeCategory,
-        as: 'category',
-        attributes: ['id', 'name', 'color'],
-      },
-      {
-        model: db.account,
-        attributes: ['id', 'name', 'color'],
-      },
-    ],
-  });
-
+  const createdIncome = await findIncomeById(income.id);
   return createdIncome;
 };
 
@@ -120,9 +125,27 @@ const createExpenditure = async ({ accountbookId, expenditureCategoryId, account
   return createdExpenditure;
 };
 
+const updateIncome = async (incomeId, { incomeCategoryId, accountId, amount, content, date, memo }) => {
+  await db.income.update(
+    {
+      incomeCategoryId,
+      accountId,
+      amount,
+      content,
+      date,
+      memo,
+    },
+    { where: { id: incomeId } },
+  );
+
+  const income = await findIncomeById(incomeId);
+  return income;
+};
+
 module.exports = {
   findIncomes,
   findExpenditures,
   createIncome,
   createExpenditure,
+  updateIncome,
 };
