@@ -1,8 +1,9 @@
-import Category from '../types/category';
+import Category, { CategoryRequest } from '../types/category';
 import instance from '../api/axios';
 const categoryAPIAddress = {
   getIncome: '/api/categories/income',
   getExpenditure: '/api/categories/expenditure',
+  createIncome: '/api/categories/income',
 };
 
 export default {
@@ -19,5 +20,8 @@ export default {
         accountbook_id: id,
       },
     });
+  },
+  createIncome: async (incomeCategory: CategoryRequest): Promise<Category> => {
+    return await instance.post(categoryAPIAddress.createIncome, incomeCategory);
   },
 };
