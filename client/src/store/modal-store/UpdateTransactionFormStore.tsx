@@ -40,6 +40,7 @@ export default class UpdateTransactionFormStore {
     this.incomeExpenditure = incomeExpenditure;
   };
 
+  // 수입일때 True, 지출일때는 False이다.
   @computed
   get isIncomeMode(): boolean | undefined {
     if (this.incomeExpenditure === undefined) {
@@ -47,5 +48,36 @@ export default class UpdateTransactionFormStore {
     }
 
     return isIncome(this.incomeExpenditure);
+  }
+
+  @computed
+  get converIncomeExpenditureToTransactionForm(): ITransactionForm | undefined {
+    if (this.incomeExpenditure === undefined) {
+      return undefined;
+    }
+
+    if (isIncome(this.incomeExpenditure)) {
+      return {
+        classify: true,
+        price: this.incomeExpenditure.amount + '',
+        categories: this.incomeExpenditure.category.id + '',
+        accounts: this.incomeExpenditure.account.id + '',
+        content: this.incomeExpenditure.content,
+        date: this.incomeExpenditure.date as string,
+        memo: this.incomeExpenditure.memo || '',
+      };
+    }
+
+    if (!isIncome(this.incomeExpenditure)) {
+      return {
+        classify: false,
+        price: this.incomeExpenditure.amount + '',
+        categories: this.incomeExpenditure.category.id + '',
+        accounts: this.incomeExpenditure.account.id + '',
+        content: this.incomeExpenditure.place,
+        date: this.incomeExpenditure.date as string,
+        memo: this.incomeExpenditure.memo || '',
+      };
+    }
   }
 }
