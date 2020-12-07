@@ -1,5 +1,3 @@
-import { Options } from './dropdownOptions';
-
 export interface ITransactionForm {
   classify: boolean;
   price: number | string;
