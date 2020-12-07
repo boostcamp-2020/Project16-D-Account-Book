@@ -8,7 +8,7 @@ import AllTransactionContainer from '../../components/common/transactions/all-tr
 import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
 import useStore from '../../hook/use-store/useStore';
-import { useObserver } from 'mobx-react';
+import { useObserver, observer } from 'mobx-react';
 import Income, { isIncome } from '../../types/income';
 import Expenditure from '../../types/expenditure';
 import { ParsedQuery } from 'query-string';
@@ -89,7 +89,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
     );
   }, [query, accountbookId]);
 
-  return useObserver(() => (
+  return (
     <>
       <FormModalFilter accountbookId={accountbookId} />
       <FormModalCreateTransaction />
@@ -124,7 +124,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
         <AllTransactionContainer transactions={transactionStore.transactions} />
       </ViewWrapper>
     </>
-  ));
+  );
 };
 
-export default TransactionView;
+export default observer(TransactionView);

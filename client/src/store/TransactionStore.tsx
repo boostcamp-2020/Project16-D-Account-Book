@@ -42,12 +42,16 @@ export default class TransactionStore {
 
   createIncome = async (income: IncomeRequest): Promise<void> => {
     const createdIncome = await transactionService.createIncome(income);
-    this.addNewTransaction(createdIncome);
+    runInAction(() => {
+      this.addNewTransaction(createdIncome);
+    });
   };
 
   createExpenditure = async (expenditure: ExpenditureRequest): Promise<void> => {
     const createdExpenditure = await transactionService.createExpenditure(expenditure);
-    this.addNewTransaction(createdExpenditure);
+    runInAction(() => {
+      this.addNewTransaction(createdExpenditure);
+    });
   };
 
   @action
@@ -56,15 +60,17 @@ export default class TransactionStore {
     const startDate = this.rootStore.dateStore.startDate;
     const endDate = this.rootStore.dateStore.endDate;
     const filterFormStore = this.rootStore.modalStore.formFilterStore;
-    if (this.isFilterMode) {
+    if (!this.isFilterMode) {
       if (date.getTime() >= startDate.getTime() && date.getTime() < endDate.getTime()) {
-        this.transactions = [...this.transactions, transaction];
+        this.transactions.push(transaction);
+        //this.transactions = [...this.transactions, transaction];
       }
     } else if (
       date.getTime() >= filterFormStore.startDate.date.getTime() &&
       date.getTime() < filterFormStore.endDate.date.getTime()
     ) {
-      this.transactions = [...this.transactions, transaction];
+      this.transactions.push(transaction);
+      //this.transactions = [...this.transactions, transaction];
       const {
         selectedAccounts: account,
         selectedIncomeCategories: incomeCategory,

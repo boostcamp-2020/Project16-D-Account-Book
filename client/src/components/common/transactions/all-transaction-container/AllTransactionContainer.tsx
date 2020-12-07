@@ -5,6 +5,7 @@ import Expenditure from '../../../../types/expenditure';
 import NotFoundTransaction from '../../not-found-transaction/NotFoundTransaction';
 import Spinner from '../../spinner/Spinner';
 import useStore from '../../../../hook/use-store/useStore';
+import { observer } from 'mobx-react';
 
 interface Props {
   transactions: Array<Income | Expenditure>;
@@ -17,7 +18,7 @@ const calcSameDateTransactions = (transactions: Array<Income | Expenditure>): Ar
   let beforeMonth = 0;
   let beforeDay = 0;
 
-  transactions.sort((transaction1, transaction2) => {
+  transactions = transactions.slice().sort((transaction1, transaction2) => {
     return new Date(transaction2.date).getTime() - new Date(transaction1.date).getTime();
   });
 
@@ -61,4 +62,4 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
   );
 };
 
-export default AllTransactionContainer;
+export default observer(AllTransactionContainer);
