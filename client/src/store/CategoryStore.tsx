@@ -48,6 +48,16 @@ export default class CategoryStore {
     this.incomeCategories = [...this.incomeCategories, incomeCategory];
   };
 
+  createExpenditureCategories = async (expenditureCategory: CategoryRequest): Promise<void> => {
+    const createdExpenditureCategory = await CategoryService.createExpenditureCategory(expenditureCategory);
+    this.addNewExpenditureCategory(createdExpenditureCategory);
+  };
+
+  @action
+  addNewExpenditureCategory = (expenditureCategory: Category): void => {
+    this.expenditureCategories = [...this.expenditureCategories, expenditureCategory];
+  };
+
   @computed
   get incomeOptions(): Options[] {
     const data: Options[] = this.incomeCategories.map((income) => {
