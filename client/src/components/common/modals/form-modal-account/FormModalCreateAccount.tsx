@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useStore from '../../../../hook/use-store/useStore';
 import FormModalWrapper from '../form-modal-template/FormModalWrapper';
 import FormModalItem from '../form-modal-template/FormModalItemWrapper';
 import FormModalLabel from '../form-modal-template/FormModalLabel';
@@ -9,7 +10,10 @@ import AccountPreview from '../../account-preview/AccountPreview';
 import InputText from '../../inputs/input-text/InputText';
 
 const FormModalAccount: React.FC = () => {
-  const [name, setName] = useState<string>('가계부 1');
+  const { rootStore } = useStore();
+  const toggle = rootStore.modalStore.createAccountFormStore;
+
+  const [name, setName] = useState<string>('부스트카드');
   const [inputColor, setInputColor] = useState<string>('black');
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,10 +24,15 @@ const FormModalAccount: React.FC = () => {
     setInputColor(color.hex);
   };
 
+  const { show } = toggle;
+  const modalToggle = (): void => {
+    toggle.toggleShow();
+  };
+
   return (
-    <ModalBackground show={true}>
+    <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
-        <FormModalHeader modalName={'결제수단 생성'} blueName={'생성'} />
+        <FormModalHeader modalName={'결제수단 생성'} blueName={'생성'} closeModal={modalToggle} />
         <FormModalItem>
           <AccountPreview title={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
@@ -31,7 +40,7 @@ const FormModalAccount: React.FC = () => {
           <FormModalLabel>결제수단 이름</FormModalLabel>
           <InputText
             maxLength={8}
-            placeholder={'최대 8자의 카테고리명을 입력해주세요.'}
+            placeholder={'최대 8자의 결제수단명을 입력해주세요.'}
             value={name}
             onChange={onChangeName}
           />
