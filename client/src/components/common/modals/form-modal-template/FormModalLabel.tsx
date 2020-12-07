@@ -9,6 +9,7 @@ const FormModalLabelWrapper = styled.div`
   width: 10vw;
   font-size: 1.2rem;
   padding-right: 10px;
+  white-space: nowrap;
 `;
 
 const FormModalLabel: React.FC<IFormModal> = ({ children }: IFormModal) => {
