@@ -1,16 +1,16 @@
 const { getAccountbookById } = require('@services/accountbook');
 
 const getIncomeCategoriesByAccountbookId = async (id) => {
-  const accountbook = await getAccountbookById(id);
-  const incomeCategories = await accountbook.getIncomeCategories({
+  const accountBook = await getAccountbookById(id);
+  const incomeCategories = await accountBook.getIncomeCategories({
     attributes: ['id', 'name', 'color'],
   });
   return incomeCategories;
 };
 
 const getExpenditureCategoriesByAccountbookId = async (id) => {
-  const accountbook = await getAccountbookById(id);
-  const expenditureCategories = await accountbook.getExpenditureCategories({
+  const accountBook = await getAccountbookById(id);
+  const expenditureCategories = await accountBook.getExpenditureCategories({
     attributes: ['id', 'name', 'color'],
   });
 

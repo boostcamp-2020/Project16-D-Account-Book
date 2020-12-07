@@ -15,6 +15,7 @@ import { ParsedQuery } from 'query-string';
 import FilterOption from '../../components/transaction-page/filter-option/FilterOption';
 import { useHistory } from 'react-router-dom';
 import FormModalFilter from '../../components/common/modals/form-modal-filter/FormModalFilter';
+import FormModalCreateTransaction from '../../components/common/modals/form-modal-transaction/FormModalCreateTransaction';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -63,6 +64,7 @@ const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<numbe
 const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
   const { dateStore, transactionStore } = rootStore;
+  const { formFilterStore } = rootStore.modalStore;
   const history = useHistory();
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
@@ -85,6 +87,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   return useObserver(() => (
     <>
       <FormModalFilter accountbookId={accountbookId} />
+      <FormModalCreateTransaction />
       <Sidebar smallAccountbooks={smallAccountbookItems} />
       <MenuNavigation />
       <HeaderNavigationWrapper>

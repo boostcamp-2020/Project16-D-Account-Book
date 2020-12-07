@@ -4,18 +4,21 @@ import DateStore from './DateStore';
 import CategoryStore from './CategoryStore';
 import TransactionStore from './TransactionStore';
 import ModalStore from './modal-store/ModalStore';
+import AccountStore from './AccountStore';
 
 export default class RootStore {
-  dateStore;
-  transactionStore;
-  modalStore;
-  categoryStore;
+  dateStore: DateStore;
+  transactionStore: TransactionStore;
+  modalStore: ModalStore;
+  categoryStore: CategoryStore;
+  accountStore: AccountStore;
 
   constructor() {
     this.dateStore = new DateStore(this);
     this.transactionStore = new TransactionStore(this);
     this.modalStore = new ModalStore(this);
     this.categoryStore = new CategoryStore(this);
+    this.accountStore = new AccountStore(this);
   }
 }
 

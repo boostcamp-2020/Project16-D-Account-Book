@@ -4,24 +4,32 @@ import UseTransactionForm from '../../../../hook/use-transaction-form/useTransac
 import FormModalWrapper from '../form-modal-template/FormModalWrapper';
 import ModalBackground from '../modal-background/ModalBackground';
 import FormModalHeader from '../form-modal-header/FormModalHeader';
-
-//임시용
-import dummyOptions from '../../../../__dummy-data__/components/inputs/dummyOptions';
+import useStore from '../../../../hook/use-store/useStore';
+import { convertToIncome, convertToExpenditure } from '../formUtils';
+import { observer } from 'mobx-react';
+import useGetParam from '../../../../hook/use-get-param/useGetParam';
 
 const FormModalTransaction: React.FC = () => {
-  // 임시 카테고리
-  const category = dummyOptions;
-  // 임시 accounts
-  const accounts = dummyOptions;
+  const { rootStore } = useStore();
+  const id = useGetParam();
+  const toggle = rootStore.modalStore.createTransactionFormStore;
 
-  //임시로 빈 객체를 넣음
+  const incomeCategory = rootStore.categoryStore.incomeOptions;
+  const expenditureCategory = rootStore.categoryStore.expenditureOptions;
+  const accounts = rootStore.accountStore.accountOptions;
+
   const [inputs, changes] = UseTransactionForm();
+
+  const { show } = toggle;
+  const modalToggle = (): void => {
+    toggle.toggleShow();
+  };
 
   const inputListInputs = {
     ...inputs,
     categories: {
       placeholder: '카테고리',
-      items: category,
+      items: inputs.classify ? incomeCategory : expenditureCategory,
       selected: inputs.categories,
     },
     accounts: {
@@ -31,14 +39,44 @@ const FormModalTransaction: React.FC = () => {
     },
   };
 
+  if (!show) {
+    return null;
+  }
+
+  const expenditureClick = () => {
+    try {
+      const expenditure = convertToExpenditure(inputs, id);
+      rootStore.transactionStore.createExpenditure(expenditure);
+    } catch (e) {
+      alert(e.message);
+    } finally {
+      modalToggle();
+    }
+  };
+  const incomeClick = () => {
+    try {
+      const income = convertToIncome(inputs, id);
+      rootStore.transactionStore.createIncome(income);
+    } catch (e) {
+      alert(e.message);
+    } finally {
+      modalToggle();
+    }
+  };
+
   return (
-    <ModalBackground show={true}>
+    <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
-        <FormModalHeader modalName={'내역작성'} blueName={'완료'} />
+        <FormModalHeader
+          modalName={'내역작성'}
+          blueName={'완료'}
+          closeModal={modalToggle}
+          clickBlue={inputs.classify ? expenditureClick : incomeClick}
+        />
         <TransactionInputList inputs={inputListInputs} changes={changes} />
       </FormModalWrapper>
     </ModalBackground>
   );
 };
 
-export default FormModalTransaction;
+export default observer(FormModalTransaction);

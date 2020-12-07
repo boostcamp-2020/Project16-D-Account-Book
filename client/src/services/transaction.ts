@@ -1,10 +1,12 @@
 import instance from '../api/axios';
 import { getFormattedDate } from '../utils/date';
-import Income from '../types/income';
-import Expenditure from '../types/expenditure';
+import Income, { IncomeRequest } from '../types/income';
+import Expenditure, { ExpenditureRequest } from '../types/expenditure';
 
 const transactionAPIAddress = {
   getTransactions: '/api/transactions',
+  createIncome: 'api/transactions/income',
+  createExpenditure: 'api/transactions/expenditure',
 };
 
 export default {
@@ -15,6 +17,7 @@ export default {
   ): Promise<Array<Income | Expenditure>> => {
     const formattedStartDate = getFormattedDate({ date: startDate, format: '.' });
     const foramttedEndDate = getFormattedDate({ date: endDate, format: '.' });
+
     return await instance.get(transactionAPIAddress.getTransactions, {
       params: {
         accountbook_id: accountbookId,
@@ -22,5 +25,11 @@ export default {
         end_date: foramttedEndDate,
       },
     });
+  },
+  createIncome: async (income: IncomeRequest): Promise<Income> => {
+    return await instance.post(transactionAPIAddress.createIncome, income);
+  },
+  createExpenditure: async (expenditure: ExpenditureRequest): Promise<Expenditure> => {
+    return await instance.post(transactionAPIAddress.createExpenditure, expenditure);
   },
 };
