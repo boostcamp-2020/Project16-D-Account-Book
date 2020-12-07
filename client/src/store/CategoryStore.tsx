@@ -1,8 +1,9 @@
 import { observable, action, makeObservable, computed } from 'mobx';
-import Category from '../types/category';
+import Category, { CategoryRequest } from '../types/category';
 import RootStore from './RootStore';
 import CategoryService from '../services/category';
 import Options from '../types/dropdownOptions';
+import category from '../services/category';
 export default class CategoryStore {
   rootStore;
 
@@ -35,6 +36,16 @@ export default class CategoryStore {
   updateExpenditureCategories = async (id: number): Promise<void> => {
     const expenditureCategories = await CategoryService.getExpenditureCategoryById(id);
     this.changeExpenditureCategories(expenditureCategories);
+  };
+
+  createIncomeCategories = async (incomeCategory: CategoryRequest): Promise<void> => {
+    const createdExpenditureCategory = await CategoryService.createIncomeCategory(incomeCategory);
+    this.addNewExpenditureCategory(createdExpenditureCategory);
+  };
+
+  @action
+  addNewIncomeCategory = (incomeCategory: Category): void => {
+    this.incomeCategories = [...this.incomeCategories, incomeCategory];
   };
 
   @computed
