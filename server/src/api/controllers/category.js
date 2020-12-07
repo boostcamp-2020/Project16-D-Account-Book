@@ -12,11 +12,19 @@ const getIncomeCategories = async (ctx) => {
   const incomeCategories = await categoryService.getIncomeCategoriesByAccountbookId(accountbookId);
   ctx.body = incomeCategories;
 };
+
 const getExpenditureCategories = async (ctx) => {
   const { accountbook_id: accountbookId } = ctx.request.query;
   validateAccountbookId(accountbookId);
   const expenditureCategories = await categoryService.getExpenditureCategoriesByAccountbookId(accountbookId);
   ctx.body = expenditureCategories;
+};
+
+const createIncomeCategory = async (ctx) => {
+  const { id: accountbookId } = ctx.request.query;
+  const incomeCategoryData = ctx.request.body;
+  const createdIncomeCategory = await categoryService.createIncomeCategory(accountbookId, incomeCategoryData);
+  ctx.body = createdIncomeCategory;
 };
 
 module.exports = {
