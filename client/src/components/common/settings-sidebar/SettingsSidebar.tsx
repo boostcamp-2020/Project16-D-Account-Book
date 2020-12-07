@@ -7,7 +7,6 @@ import SettingsSidebarBody from './settings-sidebar-body/SettingsSidebarBody';
 const SettingsSidebarWrapper = styled.div`
   width: 18%;
   height: 100vh;
-  overflow: auto;
   position: fixed;
   top: 0%;
   left: 0%;

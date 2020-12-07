@@ -5,7 +5,6 @@ import { LIGHT_GRAY, GRAY, BLUE } from '../../../../constants/color';
 const SettingsSidebarBodyWrapper = styled.div`
   margin: 0 auto;
   width: 100%;
-  z-index: 1;
   padding-top: 3em;
 `;
 
@@ -18,7 +17,6 @@ const SettingsSidebarMenuItem = styled.div<SettingsSidebarMenuItemProps>`
   padding: 12px 20px;
   cursor: pointer;
   font-size: 1rem;
-  width: 100%;
 
   &:hover {
     background-color: ${LIGHT_GRAY};

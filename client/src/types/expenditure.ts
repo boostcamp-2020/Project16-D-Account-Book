@@ -1,7 +1,7 @@
 import Category from './category';
 import Account from './account';
 
-export default interface Expenditure {
+export interface Expenditure {
   id: number;
   amount: number;
   place: string;
@@ -10,3 +10,5 @@ export default interface Expenditure {
   category: Category;
   account: Account;
 }
+
+export default Expenditure;
