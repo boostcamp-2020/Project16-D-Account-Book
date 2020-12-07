@@ -1,5 +1,6 @@
 import Account from '../types/account';
 import instance from '../api/axios';
+
 const accountAPIAddress = {
   getAccounts: '/api/accounts',
 };
