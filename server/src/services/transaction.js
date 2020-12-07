@@ -168,6 +168,10 @@ const deleteIncomeById = async (id) => {
   await db.income.destroy({ where: { id } });
 };
 
+const deleteExpenditureById = async (id) => {
+  await db.expenditure.destroy({ where: { id } });
+};
+
 module.exports = {
   findIncomes,
   findExpenditures,
@@ -176,4 +180,5 @@ module.exports = {
   updateIncome,
   updateExpenditure,
   deleteIncomeById,
+  deleteExpenditureById,
 };

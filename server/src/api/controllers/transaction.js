@@ -1,4 +1,5 @@
 const transactionService = require('@services/transaction');
+const transaction = require('../../services/transaction');
 
 const findTransactions = async (ctx) => {
   // eslint-disable-next-line camelcase
@@ -41,6 +42,12 @@ const deleteIncomeTransaction = async (ctx) => {
   ctx.status = 204;
 };
 
+const deleteExpenditureTransaction = async (ctx) => {
+  const { id } = ctx.request.params;
+  await transactionService.deleteExpenditureById(id);
+  ctx.status = 204;
+};
+
 module.exports = {
   findTransactions,
   createIncomeTransaction,
@@ -48,4 +55,5 @@ module.exports = {
   updateIncomeTransaction,
   updateExpenditureTransaction,
   deleteIncomeTransaction,
+  deleteExpenditureTransaction,
 };
