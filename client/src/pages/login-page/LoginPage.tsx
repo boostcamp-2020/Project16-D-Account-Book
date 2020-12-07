@@ -75,13 +75,13 @@ const LoginPage: React.FC = () => {
   const history = useHistory();
 
   const kakaoLogin = async () => {
-    const user: User = await authService.kakaoLogin;
+    const user: User = await authService.kakaoLogin();
     rootStore.userStore.updateUser(user);
     history.push('/');
   };
 
   const naverLogin = async () => {
-    const user: User = await authService.naverLogin;
+    const user: User = await authService.naverLogin();
     rootStore.userStore.updateUser(user);
     history.push('/');
   };
