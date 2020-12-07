@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { match } from 'react-router-dom';
 import styled from 'styled-components';
 import SettingsSidebar from '../../components/common/settings-sidebar/SettingsSidebar';
 import Account from '../../components/common/account/Account';
 import AddAccountButton from '../../components/common/add-account-button/AddAccountButton';
 import { accountsDummy } from '../../__dummy-data__/components/settings/accountData';
+
+interface Props {
+  match: match<{ id: string }>;
+}
 
 const SettingsAccountsPageWrapper = styled.div`
   display: flex;
@@ -41,7 +46,7 @@ const AccountItemWrapper = styled.div`
   cursor: pointer;
 `;
 
-const SettingsAccountsPage = (): JSX.Element => {
+const SettingsAccountsPage: React.FC<Props> = ({ match }: Props) => {
   // TODO: setter의 경우 카테고리 생성, 변경 모달창 구현 시 작업 예정
   const [accounts, setAccounts] = useState(accountsDummy);
 
