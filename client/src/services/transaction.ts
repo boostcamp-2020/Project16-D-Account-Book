@@ -18,18 +18,23 @@ export default {
     const formattedStartDate = getFormattedDate({ date: startDate, format: '.' });
     const foramttedEndDate = getFormattedDate({ date: endDate, format: '.' });
 
-    return await instance.get(transactionAPIAddress.getTransactions, {
+    const response = await instance.get(transactionAPIAddress.getTransactions, {
       params: {
         accountbook_id: accountbookId,
         start_date: formattedStartDate,
         end_date: foramttedEndDate,
       },
     });
+    return response.data;
   },
+
   createIncome: async (income: IncomeRequest): Promise<Income> => {
-    return await instance.post(transactionAPIAddress.createIncome, income);
+    const response = await instance.post(transactionAPIAddress.createIncome, income);
+    return response.data;
   },
+
   createExpenditure: async (expenditure: ExpenditureRequest): Promise<Expenditure> => {
-    return await instance.post(transactionAPIAddress.createExpenditure, expenditure);
+    const response = await instance.post(transactionAPIAddress.createExpenditure, expenditure);
+    return response.data;
   },
 };

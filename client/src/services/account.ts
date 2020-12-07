@@ -6,12 +6,12 @@ const accountAPIAddress = {
 };
 export default {
   getAccountsById: async (id: number): Promise<Account[]> => {
-    const data = await instance.get<any, Account[]>(accountAPIAddress.getAccounts, {
+    const response = await instance.get(accountAPIAddress.getAccounts, {
       params: {
         accountbook_id: id,
       },
     });
 
-    return data;
+    return response.data;
   },
 };
