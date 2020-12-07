@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { match } from 'react-router-dom';
 import styled from 'styled-components';
 import SettingsSidebar from '../../components/common/settings-sidebar/SettingsSidebar';
