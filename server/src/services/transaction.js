@@ -164,6 +164,10 @@ const updateExpenditure = async (expenditureId, { expenditureCategoryId, account
   return expenditure;
 };
 
+const deleteIncomeById = async (id) => {
+  await db.income.destroy({ where: { id } });
+};
+
 module.exports = {
   findIncomes,
   findExpenditures,
@@ -171,4 +175,5 @@ module.exports = {
   createExpenditure,
   updateIncome,
   updateExpenditure,
+  deleteIncomeById,
 };

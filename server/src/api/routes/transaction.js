@@ -8,4 +8,5 @@ router.post('/income', transactionController.createIncomeTransaction);
 router.post('/expenditure', transactionController.createExpenditureTransaction);
 router.patch('/income/:id', transactionController.updateIncomeTransaction);
 router.patch('/expenditure/:id', transactionController.updateExpenditureTransaction);
+router.delete('/income/:id', transactionController.deleteIncomeTransaction);
 module.exports = router;
