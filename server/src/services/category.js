@@ -27,8 +27,19 @@ const createIncomeCategory = async (id, { name, color }) => {
   return createdIncomeCategory;
 };
 
+const createExpenditureCategory = async (id, { name, color }) => {
+  const accountbook = await getAccountbookById(id);
+  const createdExpenditureCategory = await accountbook.createdExpenditureCategory({
+    name,
+    color,
+  });
+
+  return createdExpenditureCategory;
+};
+
 module.exports = {
   getIncomeCategoriesByAccountbookId,
   getExpenditureCategoriesByAccountbookId,
   createIncomeCategory,
+  createExpenditureCategory,
 };
