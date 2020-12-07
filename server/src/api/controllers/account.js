@@ -14,7 +14,8 @@ const getAccounts = async (ctx) => {
 };
 
 const createAccount = async (ctx) => {
-  const { id: accountbookId } = ctx.request.query;
+  // TODO: FE에서 accountbookId를 request body로 넘겨받는 로직 구현 필요
+  const accountbookId = 1;
   const accountData = ctx.request.body;
   const createdAccount = await accountService.createAccount(accountbookId, accountData);
   ctx.body = createdAccount;
