@@ -21,8 +21,16 @@ const createExpenditureTransaction = async (ctx) => {
   ctx.body = createdExpenditure;
 };
 
+const updateIncomeTransaction = async (ctx) => {
+  const { id } = ctx.request.params;
+  const incomeData = ctx.request.body;
+  const income = await transactionService.updateIncome(id, incomeData);
+  ctx.body = income;
+};
+
 module.exports = {
   findTransactions,
   createIncomeTransaction,
   createExpenditureTransaction,
+  updateIncomeTransaction,
 };
