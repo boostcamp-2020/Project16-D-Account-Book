@@ -11,6 +11,7 @@ const CategoryWrapper = styled.div`
   background-color: ${GRAY};
   box-sizing: border-box;
   border-radius: 360px;
+  padding: 9.5px 7.5px;
   cursor: pointer;
   display: flex;
   justify-content: center;
