@@ -112,7 +112,7 @@ const TransactionInputList: React.FC<ITransactionInputList> = ({ inputs, changes
       <InputWrapper>
         <InputLabel>내용</InputLabel>
         <Inputs>
-          <InputText placeholder={'날짜'} value={inputs.content} onChange={changes.content} />
+          <InputText placeholder={'내용'} value={inputs.content} onChange={changes.content} />
         </Inputs>
       </InputWrapper>
       <InputWrapper>
