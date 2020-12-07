@@ -24,6 +24,28 @@ const findIncomeById = async (id) => {
   return income;
 };
 
+const findExpenditureById = async (id) => {
+  const expenditure = await db.expenditure.findOne({
+    attributes: ['id', 'amount', 'place', 'date', 'memo'],
+    where: {
+      id,
+    },
+    include: [
+      {
+        model: db.expenditureCategory,
+        as: 'category',
+        attributes: ['id', 'name', 'color'],
+      },
+      {
+        model: db.account,
+        attributes: ['id', 'name', 'color'],
+      },
+    ],
+  });
+
+  return expenditure;
+};
+
 const findIncomes = async (accountbookId, startDate, endDate) => {
   const incomes = await db.income.findAll({
     attributes: ['id', 'amount', 'content', 'date', 'memo'],
@@ -104,24 +126,7 @@ const createExpenditure = async ({ accountbookId, expenditureCategoryId, account
     accountId,
   });
 
-  const createdExpenditure = await db.expenditure.findOne({
-    attributes: ['id', 'amount', 'place', 'date', 'memo'],
-    where: {
-      id: expenditure.id,
-    },
-    include: [
-      {
-        model: db.expenditureCategory,
-        as: 'category',
-        attributes: ['id', 'name', 'color'],
-      },
-      {
-        model: db.account,
-        attributes: ['id', 'name', 'color'],
-      },
-    ],
-  });
-
+  const createdExpenditure = await findExpenditureById(expenditure.id);
   return createdExpenditure;
 };
 
@@ -142,10 +147,28 @@ const updateIncome = async (incomeId, { incomeCategoryId, accountId, amount, con
   return income;
 };
 
+const updateExpenditure = async (expenditureId, { expenditureCategoryId, accountId, amount, place, date, memo }) => {
+  await db.expenditure.update(
+    {
+      expenditureCategoryId,
+      accountId,
+      amount,
+      place,
+      date,
+      memo,
+    },
+    { where: { id: expenditureId } },
+  );
+
+  const expenditure = await findExpenditureById(expenditureId);
+  return expenditure;
+};
+
 module.exports = {
   findIncomes,
   findExpenditures,
   createIncome,
   createExpenditure,
   updateIncome,
+  updateExpenditure,
 };
