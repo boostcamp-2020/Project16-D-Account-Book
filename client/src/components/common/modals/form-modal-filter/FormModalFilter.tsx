@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import FormFilter from './FormFilter';
 import ModalBackground from '../modal-background/ModalBackground';
 import FormModalWrapper from '../form-modal-template/FormModalWrapper';
@@ -11,7 +11,7 @@ import { useHistory } from 'react-router-dom';
 const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Element => {
   const history = useHistory();
   const { formFilterStore } = useStore().rootStore.modalStore;
-
+  const { rootStore } = useStore();
   const closeModal = () => {
     formFilterStore.setShow(false);
   };
@@ -21,6 +21,14 @@ const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Elem
     const query = formFilterStore.getQuery;
     history.push(`/accountbooks/${accountbookId}?${query}`);
   };
+
+  useEffect(() => {
+    formFilterStore.init();
+  }, [
+    rootStore.accountStore.accounts,
+    rootStore.categoryStore.incomeCategories,
+    rootStore.categoryStore.expenditureCategories,
+  ]);
 
   return useObserver(() => (
     <>

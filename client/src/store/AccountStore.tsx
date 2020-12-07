@@ -35,4 +35,16 @@ export default class AccountStore {
 
     return data;
   }
+
+  @computed
+  get accountFilterOptions(): Options[] {
+    const data: Options[] = this.accounts.map((account) => {
+      return {
+        value: account.name,
+        label: account.name,
+      };
+    });
+
+    return data;
+  }
 }

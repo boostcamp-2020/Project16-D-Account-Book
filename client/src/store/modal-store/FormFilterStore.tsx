@@ -8,24 +8,26 @@ import {
 } from '../../__dummy-data__/store/formFilterStore';
 import datePeriod from '../../constants/datePeriod';
 import { getFormattedDate } from '../../utils/date';
+import Options from '../../types/dropdownOptions';
 
 export default class FormFilterStore {
-  rootStore;
+  rootStore: RootStore;
   @observable show = false;
-  @observable dateOptions = dateOptions;
+  @observable dateOptions: Options[] = dateOptions;
   @observable selectedDate = datePeriod.ALL;
   @observable startDate = { text: '', date: new Date(0) };
   @observable endDate = { text: '', date: new Date(new Date().getTime() + 1000 * 60 * 60 * 24) };
-  @observable accountOptions = accountOptions;
-  @observable selectedAccounts: string[] = accountOptions.map((option) => option.value);
-  @observable incomeCategoryOptions = incomeCategoryOptions;
-  @observable selectedIncomeCategories: string[] = incomeCategoryOptions.map((option) => option.value);
-  @observable expenditureCategoryOptions = expenditureCategoryOptions;
-  @observable selectedExpenditureCategories: string[] = expenditureCategoryOptions.map((option) => option.value);
+  @observable accountOptions: Options[] = [];
+  @observable selectedAccounts: string[] = [];
+  @observable incomeCategoryOptions: Options[] = [];
+  @observable selectedIncomeCategories: string[] = [];
+  @observable expenditureCategoryOptions: Options[] = [];
+  @observable selectedExpenditureCategories: string[] = [];
 
   constructor(rootStore: RootStore) {
     makeObservable(this);
     this.rootStore = rootStore;
+    this.init();
   }
 
   @action
@@ -34,12 +36,12 @@ export default class FormFilterStore {
     this.selectedDate = datePeriod.ALL;
     this.startDate = { text: '', date: new Date(0) };
     this.endDate = { text: '', date: new Date(new Date().getTime() + 1000 * 60 * 60 * 24) };
-    this.accountOptions = accountOptions;
-    this.selectedAccounts = accountOptions.map((option) => option.value);
-    this.incomeCategoryOptions = incomeCategoryOptions;
-    this.selectedIncomeCategories = incomeCategoryOptions.map((option) => option.value);
-    this.expenditureCategoryOptions = expenditureCategoryOptions;
-    this.selectedExpenditureCategories = expenditureCategoryOptions.map((option) => option.value);
+    this.accountOptions = this.rootStore.accountStore.accountFilterOptions;
+    this.selectedAccounts = this.accountOptions.map((option) => option.value);
+    this.incomeCategoryOptions = this.rootStore.categoryStore.incomeFilterOptions;
+    this.selectedIncomeCategories = this.incomeCategoryOptions.map((option) => option.value);
+    this.expenditureCategoryOptions = this.rootStore.categoryStore.expenditureFilterOptions;
+    this.selectedExpenditureCategories = this.expenditureCategoryOptions.map((option) => option.value);
   };
 
   @action

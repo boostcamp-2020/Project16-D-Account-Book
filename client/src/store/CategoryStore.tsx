@@ -50,10 +50,34 @@ export default class CategoryStore {
   }
 
   @computed
+  get incomeFilterOptions(): Options[] {
+    const data: Options[] = this.incomeCategories.map((income) => {
+      return {
+        value: income.name,
+        label: income.name,
+      };
+    });
+
+    return data;
+  }
+
+  @computed
   get expenditureOptions(): Options[] {
     const data: Options[] = this.expenditureCategories.map((income) => {
       return {
         value: income.id + '',
+        label: income.name,
+      };
+    });
+
+    return data;
+  }
+
+  @computed
+  get expenditureFilterOptions(): Options[] {
+    const data: Options[] = this.expenditureCategories.map((income) => {
+      return {
+        value: income.name,
         label: income.name,
       };
     });

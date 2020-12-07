@@ -14,11 +14,11 @@ export default class RootStore {
   accountStore: AccountStore;
 
   constructor() {
+    this.categoryStore = new CategoryStore(this);
+    this.accountStore = new AccountStore(this);
     this.dateStore = new DateStore(this);
     this.transactionStore = new TransactionStore(this);
     this.modalStore = new ModalStore(this);
-    this.categoryStore = new CategoryStore(this);
-    this.accountStore = new AccountStore(this);
   }
 }
 
