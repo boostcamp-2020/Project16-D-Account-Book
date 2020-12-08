@@ -5,6 +5,7 @@ import TransactionStore from './TransactionStore';
 import ModalStore from './modal-store/ModalStore';
 import AccountStore from './AccountStore';
 import UserStore from './UserStore';
+import SocialStore from './SocialStore';
 
 export default class RootStore {
   dateStore: DateStore;
@@ -13,6 +14,7 @@ export default class RootStore {
   categoryStore: CategoryStore;
   accountStore: AccountStore;
   userStore: UserStore;
+  socialStore: SocialStore;
 
   constructor() {
     this.categoryStore = new CategoryStore(this);
@@ -21,6 +23,7 @@ export default class RootStore {
     this.dateStore = new DateStore(this);
     this.transactionStore = new TransactionStore(this);
     this.modalStore = new ModalStore(this);
+    this.socialStore = new SocialStore(this);
   }
 }
 
