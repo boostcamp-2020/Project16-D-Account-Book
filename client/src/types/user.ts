@@ -12,4 +12,10 @@ export interface SearchedUser {
   email: string;
 }
 
+export interface UserAccountbook {
+  id: number;
+  authority: number;
+  user: SearchedUser;
+}
+
 export default User;

@@ -1,5 +1,5 @@
 import { observable, action, makeObservable, runInAction } from 'mobx';
-import { SearchedUser } from '../types/user';
+import { SearchedUser, UserAccountbook } from '../types/user';
 import RootStore from './RootStore';
 import socialService from '../services/social';
 
@@ -11,6 +11,9 @@ export default class DateStore {
 
   @observable
   searchSuccess: boolean | null = null;
+
+  @observable
+  userAccountbooks: UserAccountbook[] = [];
 
   constructor(rootStore: RootStore) {
     makeObservable(this);
@@ -28,6 +31,17 @@ export default class DateStore {
         this.searchedUser = null;
         this.searchSuccess = false;
       }
+    });
+  };
+
+  @action
+  findUsers = async (accountbookId: number): Promise<void> => {
+    this.userAccountbooks = await socialService.findUsers(accountbookId);
+    runInAction(() => {
+      this.userAccountbooks?.sort((userAccountbook1, userAccountbook2) => {
+        return userAccountbook2.authority - userAccountbook1.authority;
+      });
+      console.log(this.userAccountbooks);
     });
   };
 }
