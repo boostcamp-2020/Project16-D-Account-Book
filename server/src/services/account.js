@@ -28,8 +28,23 @@ const createAccount = async ({ accountbookId, name, color }) => {
   return createdAccount;
 };
 
+const updateAccount = async (accountId, { name, color }) => {
+  await db.account.update(
+    {
+      name,
+      color,
+    },
+    {
+      where: { id: accountId },
+    },
+  );
+  const updatedAccount = await findAccountById(accountId);
+  return updatedAccount;
+};
+
 module.exports = {
   getAccountsByAccountbookId,
   createAccount,
   findAccountById,
+  updateAccount,
 };
