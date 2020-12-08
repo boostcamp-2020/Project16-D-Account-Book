@@ -5,7 +5,7 @@ import useStore from '../../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import UserItem from '../user-item/UserItem';
 import socialPage from '../../../constants/socialPage';
-import { SearchedUser } from '../../../types/user';
+import { SearchedUser } from '../../../types/social';
 import { RED } from '../../../constants/color';
 
 const Wrapper = styled.div`
@@ -35,6 +35,7 @@ const SearchContainer = (): JSX.Element => {
             email={(socialStore.searchedUser as SearchedUser).email}
             profileUrl={(socialStore.searchedUser as SearchedUser).profileUrl}
             nickname={(socialStore.searchedUser as SearchedUser).nickname}
+            id={(socialStore.searchedUser as SearchedUser).id}
           />
         </SearchedUserWrapper>
       ) : null}

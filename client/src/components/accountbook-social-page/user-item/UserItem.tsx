@@ -5,6 +5,8 @@ import AdminSettingButton from '../admin-setting-button/AdmingSettingButton';
 import DeleteButton from '../delete-button/DeleteButton';
 import { GRAY, LIGHT_GREEN } from '../../../constants/color';
 import AddButton from '../add-button/AddButton';
+import useGetParam from '../../../hook/use-get-param/useGetParam';
+import useStore from '../../../hook/use-store/useStore';
 
 const UserItemWrapper = styled.div<{ type: string | undefined }>`
   display: flex;
@@ -52,10 +54,18 @@ interface Props {
   email: string;
   nickname: string;
   profileUrl: string;
+  id: number;
   type?: string;
 }
 
-const UserItem = ({ email, nickname, profileUrl, type }: Props): JSX.Element => {
+const UserItem = ({ email, nickname, profileUrl, type, id }: Props): JSX.Element => {
+  const accountbookId = useGetParam();
+  const { socialStore } = useStore().rootStore;
+
+  const onClickAdd = () => {
+    socialStore.addUser({ accountbookId, userId: id });
+  };
+
   const firstButton = () => {
     if (type === 'user') {
       return <AdminSettingButton />;
@@ -68,7 +78,7 @@ const UserItem = ({ email, nickname, profileUrl, type }: Props): JSX.Element => 
       return <DeleteButton />;
     }
     if (type === 'search') {
-      return <AddButton />;
+      return <AddButton onClick={onClickAdd} />;
     }
     return <></>;
   };

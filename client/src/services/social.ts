@@ -1,9 +1,10 @@
-import { SearchedUser, UserAccountbook } from '../types/user';
+import { SearchedUser, UserAccountbook, AddUserBody } from '../types/social';
 import instance from '../api/axios';
 
 const socialAPIAddress = {
   searchUser: '/api/social',
   findUsers: '/api/social/users',
+  addUser: 'api/social',
 };
 
 export default {
@@ -22,6 +23,11 @@ export default {
         accountbook_id: accountbookId,
       },
     });
+    return response.data;
+  },
+
+  addUser: async ({ accountbookId, userId }: AddUserBody): Promise<UserAccountbook> => {
+    const response = await instance.post(socialAPIAddress.addUser, { accountbookId, userId });
     return response.data;
   },
 };
