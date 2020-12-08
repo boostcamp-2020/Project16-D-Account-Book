@@ -6,7 +6,7 @@ import useStore from '../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import FormModalAccount from '../../components/common/modals/form-modal-account/FormModalCreateAccount';
 
-const SettingsBody = styled.div`
+const SettingsAccountViewWrapper = styled.div`
   position: absolute;
   top: 0%;
   left: 25%;
@@ -57,7 +57,7 @@ const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
   ));
 
   return (
-    <SettingsBody>
+    <SettingsAccountViewWrapper>
       <FormModalAccount />
       <SettingsItemWrapper>
         <Label>결제수단 관리</Label>
@@ -68,7 +68,7 @@ const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
           </AccountItemWrapper>
         </AccountWrapper>
       </SettingsItemWrapper>
-    </SettingsBody>
+    </SettingsAccountViewWrapper>
   );
 };
 
