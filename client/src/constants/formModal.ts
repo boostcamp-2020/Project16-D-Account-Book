@@ -5,6 +5,7 @@ export const CreateCategoryModalName = '카테고리 생성';
 export const AccountLabelName = '결제수단 이름';
 export const CategoryLabelName = '카테고리 이름';
 export const UpdateAccountModalName = '결제수단 편집';
+export const UpdateCategorytModalName = '카테고리 편집';
 
 const formModal = {
   AccountPlaceholder,
@@ -14,6 +15,7 @@ const formModal = {
   AccountLabelName,
   CategoryLabelName,
   UpdateAccountModalName,
+  UpdateCategorytModalName,
 };
 
 export default formModal;
