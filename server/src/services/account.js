@@ -42,9 +42,14 @@ const updateAccount = async (accountId, { name, color }) => {
   return updatedAccount;
 };
 
+const deleteAccount = async (id) => {
+  await db.account.destroy({ where: { id } });
+};
+
 module.exports = {
   getAccountsByAccountbookId,
   createAccount,
   findAccountById,
   updateAccount,
+  deleteAccount,
 };
