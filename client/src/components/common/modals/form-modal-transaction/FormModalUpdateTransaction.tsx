@@ -7,6 +7,7 @@ import FormModalHeader from '../form-modal-header/FormModalHeader';
 import FormModalWrapper from '../form-modal-template/FormModalWrapper';
 import UseTransactionFrom from '../../../../hook/use-transaction-form/useTransactionForm';
 import { observer } from 'mobx-react-lite';
+import { convertToExpenditure, convertToIncome } from '../formUtils';
 
 const FormModalUpdateTransaction: React.FC = () => {
   const { rootStore } = useStore();
@@ -59,14 +60,16 @@ const FormModalUpdateTransaction: React.FC = () => {
   };
 
   const incomeUpdate = (): void => {
-    //pass
     if (transactionId) {
+      transactionStore.patchIncome(convertToIncome(inputs, accountBookId), transactionId);
+      closeModal();
     }
   };
 
   const expenditureUpdate = (): void => {
-    //pass
     if (transactionId) {
+      transactionStore.patchExpenditure(convertToExpenditure(inputs, accountBookId), transactionId);
+      closeModal();
     }
   };
 
@@ -83,6 +86,7 @@ const FormModalUpdateTransaction: React.FC = () => {
           blueName={'수정'}
           redName={'삭제'}
           clickRed={inputs.classify ? incomeDelete : expenditureDelete}
+          clickBlue={inputs.classify ? incomeUpdate : expenditureUpdate}
         ></FormModalHeader>
         <TransactionInputList inputs={inputListInputs} changes={changes} />
       </FormModalWrapper>
