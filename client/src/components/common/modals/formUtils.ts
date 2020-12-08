@@ -45,17 +45,17 @@ export const convertToAccount = (accountbookId: number, name: string, color: str
     color,
   };
 };
-export const convertToIncomeCategory = (accountbookId: number, name: string, color: string): CategoryRequest => {
+export const convertToCategory = (accountbookId: number, name: string, color: string): CategoryRequest => {
   return {
     accountbookId,
     name,
     color,
   };
 };
-export const convertToExpenditureCategory = (accountbookId: number, name: string, color: string): CategoryRequest => {
-  return {
-    accountbookId,
-    name,
-    color,
-  };
-};
+// export const convertToExpenditureCategory = (accountbookId: number, name: string, color: string): CategoryRequest => {
+//   return {
+//     accountbookId,
+//     name,
+//     color,
+//   };
+// };
