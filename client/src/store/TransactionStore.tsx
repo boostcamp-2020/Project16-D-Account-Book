@@ -120,4 +120,26 @@ export default class TransactionStore {
       return true;
     });
   };
+
+  patchIncome = async (income: IncomeRequest, incomeId: number): Promise<void> => {
+    const response = await transactionService.patchIncome(income, incomeId);
+    this.updateIncomeTransaction(response);
+  };
+
+  patchExpenditure = async (expenditure: ExpenditureRequest, expenditureId: number): Promise<void> => {
+    const response = await transactionService.patchExpenditure(expenditure, expenditureId);
+    this.updateExpenditureTransaction(response);
+  };
+
+  @action
+  updateIncomeTransaction = (income: Income): void => {
+    this.deleteIncomeById(income.id);
+    this.addNewTransaction(income);
+  };
+
+  @action
+  updateExpenditureTransaction = (expenditure: Expenditure): void => {
+    this.deleteExpenditureById(expenditure.id);
+    this.addNewTransaction(expenditure);
+  };
 }
