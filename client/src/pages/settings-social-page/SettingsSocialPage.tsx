@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SettingsSidebar from '../../components/common/settings-sidebar/SettingsSidebar';
 import { SettingsBody } from '../settings-csv-page/SettingsCsvPage';
-import SearchBar from '../../components/accountbook-social-page/search-bar/SearchBar';
+import SearchContainer from '../../components/accountbook-social-page/search-bar/SearchContainer';
 import UserItemContainer from '../../components/accountbook-social-page/user-item/UserItemContainer';
 import socialPage from '../../constants/socialPage';
 
@@ -16,11 +16,6 @@ const ContentWrapper = styled.div`
   margin-top: 20px;
 `;
 
-const SearchedUserWrapper = styled.div`
-  width: 100%;
-  height: 50px;
-`;
-
 const SettingsSocialPage: React.FC = () => {
   return (
     <SettingsPageWrapper>
@@ -31,8 +26,7 @@ const SettingsSocialPage: React.FC = () => {
         <Description>{socialPage.DESCRIPTION1}</Description>
         <Description>{socialPage.DESCRIPTION2}</Description>
         <ContentWrapper>
-          <SearchBar />
-          <SearchedUserWrapper></SearchedUserWrapper>
+          <SearchContainer />
           <UserItemContainer />
         </ContentWrapper>
       </SettingsBody>
