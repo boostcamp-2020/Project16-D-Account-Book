@@ -1,8 +1,9 @@
 import { observable, action, makeObservable, computed } from 'mobx';
-import Category from '../types/category';
+import Category, { CategoryRequest } from '../types/category';
 import RootStore from './RootStore';
 import CategoryService from '../services/category';
 import Options from '../types/dropdownOptions';
+import category from '../services/category';
 export default class CategoryStore {
   rootStore;
 
@@ -37,6 +38,26 @@ export default class CategoryStore {
     this.changeExpenditureCategories(expenditureCategories);
   };
 
+  createIncomeCategories = async (incomeCategory: CategoryRequest): Promise<void> => {
+    const createdExpenditureCategory = await CategoryService.createIncomeCategory(incomeCategory);
+    this.addNewExpenditureCategory(createdExpenditureCategory);
+  };
+
+  @action
+  addNewIncomeCategory = (incomeCategory: Category): void => {
+    this.incomeCategories = [...this.incomeCategories, incomeCategory];
+  };
+
+  createExpenditureCategories = async (expenditureCategory: CategoryRequest): Promise<void> => {
+    const createdExpenditureCategory = await CategoryService.createExpenditureCategory(expenditureCategory);
+    this.addNewExpenditureCategory(createdExpenditureCategory);
+  };
+
+  @action
+  addNewExpenditureCategory = (expenditureCategory: Category): void => {
+    this.expenditureCategories = [...this.expenditureCategories, expenditureCategory];
+  };
+
   @computed
   get incomeOptions(): Options[] {
     const data: Options[] = this.incomeCategories.map((income) => {
@@ -50,10 +71,34 @@ export default class CategoryStore {
   }
 
   @computed
+  get incomeFilterOptions(): Options[] {
+    const data: Options[] = this.incomeCategories.map((income) => {
+      return {
+        value: income.name,
+        label: income.name,
+      };
+    });
+
+    return data;
+  }
+
+  @computed
   get expenditureOptions(): Options[] {
     const data: Options[] = this.expenditureCategories.map((income) => {
       return {
         value: income.id + '',
+        label: income.name,
+      };
+    });
+
+    return data;
+  }
+
+  @computed
+  get expenditureFilterOptions(): Options[] {
+    const data: Options[] = this.expenditureCategories.map((income) => {
+      return {
+        value: income.name,
         label: income.name,
       };
     });

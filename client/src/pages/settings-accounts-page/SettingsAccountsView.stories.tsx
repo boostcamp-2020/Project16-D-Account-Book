@@ -1,11 +1,11 @@
 import React from 'react';
-import SettingsAccountsPage from './SettingsAccountsPage';
+import SettingsAccountsView from './SettingsAccountsView';
 
 export default {
   title: 'pages/settings-page/SettingsAccountsPage',
-  component: SettingsAccountsPage,
+  component: SettingsAccountsView,
 };
 
 export const Default = (): JSX.Element => {
-  return <SettingsAccountsPage />;
+  return <SettingsAccountsView accountbookId={1} />;
 };

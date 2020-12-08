@@ -12,6 +12,7 @@ const getIncomeCategories = async (ctx) => {
   const incomeCategories = await categoryService.getIncomeCategoriesByAccountbookId(accountbookId);
   ctx.body = incomeCategories;
 };
+
 const getExpenditureCategories = async (ctx) => {
   const { accountbook_id: accountbookId } = ctx.request.query;
   validateAccountbookId(accountbookId);
@@ -19,7 +20,28 @@ const getExpenditureCategories = async (ctx) => {
   ctx.body = expenditureCategories;
 };
 
+const createIncomeCategory = async (ctx) => {
+  // TODO: FE에서 accountbookId를 request body로 넘겨받는 로직 구현 필요
+  const accountbookId = 1;
+  const incomeCategoryData = ctx.request.body;
+  const createdIncomeCategory = await categoryService.createIncomeCategory(accountbookId, incomeCategoryData);
+  ctx.body = createdIncomeCategory;
+};
+
+const createExpenditureCategory = async (ctx) => {
+  // TODO: FE에서 accountbookId를 request body로 넘겨받는 로직 구현 필요
+  const accountbookId = 1;
+  const expenditureCategoryData = ctx.request.body;
+  const createdExpenditureCategory = await categoryService.createExpenditureCategory(
+    accountbookId,
+    expenditureCategoryData,
+  );
+  ctx.body = createdExpenditureCategory;
+};
+
 module.exports = {
   getIncomeCategories,
   getExpenditureCategories,
+  createIncomeCategory,
+  createExpenditureCategory,
 };
