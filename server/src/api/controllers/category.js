@@ -39,10 +39,21 @@ const updateIncomeCategory = async (ctx) => {
   ctx.body = updatedIncomeCategory;
 };
 
+const updateExpenditureCategory = async (ctx) => {
+  const { expenditure_category_id: expenditureCategoryId } = ctx.request.params;
+  const expenditureCategoryData = ctx.request.body;
+  const updatedExpenditureCategory = await categoryService.updateExpenditureCategory(
+    expenditureCategoryId,
+    expenditureCategoryData,
+  );
+  ctx.body = updatedExpenditureCategory;
+};
+
 module.exports = {
   getIncomeCategories,
   getExpenditureCategories,
   createIncomeCategory,
   createExpenditureCategory,
   updateIncomeCategory,
+  updateExpenditureCategory,
 };
