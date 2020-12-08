@@ -9,6 +9,7 @@ export interface SearchedUser {
   id: number;
   nickname: string;
   profileUrl: string;
+  email: string;
 }
 
 export default User;
