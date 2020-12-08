@@ -39,7 +39,7 @@
 ## 기술 스택 🛠
 
 <div align="center">
-  <img src="https://i.imgur.com/utIDGUq.png"/>
+  <img src="https://i.imgur.com/kdvp91a.png"/>
 </div>
 <br>
 
