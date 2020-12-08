@@ -1,5 +1,5 @@
 import { observable, action, makeObservable, runInAction } from 'mobx';
-import { SearchedUser, UserAccountbook, AddUserBody } from '../types/social';
+import { SearchedUser, UserAccountbook, AddUserBody, DeleteUserBody } from '../types/social';
 import RootStore from './RootStore';
 import socialService from '../services/social';
 
@@ -56,5 +56,13 @@ export default class DateStore {
         alert(error.response.data.message);
       }
     }
+  };
+
+  @action
+  deleteUser = async ({ accountbookId, userId }: DeleteUserBody): Promise<void> => {
+    await socialService.deleteUser({ accountbookId, userId });
+    runInAction(() => {
+      this.userAccountbooks = this.userAccountbooks.filter((userAccountbook) => userAccountbook.user.id != userId);
+    });
   };
 }
