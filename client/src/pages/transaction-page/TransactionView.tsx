@@ -8,12 +8,11 @@ import AllTransactionContainer from '../../components/common/transactions/all-tr
 import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
 import useStore from '../../hook/use-store/useStore';
-import { useObserver } from 'mobx-react';
+import { observer } from 'mobx-react';
 import Income, { isIncome } from '../../types/income';
 import Expenditure from '../../types/expenditure';
 import { ParsedQuery } from 'query-string';
 import FilterOption from '../../components/transaction-page/filter-option/FilterOption';
-import { useHistory } from 'react-router-dom';
 import FormModalFilter from '../../components/common/modals/form-modal-filter/FormModalFilter';
 import FormModalCreateTransaction from '../../components/common/modals/form-modal-transaction/FormModalCreateTransaction';
 
@@ -65,15 +64,16 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
   const { dateStore, transactionStore } = rootStore;
   const { formFilterStore } = rootStore.modalStore;
-  const history = useHistory();
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
   useEffect(() => {
     if (!query) {
+      transactionStore.isFilterMode = false;
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
       return;
     }
 
+    transactionStore.isFilterMode = true;
     const { start_date, end_date, account, income_category, expenditure_category } = query;
     transactionStore.filterTransactions(accountbookId, {
       startDate: start_date,
@@ -82,11 +82,13 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       incomeCategory: income_category,
       expenditureCategory: expenditure_category,
     });
+    formFilterStore.query = query;
+    formFilterStore.setFilterInfo();
   }, [query, accountbookId]);
 
-  return useObserver(() => (
+  return (
     <>
-      <FormModalFilter accountbookId={accountbookId} />
+      {formFilterStore.show && <FormModalFilter accountbookId={accountbookId} />}
       <FormModalCreateTransaction />
       <Sidebar smallAccountbooks={smallAccountbookItems} />
       <MenuNavigation />
@@ -119,7 +121,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
         <AllTransactionContainer transactions={transactionStore.transactions} />
       </ViewWrapper>
     </>
-  ));
+  );
 };
 
-export default TransactionView;
+export default observer(TransactionView);
