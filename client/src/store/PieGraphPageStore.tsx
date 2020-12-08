@@ -2,7 +2,7 @@ import RootStore from './RootStore';
 import Income from '../types/income';
 import Expenditure from '../types/expenditure';
 import { dateOptions } from '../__dummy-data__/store/formFilterStore';
-import { action, makeObservable, observable, computed } from 'mobx';
+import { action, makeObservable, observable, computed, flow } from 'mobx';
 import datePeriod, { datePeriodNumber } from '../constants/datePeriod';
 
 export default class PieGraphPageStore {
@@ -65,11 +65,8 @@ export default class PieGraphPageStore {
 
   getNextDateByPeriod = (endDate: Date, selectedType: string): Date => {
     const result = new Date(endDate.valueOf());
-    //year
     result.setFullYear(endDate.getFullYear() + datePeriodNumber[selectedType].year);
-    //month
     result.setMonth(endDate.getMonth() + datePeriodNumber[selectedType].month);
-    //date
     result.setDate(endDate.getDate() + datePeriodNumber[selectedType].day);
     return result;
   };
