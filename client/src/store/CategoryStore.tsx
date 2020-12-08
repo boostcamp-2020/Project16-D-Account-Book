@@ -3,7 +3,7 @@ import Category, { CategoryRequest } from '../types/category';
 import RootStore from './RootStore';
 import CategoryService from '../services/category';
 import Options from '../types/dropdownOptions';
-import category from '../services/category';
+
 export default class CategoryStore {
   rootStore;
 
@@ -39,8 +39,8 @@ export default class CategoryStore {
   };
 
   createIncomeCategory = async (incomeCategory: CategoryRequest): Promise<void> => {
-    const createdExpenditureCategory = await CategoryService.createIncomeCategory(incomeCategory);
-    this.addNewExpenditureCategory(createdExpenditureCategory);
+    const createdIncomeCategory = await CategoryService.createIncomeCategory(incomeCategory);
+    this.addNewIncomeCategory(createdIncomeCategory);
   };
 
   @action
