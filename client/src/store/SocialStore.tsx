@@ -50,6 +50,8 @@ export default class DateStore {
       const userAccountbook = await socialService.addUser({ accountbookId, userId });
       runInAction(() => {
         this.userAccountbooks.push(userAccountbook);
+        this.searchedUser = null;
+        this.searchSuccess = null;
       });
     } catch (error) {
       if (error.response.data.message) {
