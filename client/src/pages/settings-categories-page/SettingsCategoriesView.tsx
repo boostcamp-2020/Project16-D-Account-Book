@@ -4,7 +4,7 @@ import Category from '../../components/common/category/Category';
 import AddCategoryButton from '../../components/common/add-category-button/AddCategoryButton';
 import useStore from '../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
-import FormModalCreateCategory from '../../components/common/modals/form-modal-category/FormModalCreateCategory';
+import FormModalCategory from '../../components/common/modals/form-modal-category/FormModalCreateCategory';
 
 const SettingsCategoryViewWrapper = styled.div`
   position: absolute;
@@ -41,7 +41,7 @@ interface Props {
   accountbookId: number;
 }
 
-const SettingsCategoryView: React.FC<Props> = ({ accountbookId }: Props) => {
+const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
   const { rootStore } = useStore();
   const { categoryStore } = rootStore;
 
@@ -64,8 +64,8 @@ const SettingsCategoryView: React.FC<Props> = ({ accountbookId }: Props) => {
 
   return (
     <SettingsCategoryViewWrapper>
+      <FormModalCategory />
       <SettingsItemWrapper>
-        <FormModalCreateCategory />
         <Label>지출</Label>
         <CategoryWrapper>
           {ExpenditureCategoryItems}
@@ -87,4 +87,4 @@ const SettingsCategoryView: React.FC<Props> = ({ accountbookId }: Props) => {
   );
 };
 
-export default observer(SettingsCategoryView);
+export default observer(SettingsCategoriesView);
