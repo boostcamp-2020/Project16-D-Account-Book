@@ -83,6 +83,10 @@ const updateExpenditureCategory = async (expenditureCategoryId, { name, color })
   return updatedExpenditureCategory;
 };
 
+const deleteIncomeCategory = async (id) => {
+  await db.incomeCategory.destroy({ where: { id } });
+};
+
 module.exports = {
   getIncomeCategoriesByAccountbookId,
   getExpenditureCategoriesByAccountbookId,
@@ -90,4 +94,5 @@ module.exports = {
   createExpenditureCategory,
   updateIncomeCategory,
   updateExpenditureCategory,
+  deleteIncomeCategory,
 };

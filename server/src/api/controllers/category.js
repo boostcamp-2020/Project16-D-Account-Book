@@ -52,6 +52,7 @@ const updateExpenditureCategory = async (ctx) => {
 const deleteIncomeCategory = async (ctx) => {
   const { income_category_id: incomeCategoryId } = ctx.request.params;
   await categoryService.deleteIncomeCategory(incomeCategoryId);
+  ctx.status = 204;
 };
 
 module.exports = {
