@@ -1,4 +1,5 @@
 import React from 'react';
+import useStore from '../../../hook/use-store/useStore';
 import styled from 'styled-components';
 import PlusInCircle from '../plus-in-circle/PlusInCircle';
 import { GRAY } from '../../../constants/color';
@@ -26,8 +27,15 @@ const PlusInCircleWrapper = styled.div`
 `;
 
 const AddCategoryButton = (): JSX.Element => {
+  const { rootStore } = useStore();
+  const createCategoryFormStore = rootStore.modalStore.createCategoryFormStore;
+
+  const openCreateCategoryForm = (): void => {
+    createCategoryFormStore.toggleShow();
+  };
+
   return (
-    <CategoryWrapper>
+    <CategoryWrapper onClick={openCreateCategoryForm}>
       <PlusInCircleWrapper>
         <PlusInCircle sideLength={'1.5rem'} />
       </PlusInCircleWrapper>
