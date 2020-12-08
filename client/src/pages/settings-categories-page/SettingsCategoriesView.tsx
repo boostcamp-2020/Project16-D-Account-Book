@@ -44,6 +44,7 @@ interface Props {
 const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
   const { rootStore } = useStore();
   const { categoryStore } = rootStore;
+  const createCategoryFormStore = rootStore.modalStore.createCategoryFormStore;
 
   useEffect(() => {
     categoryStore.updateIncomeCategories(accountbookId);
@@ -62,6 +63,14 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
     </CategoryItemWrapper>
   ));
 
+  const setIncomeFlagTrue = (): void => {
+    createCategoryFormStore.setIncomeFlagTrue();
+  };
+
+  const setIncomeFlagFalse = (): void => {
+    createCategoryFormStore.setIncomeFlagFalse();
+  };
+
   return (
     <SettingsCategoryViewWrapper>
       <FormModalCategory />
@@ -69,7 +78,7 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
         <Label>지출</Label>
         <CategoryWrapper>
           <CategoryItemWrapper>
-            <AddCategoryButton />
+            <AddCategoryButton onClick={setIncomeFlagFalse} />
           </CategoryItemWrapper>
           {ExpenditureCategoryItems}
         </CategoryWrapper>
@@ -78,7 +87,7 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
         <Label>수입</Label>
         <CategoryWrapper>
           <CategoryItemWrapper>
-            <AddCategoryButton />
+            <AddCategoryButton onClick={setIncomeFlagTrue} />
           </CategoryItemWrapper>
           {IncomeCategoryItems}
         </CategoryWrapper>
