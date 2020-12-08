@@ -24,7 +24,7 @@ const CategoryWrapper = styled.div<{ bgColor: string; textColor: string; shadow?
 `;
 
 interface CategoryProps {
-  text: string;
+  text: string | undefined;
   bgColor: string;
   shadow?: boolean;
   onClick?: () => void;

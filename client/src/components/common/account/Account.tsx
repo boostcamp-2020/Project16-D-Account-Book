@@ -22,7 +22,7 @@ const AccountWrapper = styled.div<{ bgColor: string; textColor: string; shadow?:
 `;
 
 interface AccountProps {
-  text: string;
+  text: string | undefined;
   bgColor: string;
   shadow?: boolean;
   onClick?: () => void;

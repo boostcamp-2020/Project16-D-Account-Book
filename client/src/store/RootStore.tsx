@@ -15,12 +15,12 @@ export default class RootStore {
   userStore: UserStore;
 
   constructor() {
-    this.dateStore = new DateStore(this);
-    this.transactionStore = new TransactionStore(this);
-    this.modalStore = new ModalStore(this);
     this.categoryStore = new CategoryStore(this);
     this.accountStore = new AccountStore(this);
     this.userStore = new UserStore(this);
+    this.dateStore = new DateStore(this);
+    this.transactionStore = new TransactionStore(this);
+    this.modalStore = new ModalStore(this);
   }
 }
 

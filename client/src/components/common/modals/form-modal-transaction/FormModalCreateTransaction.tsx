@@ -71,7 +71,7 @@ const FormModalTransaction: React.FC = () => {
           modalName={'내역작성'}
           blueName={'완료'}
           closeModal={modalToggle}
-          clickBlue={inputs.classify ? expenditureClick : incomeClick}
+          clickBlue={inputs.classify ? incomeClick : expenditureClick}
         />
         <TransactionInputList inputs={inputListInputs} changes={changes} />
       </FormModalWrapper>

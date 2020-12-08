@@ -21,8 +21,38 @@ const createExpenditureTransaction = async (ctx) => {
   ctx.body = createdExpenditure;
 };
 
+const updateIncomeTransaction = async (ctx) => {
+  const { id } = ctx.request.params;
+  const incomeData = ctx.request.body;
+  const income = await transactionService.updateIncome(id, incomeData);
+  ctx.body = income;
+};
+
+const updateExpenditureTransaction = async (ctx) => {
+  const { id } = ctx.request.params;
+  const expenditureData = ctx.request.body;
+  const expenditure = await transactionService.updateExpenditure(id, expenditureData);
+  ctx.body = expenditure;
+};
+
+const deleteIncomeTransaction = async (ctx) => {
+  const { id } = ctx.request.params;
+  await transactionService.deleteIncomeById(id);
+  ctx.status = 204;
+};
+
+const deleteExpenditureTransaction = async (ctx) => {
+  const { id } = ctx.request.params;
+  await transactionService.deleteExpenditureById(id);
+  ctx.status = 204;
+};
+
 module.exports = {
   findTransactions,
   createIncomeTransaction,
   createExpenditureTransaction,
+  updateIncomeTransaction,
+  updateExpenditureTransaction,
+  deleteIncomeTransaction,
+  deleteExpenditureTransaction,
 };
