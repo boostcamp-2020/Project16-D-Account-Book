@@ -3,14 +3,16 @@ import styled from 'styled-components';
 import ProfileImage from '../../common/profile-image/ProfileImage';
 import AdminSettingButton from '../admin-setting-button/AdmingSettingButton';
 import DeleteButton from '../delete-button/DeleteButton';
-import { GRAY } from '../../../constants/color';
+import { GRAY, LIGHT_GREEN } from '../../../constants/color';
+import AddButton from '../add-button/AddButton';
 
-const UserItemWrapper = styled.div`
+const UserItemWrapper = styled.div<{ type: string | undefined }>`
   display: flex;
   width: 100%;
   justify-content: space-between;
   padding-top: 0.8rem;
   border-bottom: 1px solid ${GRAY};
+  color: ${({ type }) => (type === 'admin' ? LIGHT_GREEN : 'black')};
 `;
 
 const Cell = styled.div`
@@ -40,19 +42,39 @@ const Cell = styled.div`
 const ButtonWrapper = styled.div`
   width: 24px;
   height: 24px;
-  cursor: pointer;
   margin: 0 auto;
+  svg {
+    cursor: pointer;
+  }
 `;
 
 interface Props {
   email: string;
   nickname: string;
   profileUrl: string;
+  type?: string;
 }
 
-const UserItem = ({ email, nickname, profileUrl }: Props): JSX.Element => {
+const UserItem = ({ email, nickname, profileUrl, type }: Props): JSX.Element => {
+  const firstButton = () => {
+    if (type === 'user') {
+      return <AdminSettingButton />;
+    }
+    return <></>;
+  };
+
+  const secondButton = () => {
+    if (type === 'user') {
+      return <DeleteButton />;
+    }
+    if (type === 'search') {
+      return <AddButton />;
+    }
+    return <></>;
+  };
+
   return (
-    <UserItemWrapper>
+    <UserItemWrapper type={type}>
       <Cell>
         <ProfileImage src={profileUrl} />
       </Cell>
@@ -60,14 +82,10 @@ const UserItem = ({ email, nickname, profileUrl }: Props): JSX.Element => {
       <Cell>{nickname}</Cell>
       <Cell />
       <Cell>
-        <ButtonWrapper>
-          <AdminSettingButton />
-        </ButtonWrapper>
+        <ButtonWrapper>{firstButton()}</ButtonWrapper>
       </Cell>
       <Cell>
-        <ButtonWrapper>
-          <DeleteButton />
-        </ButtonWrapper>
+        <ButtonWrapper>{secondButton()}</ButtonWrapper>
       </Cell>
     </UserItemWrapper>
   );

@@ -28,6 +28,7 @@ export const ApplyWrapper = (): JSX.Element => {
     <Wrapper>
       <h3>가계부 구성원 목록</h3>
       <UserItem
+        type="admin"
         email={'mu1616@naver.com'}
         nickname={'mu1616'}
         profileUrl={
@@ -35,6 +36,7 @@ export const ApplyWrapper = (): JSX.Element => {
         }
       />
       <UserItem
+        type="user"
         email={'lacomaco@naver.com'}
         nickname={'lacomaco'}
         profileUrl={
@@ -42,6 +44,7 @@ export const ApplyWrapper = (): JSX.Element => {
         }
       />
       <UserItem
+        type="user"
         email={'bbbyung2@naver.com'}
         nickname={'bbbyung2'}
         profileUrl={
@@ -49,6 +52,7 @@ export const ApplyWrapper = (): JSX.Element => {
         }
       />
       <UserItem
+        type="search"
         email={'Mong-Gu@naver.com'}
         nickname={'Mong-Gu'}
         profileUrl={
