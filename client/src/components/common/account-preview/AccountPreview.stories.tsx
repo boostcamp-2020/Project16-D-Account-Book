@@ -7,7 +7,7 @@ export default {
 };
 
 export const Default = (): JSX.Element => {
-  const [inputColor, setInputColor] = useState<string>('black');
+  const [inputColor, setInputColor] = useState<string>('#000000');
   const title = '가계부 1';
 
   const onChange = (color: { hex: string }): void => {
