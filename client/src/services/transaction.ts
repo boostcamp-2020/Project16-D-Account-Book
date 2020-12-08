@@ -2,11 +2,17 @@ import instance from '../api/axios';
 import { getFormattedDate } from '../utils/date';
 import Income, { IncomeRequest } from '../types/income';
 import Expenditure, { ExpenditureRequest } from '../types/expenditure';
+import { getIncomeCategoriesHandler } from '../__dummy-data__/api/category/getIncome';
 
 const transactionAPIAddress = {
   getTransactions: '/api/transactions',
   createIncome: 'api/transactions/income',
   createExpenditure: 'api/transactions/expenditure',
+  //newer
+  pathIncome: '/api/transactions/income',
+  patchExpenditure: '/api/transactions/expenditure',
+  deleteIncome: '/api/transactions/income',
+  deleteExpenditure: '/api/transactions/expenditure',
 };
 
 export default {
@@ -36,5 +42,22 @@ export default {
   createExpenditure: async (expenditure: ExpenditureRequest): Promise<Expenditure> => {
     const response = await instance.post(transactionAPIAddress.createExpenditure, expenditure);
     return response.data;
+  },
+
+  deleteIncome: async (incomeId: number): Promise<number> => {
+    try {
+      const response = await instance.delete(transactionAPIAddress.deleteIncome + `/${incomeId}`);
+      return incomeId;
+    } catch (e) {
+      throw new Error('정상적으로 삭제되지 않았습니다.');
+    }
+  },
+  deleteExpenditure: async (expenditureId: number): Promise<number> => {
+    try {
+      const response = await instance.delete(transactionAPIAddress.deleteExpenditure + `/${expenditureId}`);
+      return expenditureId;
+    } catch (e) {
+      throw new Error('정상적으로 삭제되지 않았습니다.');
+    }
   },
 };
