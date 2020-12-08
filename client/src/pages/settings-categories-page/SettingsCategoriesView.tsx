@@ -5,6 +5,7 @@ import AddCategoryButton from '../../components/common/add-category-button/AddCa
 import useStore from '../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import FormModalCategory from '../../components/common/modals/form-modal-category/FormModalCreateCategory';
+import FormModalUpdateCategory from '../../components/common/modals/form-modal-category/FormModalUpdateCategory';
 
 const SettingsCategoryViewWrapper = styled.div`
   position: absolute;
@@ -74,6 +75,7 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
   return (
     <SettingsCategoryViewWrapper>
       <FormModalCategory />
+      <FormModalUpdateCategory />
       <SettingsItemWrapper>
         <Label>지출</Label>
         <CategoryWrapper>
