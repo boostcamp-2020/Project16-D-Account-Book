@@ -19,7 +19,15 @@ const createAccount = async (ctx) => {
   ctx.body = createdAccount;
 };
 
+const updateAccount = async (ctx) => {
+  const { accountbook_id: accountbookId } = ctx.request.params;
+  const accountData = ctx.request.body;
+  const updatedAccount = await accountService.updateAccount(accountbookId, accountData);
+  ctx.body = updatedAccount;
+};
+
 module.exports = {
   getAccounts,
   createAccount,
+  updateAccount,
 };
