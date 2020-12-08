@@ -57,13 +57,8 @@ const FormModalAccount: React.FC = () => {
           <AccountPreview title={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
-          <FormModalLabel>{formModal.CreateAccountLabelName}</FormModalLabel>
-          <InputText
-            maxLength={8}
-            placeholder={formModal.CreateAccountPlaceholder}
-            value={name}
-            onChange={onChangeName}
-          />
+          <FormModalLabel>{formModal.AccountLabelName}</FormModalLabel>
+          <InputText maxLength={8} placeholder={formModal.AccountPlaceholder} value={name} onChange={onChangeName} />
         </FormModalItem>
       </FormModalWrapper>
     </ModalBackground>
