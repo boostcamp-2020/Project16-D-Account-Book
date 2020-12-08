@@ -38,7 +38,7 @@ export default class CategoryStore {
     this.changeExpenditureCategories(expenditureCategories);
   };
 
-  createIncomeCategories = async (incomeCategory: CategoryRequest): Promise<void> => {
+  createIncomeCategory = async (incomeCategory: CategoryRequest): Promise<void> => {
     const createdExpenditureCategory = await CategoryService.createIncomeCategory(incomeCategory);
     this.addNewExpenditureCategory(createdExpenditureCategory);
   };
@@ -48,7 +48,7 @@ export default class CategoryStore {
     this.incomeCategories = [...this.incomeCategories, incomeCategory];
   };
 
-  createExpenditureCategories = async (expenditureCategory: CategoryRequest): Promise<void> => {
+  createExpenditureCategory = async (expenditureCategory: CategoryRequest): Promise<void> => {
     const createdExpenditureCategory = await CategoryService.createExpenditureCategory(expenditureCategory);
     this.addNewExpenditureCategory(createdExpenditureCategory);
   };
