@@ -4,6 +4,6 @@ const accountController = require('@controllers/account');
 const router = new Router();
 router.get('/', accountController.getAccounts);
 router.post('/', accountController.createAccount);
-router.patch('/:accounts_id', accountController.updateAccount);
+router.patch('/:account_id', accountController.updateAccount);
 
 module.exports = router;

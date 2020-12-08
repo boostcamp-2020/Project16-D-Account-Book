@@ -20,9 +20,9 @@ const createAccount = async (ctx) => {
 };
 
 const updateAccount = async (ctx) => {
-  const { accountbook_id: accountbookId } = ctx.request.params;
+  const { account_id: accountId } = ctx.request.params;
   const accountData = ctx.request.body;
-  const updatedAccount = await accountService.updateAccount(accountbookId, accountData);
+  const updatedAccount = await accountService.updateAccount(accountId, accountData);
   ctx.body = updatedAccount;
 };
 
