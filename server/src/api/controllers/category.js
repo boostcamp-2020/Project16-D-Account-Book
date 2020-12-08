@@ -21,21 +21,14 @@ const getExpenditureCategories = async (ctx) => {
 };
 
 const createIncomeCategory = async (ctx) => {
-  // TODO: FE에서 accountbookId를 request body로 넘겨받는 로직 구현 필요
-  const accountbookId = 1;
   const incomeCategoryData = ctx.request.body;
-  const createdIncomeCategory = await categoryService.createIncomeCategory(accountbookId, incomeCategoryData);
+  const createdIncomeCategory = await categoryService.createIncomeCategory(incomeCategoryData);
   ctx.body = createdIncomeCategory;
 };
 
 const createExpenditureCategory = async (ctx) => {
-  // TODO: FE에서 accountbookId를 request body로 넘겨받는 로직 구현 필요
-  const accountbookId = 1;
   const expenditureCategoryData = ctx.request.body;
-  const createdExpenditureCategory = await categoryService.createExpenditureCategory(
-    accountbookId,
-    expenditureCategoryData,
-  );
+  const createdExpenditureCategory = await categoryService.createExpenditureCategory(expenditureCategoryData);
   ctx.body = createdExpenditureCategory;
 };
 
