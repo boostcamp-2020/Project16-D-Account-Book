@@ -12,7 +12,14 @@ const addUser = async (ctx) => {
   ctx.body = addedUser;
 };
 
+const findUsers = async (ctx) => {
+  const { accountbook_id: accountbookId } = ctx.request.query;
+  const users = await socialService.findUsers(accountbookId);
+  ctx.body = users;
+};
+
 module.exports = {
   searchUser,
   addUser,
+  findUsers,
 };

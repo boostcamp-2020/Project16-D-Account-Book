@@ -27,7 +27,23 @@ const addUser = async (accountbookId, userId) => {
   return addedUser;
 };
 
+const findUsers = async (accountbookId) => {
+  const users = await db.userAccountbook.findAll({
+    where: { accountbookId },
+    attributes: ['id', 'authority'],
+    include: [
+      {
+        model: db.user,
+        as: 'user',
+        attributes: ['id', 'nickname', 'email', 'profileUrl'],
+      },
+    ],
+  });
+  return users;
+};
+
 module.exports = {
   findUserByEmail,
   addUser,
+  findUsers,
 };
