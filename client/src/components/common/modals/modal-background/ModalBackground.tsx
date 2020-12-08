@@ -29,7 +29,7 @@ const ModalBackgroundWrapper = styled.div<ModalWrapperProps>`
 
 const ChildrenWrapper = styled.div`
   z-index: 100;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   width: 100%;
