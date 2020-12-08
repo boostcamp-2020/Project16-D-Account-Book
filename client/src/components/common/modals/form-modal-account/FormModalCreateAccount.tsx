@@ -14,7 +14,7 @@ const FormModalAccount: React.FC = () => {
   const toggle = rootStore.modalStore.createAccountFormStore;
 
   const [name, setName] = useState<string>('부스트카드');
-  const [inputColor, setInputColor] = useState<string>('black');
+  const [inputColor, setInputColor] = useState<string>('#000000');
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);

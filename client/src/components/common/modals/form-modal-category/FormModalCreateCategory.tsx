@@ -10,7 +10,7 @@ import InputText from '../../inputs/input-text/InputText';
 
 const FormModalCategory: React.FC = () => {
   const [name, setName] = useState<string>('카테고리 1');
-  const [inputColor, setInputColor] = useState<string>('black');
+  const [inputColor, setInputColor] = useState<string>('#000000');
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
