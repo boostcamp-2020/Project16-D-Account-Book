@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useStore from '../../../../hook/use-store/useStore';
 import FormModalWrapper from '../form-modal-template/FormModalWrapper';
 import FormModalItem from '../form-modal-template/FormModalItemWrapper';
 import FormModalLabel from '../form-modal-template/FormModalLabel';
@@ -7,8 +8,12 @@ import FormModalHeader from '../form-modal-header/FormModalHeader';
 import { observer } from 'mobx-react';
 import CategoryPreview from '../../category-preview/CategoryPreview';
 import InputText from '../../inputs/input-text/InputText';
+import formModal from '../../../../constants/formModal';
 
 const FormModalCategory: React.FC = () => {
+  const { rootStore } = useStore();
+  const toggle = rootStore.modalStore.createCategoryFormStore;
+
   const [name, setName] = useState<string>('카테고리 1');
   const [inputColor, setInputColor] = useState<string>('#000000');
 
@@ -20,18 +25,23 @@ const FormModalCategory: React.FC = () => {
     setInputColor(color.hex);
   };
 
+  const { show } = toggle;
+  const modalToggle = (): void => {
+    toggle.toggleShow();
+  };
+
   return (
-    <ModalBackground show={true}>
+    <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
-        <FormModalHeader modalName={'카테고리 생성'} blueName={'생성'} />
+        <FormModalHeader modalName={formModal.CreateCategoryModalName} blueName={'생성'} closeModal={modalToggle} />
         <FormModalItem>
           <CategoryPreview title={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
-          <FormModalLabel>카테고리 이름</FormModalLabel>
+          <FormModalLabel>{formModal.CreateCategoryLabelName}</FormModalLabel>
           <InputText
             maxLength={8}
-            placeholder={'최대 8자의 카테고리명을 입력해주세요.'}
+            placeholder={formModal.CreateCategoryPlaceholder}
             value={name}
             onChange={onChangeName}
           />
