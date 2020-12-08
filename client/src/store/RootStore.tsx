@@ -1,10 +1,10 @@
-import { action } from 'mobx';
 import React, { createContext } from 'react';
 import DateStore from './DateStore';
 import CategoryStore from './CategoryStore';
 import TransactionStore from './TransactionStore';
 import ModalStore from './modal-store/ModalStore';
 import AccountStore from './AccountStore';
+import UserStore from './UserStore';
 
 export default class RootStore {
   dateStore: DateStore;
@@ -12,10 +12,12 @@ export default class RootStore {
   modalStore: ModalStore;
   categoryStore: CategoryStore;
   accountStore: AccountStore;
+  userStore: UserStore;
 
   constructor() {
     this.categoryStore = new CategoryStore(this);
     this.accountStore = new AccountStore(this);
+    this.userStore = new UserStore(this);
     this.dateStore = new DateStore(this);
     this.transactionStore = new TransactionStore(this);
     this.modalStore = new ModalStore(this);
