@@ -11,6 +11,7 @@ import FormModalTransaction from './form-modal-transaction/FormModalCreateTransa
 import FormModalAccount from './form-modal-account/FormModalCreateAccount';
 import FormModalCategory from './form-modal-category/FormModalCreateCategory';
 import FormModalUpdateAccount from './form-modal-account/FormModalUpdateAccount';
+import FormModalUpdateCategory from './form-modal-category/FormModalUpdateCategory';
 import styled from 'styled-components';
 
 export default {
@@ -85,4 +86,8 @@ export const FormModalCategoryDefault: React.FC = () => {
 
 export const FormModalUpdateAccountDefault: React.FC = () => {
   return <FormModalUpdateAccount />;
+};
+
+export const FormModalUpdateCategoryDefault: React.FC = () => {
+  return <FormModalUpdateCategory />;
 };
