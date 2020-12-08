@@ -8,6 +8,7 @@ import FormModalHeader from '../form-modal-header/FormModalHeader';
 import { observer } from 'mobx-react';
 import AccountPreview from '../../account-preview/AccountPreview';
 import InputText from '../../inputs/input-text/InputText';
+import formModal from '../../../../constants/formModal';
 
 const FormModalAccount: React.FC = () => {
   const { rootStore } = useStore();
@@ -32,15 +33,15 @@ const FormModalAccount: React.FC = () => {
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
-        <FormModalHeader modalName={'결제수단 생성'} blueName={'생성'} closeModal={modalToggle} />
+        <FormModalHeader modalName={formModal.CreateAccountModalName} blueName={'생성'} closeModal={modalToggle} />
         <FormModalItem>
           <AccountPreview title={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
-          <FormModalLabel>결제수단 이름</FormModalLabel>
+          <FormModalLabel>{formModal.CreateAccountLabelName}</FormModalLabel>
           <InputText
             maxLength={8}
-            placeholder={'최대 8자의 결제수단명을 입력해주세요.'}
+            placeholder={formModal.CreateAccountPlaceholder}
             value={name}
             onChange={onChangeName}
           />
