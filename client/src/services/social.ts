@@ -34,7 +34,10 @@ export default {
 
   deleteUser: async ({ accountbookId, userId }: DeleteUserBody): Promise<void> => {
     const response = await instance.delete(socialAPIAddress.deleteUser, {
-      params: { accountbookId, userId },
+      params: {
+        accountbook_id: accountbookId,
+        user_id: userId,
+      },
     });
     return response.data;
   },

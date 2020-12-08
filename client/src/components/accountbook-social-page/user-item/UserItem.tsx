@@ -66,6 +66,10 @@ const UserItem = ({ email, nickname, profileUrl, type, id }: Props): JSX.Element
     socialStore.addUser({ accountbookId, userId: id });
   };
 
+  const onClickDelete = () => {
+    socialStore.deleteUser({ accountbookId, userId: id });
+  };
+
   const firstButton = () => {
     if (type === 'user') {
       return <AdminSettingButton />;
@@ -75,7 +79,7 @@ const UserItem = ({ email, nickname, profileUrl, type, id }: Props): JSX.Element
 
   const secondButton = () => {
     if (type === 'user') {
-      return <DeleteButton />;
+      return <DeleteButton onClick={onClickDelete} />;
     }
     if (type === 'search') {
       return <AddButton onClick={onClickAdd} />;
