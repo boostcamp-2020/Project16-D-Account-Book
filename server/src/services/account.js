@@ -9,8 +9,8 @@ const getAccountsByAccountbookId = async (id) => {
   return accounts;
 };
 
-const createAccount = async (id, { name, color }) => {
-  const accountbook = await getAccountbookById(id);
+const createAccount = async ({ accountbookId, name, color }) => {
+  const accountbook = await getAccountbookById(accountbookId);
 
   const createdAccount = await accountbook.createAccount({
     name,
