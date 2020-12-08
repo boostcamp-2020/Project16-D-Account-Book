@@ -41,16 +41,12 @@ export default class TransactionStore {
 
   createIncome = async (income: IncomeRequest): Promise<void> => {
     const createdIncome = await transactionService.createIncome(income);
-    runInAction(() => {
-      this.addNewTransaction(createdIncome);
-    });
+    this.addNewTransaction(createdIncome);
   };
 
   createExpenditure = async (expenditure: ExpenditureRequest): Promise<void> => {
     const createdExpenditure = await transactionService.createExpenditure(expenditure);
-    runInAction(() => {
-      this.addNewTransaction(createdExpenditure);
-    });
+    this.addNewTransaction(createdExpenditure);
   };
 
   @action
