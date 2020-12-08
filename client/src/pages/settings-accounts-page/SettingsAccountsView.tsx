@@ -4,6 +4,7 @@ import Account from '../../components/common/account/Account';
 import AddAccountButton from '../../components/common/add-account-button/AddAccountButton';
 import useStore from '../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
+import FormModalAccount from '../../components/common/modals/form-modal-account/FormModalCreateAccount';
 
 const SettingsBody = styled.div`
   position: absolute;
@@ -57,6 +58,7 @@ const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
 
   return (
     <SettingsBody>
+      <FormModalAccount />
       <SettingsItemWrapper>
         <Label>결제수단 관리</Label>
         <AccountWrapper>
