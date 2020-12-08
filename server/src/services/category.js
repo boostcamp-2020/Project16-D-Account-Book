@@ -45,9 +45,24 @@ const createExpenditureCategory = async ({ accountbookId, name, color }) => {
   return createdExpenditureCategory;
 };
 
+const updateIncomeCategory = async (incomeCategoryId, { name, color }) => {
+  await db.incomeCategory.update(
+    {
+      name,
+      color,
+    },
+    {
+      where: { id: incomeCategoryId },
+    },
+  );
+  const updatedIncomeCategory = await findIncomeCategoryById(incomeCategoryId);
+  return updatedIncomeCategory;
+};
+
 module.exports = {
   getIncomeCategoriesByAccountbookId,
   getExpenditureCategoriesByAccountbookId,
   createIncomeCategory,
   createExpenditureCategory,
+  updateIncomeCategory,
 };
