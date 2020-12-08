@@ -121,37 +121,37 @@ export default class FormFilterStore {
     this.startDate.date = new Date(startDate);
     this.endDate.date = new Date(endDate);
 
+    let tempDate = new Date(startDate);
     const day = 1000 * 60 * 60 * 24;
-    if (this.startDate.date.setFullYear(this.startDate.date.getFullYear() + 1) + day < this.endDate.date.getTime()) {
+    if (tempDate.setFullYear(tempDate.getFullYear() + 1) + day < this.endDate.date.getTime()) {
       this.onChangeDate(datePeriod.ALL);
       return;
     }
 
-    this.startDate.date = new Date(startDate);
-    if (this.startDate.date.setMonth(this.startDate.date.getMonth() + 6) + day < this.endDate.date.getTime()) {
+    tempDate = new Date(startDate);
+    if (tempDate.setMonth(tempDate.getMonth() + 6) + day < this.endDate.date.getTime()) {
       this.onChangeDate(datePeriod.LAST_ONE_YEAR);
       return;
     }
 
-    this.startDate.date = new Date(startDate);
-    if (this.startDate.date.setMonth(this.startDate.date.getMonth() + 3) + day < this.endDate.date.getTime()) {
+    tempDate = new Date(startDate);
+    if (tempDate.setMonth(tempDate.getMonth() + 3) + day < this.endDate.date.getTime()) {
       this.onChangeDate(datePeriod.LAST_SIX_MONTH);
       return;
     }
 
-    this.startDate.date = new Date(startDate);
-    if (this.startDate.date.setMonth(this.startDate.date.getMonth() + 1) + day < this.endDate.date.getTime()) {
+    tempDate = new Date(startDate);
+    if (tempDate.setMonth(tempDate.getMonth() + 1) + day < this.endDate.date.getTime()) {
       this.onChangeDate(datePeriod.LAST_THREE_MONTH);
       return;
     }
 
-    this.startDate.date = new Date(startDate);
-    if (this.startDate.date.setDate(this.startDate.date.getDate() + 7) < this.endDate.date.getTime()) {
+    tempDate = new Date(startDate);
+    if (tempDate.setDate(tempDate.getDate() + 7) < this.endDate.date.getTime()) {
       this.onChangeDate(datePeriod.LAST_ONE_MONTH);
       return;
     }
 
-    this.startDate.date = new Date(startDate);
     this.onChangeDate(datePeriod.LAST_ONE_WEEK);
   };
 }
