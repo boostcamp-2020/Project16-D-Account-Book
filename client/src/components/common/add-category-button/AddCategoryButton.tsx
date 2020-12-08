@@ -26,12 +26,12 @@ const PlusInCircleWrapper = styled.div`
   margin: auto 0;
 `;
 
-const AddCategoryButton = (): JSX.Element => {
+const AddCategoryButton: React.FC = () => {
   const { rootStore } = useStore();
-  const createCategoryFormStore = rootStore.modalStore.createCategoryFormStore;
+  const createCategoryForm = rootStore.modalStore.createCategoryFormStore;
 
   const openCreateCategoryForm = (): void => {
-    createCategoryFormStore.toggleShow();
+    createCategoryForm.toggleShow();
   };
 
   return (
