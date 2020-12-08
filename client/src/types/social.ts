@@ -3,6 +3,11 @@ export interface AddUserBody {
   userId: number;
 }
 
+export interface DeleteUserBody {
+  accountbookId: number;
+  userId: number;
+}
+
 export interface SearchedUser {
   id: number;
   nickname: string;
