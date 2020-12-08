@@ -19,7 +19,7 @@ export default class FormFilterStore {
   @observable selectedIncomeCategories: string[] = [];
   @observable expenditureCategoryOptions: Options[] = [];
   @observable selectedExpenditureCategories: string[] = [];
-  query: ParsedQuery<string> | null = null;
+  @observable query: ParsedQuery<string> | null = null;
 
   constructor(rootStore: RootStore) {
     makeObservable(this);
@@ -109,14 +109,13 @@ export default class FormFilterStore {
   }
 
   @action
-  setInfo = (
-    startDate: string,
-    endDate: string,
-    account: string,
-    incomeCategory: string,
-    expenditureCategory: string,
-  ): void => {
-    this.selectedAccounts = account.length === 0 ? [] : account.split(' ');
+  setFilterInfo = (): void => {
+    const { start_date, end_date, account, income_category, expenditure_category } = this.query as ParsedQuery<string>;
+    const startDate = start_date as string;
+    const endDate = end_date as string;
+    const incomeCategory = income_category as string;
+    const expenditureCategory = expenditure_category as string;
+    this.selectedAccounts = (account as string).length === 0 ? [] : (account as string).split(' ');
     this.selectedIncomeCategories = incomeCategory.length === 0 ? [] : incomeCategory.split(' ');
     this.selectedExpenditureCategories = expenditureCategory.length === 0 ? [] : expenditureCategory.split(' ');
     this.startDate.date = new Date(startDate);

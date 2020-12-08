@@ -83,13 +83,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       expenditureCategory: expenditure_category,
     });
     formFilterStore.query = query;
-    formFilterStore.setInfo(
-      start_date as string,
-      end_date as string,
-      account as string,
-      income_category as string,
-      expenditure_category as string,
-    );
+    formFilterStore.setFilterInfo();
   }, [query, accountbookId]);
 
   return (
