@@ -1,3 +1,4 @@
+const db = require('@models');
 const { getAccountbookById } = require('@services/accountbook');
 
 const getIncomeCategoriesByAccountbookId = async (id) => {
@@ -13,8 +14,17 @@ const getExpenditureCategoriesByAccountbookId = async (id) => {
   const expenditureCategories = await accountBook.getExpenditureCategories({
     attributes: ['id', 'name', 'color'],
   });
-
   return expenditureCategories;
+};
+
+const findIncomeCategoryById = async (id) => {
+  const incomeCategory = await db.incomeCategory.findOne({
+    attributes: ['id', 'name', 'color'],
+    where: {
+      id,
+    },
+  });
+  return incomeCategory;
 };
 
 const createIncomeCategory = async ({ accountbookId, name, color }) => {
@@ -23,7 +33,6 @@ const createIncomeCategory = async ({ accountbookId, name, color }) => {
     name,
     color,
   });
-
   return createdIncomeCategory;
 };
 
@@ -33,7 +42,6 @@ const createExpenditureCategory = async ({ accountbookId, name, color }) => {
     name,
     color,
   });
-
   return createdExpenditureCategory;
 };
 
