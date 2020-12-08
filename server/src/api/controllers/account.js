@@ -26,8 +26,15 @@ const updateAccount = async (ctx) => {
   ctx.body = updatedAccount;
 };
 
+const deleteAccount = async (ctx) => {
+  const { account_id: accountId } = ctx.request.params;
+  await accountService.deleteAccount(accountId);
+  ctx.status = 204;
+};
+
 module.exports = {
   getAccounts,
   createAccount,
   updateAccount,
+  deleteAccount,
 };
