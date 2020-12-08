@@ -22,10 +22,10 @@ export default {
       },
     });
   },
-  createIncome: async (incomeCategory: CategoryRequest): Promise<Category> => {
+  createIncomeCategory: async (incomeCategory: CategoryRequest): Promise<Category> => {
     return await instance.post(categoryAPIAddress.createIncome, incomeCategory);
   },
-  createExpenditure: async (expenditureCategory: CategoryRequest): Promise<Category> => {
+  createExpenditureCategory: async (expenditureCategory: CategoryRequest): Promise<Category> => {
     return await instance.post(categoryAPIAddress.createExpenditure, expenditureCategory);
   },
 };
