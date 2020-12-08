@@ -65,7 +65,6 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
   const { dateStore, transactionStore, modalStore } = rootStore;
   const { formFilterStore } = rootStore.modalStore;
-  const history = useHistory();
   const { createTransactionFormStore, updateTransactionFormStore } = modalStore;
 
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
