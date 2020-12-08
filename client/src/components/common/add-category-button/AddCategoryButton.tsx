@@ -3,8 +3,9 @@ import useStore from '../../../hook/use-store/useStore';
 import styled from 'styled-components';
 import PlusInCircle from '../plus-in-circle/PlusInCircle';
 import { GRAY } from '../../../constants/color';
+import { observer } from 'mobx-react';
 
-const CategoryWrapper = styled.div`
+const CategoryWrapper = styled.div<{ flag?: boolean }>`
   width: 100%;
   max-width: 115px;
   height: 100%;
@@ -26,12 +27,17 @@ const PlusInCircleWrapper = styled.div`
   margin: auto 0;
 `;
 
-const AddCategoryButton: React.FC = () => {
+interface AddCategoryButton {
+  onClick: () => void;
+}
+
+const AddCategoryButton: React.FC<AddCategoryButton> = ({ onClick }: AddCategoryButton) => {
   const { rootStore } = useStore();
   const createCategoryForm = rootStore.modalStore.createCategoryFormStore;
 
   const openCreateCategoryForm = (): void => {
     createCategoryForm.toggleShow();
+    onClick();
   };
 
   return (
@@ -43,4 +49,4 @@ const AddCategoryButton: React.FC = () => {
   );
 };
 
-export default AddCategoryButton;
+export default observer(AddCategoryButton);
