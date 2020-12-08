@@ -62,10 +62,10 @@ const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
       <SettingsItemWrapper>
         <Label>결제수단 관리</Label>
         <AccountWrapper>
-          {AccountsItems}
           <AccountItemWrapper>
             <AddAccountButton />
           </AccountItemWrapper>
+          {AccountsItems}
         </AccountWrapper>
       </SettingsItemWrapper>
     </SettingsAccountViewWrapper>

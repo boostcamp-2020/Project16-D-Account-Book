@@ -68,19 +68,19 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
       <SettingsItemWrapper>
         <Label>지출</Label>
         <CategoryWrapper>
-          {ExpenditureCategoryItems}
           <CategoryItemWrapper>
             <AddCategoryButton />
           </CategoryItemWrapper>
+          {ExpenditureCategoryItems}
         </CategoryWrapper>
       </SettingsItemWrapper>
       <SettingsItemWrapper>
         <Label>수입</Label>
         <CategoryWrapper>
-          {IncomeCategoryItems}
           <CategoryItemWrapper>
             <AddCategoryButton />
           </CategoryItemWrapper>
+          {IncomeCategoryItems}
         </CategoryWrapper>
       </SettingsItemWrapper>
     </SettingsCategoryViewWrapper>
