@@ -1,7 +1,9 @@
 import React from 'react';
+import useStore from '../../../hook/use-store/useStore';
 import styled from 'styled-components';
 import PlusInCircle from '../plus-in-circle/PlusInCircle';
 import { GRAY } from '../../../constants/color';
+import { observer, useObserver } from 'mobx-react';
 
 const AccountWrapper = styled.div`
   width: 17vw;
@@ -22,9 +24,16 @@ const PlusInCircleWrapper = styled.div`
   margin: auto 0;
 `;
 
-const AddAccountButton = (): JSX.Element => {
+const AddAccountButton: React.FC = () => {
+  const { rootStore } = useStore();
+  const createAccountForm = rootStore.modalStore.createAccountFormStore;
+
+  const openCreateAccountForm = (): void => {
+    createAccountForm.toggleShow();
+  };
+
   return (
-    <AccountWrapper>
+    <AccountWrapper onClick={openCreateAccountForm}>
       <PlusInCircleWrapper>
         <PlusInCircle sideLength={'3rem'} />
       </PlusInCircleWrapper>
