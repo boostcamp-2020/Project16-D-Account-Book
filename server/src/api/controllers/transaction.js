@@ -1,5 +1,4 @@
 const transactionService = require('@services/transaction');
-const transaction = require('../../services/transaction');
 
 const findTransactions = async (ctx) => {
   // eslint-disable-next-line camelcase
