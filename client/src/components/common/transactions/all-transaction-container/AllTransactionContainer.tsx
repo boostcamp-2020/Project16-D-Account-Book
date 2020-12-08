@@ -44,7 +44,7 @@ const calcSameDateTransactions = (transactions: Array<Income | Expenditure>): Ar
 
 const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
   const { transactionStore } = useStore().rootStore;
-  const sameDateTransactions = useMemo(() => calcSameDateTransactions(transactions), [transactions]);
+  const sameDateTransactions = calcSameDateTransactions(transactions);
 
   if (transactionStore.isLoading) return <Spinner />;
   if (transactions.length == 0) return <NotFoundTransaction />;

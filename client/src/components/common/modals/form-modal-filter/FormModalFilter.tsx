@@ -7,6 +7,7 @@ import { inputs, changes } from '../../../../__dummy-data__/components/modal/mod
 import useStore from '../../../../hook/use-store/useStore';
 import { useObserver } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
+import { ParsedQuery } from 'query-string';
 
 const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Element => {
   const history = useHistory();
@@ -24,31 +25,39 @@ const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Elem
 
   useEffect(() => {
     formFilterStore.init();
-  }, [
-    rootStore.accountStore.accounts,
-    rootStore.categoryStore.incomeCategories,
-    rootStore.categoryStore.expenditureCategories,
-  ]);
+    if (formFilterStore.query) {
+      const {
+        start_date,
+        end_date,
+        account,
+        income_category,
+        expenditure_category,
+      } = formFilterStore.query as ParsedQuery<string>;
+      formFilterStore.setInfo(
+        start_date as string,
+        end_date as string,
+        account as string,
+        income_category as string,
+        expenditure_category as string,
+      );
+    }
+  }, []);
 
   return useObserver(() => (
     <>
-      {formFilterStore.show ? (
-        <ModalBackground show={true} closeModal={closeModal}>
-          <FormModalWrapper>
-            <FormModalHeader
-              modalName={'필터'}
-              redName={'초기화'}
-              blueName={'적용'}
-              clickBlue={onClickApply}
-              clickRed={formFilterStore.init}
-              closeModal={closeModal}
-            />
-            <FormFilter inputs={inputs} changes={changes} />
-          </FormModalWrapper>
-        </ModalBackground>
-      ) : (
-        <></>
-      )}
+      <ModalBackground show={true} closeModal={closeModal}>
+        <FormModalWrapper>
+          <FormModalHeader
+            modalName={'필터'}
+            redName={'초기화'}
+            blueName={'적용'}
+            clickBlue={onClickApply}
+            clickRed={formFilterStore.init}
+            closeModal={closeModal}
+          />
+          <FormFilter inputs={inputs} changes={changes} />
+        </FormModalWrapper>
+      </ModalBackground>
     </>
   ));
 };

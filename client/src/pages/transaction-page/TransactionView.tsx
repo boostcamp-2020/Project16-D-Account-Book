@@ -65,13 +65,15 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { dateStore, transactionStore } = rootStore;
   const { formFilterStore } = rootStore.modalStore;
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
-
+  console.log(transactionStore.transactions);
   useEffect(() => {
     if (!query) {
+      transactionStore.isFilterMode = false;
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
       return;
     }
 
+    transactionStore.isFilterMode = true;
     const { start_date, end_date, account, income_category, expenditure_category } = query;
     transactionStore.filterTransactions(accountbookId, {
       startDate: start_date,
@@ -80,6 +82,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       incomeCategory: income_category,
       expenditureCategory: expenditure_category,
     });
+    formFilterStore.query = query;
     formFilterStore.setInfo(
       start_date as string,
       end_date as string,
@@ -91,7 +94,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
 
   return (
     <>
-      <FormModalFilter accountbookId={accountbookId} />
+      {formFilterStore.show && <FormModalFilter accountbookId={accountbookId} />}
       <FormModalCreateTransaction />
       <Sidebar smallAccountbooks={smallAccountbookItems} />
       <MenuNavigation />

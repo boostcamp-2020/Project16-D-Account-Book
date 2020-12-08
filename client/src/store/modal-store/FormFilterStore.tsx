@@ -1,14 +1,10 @@
 import { observable, action, makeObservable, computed } from 'mobx';
 import RootStore from '../RootStore';
-import {
-  dateOptions,
-  accountOptions,
-  incomeCategoryOptions,
-  expenditureCategoryOptions,
-} from '../../__dummy-data__/store/formFilterStore';
+import { dateOptions } from '../../__dummy-data__/store/formFilterStore';
 import datePeriod from '../../constants/datePeriod';
 import { getFormattedDate } from '../../utils/date';
 import Options from '../../types/dropdownOptions';
+import { ParsedQuery } from 'query-string';
 
 export default class FormFilterStore {
   rootStore: RootStore;
@@ -23,6 +19,7 @@ export default class FormFilterStore {
   @observable selectedIncomeCategories: string[] = [];
   @observable expenditureCategoryOptions: Options[] = [];
   @observable selectedExpenditureCategories: string[] = [];
+  query: ParsedQuery<string> | null = null;
 
   constructor(rootStore: RootStore) {
     makeObservable(this);

@@ -23,7 +23,6 @@ export default class TransactionStore {
     runInAction(() => {
       this.transactions = transactions;
       this.isLoading = false;
-      this.isFilterMode = true;
     });
   };
 
@@ -60,9 +59,11 @@ export default class TransactionStore {
     const startDate = this.rootStore.dateStore.startDate;
     const endDate = this.rootStore.dateStore.endDate;
     const filterFormStore = this.rootStore.modalStore.formFilterStore;
+
     if (!this.isFilterMode) {
       if (date.getTime() >= startDate.getTime() && date.getTime() < endDate.getTime()) {
         this.transactions.push(transaction);
+        console.log(this.transactions[this.transactions.length - 1]);
         //this.transactions = [...this.transactions, transaction];
       }
     } else if (
@@ -70,6 +71,7 @@ export default class TransactionStore {
       date.getTime() < filterFormStore.endDate.date.getTime()
     ) {
       this.transactions.push(transaction);
+      console.log('ss');
       //this.transactions = [...this.transactions, transaction];
       const {
         selectedAccounts: account,
