@@ -115,43 +115,43 @@ export default class FormFilterStore {
     const endDate = end_date as string;
     const incomeCategory = income_category as string;
     const expenditureCategory = expenditure_category as string;
+
     this.selectedAccounts = (account as string).length === 0 ? [] : (account as string).split(' ');
     this.selectedIncomeCategories = incomeCategory.length === 0 ? [] : incomeCategory.split(' ');
     this.selectedExpenditureCategories = expenditureCategory.length === 0 ? [] : expenditureCategory.split(' ');
     this.startDate.date = new Date(startDate);
     this.endDate.date = new Date(endDate);
+    const period = this.getDatePeriod(new Date(startDate), new Date(endDate));
+    this.onChangeDate(period);
+  };
 
+  getDatePeriod = (startDate: Date, endDate: Date): string => {
     let tempDate = new Date(startDate);
     const day = 1000 * 60 * 60 * 24;
-    if (tempDate.setFullYear(tempDate.getFullYear() + 1) + day < this.endDate.date.getTime()) {
-      this.onChangeDate(datePeriod.ALL);
-      return;
+    if (tempDate.setFullYear(tempDate.getFullYear() + 1) + day < endDate.getTime()) {
+      return datePeriod.ALL;
     }
 
     tempDate = new Date(startDate);
-    if (tempDate.setMonth(tempDate.getMonth() + 6) + day < this.endDate.date.getTime()) {
-      this.onChangeDate(datePeriod.LAST_ONE_YEAR);
-      return;
+    if (tempDate.setMonth(tempDate.getMonth() + 6) + day < endDate.getTime()) {
+      return datePeriod.LAST_ONE_YEAR;
     }
 
     tempDate = new Date(startDate);
-    if (tempDate.setMonth(tempDate.getMonth() + 3) + day < this.endDate.date.getTime()) {
-      this.onChangeDate(datePeriod.LAST_SIX_MONTH);
-      return;
+    if (tempDate.setMonth(tempDate.getMonth() + 3) + day < endDate.getTime()) {
+      return datePeriod.LAST_SIX_MONTH;
     }
 
     tempDate = new Date(startDate);
-    if (tempDate.setMonth(tempDate.getMonth() + 1) + day < this.endDate.date.getTime()) {
-      this.onChangeDate(datePeriod.LAST_THREE_MONTH);
-      return;
+    if (tempDate.setMonth(tempDate.getMonth() + 1) + day < endDate.getTime()) {
+      return datePeriod.LAST_THREE_MONTH;
     }
 
     tempDate = new Date(startDate);
-    if (tempDate.setDate(tempDate.getDate() + 7) < this.endDate.date.getTime()) {
-      this.onChangeDate(datePeriod.LAST_ONE_MONTH);
-      return;
+    if (tempDate.setDate(tempDate.getDate() + 7) < endDate.getTime()) {
+      return datePeriod.LAST_ONE_MONTH;
     }
 
-    this.onChangeDate(datePeriod.LAST_ONE_WEEK);
+    return datePeriod.LAST_ONE_WEEK;
   };
 }
