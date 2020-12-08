@@ -6,7 +6,6 @@ export interface Category {
 
 export interface CategoryRequest {
   accountbookId: number;
-  id: number;
   name: string;
   color: string;
 }
