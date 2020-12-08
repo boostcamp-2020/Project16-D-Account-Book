@@ -27,6 +27,16 @@ const findIncomeCategoryById = async (id) => {
   return incomeCategory;
 };
 
+const findExpenditureeCategoryById = async (id) => {
+  const expenditureCategory = await db.expenditureCategory.findOne({
+    attributes: ['id', 'name', 'color'],
+    where: {
+      id,
+    },
+  });
+  return expenditureCategory;
+};
+
 const createIncomeCategory = async ({ accountbookId, name, color }) => {
   const accountbook = await getAccountbookById(accountbookId);
   const createdIncomeCategory = await accountbook.createIncomeCategory({
