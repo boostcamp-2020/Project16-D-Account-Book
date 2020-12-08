@@ -18,8 +18,15 @@ const findUsers = async (ctx) => {
   ctx.body = users;
 };
 
+const deleteUser = async (ctx) => {
+  const { accountbook_id: accountbookId, user_id: userId } = ctx.request.query;
+  await socialService.deleteUser(accountbookId, userId);
+  ctx.status = 204;
+};
+
 module.exports = {
   searchUser,
   addUser,
   findUsers,
+  deleteUser,
 };

@@ -42,8 +42,13 @@ const findUsers = async (accountbookId) => {
   return users;
 };
 
+const deleteUser = async (accountbookId, userId) => {
+  await db.userAccountbook.destroy({ where: { accountbookId, userId } });
+};
+
 module.exports = {
   findUserByEmail,
   addUser,
   findUsers,
+  deleteUser,
 };
