@@ -8,7 +8,7 @@ import AllTransactionContainer from '../../components/common/transactions/all-tr
 import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
 import useStore from '../../hook/use-store/useStore';
-import { useObserver, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import Income, { isIncome } from '../../types/income';
 import Expenditure from '../../types/expenditure';
 import { ParsedQuery } from 'query-string';
@@ -65,7 +65,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { dateStore, transactionStore } = rootStore;
   const { formFilterStore } = rootStore.modalStore;
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
-  console.log(transactionStore.transactions);
+
   useEffect(() => {
     if (!query) {
       transactionStore.isFilterMode = false;

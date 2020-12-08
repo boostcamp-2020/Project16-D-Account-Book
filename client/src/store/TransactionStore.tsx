@@ -63,16 +63,12 @@ export default class TransactionStore {
     if (!this.isFilterMode) {
       if (date.getTime() >= startDate.getTime() && date.getTime() < endDate.getTime()) {
         this.transactions.push(transaction);
-        console.log(this.transactions[this.transactions.length - 1]);
-        //this.transactions = [...this.transactions, transaction];
       }
     } else if (
       date.getTime() >= filterFormStore.startDate.date.getTime() &&
       date.getTime() < filterFormStore.endDate.date.getTime()
     ) {
       this.transactions.push(transaction);
-      console.log('ss');
-      //this.transactions = [...this.transactions, transaction];
       const {
         selectedAccounts: account,
         selectedIncomeCategories: incomeCategory,

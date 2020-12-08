@@ -12,7 +12,7 @@ import { ParsedQuery } from 'query-string';
 const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Element => {
   const history = useHistory();
   const { formFilterStore } = useStore().rootStore.modalStore;
-  const { rootStore } = useStore();
+
   const closeModal = () => {
     formFilterStore.setShow(false);
   };
