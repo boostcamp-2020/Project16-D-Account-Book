@@ -17,8 +17,8 @@ const getExpenditureCategoriesByAccountbookId = async (id) => {
   return expenditureCategories;
 };
 
-const createIncomeCategory = async (id, { name, color }) => {
-  const accountbook = await getAccountbookById(id);
+const createIncomeCategory = async ({ accountbookId, name, color }) => {
+  const accountbook = await getAccountbookById(accountbookId);
   const createdIncomeCategory = await accountbook.createIncomeCategory({
     name,
     color,
@@ -27,8 +27,8 @@ const createIncomeCategory = async (id, { name, color }) => {
   return createdIncomeCategory;
 };
 
-const createExpenditureCategory = async (id, { name, color }) => {
-  const accountbook = await getAccountbookById(id);
+const createExpenditureCategory = async ({ accountbookId, name, color }) => {
+  const accountbook = await getAccountbookById(accountbookId);
   const createdExpenditureCategory = await accountbook.createdExpenditureCategory({
     name,
     color,
