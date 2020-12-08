@@ -9,9 +9,12 @@ import { observer } from 'mobx-react';
 import CategoryPreview from '../../category-preview/CategoryPreview';
 import InputText from '../../inputs/input-text/InputText';
 import formModal from '../../../../constants/formModal';
+import useGetParam from '../../../../hook/use-get-param/useGetParam';
+import { convertToCategory } from '../formUtils';
 
 const FormModalCategory: React.FC = () => {
   const { rootStore } = useStore();
+  const id = useGetParam();
   const toggle = rootStore.modalStore.createCategoryFormStore;
 
   const [name, setName] = useState<string>('카테고리 1');
@@ -30,10 +33,37 @@ const FormModalCategory: React.FC = () => {
     toggle.toggleShow();
   };
 
+  const onCreateIncomeCategory = () => {
+    try {
+      const incomeCategory = convertToCategory(id, name, inputColor);
+      rootStore.categoryStore.createIncomeCategory(incomeCategory);
+    } catch (e) {
+      alert(e.message);
+    } finally {
+      modalToggle();
+    }
+  };
+
+  const onCreateExpenditureCategory = () => {
+    try {
+      const expenditureCategory = convertToCategory(id, name, inputColor);
+      rootStore.categoryStore.createExpenditureCategory(expenditureCategory);
+    } catch (e) {
+      alert(e.message);
+    } finally {
+      modalToggle();
+    }
+  };
+
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
-        <FormModalHeader modalName={formModal.CreateCategoryModalName} blueName={'생성'} closeModal={modalToggle} />
+        <FormModalHeader
+          modalName={formModal.CreateCategoryModalName}
+          blueName={'생성'}
+          closeModal={modalToggle}
+          clickBlue={toggle.incomeFlag ? onCreateIncomeCategory : onCreateExpenditureCategory}
+        />
         <FormModalItem>
           <CategoryPreview title={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
