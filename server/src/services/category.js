@@ -87,6 +87,10 @@ const deleteIncomeCategory = async (id) => {
   await db.incomeCategory.destroy({ where: { id } });
 };
 
+const deleteExpenditureCategory = async (id) => {
+  await db.expenditureCategory.destroy({ where: { id } });
+};
+
 module.exports = {
   getIncomeCategoriesByAccountbookId,
   getExpenditureCategoriesByAccountbookId,
@@ -95,4 +99,5 @@ module.exports = {
   updateIncomeCategory,
   updateExpenditureCategory,
   deleteIncomeCategory,
+  deleteExpenditureCategory,
 };
