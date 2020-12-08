@@ -8,7 +8,6 @@ const transactionAPIAddress = {
   getTransactions: '/api/transactions',
   createIncome: 'api/transactions/income',
   createExpenditure: 'api/transactions/expenditure',
-  //newer
   pathIncome: '/api/transactions/income',
   patchExpenditure: '/api/transactions/expenditure',
   deleteIncome: '/api/transactions/income',
@@ -41,6 +40,15 @@ export default {
 
   createExpenditure: async (expenditure: ExpenditureRequest): Promise<Expenditure> => {
     const response = await instance.post(transactionAPIAddress.createExpenditure, expenditure);
+    return response.data;
+  },
+
+  patchIncome: async (income: IncomeRequest, incomeId: number): Promise<Income> => {
+    const response = await instance.patch(transactionAPIAddress.pathIncome + `/${incomeId}`, income);
+    return response.data;
+  },
+  patchExpenditure: async (expenditure: ExpenditureRequest, expenditureId: number): Promise<Expenditure> => {
+    const response = await instance.patch(transactionAPIAddress.patchExpenditure + `/${expenditureId}`, expenditure);
     return response.data;
   },
 
