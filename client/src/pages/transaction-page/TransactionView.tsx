@@ -15,6 +15,7 @@ import { ParsedQuery } from 'query-string';
 import FilterOption from '../../components/transaction-page/filter-option/FilterOption';
 import FormModalFilter from '../../components/common/modals/form-modal-filter/FormModalFilter';
 import FormModalCreateTransaction from '../../components/common/modals/form-modal-transaction/FormModalCreateTransaction';
+import FormModalUpdateTransaction from '../../components/common/modals/form-modal-transaction/FormModalUpdateTransaction';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -62,8 +63,11 @@ const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<numbe
 
 const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
-  const { dateStore, transactionStore } = rootStore;
+  const { dateStore, transactionStore, modalStore } = rootStore;
   const { formFilterStore } = rootStore.modalStore;
+  const history = useHistory();
+  const { createTransactionFormStore, updateTransactionFormStore } = modalStore;
+
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
   useEffect(() => {
@@ -89,7 +93,8 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   return (
     <>
       {formFilterStore.show && <FormModalFilter accountbookId={accountbookId} />}
-      <FormModalCreateTransaction />
+      {createTransactionFormStore.show && <FormModalCreateTransaction />}
+      {updateTransactionFormStore.show && <FormModalUpdateTransaction />}
       <Sidebar smallAccountbooks={smallAccountbookItems} />
       <MenuNavigation />
       <HeaderNavigationWrapper>
