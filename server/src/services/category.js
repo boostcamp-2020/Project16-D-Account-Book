@@ -29,7 +29,7 @@ const createIncomeCategory = async ({ accountbookId, name, color }) => {
 
 const createExpenditureCategory = async ({ accountbookId, name, color }) => {
   const accountbook = await getAccountbookById(accountbookId);
-  const createdExpenditureCategory = await accountbook.createdExpenditureCategory({
+  const createdExpenditureCategory = await accountbook.createExpenditureCategory({
     name,
     color,
   });
