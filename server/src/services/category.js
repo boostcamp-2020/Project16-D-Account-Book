@@ -27,7 +27,7 @@ const findIncomeCategoryById = async (id) => {
   return incomeCategory;
 };
 
-const findExpenditureeCategoryById = async (id) => {
+const findExpenditureCategoryById = async (id) => {
   const expenditureCategory = await db.expenditureCategory.findOne({
     attributes: ['id', 'name', 'color'],
     where: {
@@ -69,10 +69,25 @@ const updateIncomeCategory = async (incomeCategoryId, { name, color }) => {
   return updatedIncomeCategory;
 };
 
+const updateExpenditureCategory = async (expenditureCategoryId, { name, color }) => {
+  await db.expenditureCategory.update(
+    {
+      name,
+      color,
+    },
+    {
+      where: { id: expenditureCategoryId },
+    },
+  );
+  const updatedExpenditureCategory = await findExpenditureCategoryById(expenditureCategoryId);
+  return updatedExpenditureCategory;
+};
+
 module.exports = {
   getIncomeCategoriesByAccountbookId,
   getExpenditureCategoriesByAccountbookId,
   createIncomeCategory,
   createExpenditureCategory,
   updateIncomeCategory,
+  updateExpenditureCategory,
 };
