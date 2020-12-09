@@ -32,13 +32,15 @@ const FormModalAccount: React.FC = () => {
   const { show } = toggle;
   const modalToggle = (): void => {
     toggle.toggleShow();
+    setName('');
+    setInputColor(BLACK);
   };
 
   const onCreate = () => {
     try {
       const account = convertToAccount(id, name, inputColor);
       rootStore.accountStore.createAccount(account);
-      setName('부스트카드');
+      setName('');
       setInputColor(BLACK);
     } catch (e) {
       alert(e.message);
