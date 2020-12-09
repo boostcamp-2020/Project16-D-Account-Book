@@ -65,12 +65,8 @@ const IncomeExpenditureSwitch = styled.div`
 
 const PieGraphPage: React.FC = () => {
   const { rootStore } = useStore();
-  console.log('re rendered');
   const id = useGetParam();
   const pieGraphStore = rootStore.pieGraphPageStore;
-  console.log(pieGraphStore.transactions);
-  console.log(pieGraphStore.pieChartValue);
-  console.log(pieGraphStore.boxChartValue);
   useEffect(() => {
     pieGraphStore.loadTransactions(id);
   }, []);
