@@ -47,7 +47,7 @@ const logout = async (ctx) => {
       maxAge: 0,
       httpOnly: true,
     });
-    ctx.status = 204;
+    ctx.status = 200;
   } catch (err) {
     ctx.throw(401, err);
   }
