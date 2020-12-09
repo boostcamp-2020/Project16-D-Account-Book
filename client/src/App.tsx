@@ -10,6 +10,7 @@ import SettingsAccountsPage from './pages/settings-accounts-page/SettingsAccount
 import SettingsCsvPage from './pages/settings-csv-page/SettingsCsvPage';
 import SettingsSocialPage from './pages/settings-social-page/SettingsSocialPage';
 import StatisticsPage from './pages/statistics-page/StatisticsPage';
+import AccountbookSelectionPage from './pages/accountbook-selection-page/AccountbookSelectionPage';
 import Auth from './hoc/Auth';
 
 function App(): JSX.Element {
@@ -19,6 +20,7 @@ function App(): JSX.Element {
         <Router>
           <GlobalFonts />
           <Switch>
+            <Route exact path="/" component={Auth(AccountbookSelectionPage)} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/accountbooks/:id" component={Auth(TransactionPage)} />
             <Route exact path="/accountbooks/:id/settings/accountbook" component={Auth(SettingsAccountbookPage)} />
