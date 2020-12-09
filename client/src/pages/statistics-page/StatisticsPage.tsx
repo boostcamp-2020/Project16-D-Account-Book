@@ -6,6 +6,11 @@ import { smallAccountbookItems } from '../../__dummy-data__/components/smallAcco
 import PieGraphPage from './PieGraphPage';
 import styled from 'styled-components';
 
+const PageWrapper = styled.div`
+  margin: 100px auto;
+  width: 70%;
+`;
+
 const StatisticsPage: React.FC = () => {
   return (
     <>
@@ -13,6 +18,9 @@ const StatisticsPage: React.FC = () => {
       <HeaderNavigationRightTopWrapper>
         <HeaderNavigation currentPage={'statistics'} />
       </HeaderNavigationRightTopWrapper>
+      <PageWrapper>
+        <PieGraphPage />
+      </PageWrapper>
     </>
   );
 };
