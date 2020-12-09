@@ -10,6 +10,7 @@
 
 # production
 /build
+launch.json
 
 # misc
 .DS_Store

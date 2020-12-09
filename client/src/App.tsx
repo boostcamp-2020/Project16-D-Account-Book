@@ -8,6 +8,7 @@ import SettingsAccountbookPage from './pages/settings-accountbook-page/SettingsA
 import SettingsCategoriesPage from './pages/settings-categories-page/SettingsCategoriesPage';
 import SettingsAccountsPage from './pages/settings-accounts-page/SettingsAccountsPage';
 import SettingsCsvPage from './pages/settings-csv-page/SettingsCsvPage';
+import StatisticsPage from './pages/statistics-page/StatisticsPage';
 
 function App(): JSX.Element {
   return (
@@ -22,6 +23,7 @@ function App(): JSX.Element {
             <Route exact path="/accountbooks/:id/settings/categories" component={SettingsCategoriesPage} />
             <Route exact path="/accountbooks/:id/settings/accounts" component={SettingsAccountsPage} />
             <Route exact path="/accountbooks/:id/settings/csv" component={SettingsCsvPage} />
+            <Route exact path="/accountbooks/:id/statistics" component={StatisticsPage} />
           </Switch>
         </Router>
       </RootProvider>

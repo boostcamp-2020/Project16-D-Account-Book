@@ -16,4 +16,37 @@ const datePeriod = {
   USER_SETTING,
 };
 
+export const datePeriodNumber = {
+  [ALL]: {
+    year: 0,
+    day: 0,
+    month: 0,
+  },
+  [LAST_ONE_WEEK]: {
+    year: 0,
+    day: 7,
+    month: 0,
+  },
+  [LAST_ONE_MONTH]: {
+    year: 0,
+    day: 0,
+    month: 1,
+  },
+  [LAST_THREE_MONTH]: {
+    year: 0,
+    day: 0,
+    month: 3,
+  },
+  [LAST_SIX_MONTH]: {
+    year: 0,
+    day: 0,
+    month: 6,
+  },
+  [LAST_ONE_YEAR]: {
+    year: 1,
+    day: 0,
+    month: 0,
+  },
+};
+
 export default datePeriod;

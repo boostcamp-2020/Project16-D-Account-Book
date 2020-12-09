@@ -16,16 +16,11 @@ import FilterOption from '../../components/transaction-page/filter-option/Filter
 import FormModalFilter from '../../components/common/modals/form-modal-filter/FormModalFilter';
 import FormModalCreateTransaction from '../../components/common/modals/form-modal-transaction/FormModalCreateTransaction';
 import FormModalUpdateTransaction from '../../components/common/modals/form-modal-transaction/FormModalUpdateTransaction';
+import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
 
 const ViewWrapper = styled.div`
   width: 70%;
   margin: 0 auto;
-`;
-
-const HeaderNavigationWrapper = styled.div`
-  position: absolute;
-  right: 2%;
-  top: 2%;
 `;
 
 const TransactionHeaderWrapper = styled.div`
@@ -96,9 +91,9 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       {updateTransactionFormStore.show && <FormModalUpdateTransaction />}
       <Sidebar smallAccountbooks={smallAccountbookItems} />
       <MenuNavigation />
-      <HeaderNavigationWrapper>
+      <HeaderNavigationRightTopWrapper>
         <HeaderNavigation currentPage={'transaction'} />
-      </HeaderNavigationWrapper>
+      </HeaderNavigationRightTopWrapper>
       <ViewWrapper>
         <TransactionHeaderWrapper>
           {query ? (
