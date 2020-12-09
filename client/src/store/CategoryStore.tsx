@@ -68,6 +68,16 @@ export default class CategoryStore {
     this.incomeCategories = this.incomeCategories.filter((item) => item.id !== incomeCategoryId);
   };
 
+  deleteExpenditureCategory = async (expenditureCategoryId: number): Promise<void> => {
+    await CategoryService.deleteExpenditureCategory(expenditureCategoryId);
+    this.deleteExpenditureCategoryById(expenditureCategoryId);
+  };
+
+  @action
+  deleteExpenditureCategoryById = (expenditureCategoryId: number): void => {
+    this.expenditureCategories = this.expenditureCategories.filter((item) => item.id !== expenditureCategoryId);
+  };
+
   @computed
   get incomeOptions(): Options[] {
     const data: Options[] = this.incomeCategories.map((income) => {
