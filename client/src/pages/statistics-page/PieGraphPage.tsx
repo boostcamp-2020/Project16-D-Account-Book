@@ -9,6 +9,9 @@ import PieGraph from '../../components/graph/pie/PieGraph';
 import NotFoundTransaction from '../../components/common/not-found-transaction/NotFoundTransaction';
 import { numberWithCommas } from '../../utils/number';
 import BoxGraph from '../../components/graph/box-graph/BoxGraph';
+import CategoryNoDependency from '../../components/common/category/CategoryNoDependency';
+import { text, color } from '../../constants/pieGraphPage';
+
 const PieGraphPageWrapper = styled.div`
   margin: 0 auto;
   width: 70%;
@@ -54,6 +57,12 @@ const BarChartList = styled.ul`
   padding: 0;
 `;
 
+const IncomeExpenditureSwitch = styled.div`
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+`;
+
 const PieGraphPage: React.FC = () => {
   const { rootStore } = useStore();
   console.log('re rendered');
@@ -74,13 +83,16 @@ const PieGraphPage: React.FC = () => {
   const clickNextButton = (): void => {
     pieGraphStore.moveToNext(id);
   };
+  const switchIncomeExpenditure = (): void => {
+    pieGraphStore.switchIncomeMode();
+  };
   return (
     <PieGraphPageWrapper>
       <PieHeaderFilter>
         <DropdownWrapper>
           <SingleInputDropDown
             items={pieGraphStore.dateOptions}
-            placeholder={'날짜를 선택해주세요'}
+            placeholder={text.dateInputPlaceholder}
             defaultSelectValue={pieGraphStore.selectedDate}
             onChange={selectDateChanged}
           />
@@ -102,7 +114,7 @@ const PieGraphPage: React.FC = () => {
           </PieGraphWrapper>
           <BarChartWrapper>
             <BarChartHeaderWrapper>
-              <BarChartHeader>{pieGraphStore.incomeMode ? '총 지출' : '총 수입'}</BarChartHeader>
+              <BarChartHeader>{pieGraphStore.incomeMode ? text.totalExpenditure : text.totalIncome}</BarChartHeader>
               <BarChartHeader>
                 {pieGraphStore.incomeMode
                   ? '-' + numberWithCommas(pieGraphStore.totalValue)
@@ -114,6 +126,13 @@ const PieGraphPage: React.FC = () => {
                 return <BoxGraph key={barChart.title} {...barChart} />;
               })}
             </BarChartList>
+            <IncomeExpenditureSwitch>
+              <CategoryNoDependency
+                bgColor={color.naverGreen}
+                text={pieGraphStore.incomeMode ? text.showExpenditure : text.showIncome}
+                onClick={switchIncomeExpenditure}
+              ></CategoryNoDependency>
+            </IncomeExpenditureSwitch>
           </BarChartWrapper>
         </>
       )}
