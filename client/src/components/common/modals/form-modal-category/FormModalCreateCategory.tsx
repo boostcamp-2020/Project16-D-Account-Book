@@ -18,7 +18,7 @@ const FormModalCategory: React.FC = () => {
   const id = useGetParam();
   const toggle = rootStore.modalStore.createCategoryFormStore;
 
-  const [name, setName] = useState<string>('카테고리 1');
+  const [name, setName] = useState<string>('');
   const [inputColor, setInputColor] = useState<string>(BLACK);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,6 +38,8 @@ const FormModalCategory: React.FC = () => {
     try {
       const incomeCategory = convertToCategory(id, name, inputColor);
       rootStore.categoryStore.createIncomeCategory(incomeCategory);
+      setName('');
+      setInputColor(BLACK);
     } catch (e) {
       alert(e.message);
     } finally {
