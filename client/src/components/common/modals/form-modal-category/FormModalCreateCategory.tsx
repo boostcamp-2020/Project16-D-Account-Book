@@ -64,7 +64,9 @@ const FormModalCategory: React.FC = () => {
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
         <FormModalHeader
-          modalName={formModal.CreateCategoryModalName}
+          modalName={
+            toggle.incomeFlag ? formModal.CreateIncomeCategoryModalName : formModal.CreateExpenditureCategoryModalName
+          }
           blueName={'생성'}
           closeModal={modalToggle}
           clickBlue={toggle.incomeFlag ? onCreateIncomeCategory : onCreateExpenditureCategory}
