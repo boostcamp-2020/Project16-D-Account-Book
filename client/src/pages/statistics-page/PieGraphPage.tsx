@@ -7,7 +7,8 @@ import { observer } from 'mobx-react';
 import useGetParam from '../../hook/use-get-param/useGetParam';
 import PieGraph from '../../components/graph/pie/PieGraph';
 import NotFoundTransaction from '../../components/common/not-found-transaction/NotFoundTransaction';
-
+import { numberWithCommas } from '../../utils/number';
+import BoxGraph from '../../components/graph/box-graph/BoxGraph';
 const PieGraphPageWrapper = styled.div`
   margin: 0 auto;
   width: 70%;
@@ -31,7 +32,26 @@ const InputWrapper = styled.div`
 const PieGraphWrapper = styled.div`
   margin: 0 auto;
   margin-top: -5%;
-  width: 70%;
+  width: 55%;
+`;
+
+const BarChartWrapper = styled.div`
+  margin-top: 2em;
+`;
+
+const BarChartHeaderWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid lightgray;
+`;
+
+const BarChartHeader = styled.p`
+  font-size: 1.2em;
+`;
+
+const BarChartList = styled.ul`
+  padding: 0;
 `;
 
 const PieGraphPage: React.FC = () => {
@@ -76,9 +96,26 @@ const PieGraphPage: React.FC = () => {
       {pieGraphStore.transactions.length === 0 ? (
         <NotFoundTransaction />
       ) : (
-        <PieGraphWrapper>
-          <PieGraph transactionData={pieGraphStore.pieChartValue} />
-        </PieGraphWrapper>
+        <>
+          <PieGraphWrapper>
+            <PieGraph transactionData={pieGraphStore.pieChartValue} />
+          </PieGraphWrapper>
+          <BarChartWrapper>
+            <BarChartHeaderWrapper>
+              <BarChartHeader>{pieGraphStore.incomeMode ? '총 지출' : '총 수입'}</BarChartHeader>
+              <BarChartHeader>
+                {pieGraphStore.incomeMode
+                  ? '-' + numberWithCommas(pieGraphStore.totalValue)
+                  : '+' + numberWithCommas(pieGraphStore.totalValue)}
+              </BarChartHeader>
+            </BarChartHeaderWrapper>
+            <BarChartList>
+              {pieGraphStore.boxChartValue.map((barChart) => {
+                return <BoxGraph key={barChart.title} {...barChart} />;
+              })}
+            </BarChartList>
+          </BarChartWrapper>
+        </>
       )}
     </PieGraphPageWrapper>
   );
