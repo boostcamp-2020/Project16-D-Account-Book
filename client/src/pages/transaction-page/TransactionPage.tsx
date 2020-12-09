@@ -27,7 +27,6 @@ const TransactionPage: React.FC<Props> = ({ match, location }: Props) => {
     rootStore.categoryStore.updateExpenditureCategories(accountbookId);
     rootStore.modalStore.formFilterStore.init();
   }, []);
-
   return (
     <PageWrapper>
       <TransactionView accountbookId={accountbookId} query={query} />
