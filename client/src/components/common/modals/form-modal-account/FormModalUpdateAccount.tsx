@@ -13,10 +13,12 @@ import { BLACK } from '../../../../constants/color';
 
 const FormModalUpdateAccount: React.FC = () => {
   const { rootStore } = useStore();
-  const toggle = rootStore.modalStore.updateAccountFormStore;
-
+  const updateAccountFormStore = rootStore.modalStore.updateAccountFormStore;
+  const { show } = updateAccountFormStore;
   const [name, setName] = useState<string>('부스트카드');
   const [inputColor, setInputColor] = useState<string>(BLACK);
+
+  const accountId = updateAccountFormStore.account?.id;
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -26,9 +28,20 @@ const FormModalUpdateAccount: React.FC = () => {
     setInputColor(color.hex);
   };
 
-  const { show } = toggle;
   const modalToggle = (): void => {
-    toggle.toggleShow();
+    updateAccountFormStore.toggleShow();
+  };
+
+  const deleteAccount = (): void => {
+    try {
+      if (accountId !== undefined) {
+        rootStore.accountStore.deleteAccount(accountId);
+      }
+    } catch (e) {
+      alert(e.message);
+    } finally {
+      modalToggle();
+    }
   };
 
   return (
@@ -39,9 +52,10 @@ const FormModalUpdateAccount: React.FC = () => {
           blueName={'완료'}
           redName={'삭제'}
           closeModal={modalToggle}
+          clickRed={deleteAccount}
         />
         <FormModalItem>
-          <AccountPreview title={name} color={inputColor} onChange={onChange} />
+          <AccountPreview name={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
           <FormModalLabel>{formModal.AccountLabelName}</FormModalLabel>
