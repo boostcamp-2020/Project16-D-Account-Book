@@ -12,11 +12,7 @@ export default {
   },
 
   getCurrentUser: async (): Promise<any> => {
-    try {
-      const response = await instance.get(authAPIAddress.getCurrentUser);
-      return response.data;
-    } catch (err) {
-      console.log(err);
-    }
+    const response = await instance.get(authAPIAddress.getCurrentUser);
+    return response.data;
   },
 };
