@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
 import useStore from '../../../hook/use-store/useStore';
 
-const CategoryWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean }>`
+const CategoryWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean; minWidth?: string }>`
   width: 100%;
   max-width: 115px;
+  min-width: ${({ minWidth }) => minWidth};
   height: 100%;
   max-height: 50px;
+  min-height: 43px;
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};
   box-sizing: border-box;
@@ -28,10 +30,11 @@ interface CategoryProps {
   text: string | undefined;
   bgColor: string;
   shadow?: boolean;
+  minWidth?: string;
   onClick?: () => void;
 }
 
-const Category = ({ text, bgColor, shadow, onClick }: CategoryProps): JSX.Element => {
+const Category = ({ text, bgColor, shadow, minWidth, onClick }: CategoryProps): JSX.Element => {
   const { rootStore } = useStore();
   const updateCategoryForm = rootStore.modalStore.updateCategoryFormStore;
 
@@ -41,7 +44,13 @@ const Category = ({ text, bgColor, shadow, onClick }: CategoryProps): JSX.Elemen
 
   const textColor = getTextColor(bgColor);
   return (
-    <CategoryWrapper bgColor={bgColor} textColor={textColor} shadow={shadow} onClick={openUpdateCategoryForm}>
+    <CategoryWrapper
+      bgColor={bgColor}
+      textColor={textColor}
+      shadow={shadow}
+      minWidth={minWidth}
+      onClick={openUpdateCategoryForm}
+    >
       {text}
     </CategoryWrapper>
   );
