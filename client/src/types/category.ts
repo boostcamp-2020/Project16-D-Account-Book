@@ -10,4 +10,10 @@ export interface CategoryRequest {
   color: string;
 }
 
+export interface ICategoryValue {
+  title: string;
+  color: string;
+  value: number;
+}
+
 export default Category;
