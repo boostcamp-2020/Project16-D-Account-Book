@@ -10,4 +10,13 @@ export interface AccountRequest {
   color: string;
 }
 
+export interface SingleAccount {
+  id: number;
+  name: string;
+  color: string;
+  shadow?: boolean;
+  preview?: string;
+  onClick?: () => void;
+}
+
 export default Account;
