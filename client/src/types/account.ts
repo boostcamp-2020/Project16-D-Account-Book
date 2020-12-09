@@ -6,7 +6,6 @@ export interface Account {
 
 export interface AccountRequest {
   accountbookId: number;
-  id: number;
   name: string;
   color: string;
 }

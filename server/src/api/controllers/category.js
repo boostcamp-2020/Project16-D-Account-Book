@@ -21,22 +21,44 @@ const getExpenditureCategories = async (ctx) => {
 };
 
 const createIncomeCategory = async (ctx) => {
-  // TODO: FE에서 accountbookId를 request body로 넘겨받는 로직 구현 필요
-  const accountbookId = 1;
   const incomeCategoryData = ctx.request.body;
-  const createdIncomeCategory = await categoryService.createIncomeCategory(accountbookId, incomeCategoryData);
+  const createdIncomeCategory = await categoryService.createIncomeCategory(incomeCategoryData);
   ctx.body = createdIncomeCategory;
 };
 
 const createExpenditureCategory = async (ctx) => {
-  // TODO: FE에서 accountbookId를 request body로 넘겨받는 로직 구현 필요
-  const accountbookId = 1;
   const expenditureCategoryData = ctx.request.body;
-  const createdExpenditureCategory = await categoryService.createExpenditureCategory(
-    accountbookId,
+  const createdExpenditureCategory = await categoryService.createExpenditureCategory(expenditureCategoryData);
+  ctx.body = createdExpenditureCategory;
+};
+
+const updateIncomeCategory = async (ctx) => {
+  const { income_category_id: incomeCategoryId } = ctx.request.params;
+  const incomeCategoryData = ctx.request.body;
+  const updatedIncomeCategory = await categoryService.updateIncomeCategory(incomeCategoryId, incomeCategoryData);
+  ctx.body = updatedIncomeCategory;
+};
+
+const updateExpenditureCategory = async (ctx) => {
+  const { expenditure_category_id: expenditureCategoryId } = ctx.request.params;
+  const expenditureCategoryData = ctx.request.body;
+  const updatedExpenditureCategory = await categoryService.updateExpenditureCategory(
+    expenditureCategoryId,
     expenditureCategoryData,
   );
-  ctx.body = createdExpenditureCategory;
+  ctx.body = updatedExpenditureCategory;
+};
+
+const deleteIncomeCategory = async (ctx) => {
+  const { income_category_id: incomeCategoryId } = ctx.request.params;
+  await categoryService.deleteIncomeCategory(incomeCategoryId);
+  ctx.status = 204;
+};
+
+const deleteExpenditureCategory = async (ctx) => {
+  const { expenditure_category_id: expenditureCategoryId } = ctx.request.params;
+  await categoryService.deleteExpenditureCategory(expenditureCategoryId);
+  ctx.status = 204;
 };
 
 module.exports = {
@@ -44,4 +66,8 @@ module.exports = {
   getExpenditureCategories,
   createIncomeCategory,
   createExpenditureCategory,
+  updateIncomeCategory,
+  updateExpenditureCategory,
+  deleteIncomeCategory,
+  deleteExpenditureCategory,
 };

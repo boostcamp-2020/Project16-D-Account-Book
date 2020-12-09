@@ -4,6 +4,8 @@ import CreateTransactionFormStore from './CreateTransactionFormStore';
 import UpdateTransactionFormStore from './UpdateTransactionFormStore';
 import CreateAccountFormStore from './CreateAccountFormStore';
 import CreateCategoryFormStore from './CreateCategoryFormStore';
+import UpdateAccountFormStore from './UpdateAccountFormStore';
+import UpdateCategoryFormStore from './UpdateCategoryFormStore';
 
 export default class ModalStore {
   rootStore: RootStore;
@@ -12,6 +14,8 @@ export default class ModalStore {
   updateTransactionFormStore: UpdateTransactionFormStore;
   createAccountFormStore: CreateAccountFormStore;
   createCategoryFormStore: CreateCategoryFormStore;
+  updateAccountFormStore: UpdateAccountFormStore;
+  updateCategoryFormStore: UpdateCategoryFormStore;
 
   constructor(rootStore: RootStore) {
     this.formFilterStore = new FormFilterStore(rootStore);
@@ -20,5 +24,7 @@ export default class ModalStore {
     this.updateTransactionFormStore = new UpdateTransactionFormStore(rootStore);
     this.createAccountFormStore = new CreateAccountFormStore(rootStore);
     this.createCategoryFormStore = new CreateCategoryFormStore(rootStore);
+    this.updateAccountFormStore = new UpdateAccountFormStore(rootStore);
+    this.updateCategoryFormStore = new UpdateCategoryFormStore(rootStore);
   }
 }

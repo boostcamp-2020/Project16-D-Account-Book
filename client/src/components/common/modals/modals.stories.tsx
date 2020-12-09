@@ -10,6 +10,8 @@ import { inputs as filterInputs, changes as filterChanges } from '../../../__dum
 import FormModalTransaction from './form-modal-transaction/FormModalCreateTransaction';
 import FormModalAccount from './form-modal-account/FormModalCreateAccount';
 import FormModalCategory from './form-modal-category/FormModalCreateCategory';
+import FormModalUpdateAccount from './form-modal-account/FormModalUpdateAccount';
+import FormModalUpdateCategory from './form-modal-category/FormModalUpdateCategory';
 import styled from 'styled-components';
 
 export default {
@@ -80,4 +82,12 @@ export const FormModalAccountDefault: React.FC = () => {
 
 export const FormModalCategoryDefault: React.FC = () => {
   return <FormModalCategory />;
+};
+
+export const FormModalUpdateAccountDefault: React.FC = () => {
+  return <FormModalUpdateAccount />;
+};
+
+export const FormModalUpdateCategoryDefault: React.FC = () => {
+  return <FormModalUpdateCategory />;
 };

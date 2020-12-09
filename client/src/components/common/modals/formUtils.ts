@@ -3,6 +3,8 @@ import { ExpenditureRequest } from '../../../types/expenditure';
 import { ITransaction } from '../../../types/lineChartValue';
 import { ITransactionForm } from '../../../types/TransactionForm';
 import { privateEncrypt } from 'crypto';
+import { AccountRequest } from '../../../types/account';
+import { CategoryRequest } from '../../../types/category';
 
 export const convertToIncome = (incomeInput: ITransactionForm, accountbookId: number): IncomeRequest => {
   const { price, categories, accounts, content, date, memo } = incomeInput;
@@ -36,3 +38,24 @@ export const convertToExpenditure = (expenditureInput: ITransactionForm, account
     memo,
   };
 };
+export const convertToAccount = (accountbookId: number, name: string, color: string): AccountRequest => {
+  return {
+    accountbookId,
+    name,
+    color,
+  };
+};
+export const convertToCategory = (accountbookId: number, name: string, color: string): CategoryRequest => {
+  return {
+    accountbookId,
+    name,
+    color,
+  };
+};
+// export const convertToExpenditureCategory = (accountbookId: number, name: string, color: string): CategoryRequest => {
+//   return {
+//     accountbookId,
+//     name,
+//     color,
+//   };
+// };

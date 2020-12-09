@@ -6,19 +6,16 @@ import FormModalLabel from '../form-modal-template/FormModalLabel';
 import ModalBackground from '../modal-background/ModalBackground';
 import FormModalHeader from '../form-modal-header/FormModalHeader';
 import { observer } from 'mobx-react';
-import AccountPreview from '../../account-preview/AccountPreview';
+import CategoryPreview from '../../category-preview/CategoryPreview';
 import InputText from '../../inputs/input-text/InputText';
 import formModal from '../../../../constants/formModal';
-import useGetParam from '../../../../hook/use-get-param/useGetParam';
-import { convertToAccount } from '../formUtils';
 import { BLACK } from '../../../../constants/color';
 
-const FormModalAccount: React.FC = () => {
+const FormModalUpdateCategory: React.FC = () => {
   const { rootStore } = useStore();
-  const id = useGetParam();
-  const toggle = rootStore.modalStore.createAccountFormStore;
+  const toggle = rootStore.modalStore.updateCategoryFormStore;
 
-  const [name, setName] = useState<string>('부스트카드');
+  const [name, setName] = useState<string>('카테고리 1');
   const [inputColor, setInputColor] = useState<string>(BLACK);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,36 +31,27 @@ const FormModalAccount: React.FC = () => {
     toggle.toggleShow();
   };
 
-  const onCreate = () => {
-    try {
-      const account = convertToAccount(id, name, inputColor);
-      rootStore.accountStore.createAccount(account);
-    } catch (e) {
-      alert(e.message);
-    } finally {
-      modalToggle();
-    }
-  };
-
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
         <FormModalHeader
-          modalName={formModal.CreateAccountModalName}
-          blueName={'생성'}
+          modalName={formModal.UpdateCategorytModalName}
+          blueName={'완료'}
+          redName={'삭제'}
           closeModal={modalToggle}
-          clickBlue={onCreate}
+          // TODO: 카테고리 변경 로직 구현 필요
+          // clickBlue={toggle.incomeFlag ? onCreateIncomeCategory : onCreateExpenditureCategory}
         />
         <FormModalItem>
-          <AccountPreview title={name} color={inputColor} onChange={onChange} />
+          <CategoryPreview title={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
-          <FormModalLabel>{formModal.AccountLabelName}</FormModalLabel>
-          <InputText maxLength={8} placeholder={formModal.AccountPlaceholder} value={name} onChange={onChangeName} />
+          <FormModalLabel>{formModal.CategoryLabelName}</FormModalLabel>
+          <InputText maxLength={8} placeholder={formModal.CategoryPlaceholder} value={name} onChange={onChangeName} />
         </FormModalItem>
       </FormModalWrapper>
     </ModalBackground>
   );
 };
 
-export default observer(FormModalAccount);
+export default observer(FormModalUpdateCategory);

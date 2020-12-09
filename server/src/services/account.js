@@ -9,18 +9,47 @@ const getAccountsByAccountbookId = async (id) => {
   return accounts;
 };
 
-const createAccount = async (id, { name, color }) => {
-  const accountbook = await getAccountbookById(id);
+const findAccountById = async (id) => {
+  const account = await db.account.findOne({
+    attributes: ['id', 'name', 'color'],
+    where: {
+      id,
+    },
+  });
+  return account;
+};
 
+const createAccount = async ({ accountbookId, name, color }) => {
+  const accountbook = await getAccountbookById(accountbookId);
   const createdAccount = await accountbook.createAccount({
     name,
     color,
   });
-
   return createdAccount;
+};
+
+const updateAccount = async (accountId, { name, color }) => {
+  await db.account.update(
+    {
+      name,
+      color,
+    },
+    {
+      where: { id: accountId },
+    },
+  );
+  const updatedAccount = await findAccountById(accountId);
+  return updatedAccount;
+};
+
+const deleteAccount = async (id) => {
+  await db.account.destroy({ where: { id } });
 };
 
 module.exports = {
   getAccountsByAccountbookId,
   createAccount,
+  findAccountById,
+  updateAccount,
+  deleteAccount,
 };

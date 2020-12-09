@@ -9,6 +9,7 @@ export const MODAL_RED = '#E74C3C';
 export const MODAL_WHITE = '#ECECEC';
 export const DODGER_BLUE = '#1E90FF';
 export const LIGHT_GREEN = '#11CD6E';
+export const BLACK = '#000000';
 
 const color = {
   BLUE,
@@ -22,6 +23,7 @@ const color = {
   MODAL_WHITE,
   DODGER_BLUE,
   LIGHT_GREEN,
+  BLACK,
 };
 
 export default color;

@@ -16,6 +16,7 @@ export default {
     return response.data;
   },
   createAccount: async (account: AccountRequest): Promise<Account> => {
-    return await instance.post(accountAPIAddress.createAccount, account);
+    const response = await instance.post(accountAPIAddress.createAccount, account);
+    return response.data;
   },
 };

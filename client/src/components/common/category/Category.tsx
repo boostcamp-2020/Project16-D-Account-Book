@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
+import useStore from '../../../hook/use-store/useStore';
 
 const CategoryWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean }>`
   width: 100%;
@@ -31,9 +32,16 @@ interface CategoryProps {
 }
 
 const Category = ({ text, bgColor, shadow, onClick }: CategoryProps): JSX.Element => {
+  const { rootStore } = useStore();
+  const updateCategoryForm = rootStore.modalStore.updateCategoryFormStore;
+
+  const openUpdateCategoryForm = (): void => {
+    updateCategoryForm.toggleShow();
+  };
+
   const textColor = getTextColor(bgColor);
   return (
-    <CategoryWrapper bgColor={bgColor} textColor={textColor} shadow={shadow} onClick={onClick}>
+    <CategoryWrapper bgColor={bgColor} textColor={textColor} shadow={shadow} onClick={openUpdateCategoryForm}>
       {text}
     </CategoryWrapper>
   );
