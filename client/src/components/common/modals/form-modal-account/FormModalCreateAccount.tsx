@@ -18,7 +18,7 @@ const FormModalAccount: React.FC = () => {
   const id = useGetParam();
   const toggle = rootStore.modalStore.createAccountFormStore;
 
-  const [name, setName] = useState<string>('부스트카드');
+  const [name, setName] = useState<string>('');
   const [inputColor, setInputColor] = useState<string>(BLACK);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,6 +38,8 @@ const FormModalAccount: React.FC = () => {
     try {
       const account = convertToAccount(id, name, inputColor);
       rootStore.accountStore.createAccount(account);
+      setName('부스트카드');
+      setInputColor(BLACK);
     } catch (e) {
       alert(e.message);
     } finally {
