@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import useStore from '../hook/use-store/useStore';
+import { observer } from 'mobx-react';
 
 export default (SpecificComponent: any): any => {
   const AuthenticationCheck = (props: any) => {
@@ -14,5 +15,5 @@ export default (SpecificComponent: any): any => {
     }
   };
 
-  return AuthenticationCheck;
+  return observer(AuthenticationCheck);
 };
