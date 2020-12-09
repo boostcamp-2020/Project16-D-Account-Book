@@ -9,14 +9,16 @@ import { observer } from 'mobx-react';
 import AccountPreview from '../../account-preview/AccountPreview';
 import InputText from '../../inputs/input-text/InputText';
 import formModal from '../../../../constants/formModal';
-import { BLACK } from '../../../../constants/color';
+import useGetParam from '../../../../hook/use-get-param/useGetParam';
+import { convertToAccount } from '../formUtils';
 
 const FormModalUpdateAccount: React.FC = () => {
   const { rootStore } = useStore();
+  const id = useGetParam();
   const updateAccountFormStore = rootStore.modalStore.updateAccountFormStore;
   const { show } = updateAccountFormStore;
-  const [name, setName] = useState<string>('부스트카드');
-  const [inputColor, setInputColor] = useState<string>(BLACK);
+  const [name, setName] = useState<string | undefined>(updateAccountFormStore.account?.name);
+  const [inputColor, setInputColor] = useState<string | undefined>(updateAccountFormStore.account?.color);
 
   const accountId = updateAccountFormStore.account?.id;
 
@@ -44,26 +46,51 @@ const FormModalUpdateAccount: React.FC = () => {
     }
   };
 
-  return (
-    <ModalBackground show={show} closeModal={modalToggle}>
-      <FormModalWrapper>
-        <FormModalHeader
-          modalName={formModal.UpdateAccountModalName}
-          blueName={'완료'}
-          redName={'삭제'}
-          closeModal={modalToggle}
-          clickRed={deleteAccount}
-        />
-        <FormModalItem>
-          <AccountPreview name={name} color={inputColor} onChange={onChange} />
-        </FormModalItem>
-        <FormModalItem>
-          <FormModalLabel>{formModal.AccountLabelName}</FormModalLabel>
-          <InputText maxLength={8} placeholder={formModal.AccountPlaceholder} value={name} onChange={onChangeName} />
-        </FormModalItem>
-      </FormModalWrapper>
-    </ModalBackground>
-  );
+  const updateAccount = (): void => {
+    if (accountId && name && inputColor) {
+      const account = convertToAccount(id, name, inputColor);
+      rootStore.accountStore.updateAccount(account, accountId);
+      modalToggle();
+    }
+  };
+
+  if (
+    updateAccountFormStore.convertAccount?.name !== undefined &&
+    updateAccountFormStore.convertAccount?.color !== undefined
+  ) {
+    return (
+      <ModalBackground show={show} closeModal={modalToggle}>
+        <FormModalWrapper>
+          <FormModalHeader
+            modalName={formModal.UpdateAccountModalName}
+            blueName={'완료'}
+            redName={'삭제'}
+            closeModal={modalToggle}
+            clickRed={deleteAccount}
+            clickBlue={updateAccount}
+          />
+          <FormModalItem>
+            <AccountPreview
+              name={updateAccountFormStore.convertAccount?.name}
+              color={updateAccountFormStore.convertAccount?.color}
+              onChange={onChange}
+            />
+          </FormModalItem>
+          <FormModalItem>
+            <FormModalLabel>{formModal.AccountLabelName}</FormModalLabel>
+            <InputText
+              maxLength={8}
+              placeholder={formModal.AccountPlaceholder}
+              value={updateAccountFormStore.convertAccount?.name}
+              onChange={onChangeName}
+            />
+          </FormModalItem>
+        </FormModalWrapper>
+      </ModalBackground>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default observer(FormModalUpdateAccount);
