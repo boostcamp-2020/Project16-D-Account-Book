@@ -3,7 +3,7 @@ import { ExpenditureRequest } from '../../../types/expenditure';
 import { ITransaction } from '../../../types/lineChartValue';
 import { ITransactionForm } from '../../../types/TransactionForm';
 import { privateEncrypt } from 'crypto';
-import { AccountRequest } from '../../../types/account';
+import { AccountRequest, SingleAccount } from '../../../types/account';
 import { CategoryRequest } from '../../../types/category';
 
 export const convertToIncome = (incomeInput: ITransactionForm, accountbookId: number): IncomeRequest => {
@@ -52,10 +52,10 @@ export const convertToCategory = (accountbookId: number, name: string, color: st
     color,
   };
 };
-// export const convertToExpenditureCategory = (accountbookId: number, name: string, color: string): CategoryRequest => {
-//   return {
-//     accountbookId,
-//     name,
-//     color,
-//   };
-// };
+export const convertToAccountObj = (id: number, name: string, color: string): SingleAccount => {
+  return {
+    id,
+    name,
+    color,
+  };
+};
