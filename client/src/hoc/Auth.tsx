@@ -7,7 +7,11 @@ export default (SpecificComponent: any): any => {
     useEffect(() => {
       userStore.checkAuth();
     }, []);
-    return <SpecificComponent {...props} />;
+    if (userStore.userId === null) {
+      return <></>;
+    } else {
+      return <SpecificComponent {...props} />;
+    }
   };
 
   return AuthenticationCheck;
