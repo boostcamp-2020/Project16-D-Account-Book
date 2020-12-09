@@ -32,6 +32,8 @@ const FormModalCategory: React.FC = () => {
   const { show } = toggle;
   const modalToggle = (): void => {
     toggle.toggleShow();
+    setName('');
+    setInputColor(BLACK);
   };
 
   const onCreateIncomeCategory = () => {
