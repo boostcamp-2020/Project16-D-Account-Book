@@ -59,7 +59,7 @@ const FormModalAccount: React.FC = () => {
           clickBlue={onCreate}
         />
         <FormModalItem>
-          <AccountPreview title={name} color={inputColor} onChange={onChange} />
+          <AccountPreview name={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
           <FormModalLabel>{formModal.AccountLabelName}</FormModalLabel>

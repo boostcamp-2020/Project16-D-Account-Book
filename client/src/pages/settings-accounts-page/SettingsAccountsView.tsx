@@ -53,7 +53,7 @@ const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
 
   const AccountsItems = accountStore.accounts.map((item) => (
     <AccountItemWrapper key={item.id}>
-      <Account key={item.id} text={item.name} bgColor={item.color} shadow={true} />
+      <Account key={item.id} id={item.id} name={item.name} color={item.color} shadow={true} />
     </AccountItemWrapper>
   ));
 
