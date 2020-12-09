@@ -1,9 +1,19 @@
 import React, { useMemo } from 'react';
 import CircleSVG from './Circle';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const SVGAnimation = () => keyframes`
+0%{
+  transform:translateY(5%);
+}
+100%{
+  transform:translateY(-5%);
+}
+`;
 
 const SVG = styled.svg`
   transform: rotate(-90deg);
+  animation: ${() => SVGAnimation()} 2s alternate infinite;
 `;
 
 const SVGWrapper = styled.div`
