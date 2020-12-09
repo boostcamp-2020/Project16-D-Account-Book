@@ -26,9 +26,11 @@ export default {
     return response.data;
   },
   createIncomeCategory: async (incomeCategory: CategoryRequest): Promise<Category> => {
-    return await instance.post(categoryAPIAddress.createIncome, incomeCategory);
+    const response = await instance.post(categoryAPIAddress.createIncome, incomeCategory);
+    return response.data;
   },
   createExpenditureCategory: async (expenditureCategory: CategoryRequest): Promise<Category> => {
-    return await instance.post(categoryAPIAddress.createExpenditure, expenditureCategory);
+    const response = await instance.post(categoryAPIAddress.createExpenditure, expenditureCategory);
+    return response.data;
   },
 };

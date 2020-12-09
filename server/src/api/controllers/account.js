@@ -14,14 +14,27 @@ const getAccounts = async (ctx) => {
 };
 
 const createAccount = async (ctx) => {
-  // TODO: FE에서 accountbookId를 request body로 넘겨받는 로직 구현 필요
-  const accountbookId = 1;
   const accountData = ctx.request.body;
-  const createdAccount = await accountService.createAccount(accountbookId, accountData);
+  const createdAccount = await accountService.createAccount(accountData);
   ctx.body = createdAccount;
+};
+
+const updateAccount = async (ctx) => {
+  const { account_id: accountId } = ctx.request.params;
+  const accountData = ctx.request.body;
+  const updatedAccount = await accountService.updateAccount(accountId, accountData);
+  ctx.body = updatedAccount;
+};
+
+const deleteAccount = async (ctx) => {
+  const { account_id: accountId } = ctx.request.params;
+  await accountService.deleteAccount(accountId);
+  ctx.status = 204;
 };
 
 module.exports = {
   getAccounts,
   createAccount,
+  updateAccount,
+  deleteAccount,
 };

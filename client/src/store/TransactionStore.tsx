@@ -1,5 +1,5 @@
 import { observable, makeObservable, runInAction, action, computed } from 'mobx';
-import Income, { IncomeRequest } from '../types/income';
+import Income, { IncomeRequest, isIncome } from '../types/income';
 import Expenditure, { ExpenditureRequest } from '../types/expenditure';
 import transactionService from '../services/transaction';
 import RootStore from './RootStore';
@@ -47,16 +47,12 @@ export default class TransactionStore {
 
   createIncome = async (income: IncomeRequest): Promise<void> => {
     const createdIncome = await transactionService.createIncome(income);
-    runInAction(() => {
-      this.addNewTransaction(createdIncome);
-    });
+    this.addNewTransaction(createdIncome);
   };
 
   createExpenditure = async (expenditure: ExpenditureRequest): Promise<void> => {
     const createdExpenditure = await transactionService.createExpenditure(expenditure);
-    runInAction(() => {
-      this.addNewTransaction(createdExpenditure);
-    });
+    this.addNewTransaction(createdExpenditure);
   };
 
   @action
@@ -87,5 +83,65 @@ export default class TransactionStore {
         expenditureCategory: expenditureCategory.join(' '),
       });
     }
+  };
+
+  deleteIncome = async (incomeId: number): Promise<void> => {
+    try {
+      await transactionService.deleteIncome(incomeId);
+      this.deleteIncomeById(incomeId);
+    } catch {
+      alert('삭제 실패');
+    }
+  };
+
+  deleteExpenditure = async (expenditureId: number): Promise<void> => {
+    try {
+      await transactionService.deleteExpenditure(expenditureId);
+      this.deleteExpenditureById(expenditureId);
+    } catch {
+      alert('삭제 실패');
+    }
+  };
+
+  @action
+  deleteIncomeById = (incomeId: number): void => {
+    this.transactions = this.transactions.filter((item) => {
+      if (isIncome(item)) {
+        return item.id !== incomeId;
+      }
+      return true;
+    });
+  };
+
+  @action
+  deleteExpenditureById = (expenditureId: number): void => {
+    this.transactions = this.transactions.filter((item) => {
+      if (!isIncome(item)) {
+        return item.id !== expenditureId;
+      }
+      return true;
+    });
+  };
+
+  patchIncome = async (income: IncomeRequest, incomeId: number): Promise<void> => {
+    const response = await transactionService.patchIncome(income, incomeId);
+    this.updateIncomeTransaction(response);
+  };
+
+  patchExpenditure = async (expenditure: ExpenditureRequest, expenditureId: number): Promise<void> => {
+    const response = await transactionService.patchExpenditure(expenditure, expenditureId);
+    this.updateExpenditureTransaction(response);
+  };
+
+  @action
+  updateIncomeTransaction = (income: Income): void => {
+    this.deleteIncomeById(income.id);
+    this.addNewTransaction(income);
+  };
+
+  @action
+  updateExpenditureTransaction = (expenditure: Expenditure): void => {
+    this.deleteExpenditureById(expenditure.id);
+    this.addNewTransaction(expenditure);
   };
 }

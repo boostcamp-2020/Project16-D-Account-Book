@@ -9,14 +9,11 @@ import { observer } from 'mobx-react';
 import AccountPreview from '../../account-preview/AccountPreview';
 import InputText from '../../inputs/input-text/InputText';
 import formModal from '../../../../constants/formModal';
-import useGetParam from '../../../../hook/use-get-param/useGetParam';
-import { convertToAccount } from '../formUtils';
 import { BLACK } from '../../../../constants/color';
 
-const FormModalAccount: React.FC = () => {
+const FormModalUpdateAccount: React.FC = () => {
   const { rootStore } = useStore();
-  const id = useGetParam();
-  const toggle = rootStore.modalStore.createAccountFormStore;
+  const toggle = rootStore.modalStore.updateAccountFormStore;
 
   const [name, setName] = useState<string>('부스트카드');
   const [inputColor, setInputColor] = useState<string>(BLACK);
@@ -34,25 +31,14 @@ const FormModalAccount: React.FC = () => {
     toggle.toggleShow();
   };
 
-  const onCreate = () => {
-    try {
-      const account = convertToAccount(id, name, inputColor);
-      rootStore.accountStore.createAccount(account);
-    } catch (e) {
-      alert(e.message);
-    } finally {
-      modalToggle();
-    }
-  };
-
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
         <FormModalHeader
-          modalName={formModal.CreateAccountModalName}
-          blueName={'생성'}
+          modalName={formModal.UpdateAccountModalName}
+          blueName={'완료'}
+          redName={'삭제'}
           closeModal={modalToggle}
-          clickBlue={onCreate}
         />
         <FormModalItem>
           <AccountPreview title={name} color={inputColor} onChange={onChange} />
@@ -66,4 +52,4 @@ const FormModalAccount: React.FC = () => {
   );
 };
 
-export default observer(FormModalAccount);
+export default observer(FormModalUpdateAccount);

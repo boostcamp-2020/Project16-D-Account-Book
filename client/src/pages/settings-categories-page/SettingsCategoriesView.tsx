@@ -5,6 +5,7 @@ import AddCategoryButton from '../../components/common/add-category-button/AddCa
 import useStore from '../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import FormModalCategory from '../../components/common/modals/form-modal-category/FormModalCreateCategory';
+import FormModalUpdateCategory from '../../components/common/modals/form-modal-category/FormModalUpdateCategory';
 
 const SettingsCategoryViewWrapper = styled.div`
   position: absolute;
@@ -44,6 +45,7 @@ interface Props {
 const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
   const { rootStore } = useStore();
   const { categoryStore } = rootStore;
+  const createCategoryFormStore = rootStore.modalStore.createCategoryFormStore;
 
   useEffect(() => {
     categoryStore.updateIncomeCategories(accountbookId);
@@ -62,25 +64,34 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
     </CategoryItemWrapper>
   ));
 
+  const setIncomeFlagTrue = (): void => {
+    createCategoryFormStore.setIncomeFlagTrue();
+  };
+
+  const setIncomeFlagFalse = (): void => {
+    createCategoryFormStore.setIncomeFlagFalse();
+  };
+
   return (
     <SettingsCategoryViewWrapper>
       <FormModalCategory />
+      <FormModalUpdateCategory />
       <SettingsItemWrapper>
         <Label>지출</Label>
         <CategoryWrapper>
-          {ExpenditureCategoryItems}
           <CategoryItemWrapper>
-            <AddCategoryButton />
+            <AddCategoryButton onClick={setIncomeFlagFalse} />
           </CategoryItemWrapper>
+          {ExpenditureCategoryItems}
         </CategoryWrapper>
       </SettingsItemWrapper>
       <SettingsItemWrapper>
         <Label>수입</Label>
         <CategoryWrapper>
-          {IncomeCategoryItems}
           <CategoryItemWrapper>
-            <AddCategoryButton />
+            <AddCategoryButton onClick={setIncomeFlagTrue} />
           </CategoryItemWrapper>
+          {IncomeCategoryItems}
         </CategoryWrapper>
       </SettingsItemWrapper>
     </SettingsCategoryViewWrapper>

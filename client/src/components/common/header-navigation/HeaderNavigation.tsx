@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import ProfileDropdown from '../profile-dropdown/ProfileDropdown';
 import { BLUE } from '../../../constants/color';
+import { Link } from 'react-router-dom';
+import useGetParam from '../../../hook/use-get-param/useGetParam';
 
 const NavigationWrapper = styled.div`
   display: flex;
@@ -43,6 +45,7 @@ interface HeaderNavigationProps {
 }
 
 const HeaderNavigation = ({ currentPage }: HeaderNavigationProps): JSX.Element => {
+  const id = useGetParam();
   return (
     <NavigationWrapper>
       <NavigationItem currentPage={currentPage}>
@@ -52,7 +55,9 @@ const HeaderNavigation = ({ currentPage }: HeaderNavigationProps): JSX.Element =
         <span className="text">달력</span>
       </NavigationItem>
       <NavigationItem currentPage={currentPage}>
-        <span className="text">통계</span>
+        <Link to={`/accountbooks/${id}/statistics`} className="text">
+          통계
+        </Link>
       </NavigationItem>
       <NavigationItem currentPage={''}>
         <ProfileDropdown src={sampleProfileImage} />

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
+import useStore from '../../../hook/use-store/useStore';
 
 const AccountWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean }>`
   width: 17vw;
@@ -28,10 +29,17 @@ interface AccountProps {
   onClick?: () => void;
 }
 
-const Account = ({ text, bgColor, shadow, onClick }: AccountProps): JSX.Element => {
+const Account = ({ text, bgColor, shadow }: AccountProps): JSX.Element => {
+  const { rootStore } = useStore();
+  const updateAccountForm = rootStore.modalStore.updateAccountFormStore;
+
+  const openUpdateAccountForm = (): void => {
+    updateAccountForm.toggleShow();
+  };
+
   const textColor = getTextColor(bgColor);
   return (
-    <AccountWrapper bgColor={bgColor} textColor={textColor} shadow={shadow} onClick={onClick}>
+    <AccountWrapper bgColor={bgColor} textColor={textColor} shadow={shadow} onClick={openUpdateAccountForm}>
       {text}
     </AccountWrapper>
   );

@@ -7,6 +7,7 @@ import FormModalHeader from '../form-modal-header/FormModalHeader';
 import FormModalWrapper from '../form-modal-template/FormModalWrapper';
 import UseTransactionFrom from '../../../../hook/use-transaction-form/useTransactionForm';
 import { observer } from 'mobx-react-lite';
+import { convertToExpenditure, convertToIncome } from '../formUtils';
 
 const FormModalUpdateTransaction: React.FC = () => {
   const { rootStore } = useStore();
@@ -14,11 +15,14 @@ const FormModalUpdateTransaction: React.FC = () => {
   const incomeCategory = rootStore.categoryStore.incomeOptions;
   const expenditureCategory = rootStore.categoryStore.expenditureOptions;
   const accounts = rootStore.accountStore.accountOptions;
+  const transactionStore = rootStore.transactionStore;
   const updateModalStore = rootStore.modalStore.updateTransactionFormStore;
 
   const show = updateModalStore.show;
 
   const startInputData = updateModalStore.converIncomeExpenditureToTransactionForm;
+
+  const transactionId = updateModalStore.incomeExpenditure?.id;
 
   const [inputs, changes] = UseTransactionFrom(startInputData);
   const inputListInputs = {
@@ -41,6 +45,34 @@ const FormModalUpdateTransaction: React.FC = () => {
     updateModalStore.setShowFalse();
   };
 
+  const incomeDelete = (): void => {
+    if (transactionId) {
+      transactionStore.deleteIncome(transactionId);
+      closeModal();
+    }
+  };
+
+  const expenditureDelete = (): void => {
+    if (transactionId) {
+      transactionStore.deleteExpenditure(transactionId);
+      closeModal();
+    }
+  };
+
+  const incomeUpdate = (): void => {
+    if (transactionId) {
+      transactionStore.patchIncome(convertToIncome(inputs, accountBookId), transactionId);
+      closeModal();
+    }
+  };
+
+  const expenditureUpdate = (): void => {
+    if (transactionId) {
+      transactionStore.patchExpenditure(convertToExpenditure(inputs, accountBookId), transactionId);
+      closeModal();
+    }
+  };
+
   if (!show) {
     return null;
   }
@@ -48,7 +80,14 @@ const FormModalUpdateTransaction: React.FC = () => {
   return (
     <ModalBackground show={show} closeModal={closeModal}>
       <FormModalWrapper>
-        <FormModalHeader modalName={'내역수정'} blueName={'수정'} redName={'삭제'}></FormModalHeader>
+        <FormModalHeader
+          closeModal={closeModal}
+          modalName={'내역수정'}
+          blueName={'수정'}
+          redName={'삭제'}
+          clickRed={inputs.classify ? incomeDelete : expenditureDelete}
+          clickBlue={inputs.classify ? incomeUpdate : expenditureUpdate}
+        ></FormModalHeader>
         <TransactionInputList inputs={inputListInputs} changes={changes} />
       </FormModalWrapper>
     </ModalBackground>

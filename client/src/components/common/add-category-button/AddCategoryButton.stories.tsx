@@ -7,5 +7,8 @@ export default {
 };
 
 export const AddCategoryButtonDefault = (): JSX.Element => {
-  return <AddCategoryButton />;
+  const onClick = (): void => {
+    // Props가 없어서 발생하는 오류 때문에 임의로 만든 함수
+  };
+  return <AddCategoryButton onClick={onClick} />;
 };
