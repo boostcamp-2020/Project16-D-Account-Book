@@ -18,7 +18,7 @@ const PreviewWrapper = styled.div`
 const CategoryPreview: React.FC<PreviewProps> = ({ title, color, onChange }: PreviewProps) => {
   return (
     <PreviewWrapper>
-      <Category text={title} bgColor={color} minWidth={'115px'} />
+      <Category text={title} bgColor={color} minWidth={'115px'} preview={'none'} />
       <ColorPicker inputColor={{ hex: color }} setInputColor={onChange} />
     </PreviewWrapper>
   );
