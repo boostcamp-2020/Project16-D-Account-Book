@@ -1,4 +1,4 @@
-import { observable, action, makeAutoObservable } from 'mobx';
+import { observable, action, makeAutoObservable, computed } from 'mobx';
 import RootStore from '../RootStore';
 import Account from '../../types/account';
 
@@ -35,4 +35,19 @@ export default class UpdateAccountFormStore {
   loadAccount = (account: Account): void => {
     this.account = account;
   };
+
+  @computed
+  get convertAccount(): Account | undefined {
+    if (this.account === undefined) {
+      return undefined;
+    }
+
+    if (this.account !== undefined) {
+      return {
+        id: this.account?.id,
+        name: this.account?.name,
+        color: this.account?.color,
+      };
+    }
+  }
 }
