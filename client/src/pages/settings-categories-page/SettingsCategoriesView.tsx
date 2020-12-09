@@ -46,21 +46,44 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
   const { rootStore } = useStore();
   const { categoryStore } = rootStore;
   const createCategoryFormStore = rootStore.modalStore.createCategoryFormStore;
+  const updateCategoryFormStore = rootStore.modalStore.updateCategoryFormStore;
 
   useEffect(() => {
     categoryStore.updateIncomeCategories(accountbookId);
     categoryStore.updateExpenditureCategories(accountbookId);
   }, []);
 
+  const setCategoryIncomeFlagTrue = (): void => {
+    updateCategoryFormStore.setIncomeFlagTrue();
+  };
+
+  const setCategoryIncomeFlagFalse = (): void => {
+    updateCategoryFormStore.setIncomeFlagFalse();
+  };
+
   const ExpenditureCategoryItems = categoryStore.expenditureCategories.map((item) => (
     <CategoryItemWrapper key={item.id}>
-      <Category key={item.id} text={item.name} bgColor={item.color} shadow={true} />
+      <Category
+        key={item.id}
+        id={item.id}
+        name={item.name}
+        color={item.color}
+        shadow={true}
+        onClick={setCategoryIncomeFlagFalse}
+      />
     </CategoryItemWrapper>
   ));
 
   const IncomeCategoryItems = categoryStore.incomeCategories.map((item) => (
     <CategoryItemWrapper key={item.id}>
-      <Category key={item.id} text={item.name} bgColor={item.color} shadow={true} />
+      <Category
+        key={item.id}
+        id={item.id}
+        name={item.name}
+        color={item.color}
+        shadow={true}
+        onClick={setCategoryIncomeFlagTrue}
+      />
     </CategoryItemWrapper>
   ));
 
