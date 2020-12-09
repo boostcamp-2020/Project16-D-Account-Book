@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
 import useStore from '../../../hook/use-store/useStore';
 
-const AccountWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean }>`
+const AccountWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean; preview?: string }>`
   width: 17vw;
   height: 10vw;
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};
+  pointer-events: ${({ preview }) => preview};
   box-sizing: border-box;
   padding: 20px 20px;
   border-radius: 10px;
@@ -26,10 +27,11 @@ interface AccountProps {
   text: string | undefined;
   bgColor: string;
   shadow?: boolean;
+  preview?: string;
   onClick?: () => void;
 }
 
-const Account = ({ text, bgColor, shadow }: AccountProps): JSX.Element => {
+const Account = ({ text, bgColor, shadow, preview }: AccountProps): JSX.Element => {
   const { rootStore } = useStore();
   const updateAccountForm = rootStore.modalStore.updateAccountFormStore;
 
@@ -39,7 +41,13 @@ const Account = ({ text, bgColor, shadow }: AccountProps): JSX.Element => {
 
   const textColor = getTextColor(bgColor);
   return (
-    <AccountWrapper bgColor={bgColor} textColor={textColor} shadow={shadow} onClick={openUpdateAccountForm}>
+    <AccountWrapper
+      bgColor={bgColor}
+      textColor={textColor}
+      shadow={shadow}
+      preview={preview}
+      onClick={openUpdateAccountForm}
+    >
       {text}
     </AccountWrapper>
   );

@@ -18,7 +18,7 @@ const PreviewWrapper = styled.div`
 const AccountPreview: React.FC<PreviewProps> = ({ title, color, onChange }: PreviewProps) => {
   return (
     <PreviewWrapper>
-      <Account text={title} bgColor={color} />
+      <Account text={title} bgColor={color} preview={'none'} />
       <ColorPicker inputColor={{ hex: color }} setInputColor={onChange} />
     </PreviewWrapper>
   );
