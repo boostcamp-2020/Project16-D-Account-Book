@@ -1,11 +1,15 @@
 import { observable, action, makeAutoObservable } from 'mobx';
 import RootStore from '../RootStore';
+import Account from '../../types/account';
 
 export default class UpdateAccountFormStore {
   rootStore: RootStore;
 
   @observable
   show = false;
+
+  @observable
+  account: Account | undefined = undefined;
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
@@ -25,5 +29,10 @@ export default class UpdateAccountFormStore {
   @action
   setShowFalse = (): void => {
     this.show = false;
+  };
+
+  @action
+  loadAccount = (account: Account): void => {
+    this.account = account;
   };
 }
