@@ -9,13 +9,14 @@ import { observer } from 'mobx-react';
 import CategoryPreview from '../../category-preview/CategoryPreview';
 import InputText from '../../inputs/input-text/InputText';
 import formModal from '../../../../constants/formModal';
+import { BLACK } from '../../../../constants/color';
 
 const FormModalUpdateCategory: React.FC = () => {
   const { rootStore } = useStore();
   const toggle = rootStore.modalStore.updateCategoryFormStore;
 
   const [name, setName] = useState<string>('카테고리 1');
-  const [inputColor, setInputColor] = useState<string>('#000000');
+  const [inputColor, setInputColor] = useState<string>(BLACK);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);

@@ -11,6 +11,7 @@ import InputText from '../../inputs/input-text/InputText';
 import formModal from '../../../../constants/formModal';
 import useGetParam from '../../../../hook/use-get-param/useGetParam';
 import { convertToAccount } from '../formUtils';
+import { BLACK } from '../../../../constants/color';
 
 const FormModalAccount: React.FC = () => {
   const { rootStore } = useStore();
@@ -18,7 +19,7 @@ const FormModalAccount: React.FC = () => {
   const toggle = rootStore.modalStore.createAccountFormStore;
 
   const [name, setName] = useState<string>('부스트카드');
-  const [inputColor, setInputColor] = useState<string>('#000000');
+  const [inputColor, setInputColor] = useState<string>(BLACK);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);

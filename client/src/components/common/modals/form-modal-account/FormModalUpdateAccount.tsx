@@ -9,13 +9,14 @@ import { observer } from 'mobx-react';
 import AccountPreview from '../../account-preview/AccountPreview';
 import InputText from '../../inputs/input-text/InputText';
 import formModal from '../../../../constants/formModal';
+import { BLACK } from '../../../../constants/color';
 
 const FormModalUpdateAccount: React.FC = () => {
   const { rootStore } = useStore();
   const toggle = rootStore.modalStore.updateAccountFormStore;
 
   const [name, setName] = useState<string>('부스트카드');
-  const [inputColor, setInputColor] = useState<string>('#000000');
+  const [inputColor, setInputColor] = useState<string>(BLACK);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
