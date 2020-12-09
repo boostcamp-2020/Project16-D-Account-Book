@@ -1,11 +1,21 @@
 import { observable, action, makeAutoObservable } from 'mobx';
 import RootStore from '../RootStore';
+import Category from '../../types/category';
 
 export default class UpdateCategoryFormStore {
   rootStore: RootStore;
 
   @observable
   show = false;
+
+  @observable
+  incomeFlag = true;
+
+  @observable
+  incomeCategory: Category | undefined = undefined;
+
+  @observable
+  expenditureCategory: Category | undefined = undefined;
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
@@ -25,5 +35,25 @@ export default class UpdateCategoryFormStore {
   @action
   setShowFalse = (): void => {
     this.show = false;
+  };
+
+  @action
+  setIncomeFlagTrue = (): void => {
+    this.incomeFlag = true;
+  };
+
+  @action
+  setIncomeFlagFalse = (): void => {
+    this.incomeFlag = false;
+  };
+
+  @action
+  loadIncomeCategory = (incomeCategory: Category): void => {
+    this.incomeCategory = incomeCategory;
+  };
+
+  @action
+  loadExpenditureCategory = (expenditureCategory: Category): void => {
+    this.expenditureCategory = expenditureCategory;
   };
 }
