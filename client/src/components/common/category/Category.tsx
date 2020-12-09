@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
 import useStore from '../../../hook/use-store/useStore';
+import { SingleCategory } from '../../../types/category';
+import { convertToCategoryObj } from '../modals/formUtils';
 
 const CategoryWrapper = styled.div<{
   bgColor: string;
@@ -33,34 +35,34 @@ const CategoryWrapper = styled.div<{
   }
 `;
 
-interface CategoryProps {
-  text: string | undefined;
-  bgColor: string;
-  shadow?: boolean;
-  minWidth?: string;
-  preview?: string;
-  onClick?: () => void;
-}
-
-const Category = ({ text, bgColor, shadow, minWidth, preview, onClick }: CategoryProps): JSX.Element => {
+const Category = (singleCategory: SingleCategory): JSX.Element => {
   const { rootStore } = useStore();
   const updateCategoryForm = rootStore.modalStore.updateCategoryFormStore;
 
   const openUpdateCategoryForm = (): void => {
     updateCategoryForm.toggleShow();
+    if (singleCategory.onClick !== undefined) {
+      singleCategory.onClick();
+    }
+    const category = convertToCategoryObj(singleCategory.id, singleCategory.name, singleCategory.color);
+    if (updateCategoryForm.incomeFlag) {
+      updateCategoryForm.loadIncomeCategory(category);
+    } else {
+      updateCategoryForm.loadExpenditureCategory(category);
+    }
   };
 
-  const textColor = getTextColor(bgColor);
+  const textColor = getTextColor(singleCategory.color);
   return (
     <CategoryWrapper
-      bgColor={bgColor}
+      bgColor={singleCategory.color}
       textColor={textColor}
-      shadow={shadow}
-      minWidth={minWidth}
-      preview={preview}
+      shadow={singleCategory.shadow}
+      minWidth={singleCategory.minWidth}
+      preview={singleCategory.preview}
       onClick={openUpdateCategoryForm}
     >
-      {text}
+      {singleCategory.name}
     </CategoryWrapper>
   );
 };
