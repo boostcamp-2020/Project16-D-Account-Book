@@ -7,9 +7,15 @@ import { filtering } from '../utils/filter';
 import Query from '../types/query';
 
 export default class TransactionStore {
-  @observable transactions: Array<Income | Expenditure> = [];
-  @observable isFilterMode = false;
-  @observable isLoading = true;
+  @observable
+  transactions: Array<Income | Expenditure> = [];
+
+  @observable
+  isFilterMode = false;
+
+  @observable
+  isLoading = true;
+
   rootStore: RootStore;
 
   constructor(rootStore: RootStore) {

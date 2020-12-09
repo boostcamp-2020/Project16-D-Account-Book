@@ -3,8 +3,12 @@ import { getFirstDateOfPreviousMonth, getFirstDateOfNextMonth } from '../utils/d
 import RootStore from './RootStore';
 export default class DateStore {
   rootStore;
-  @observable startDate: Date;
-  @observable endDate: Date;
+
+  @observable
+  startDate: Date;
+
+  @observable
+  endDate: Date;
 
   constructor(rootStore: RootStore) {
     makeObservable(this);

@@ -5,6 +5,7 @@ import TransactionStore from './TransactionStore';
 import ModalStore from './modal-store/ModalStore';
 import AccountStore from './AccountStore';
 import UserStore from './UserStore';
+import SocialStore from './SocialStore';
 import PieGraphPageStore from './PieGraphPageStore';
 
 export default class RootStore {
@@ -14,6 +15,7 @@ export default class RootStore {
   categoryStore: CategoryStore;
   accountStore: AccountStore;
   userStore: UserStore;
+  socialStore: SocialStore;
   pieGraphPageStore: PieGraphPageStore;
 
   constructor() {
@@ -23,6 +25,7 @@ export default class RootStore {
     this.dateStore = new DateStore(this);
     this.transactionStore = new TransactionStore(this);
     this.modalStore = new ModalStore(this);
+    this.socialStore = new SocialStore(this);
     this.pieGraphPageStore = new PieGraphPageStore(this);
   }
 }

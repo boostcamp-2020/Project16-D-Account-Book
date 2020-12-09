@@ -4,10 +4,18 @@ import User from '../types/user';
 
 export default class UserStore {
   rootStore: RootStore;
-  @observable userId: null | number;
-  @observable provider: string;
-  @observable nickname: string;
-  @observable profileUrl: string;
+
+  @observable
+  userId: null | number;
+
+  @observable
+  provider: string;
+
+  @observable
+  nickname: string;
+
+  @observable
+  profileUrl: string;
 
   constructor(rootStore: RootStore) {
     makeObservable(this);

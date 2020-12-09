@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import UserItem from './UserItem';
-import { users } from '../../../__dummy-data__/components/user-item/user';
+import { observer } from 'mobx-react';
+import useStore from '../../../hook/use-store/useStore';
 
 const Container = styled.div`
   display: flex;
@@ -10,14 +11,23 @@ const Container = styled.div`
 `;
 
 const UserItemContainer = (): JSX.Element => {
+  const { socialStore } = useStore().rootStore;
+
   return (
     <Container>
       <h3>가계부 구성원 목록</h3>
-      {users.map((user) => (
-        <UserItem key={user.email} email={user.email} profileUrl={user.profileUrl} nickname={user.nickname} />
+      {socialStore.userAccountbooks?.map((userAccountbook) => (
+        <UserItem
+          id={userAccountbook.user.id}
+          key={userAccountbook.user.email}
+          email={userAccountbook.user.email}
+          profileUrl={userAccountbook.user.profileUrl}
+          nickname={userAccountbook.user.nickname}
+          type={userAccountbook.authority ? 'admin' : 'user'}
+        />
       ))}
     </Container>
   );
 };
 
-export default UserItemContainer;
+export default observer(UserItemContainer);

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { LIGHT_BLUE, GRAY } from '../../../constants/color';
 import SearchIcon from './SearchIcon';
+import useStore from '../../../hook/use-store/useStore';
 
 const SearchBarWrapper = styled.div`
   width: 100%;
@@ -33,10 +34,21 @@ const SearchButton = styled.div`
 `;
 
 const SearchBar = (): JSX.Element => {
+  const [searchingWord, setSearchingWord] = useState('');
+  const { socialStore } = useStore().rootStore;
+
+  const onChangeSearchingWord = (e) => {
+    setSearchingWord(e.target.value);
+  };
+
+  const onClickSearch = () => {
+    socialStore.searchUser(searchingWord);
+  };
+
   return (
     <SearchBarWrapper>
-      <InputText />
-      <SearchButton>
+      <InputText onChange={onChangeSearchingWord} value={searchingWord} />
+      <SearchButton onClick={onClickSearch}>
         <SearchIcon />
       </SearchButton>
     </SearchBarWrapper>
