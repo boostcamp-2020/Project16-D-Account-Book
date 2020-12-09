@@ -71,23 +71,3 @@ export const FormModalFilterDefault: React.FC = () => {
     </>
   );
 };
-
-export const FormModalTransactionDefault: React.FC = () => {
-  return <FormModalTransaction />;
-};
-
-export const FormModalAccountDefault: React.FC = () => {
-  return <FormModalAccount />;
-};
-
-export const FormModalCategoryDefault: React.FC = () => {
-  return <FormModalCategory />;
-};
-
-export const FormModalUpdateAccountDefault: React.FC = () => {
-  return <FormModalUpdateAccount />;
-};
-
-export const FormModalUpdateCategoryDefault: React.FC = () => {
-  return <FormModalUpdateCategory />;
-};
