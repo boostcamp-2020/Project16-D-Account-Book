@@ -21,12 +21,12 @@ function App(): JSX.Element {
           <Switch>
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/accountbooks/:id" component={Auth(TransactionPage)} />
-            <Route exact path="/accountbooks/:id/settings/accountbook" component={SettingsAccountbookPage} />
-            <Route exact path="/accountbooks/:id/settings/categories" component={SettingsCategoriesPage} />
-            <Route exact path="/accountbooks/:id/settings/accounts" component={SettingsAccountsPage} />
-            <Route exact path="/accountbooks/:id/settings/csv" component={SettingsCsvPage} />
-            <Route exact path="/accountbooks/:id/settings/social" component={SettingsSocialPage} />
-            <Route exact path="/accountbooks/:id/statistics" component={StatisticsPage} />
+            <Route exact path="/accountbooks/:id/settings/accountbook" component={Auth(SettingsAccountbookPage)} />
+            <Route exact path="/accountbooks/:id/settings/categories" component={Auth(SettingsCategoriesPage)} />
+            <Route exact path="/accountbooks/:id/settings/accounts" component={Auth(SettingsAccountsPage)} />
+            <Route exact path="/accountbooks/:id/settings/csv" component={Auth(SettingsCsvPage)} />
+            <Route exact path="/accountbooks/:id/settings/social" component={Auth(SettingsSocialPage)} />
+            <Route exact path="/accountbooks/:id/statistics" component={Auth(StatisticsPage)} />
           </Switch>
         </Router>
       </RootProvider>
