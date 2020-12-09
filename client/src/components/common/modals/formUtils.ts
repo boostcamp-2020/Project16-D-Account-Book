@@ -4,7 +4,7 @@ import { ITransaction } from '../../../types/lineChartValue';
 import { ITransactionForm } from '../../../types/TransactionForm';
 import { privateEncrypt } from 'crypto';
 import { AccountRequest, SingleAccount } from '../../../types/account';
-import { CategoryRequest } from '../../../types/category';
+import { CategoryRequest, SingleCategory } from '../../../types/category';
 
 export const convertToIncome = (incomeInput: ITransactionForm, accountbookId: number): IncomeRequest => {
   const { price, categories, accounts, content, date, memo } = incomeInput;
@@ -53,6 +53,13 @@ export const convertToCategory = (accountbookId: number, name: string, color: st
   };
 };
 export const convertToAccountObj = (id: number, name: string, color: string): SingleAccount => {
+  return {
+    id,
+    name,
+    color,
+  };
+};
+export const convertToCategoryObj = (id: number, name: string, color: string): SingleCategory => {
   return {
     id,
     name,
