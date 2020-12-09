@@ -61,6 +61,11 @@ export default class PieGraphPageStore {
     this.dateChange(this.endDate, nextDate, accountbookId);
   };
 
+  @action
+  switchIncomeMode = (): void => {
+    this.incomeMode = !this.incomeMode;
+  };
+
   dateChange = flow(function* (this: PieGraphPageStore, startDate: Date, endDate: Date, accountbookId: number) {
     this.startDate = startDate;
     this.endDate = endDate;
