@@ -94,7 +94,7 @@ const TransactionItem = ({ transaction }: TrasnsactionItemProps): JSX.Element =>
     <TransactionItemWrapper onClick={clickItem}>
       <ContentItemWrapper>
         <CategoryWrapper>
-          <Category text={category.name} bgColor={category.color} />
+          <Category id={category.id} name={category.name} color={category.color} />
         </CategoryWrapper>
       </ContentItemWrapper>
       <ContentItemWrapper>

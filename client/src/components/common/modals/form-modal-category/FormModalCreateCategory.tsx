@@ -72,7 +72,7 @@ const FormModalCategory: React.FC = () => {
           clickBlue={toggle.incomeFlag ? onCreateIncomeCategory : onCreateExpenditureCategory}
         />
         <FormModalItem>
-          <CategoryPreview title={name} color={inputColor} onChange={onChange} />
+          <CategoryPreview name={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
           <FormModalLabel>{formModal.CategoryLabelName}</FormModalLabel>

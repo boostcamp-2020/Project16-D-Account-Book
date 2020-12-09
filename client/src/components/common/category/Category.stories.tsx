@@ -7,13 +7,13 @@ export default {
 };
 
 export const WhiteTextCategory = (): JSX.Element => {
-  return <Category text={'영화'} bgColor={'#000000'} />;
+  return <Category id={1} name={'영화'} color={'#000000'} />;
 };
 
 export const BlackTextCategory = (): JSX.Element => {
-  return <Category text={'쇼핑/뷰티'} bgColor={'#E0F8EC'} />;
+  return <Category id={2} name={'쇼핑/뷰티'} color={'#E0F8EC'} />;
 };
 
 export const LongTextCategory = (): JSX.Element => {
-  return <Category text={'네이버부스트캠프'} bgColor={'#E0F8EC'} />;
+  return <Category id={3} name={'네이버부스트캠프'} color={'#E0F8EC'} />;
 };
