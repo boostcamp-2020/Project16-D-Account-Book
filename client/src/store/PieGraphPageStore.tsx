@@ -76,7 +76,6 @@ export default class PieGraphPageStore {
   loadTransactions = flow(function* (this: PieGraphPageStore, accountbookId: number) {
     const transactions = yield transactionService.getTransactions(accountbookId, this.startDate, this.endDate);
     this.transactions = transactions;
-    console.log(transactions);
   });
 
   getBeforeDateByPeriod = (endDate: Date, selectedType: string): Date => {
