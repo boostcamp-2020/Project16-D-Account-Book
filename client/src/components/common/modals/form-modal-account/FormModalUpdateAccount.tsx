@@ -63,7 +63,7 @@ const FormModalUpdateAccount: React.FC = () => {
       <ModalBackground show={show} closeModal={modalToggle}>
         <FormModalWrapper>
           <FormModalHeader
-            modalName={formModal.UpdateAccountModalName}
+            modalName={formModal.UPDATE_ACCOUNT_MODAL_NAME}
             blueName={'완료'}
             redName={'삭제'}
             closeModal={modalToggle}
@@ -74,8 +74,8 @@ const FormModalUpdateAccount: React.FC = () => {
             <AccountPreview name={name} color={inputColor} onChange={onChange} />
           </FormModalItem>
           <FormModalItem>
-            <FormModalLabel>{formModal.AccountLabelName}</FormModalLabel>
-            <InputText maxLength={8} placeholder={formModal.AccountPlaceholder} value={name} onChange={onChangeName} />
+            <FormModalLabel>{formModal.ACCOUNT_LABEL_NAME}</FormModalLabel>
+            <InputText maxLength={8} placeholder={formModal.ACCOUNT_PLACEHOLDER} value={name} onChange={onChangeName} />
           </FormModalItem>
         </FormModalWrapper>
       </ModalBackground>

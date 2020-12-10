@@ -5,6 +5,7 @@ const categoryRouter = require('@routes/category');
 const accountRouter = require('@routes/account');
 const accountbookRouter = require('@routes/accountbook');
 const socialRouter = require('@routes/social');
+const authRouter = require('@routes/auth');
 
 const router = new Router();
 
@@ -14,5 +15,6 @@ router.use('/categories', categoryRouter.routes());
 router.use('/accounts', accountRouter.routes());
 router.use('/accountbooks', accountbookRouter.routes());
 router.use('/social', socialRouter.routes());
+router.use('/auth', authRouter.routes());
 
 module.exports = router;

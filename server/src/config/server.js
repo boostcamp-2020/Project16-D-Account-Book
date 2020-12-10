@@ -7,5 +7,8 @@ if (envFound.error) {
 }
 
 module.exports = {
-  port: process.env.PORT,
+  serverHost: process.env.SERVER_HOST,
+  serverPort: process.env.SERVER_PORT,
+  clientHost: process.env.CLIENT_HOST,
+  clientPort: process.env.CLIENT_PORT,
 };

@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import ModalBackButton from '../../back-button/ModalBackButton';
+import SMSIcon from './SMSIcon';
 
 interface IFormModalHeaderProps {
   closeModal?: () => void;
-  clickMMS?: () => void;
+  clickSMS?: () => void;
   clickRed?: () => void;
   clickBlue?: () => void;
   modalName?: string;
   blueName?: string;
   redName?: string;
-  mms?: boolean;
+  sms?: boolean;
 }
 
 const Header = styled.div`
@@ -55,13 +56,13 @@ const BlueButton = styled.p`
 
 const FormModalHeader: React.FC<IFormModalHeaderProps> = ({
   closeModal,
-  clickMMS,
+  clickSMS,
   clickRed,
   clickBlue,
   modalName,
   blueName,
   redName,
-  mms,
+  sms,
 }: IFormModalHeaderProps) => {
   return (
     <Header>
@@ -70,7 +71,7 @@ const FormModalHeader: React.FC<IFormModalHeaderProps> = ({
       </CloseModalButtonWrapper>
       <ModalName>{modalName}</ModalName>
       <Right />
-      {mms}
+      {sms && <SMSIcon />}
       {redName && <RedButton onClick={clickRed}>{redName}</RedButton>}
       {blueName && <BlueButton onClick={clickBlue}>{blueName}</BlueButton>}
     </Header>

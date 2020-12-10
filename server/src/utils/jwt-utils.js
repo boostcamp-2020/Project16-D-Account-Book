@@ -3,15 +3,15 @@ const jwt = require('jsonwebtoken');
 const jwtConfig = require('@config/jwt');
 const db = require('@models');
 
-const generateToken = async (user) => {
-  const jwtToken = jwt.sign({ iss: 'moa', userId: user.id }, jwtConfig.jwtSecretKey, {
+const generateToken = async (id) => {
+  const jwtToken = jwt.sign({ iss: 'moa', userId: id }, jwtConfig.jwtSecretKey, {
     expiresIn: jwtConfig.jwtExpiresIn,
   });
   await db.user.update(
     { token: jwtToken },
     {
       where: {
-        id: user.id,
+        id,
       },
     },
   );
@@ -25,7 +25,7 @@ const decodeTokenForValidation = async (token) => {
     }
     return decoded;
   });
-  const user = await db.user.findOne({
+  let user = await db.user.findOne({
     where: { id: decodedToken.userId },
     attributes: ['id', 'provider', 'nickname', 'profileUrl', 'token'],
   });
@@ -35,7 +35,9 @@ const decodeTokenForValidation = async (token) => {
   if (user.token !== token) {
     throw new Error('decoded payload에 기재된 유저는 있지만, 서버에서 발행해준 jwt값과 일치하지 않음');
   }
-  return decodedToken;
+  user = user.toJSON();
+  delete user.token;
+  return [decodedToken, user];
 };
 
 const decodeToken = (token) => {

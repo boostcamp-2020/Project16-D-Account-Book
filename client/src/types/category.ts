@@ -19,4 +19,11 @@ export interface SingleCategory {
   minWidth?: string;
   onClick?: () => void;
 }
+
+export interface ICategoryValue {
+  title: string;
+  color: string;
+  value: number;
+}
+
 export default Category;

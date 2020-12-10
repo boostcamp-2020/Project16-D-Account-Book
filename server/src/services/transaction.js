@@ -13,10 +13,12 @@ const findIncomeById = async (id) => {
         model: db.incomeCategory,
         as: 'category',
         attributes: ['id', 'name', 'color'],
+        paranoid: false,
       },
       {
         model: db.account,
         attributes: ['id', 'name', 'color'],
+        paranoid: false,
       },
     ],
   });
@@ -35,10 +37,12 @@ const findExpenditureById = async (id) => {
         model: db.expenditureCategory,
         as: 'category',
         attributes: ['id', 'name', 'color'],
+        paranoid: false,
       },
       {
         model: db.account,
         attributes: ['id', 'name', 'color'],
+        paranoid: false,
       },
     ],
   });
@@ -61,10 +65,12 @@ const findIncomes = async (accountbookId, startDate, endDate) => {
         model: db.incomeCategory,
         as: 'category',
         attributes: ['id', 'name', 'color'],
+        paranoid: false,
       },
       {
         model: db.account,
         attributes: ['id', 'name', 'color'],
+        paranoid: false,
       },
     ],
   });
@@ -87,10 +93,12 @@ const findExpenditures = async (accountbookId, startDate, endDate) => {
         model: db.expenditureCategory,
         as: 'category',
         attributes: ['id', 'name', 'color'],
+        paranoid: false,
       },
       {
         model: db.account,
         attributes: ['id', 'name', 'color'],
+        paranoid: false,
       },
     ],
   });

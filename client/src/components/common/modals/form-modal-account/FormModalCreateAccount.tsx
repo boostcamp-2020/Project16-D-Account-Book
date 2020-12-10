@@ -53,7 +53,7 @@ const FormModalAccount: React.FC = () => {
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
         <FormModalHeader
-          modalName={formModal.CreateAccountModalName}
+          modalName={formModal.CREATE_ACCOUNT_MODAL_NAME}
           blueName={'생성'}
           closeModal={modalToggle}
           clickBlue={onCreate}
@@ -62,8 +62,8 @@ const FormModalAccount: React.FC = () => {
           <AccountPreview name={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
-          <FormModalLabel>{formModal.AccountLabelName}</FormModalLabel>
-          <InputText maxLength={8} placeholder={formModal.AccountPlaceholder} value={name} onChange={onChangeName} />
+          <FormModalLabel>{formModal.ACCOUNT_LABEL_NAME}</FormModalLabel>
+          <InputText maxLength={8} placeholder={formModal.ACCOUNT_PLACEHOLDER} value={name} onChange={onChangeName} />
         </FormModalItem>
       </FormModalWrapper>
     </ModalBackground>

@@ -1,5 +1,5 @@
 export interface User {
-  userId: number;
+  id: number;
   provider: string;
   nickname: string;
   profileUrl: string;

@@ -65,7 +65,7 @@ const FormModalCategory: React.FC = () => {
       <FormModalWrapper>
         <FormModalHeader
           modalName={
-            toggle.incomeFlag ? formModal.CreateIncomeCategoryModalName : formModal.CreateExpenditureCategoryModalName
+            toggle.incomeFlag ? formModal.CREATE_INCOME_CATEGORY_MODAL_NAME : formModal.CREATE_EXPENDITURE_CATEGORY_MODAL_NAME
           }
           blueName={'생성'}
           closeModal={modalToggle}
@@ -75,8 +75,8 @@ const FormModalCategory: React.FC = () => {
           <CategoryPreview name={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
-          <FormModalLabel>{formModal.CategoryLabelName}</FormModalLabel>
-          <InputText maxLength={8} placeholder={formModal.CategoryPlaceholder} value={name} onChange={onChangeName} />
+          <FormModalLabel>{formModal.CATEGORY_LABEL_NAME}</FormModalLabel>
+          <InputText maxLength={8} placeholder={formModal.CATEGORY_PLACEHOLDER} value={name} onChange={onChangeName} />
         </FormModalItem>
       </FormModalWrapper>
     </ModalBackground>

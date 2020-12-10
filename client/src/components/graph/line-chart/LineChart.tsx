@@ -44,7 +44,7 @@ const Path = styled.path<IPath>`
   stroke: dodgerblue;
   stroke-width: 0;
   stroke-dasharray: ${(props) => props.length};
-  animation: ${(props) => pathAnimation(props.length)} 2s ease 1.7s both;
+  animation: ${(props) => pathAnimation(props.length)} 1.5s ease 1.7s both;
 `;
 
 const LineChart: React.FC<IProps> = ({ transactions }: IProps) => {
