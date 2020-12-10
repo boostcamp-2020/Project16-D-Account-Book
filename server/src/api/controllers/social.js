@@ -24,10 +24,11 @@ const deleteUser = async (ctx) => {
   ctx.status = 204;
 };
 
-const updateAuthority = async (ctx) => {
+const giveAdmin = async (ctx) => {
+  const token = ctx.cookies.get('jwt');
   const { user_accountbook_id: userAccountbookId } = ctx.request.params;
   const { authority } = ctx.request.body;
-  const patchedUser = await socialService.updateAuthority(userAccountbookId, authority);
+  const patchedUser = await socialService.giveAdmin(userAccountbookId, authority, token);
   ctx.body = patchedUser;
 };
 
@@ -36,5 +37,5 @@ module.exports = {
   addUser,
   findUsers,
   deleteUser,
-  updateAuthority,
+  giveAdmin,
 };
