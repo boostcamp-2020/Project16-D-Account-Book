@@ -60,7 +60,7 @@ interface Props {
 
 const UserItem = ({ email, nickname, profileUrl, type, id }: Props): JSX.Element => {
   const accountbookId = useGetParam();
-  const { socialStore } = useStore().rootStore;
+  const { socialStore, userStore } = useStore().rootStore;
 
   const onClickAdd = () => {
     socialStore.addUser({ accountbookId, userId: id });
@@ -71,17 +71,17 @@ const UserItem = ({ email, nickname, profileUrl, type, id }: Props): JSX.Element
   };
 
   const firstButton = () => {
-    if (type === 'user') {
+    if (type === 'user' && userStore.isAdmin === true) {
       return <AdminSettingButton />;
     }
     return <></>;
   };
 
   const secondButton = () => {
-    if (type === 'user') {
+    if (type === 'user' && userStore.isAdmin === true) {
       return <DeleteButton onClick={onClickDelete} />;
     }
-    if (type === 'search') {
+    if (type === 'search' && userStore.isAdmin === true) {
       return <AddButton onClick={onClickAdd} />;
     }
     return <></>;
