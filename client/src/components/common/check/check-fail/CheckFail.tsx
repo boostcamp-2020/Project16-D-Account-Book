@@ -11,7 +11,7 @@ const CheckFailWrapper = styled.div`
 const CheckFail: React.FC = () => {
   return (
     <CheckFailWrapper>
-      <svg xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 512 512">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 512 512">
         <path
           xmlns="http://www.w3.org/2000/svg"
           d="M256 0C114.836 0 0 114.836 0 256s114.836 256 256 256 256-114.836 256-256S397.164 0 256 0zm0 0"
