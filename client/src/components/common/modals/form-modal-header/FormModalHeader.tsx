@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ModalBackButton from '../../back-button/ModalBackButton';
 import SMSIcon from './SMSIcon';
+import { DEEP_GRAY } from '../../../../constants/color';
 
 interface IFormModalHeaderProps {
   closeModal?: () => void;
@@ -11,6 +12,7 @@ interface IFormModalHeaderProps {
   modalName?: string;
   blueName?: string;
   redName?: string;
+  disabledName?: string;
   sms?: boolean;
 }
 
@@ -54,6 +56,12 @@ const BlueButton = styled.p`
   margin-bottom: 0%;
 `;
 
+const DisabledButton = styled.p`
+  color: ${DEEP_GRAY};
+  margin-top: 0%;
+  margin-bottom: 0%;
+`;
+
 const FormModalHeader: React.FC<IFormModalHeaderProps> = ({
   closeModal,
   clickSMS,
@@ -62,6 +70,7 @@ const FormModalHeader: React.FC<IFormModalHeaderProps> = ({
   modalName,
   blueName,
   redName,
+  disabledName,
   sms,
 }: IFormModalHeaderProps) => {
   return (
@@ -74,6 +83,7 @@ const FormModalHeader: React.FC<IFormModalHeaderProps> = ({
       {sms && <SMSIcon />}
       {redName && <RedButton onClick={clickRed}>{redName}</RedButton>}
       {blueName && <BlueButton onClick={clickBlue}>{blueName}</BlueButton>}
+      {disabledName && <DisabledButton>{disabledName}</DisabledButton>}
     </Header>
   );
 };
