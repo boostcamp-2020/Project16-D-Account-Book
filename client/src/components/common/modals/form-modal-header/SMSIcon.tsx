@@ -24,8 +24,8 @@ const QuestionWrapper = styled.div`
 const Description = styled.div`
   background-color: white;
   border: 1px solid black;
-  max-width: 260px;
-  font-size: 14px;
+  max-width: 235px;
+  font-size: 12px;
   padding: 5px;
   box-sizing: border-box;
   border-radius: 3px;
