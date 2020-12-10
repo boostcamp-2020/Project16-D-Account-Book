@@ -5,7 +5,7 @@ import useStore from '../../../hook/use-store/useStore';
 import { SingleCategory } from '../../../types/category';
 import { convertToCategoryObj } from '../modals/formUtils';
 
-const CategoryWrapper = styled.div<{
+export const CategoryWrapper = styled.div<{
   bgColor: string;
   textColor: string;
   shadow?: boolean;
