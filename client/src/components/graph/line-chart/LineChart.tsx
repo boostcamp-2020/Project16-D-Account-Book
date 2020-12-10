@@ -100,13 +100,14 @@ const LineChart: React.FC<IProps> = ({ transactions }: IProps) => {
       })}
 
       {dotsPosition.map((position, id) => {
+        const value = valueFitUnit(sortedByDate[id].value, unit);
         return (
           <LineChartDot
             x={position[0]}
             y={position[1]}
-            key={sortedByDate[id].date.valueOf()}
+            key={sortedByDate[id].date.valueOf() + id + position[0] + position[1] + value + Math.random()}
             date={sortedByDate[id].date}
-            value={valueFitUnit(sortedByDate[id].value, unit)}
+            value={value}
             yWidth={viewY - 2 * chartGap}
             gap={chartGap}
           />
