@@ -16,6 +16,8 @@ import CheckSuccess from '../../check/check-success/CheckSuccess';
 import CheckFail from '../../check/check-fail/CheckFail';
 import CheckSuccessText from '../../check/check-text/CheckSuccessText';
 import CheckFailText from '../../check/check-text/CheckFailText';
+import CheckNoAction from '../../check/check-no-action/CheckNoAction';
+import CheckNoActionText from '../../check/check-text/CheckNoActionText';
 
 const FormModalCategory: React.FC = () => {
   const { rootStore } = useStore();
@@ -118,9 +120,9 @@ const FormModalCategory: React.FC = () => {
         <FormModalItem>
           <FormModalLabel>{formModal.CATEGORY_LABEL_NAME}</FormModalLabel>
           <InputText maxLength={8} placeholder={formModal.CATEGORY_PLACEHOLDER} value={name} onChange={onChangeName} />
-          {check ? name && <CheckSuccess /> : <CheckFail />}
+          {check ? name ? <CheckSuccess /> : <CheckNoAction /> : <CheckFail />}
         </FormModalItem>
-        <FormModalItem>{check ? name && <CheckSuccessText /> : <CheckFailText />}</FormModalItem>
+        {check ? name ? <CheckSuccessText /> : <CheckNoActionText /> : <CheckFailText />}
       </FormModalWrapper>
     </ModalBackground>
   );
