@@ -7,6 +7,9 @@ export default class CreateAccountFormStore {
   @observable
   show = false;
 
+  @observable
+  check = true;
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
 
@@ -21,5 +24,15 @@ export default class CreateAccountFormStore {
   @action
   setShow = (show: boolean): void => {
     this.show = show;
+  };
+
+  @action
+  setCheckTrue = (): void => {
+    this.check = true;
+  };
+
+  @action
+  setCheckFalse = (): void => {
+    this.check = false;
   };
 }
