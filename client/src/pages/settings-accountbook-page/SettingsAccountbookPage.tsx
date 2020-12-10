@@ -65,7 +65,7 @@ const SettingsAccountbookPage = (): JSX.Element => {
 
   return (
     <SettingsAccountbookPageWrapper>
-      <SettingsSidebar currentPage={'accountbook'} />
+      <SettingsSidebar currentpage={'accountbook'} />
       <SettingsBody>
         <ConfirmButton>완료</ConfirmButton>
         <PreviewWrapper>

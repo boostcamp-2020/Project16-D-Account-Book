@@ -18,7 +18,7 @@ const FormModalAccount: React.FC = () => {
   const id = useGetParam();
   const toggle = rootStore.modalStore.createAccountFormStore;
 
-  const [name, setName] = useState<string>('부스트카드');
+  const [name, setName] = useState<string>('');
   const [inputColor, setInputColor] = useState<string>(BLACK);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,12 +32,16 @@ const FormModalAccount: React.FC = () => {
   const { show } = toggle;
   const modalToggle = (): void => {
     toggle.toggleShow();
+    setName('');
+    setInputColor(BLACK);
   };
 
   const onCreate = () => {
     try {
       const account = convertToAccount(id, name, inputColor);
       rootStore.accountStore.createAccount(account);
+      setName('');
+      setInputColor(BLACK);
     } catch (e) {
       alert(e.message);
     } finally {
@@ -55,7 +59,7 @@ const FormModalAccount: React.FC = () => {
           clickBlue={onCreate}
         />
         <FormModalItem>
-          <AccountPreview title={name} color={inputColor} onChange={onChange} />
+          <AccountPreview name={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
           <FormModalLabel>{formModal.ACCOUNT_LABEL_NAME}</FormModalLabel>

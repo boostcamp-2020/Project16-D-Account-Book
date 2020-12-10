@@ -5,7 +5,7 @@ import Account from '../account/Account';
 
 interface PreviewProps {
   color: string;
-  title?: string;
+  name: string;
   onChange: (color: { hex: string }) => void;
 }
 
@@ -15,10 +15,10 @@ const PreviewWrapper = styled.div`
   align-items: flex-end;
 `;
 
-const AccountPreview: React.FC<PreviewProps> = ({ title, color, onChange }: PreviewProps) => {
+const AccountPreview: React.FC<PreviewProps> = ({ name, color, onChange }: PreviewProps) => {
   return (
     <PreviewWrapper>
-      <Account text={title} bgColor={color} />
+      <Account id={1} name={name} color={color} preview={'none'} />
       <ColorPicker inputColor={{ hex: color }} setInputColor={onChange} />
     </PreviewWrapper>
   );

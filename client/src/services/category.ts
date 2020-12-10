@@ -6,6 +6,8 @@ const categoryAPIAddress = {
   getExpenditure: '/api/categories/expenditure',
   createIncome: '/api/categories/income',
   createExpenditure: '/api/categories/expenditure',
+  deleteIncomeCategory: '/api/categories/income',
+  deleteExpenditureCategory: '/api/categories/expenditure',
 };
 
 export default {
@@ -32,5 +34,21 @@ export default {
   createExpenditureCategory: async (expenditureCategory: CategoryRequest): Promise<Category> => {
     const response = await instance.post(categoryAPIAddress.createExpenditure, expenditureCategory);
     return response.data;
+  },
+  deleteIncomeCategory: async (incomeCategoryId: number): Promise<number> => {
+    try {
+      await instance.delete(categoryAPIAddress.deleteIncomeCategory + `/${incomeCategoryId}`);
+      return incomeCategoryId;
+    } catch {
+      throw new Error('삭제 실패');
+    }
+  },
+  deleteExpenditureCategory: async (expenditureCategoryId: number): Promise<number> => {
+    try {
+      await instance.delete(categoryAPIAddress.deleteExpenditureCategory + `/${expenditureCategoryId}`);
+      return expenditureCategoryId;
+    } catch {
+      throw new Error('삭제 실패');
+    }
   },
 };

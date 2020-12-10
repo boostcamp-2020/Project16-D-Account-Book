@@ -7,5 +7,5 @@ export default {
 };
 
 export const AccountDefault = (): JSX.Element => {
-  return <Account text={'우리카드'} bgColor={'#000000'} />;
+  return <Account id={1} name={'우리카드'} color={'#000000'} />;
 };

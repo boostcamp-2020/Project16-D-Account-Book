@@ -15,7 +15,7 @@ const SettingsAccountsPageWrapper = styled.div`
 const SettingsAccountsPage: React.FC<Props> = ({ match }: Props) => {
   return (
     <SettingsAccountsPageWrapper>
-      <SettingsSidebar currentPage={'accounts'} />
+      <SettingsSidebar currentpage={'accounts'} />
       <SettingsAccountsView accountbookId={Number(match.params.id)} />
     </SettingsAccountsPageWrapper>
   );

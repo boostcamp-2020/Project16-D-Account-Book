@@ -2,12 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
 import useStore from '../../../hook/use-store/useStore';
-
-const AccountWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean }>`
+import { convertToAccountObj } from '../modals/formUtils';
+import { SingleAccount } from '../../../types/account';
+const AccountWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean; preview?: string }>`
   width: 17vw;
   height: 10vw;
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};
+  pointer-events: ${({ preview }) => preview};
   box-sizing: border-box;
   padding: 20px 20px;
   border-radius: 10px;
@@ -22,25 +24,26 @@ const AccountWrapper = styled.div<{ bgColor: string; textColor: string; shadow?:
   }
 `;
 
-interface AccountProps {
-  text: string | undefined;
-  bgColor: string;
-  shadow?: boolean;
-  onClick?: () => void;
-}
-
-const Account = ({ text, bgColor, shadow }: AccountProps): JSX.Element => {
+const Account = (singleAccount: SingleAccount): JSX.Element => {
   const { rootStore } = useStore();
   const updateAccountForm = rootStore.modalStore.updateAccountFormStore;
 
   const openUpdateAccountForm = (): void => {
     updateAccountForm.toggleShow();
+    const account = convertToAccountObj(singleAccount.id, singleAccount.name, singleAccount.color);
+    updateAccountForm.loadAccount(account);
   };
 
-  const textColor = getTextColor(bgColor);
+  const textColor = getTextColor(singleAccount.color);
   return (
-    <AccountWrapper bgColor={bgColor} textColor={textColor} shadow={shadow} onClick={openUpdateAccountForm}>
-      {text}
+    <AccountWrapper
+      bgColor={singleAccount.color}
+      textColor={textColor}
+      shadow={singleAccount.shadow}
+      preview={singleAccount.preview}
+      onClick={openUpdateAccountForm}
+    >
+      {singleAccount.name}
     </AccountWrapper>
   );
 };

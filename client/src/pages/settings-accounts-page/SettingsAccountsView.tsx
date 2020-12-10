@@ -46,21 +46,21 @@ interface Props {
 const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
   const { rootStore } = useStore();
   const { accountStore } = rootStore;
-
+  const { show } = rootStore.modalStore.updateAccountFormStore;
   useEffect(() => {
     accountStore.updateAccounts(accountbookId);
   }, []);
 
   const AccountsItems = accountStore.accounts.map((item) => (
     <AccountItemWrapper key={item.id}>
-      <Account key={item.id} text={item.name} bgColor={item.color} shadow={true} />
+      <Account key={item.id} id={item.id} name={item.name} color={item.color} shadow={true} />
     </AccountItemWrapper>
   ));
 
   return (
     <SettingsAccountViewWrapper>
       <FormModalAccount />
-      <FormModalUpdateAccount />
+      {show && <FormModalUpdateAccount />}
       <SettingsItemWrapper>
         <Label>결제수단 관리</Label>
         <AccountWrapper>

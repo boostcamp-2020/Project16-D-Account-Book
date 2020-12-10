@@ -34,6 +34,21 @@ export default class AccountStore {
     this.accounts = [...this.accounts, account];
   };
 
+  deleteAccount = async (accountId: number): Promise<void> => {
+    await AccountService.deleteAccount(accountId);
+    this.deleteAccountById(accountId);
+  };
+
+  @action
+  deleteAccountById = (accountId: number): void => {
+    this.accounts = this.accounts.filter((item) => item.id !== accountId);
+  };
+
+  updateAccount = async (account: AccountRequest, accountId: number): Promise<void> => {
+    await AccountService.updateAccount(account, accountId);
+    this.updateAccounts(account.accountbookId);
+  };
+
   @computed
   get accountOptions(): Options[] {
     const data: Options[] = this.accounts.map((account) => {

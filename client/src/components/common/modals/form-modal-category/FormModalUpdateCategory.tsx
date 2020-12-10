@@ -13,10 +13,14 @@ import { BLACK } from '../../../../constants/color';
 
 const FormModalUpdateCategory: React.FC = () => {
   const { rootStore } = useStore();
-  const toggle = rootStore.modalStore.updateCategoryFormStore;
+  const updateCategoryFormStore = rootStore.modalStore.updateCategoryFormStore;
+  const { show } = updateCategoryFormStore;
 
   const [name, setName] = useState<string>('카테고리 1');
   const [inputColor, setInputColor] = useState<string>(BLACK);
+
+  const incomeCategoryId = updateCategoryFormStore.incomeCategory?.id;
+  const expenditureCategoryId = updateCategoryFormStore.expenditureCategory?.id;
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -26,24 +30,50 @@ const FormModalUpdateCategory: React.FC = () => {
     setInputColor(color.hex);
   };
 
-  const { show } = toggle;
   const modalToggle = (): void => {
-    toggle.toggleShow();
+    updateCategoryFormStore.toggleShow();
+  };
+
+  const deleteIncomeCategory = (): void => {
+    try {
+      if (incomeCategoryId !== undefined) {
+        rootStore.categoryStore.deleteIncomeCategory(incomeCategoryId);
+      }
+    } catch (e) {
+      alert(e.message);
+    } finally {
+      modalToggle();
+    }
+  };
+
+  const deleteExpenditureCategory = (): void => {
+    try {
+      if (expenditureCategoryId !== undefined) {
+        rootStore.categoryStore.deleteExpenditureCategory(expenditureCategoryId);
+      }
+    } catch (e) {
+      alert(e.message);
+    } finally {
+      modalToggle();
+    }
   };
 
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
         <FormModalHeader
-          modalName={formModal.UPDATE_CATEGORY_MODAL_NAME}
+          modalName={
+            updateCategoryFormStore.incomeFlag
+              ? formModal.UPDATE_INCOME_CATEGORY_MODAL_NAME
+              : formModal.UPDATE_EXPENDITURE_CATEGORY_MODAL_NAME
+          }
           blueName={'완료'}
           redName={'삭제'}
           closeModal={modalToggle}
-          // TODO: 카테고리 변경 로직 구현 필요
-          // clickBlue={toggle.incomeFlag ? onCreateIncomeCategory : onCreateExpenditureCategory}
+          clickRed={updateCategoryFormStore.incomeFlag ? deleteIncomeCategory : deleteExpenditureCategory}
         />
         <FormModalItem>
-          <CategoryPreview title={name} color={inputColor} onChange={onChange} />
+          <CategoryPreview name={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
           <FormModalLabel>{formModal.CATEGORY_LABEL_NAME}</FormModalLabel>
