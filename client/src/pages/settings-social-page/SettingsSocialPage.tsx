@@ -7,6 +7,8 @@ import UserItemContainer from '../../components/accountbook-social-page/user-ite
 import socialPage from '../../constants/socialPage';
 import useStore from '../../hook/use-store/useStore';
 import useGetParam from '../../hook/use-get-param/useGetParam';
+import Spinner from '../../components/common/spinner/Spinner';
+import { observer } from 'mobx-react';
 
 const SettingsPageWrapper = styled.div``;
 
@@ -29,22 +31,26 @@ const SettingsSocialPage: React.FC = () => {
   return (
     <SettingsPageWrapper>
       <SettingsSidebar currentpage={'social'} />
-      <SettingsBody>
-        <h2>{socialPage.TITLE}</h2>
-        {userStore.isAdmin && (
-          <>
-            <br />
-            <Description>{socialPage.DESCRIPTION1}</Description>
-            <Description>{socialPage.DESCRIPTION2}</Description>
-          </>
-        )}
-        <ContentWrapper>
-          {userStore.isAdmin && <SearchContainer />}
-          <UserItemContainer />
-        </ContentWrapper>
-      </SettingsBody>
+      {socialStore.isLoading ? (
+        <Spinner />
+      ) : (
+        <SettingsBody>
+          <h2>{socialPage.TITLE}</h2>
+          {userStore.isAdmin && (
+            <>
+              <br />
+              <Description>{socialPage.DESCRIPTION1}</Description>
+              <Description>{socialPage.DESCRIPTION2}</Description>
+            </>
+          )}
+          <ContentWrapper>
+            {userStore.isAdmin && <SearchContainer />}
+            <UserItemContainer />
+          </ContentWrapper>
+        </SettingsBody>
+      )}
     </SettingsPageWrapper>
   );
 };
 
-export default SettingsSocialPage;
+export default observer(SettingsSocialPage);

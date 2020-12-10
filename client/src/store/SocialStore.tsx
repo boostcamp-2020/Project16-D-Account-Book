@@ -7,6 +7,9 @@ export default class DateStore {
   rootStore: RootStore;
 
   @observable
+  isLoading = true;
+
+  @observable
   searchedUser: SearchedUser | null = null;
 
   @observable
@@ -41,6 +44,7 @@ export default class DateStore {
       this.userAccountbooks.sort((userAccountbook1, userAccountbook2) => {
         return Number(userAccountbook2.authority) - Number(userAccountbook1.authority);
       });
+      this.isLoading = false;
     });
   };
 
