@@ -12,17 +12,27 @@ import formModal from '../../../../constants/formModal';
 import useGetParam from '../../../../hook/use-get-param/useGetParam';
 import { convertToAccount } from '../formUtils';
 import { BLACK } from '../../../../constants/color';
+import CheckSuccess from '../../check/check-success/CheckSuccess';
+import CheckFail from '../../check/check-fail/CheckFail';
+import CheckSuccessText from '../../check/check-text/CheckSuccessText';
+import CheckFailText from '../../check/check-text/CheckFailText';
 
 const FormModalAccount: React.FC = () => {
   const { rootStore } = useStore();
   const id = useGetParam();
   const toggle = rootStore.modalStore.createAccountFormStore;
+  const { check } = rootStore.modalStore.createAccountFormStore;
 
   const [name, setName] = useState<string>('');
   const [inputColor, setInputColor] = useState<string>(BLACK);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+    if (rootStore.accountStore.accountNames.includes(e.target.value)) {
+      rootStore.modalStore.createAccountFormStore.setCheckFalse();
+    } else {
+      rootStore.modalStore.createAccountFormStore.setCheckTrue();
+    }
   };
 
   const onChange = (color: { hex: string }): void => {
@@ -64,7 +74,9 @@ const FormModalAccount: React.FC = () => {
         <FormModalItem>
           <FormModalLabel>{formModal.ACCOUNT_LABEL_NAME}</FormModalLabel>
           <InputText maxLength={8} placeholder={formModal.ACCOUNT_PLACEHOLDER} value={name} onChange={onChangeName} />
+          {check ? <CheckSuccess /> : <CheckFail />}
         </FormModalItem>
+        {check ? '사용 가능한 이름입니다.' : '이미 사용 중인 이름입니다.'}
       </FormModalWrapper>
     </ModalBackground>
   );
