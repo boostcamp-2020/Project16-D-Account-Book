@@ -167,5 +167,15 @@ export function getTopFiveCategory(transactions: Array<Income | Expenditure>): B
     endOfFive.ratio = (endOfFive.value * 100) / totalValue;
   }
 
+  topOfFive.sort(function (transactionPrev: BoxChartValue, transactionNext: BoxChartValue) {
+    if (transactionPrev.ratio > transactionNext.ratio) {
+      return -1;
+    }
+    if (transactionPrev.ratio === transactionNext.ratio) {
+      return 0;
+    }
+    return 1;
+  });
+
   return topOfFive;
 }
