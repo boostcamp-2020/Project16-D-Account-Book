@@ -10,7 +10,8 @@ import NotFoundTransaction from '../../components/common/not-found-transaction/N
 import { numberWithCommas } from '../../utils/number';
 import BoxGraph from '../../components/graph/box-graph/BoxGraph';
 import CategoryNoDependency from '../../components/common/category/CategoryNoDependency';
-import { text, color } from '../../constants/pieGraphPage';
+import { text } from '../../constants/pieGraphPage';
+import color from '../../constants/color';
 
 const PieGraphPageWrapper = styled.div`
   margin: 0 auto;
@@ -63,7 +64,11 @@ const IncomeExpenditureSwitch = styled.div`
   bottom: 5%;
 `;
 
-const PieGraphPage: React.FC = () => {
+interface IPieGraphPage {
+  changePage: (change: boolean) => void;
+}
+
+const PieGraphPage: React.FC<IPieGraphPage> = ({ changePage }: IPieGraphPage) => {
   const { rootStore } = useStore();
   const id = useGetParam();
   const pieGraphStore = rootStore.pieGraphPageStore;
@@ -88,7 +93,7 @@ const PieGraphPage: React.FC = () => {
         <DropdownWrapper>
           <SingleInputDropDown
             items={pieGraphStore.dateOptions}
-            placeholder={text.dateInputPlaceholder}
+            placeholder={text.DATE_INPUT_PLACEHOLDER}
             defaultSelectValue={pieGraphStore.selectedDate}
             onChange={selectDateChanged}
           />
@@ -110,7 +115,7 @@ const PieGraphPage: React.FC = () => {
           </PieGraphWrapper>
           <BarChartWrapper>
             <BarChartHeaderWrapper>
-              <BarChartHeader>{pieGraphStore.incomeMode ? text.totalExpenditure : text.totalIncome}</BarChartHeader>
+              <BarChartHeader>{pieGraphStore.incomeMode ? text.TOTAL_EXPENDITURE : text.TOTAL_INCOME}</BarChartHeader>
               <BarChartHeader>
                 {pieGraphStore.incomeMode
                   ? '-' + numberWithCommas(pieGraphStore.totalValue)
@@ -124,8 +129,8 @@ const PieGraphPage: React.FC = () => {
             </BarChartList>
             <IncomeExpenditureSwitch>
               <CategoryNoDependency
-                bgColor={color.naverGreen}
-                text={pieGraphStore.incomeMode ? text.showExpenditure : text.showIncome}
+                bgColor={color.NAVER_GREEN}
+                text={pieGraphStore.incomeMode ? text.SHOW_EXPENDITURE : text.SHOW_INCOME}
                 onClick={switchIncomeExpenditure}
               ></CategoryNoDependency>
             </IncomeExpenditureSwitch>
