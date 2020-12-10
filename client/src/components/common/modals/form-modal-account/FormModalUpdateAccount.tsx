@@ -54,6 +54,7 @@ const FormModalUpdateAccount: React.FC = () => {
 
   const modalToggle = (): void => {
     updateAccountFormStore.toggleShow();
+    updateAccountFormStore.setNoChangeTrue();
   };
 
   const deleteAccount = (): void => {
