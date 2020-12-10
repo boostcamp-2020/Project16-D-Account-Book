@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import SettingsSidebar from '../../components/common/settings-sidebar/SettingsSidebar';
 import Preview from '../../components/common/preview/Preview';
 import InputText from '../../components/common/inputs/input-text/InputText';
-import SingleInputDropDown from '../../components/common/inputs/single-input-dropdown/SingleInputDropdown';
-import GMT from '../../__dummy-data__/components/settings/gmtData';
-import InputRadio from '../../components/common/inputs/input-radio/InputRadio';
 import { DODGER_BLUE } from '../../constants/color';
 
 const SettingsAccountbookPageWrapper = styled.div`
@@ -88,14 +85,6 @@ const SettingsAccountbookPage = (): JSX.Element => {
             value={description}
             onChange={onChangeDescription}
           />
-        </SettingsItemWrapper>
-        <SettingsItemWrapper>
-          <Label>한 주의 시작 요일 설정</Label>
-          <InputRadio />
-        </SettingsItemWrapper>
-        <SettingsItemWrapper>
-          <Label>GMT 설정</Label>
-          <SingleInputDropDown items={GMT} placeholder={'GMT 설정'} />
         </SettingsItemWrapper>
       </SettingsBody>
     </SettingsAccountbookPageWrapper>

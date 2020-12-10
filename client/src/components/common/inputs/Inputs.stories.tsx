@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputText from './input-text/InputText';
 import styled from 'styled-components';
 import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions';
@@ -8,7 +8,6 @@ import SelectPaymentMethod from './select-payment-method/SelectPaymentMethod';
 import MultiInputDropdownWithCheckBox from './multi-input-dropdown/MultiInputDropdownWithCheckBox';
 import ModalClassify from './modal-classify/ModalClassify';
 import InputDateTime from './input-datetime/InputDateTime';
-import InputRadio from './input-radio/InputRadio';
 
 const SmallDiv = styled.div`
   width: 300px;
@@ -78,8 +77,4 @@ export const InputDateTimeDefault: React.FC = () => {
       <InputDateTime />
     </SmallDiv>
   );
-};
-
-export const InputRadioDefault: React.FC = () => {
-  return <InputRadio />;
 };
