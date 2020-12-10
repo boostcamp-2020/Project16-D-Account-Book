@@ -46,7 +46,7 @@ interface Props {
 const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
   const { rootStore } = useStore();
   const { accountStore } = rootStore;
-
+  const { show } = rootStore.modalStore.updateAccountFormStore;
   useEffect(() => {
     accountStore.updateAccounts(accountbookId);
   }, []);
@@ -60,7 +60,7 @@ const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
   return (
     <SettingsAccountViewWrapper>
       <FormModalAccount />
-      <FormModalUpdateAccount />
+      {show && <FormModalUpdateAccount />}
       <SettingsItemWrapper>
         <Label>결제수단 관리</Label>
         <AccountWrapper>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStore from '../../../../hook/use-store/useStore';
 import FormModalWrapper from '../form-modal-template/FormModalWrapper';
 import FormModalItem from '../form-modal-template/FormModalItemWrapper';
@@ -11,14 +11,15 @@ import InputText from '../../inputs/input-text/InputText';
 import formModal from '../../../../constants/formModal';
 import useGetParam from '../../../../hook/use-get-param/useGetParam';
 import { convertToAccount } from '../formUtils';
+import { Account } from '../../../../types/account';
 
 const FormModalUpdateAccount: React.FC = () => {
   const { rootStore } = useStore();
   const id = useGetParam();
   const updateAccountFormStore = rootStore.modalStore.updateAccountFormStore;
   const { show } = updateAccountFormStore;
-  const [name, setName] = useState<string | undefined>(updateAccountFormStore.account?.name);
-  const [inputColor, setInputColor] = useState<string | undefined>(updateAccountFormStore.account?.color);
+  const [name, setName] = useState<string>((updateAccountFormStore.account as Account).name);
+  const [inputColor, setInputColor] = useState<string>((updateAccountFormStore.account as Account).color);
 
   const accountId = updateAccountFormStore.account?.id;
 
@@ -70,20 +71,11 @@ const FormModalUpdateAccount: React.FC = () => {
             clickBlue={updateAccount}
           />
           <FormModalItem>
-            <AccountPreview
-              name={updateAccountFormStore.convertAccount?.name}
-              color={updateAccountFormStore.convertAccount?.color}
-              onChange={onChange}
-            />
+            <AccountPreview name={name} color={inputColor} onChange={onChange} />
           </FormModalItem>
           <FormModalItem>
             <FormModalLabel>{formModal.AccountLabelName}</FormModalLabel>
-            <InputText
-              maxLength={8}
-              placeholder={formModal.AccountPlaceholder}
-              value={updateAccountFormStore.convertAccount?.name}
-              onChange={onChangeName}
-            />
+            <InputText maxLength={8} placeholder={formModal.AccountPlaceholder} value={name} onChange={onChangeName} />
           </FormModalItem>
         </FormModalWrapper>
       </ModalBackground>
