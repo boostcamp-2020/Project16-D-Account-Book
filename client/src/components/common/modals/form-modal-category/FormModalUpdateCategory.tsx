@@ -9,11 +9,13 @@ import { observer } from 'mobx-react';
 import CategoryPreview from '../../category-preview/CategoryPreview';
 import InputText from '../../inputs/input-text/InputText';
 import formModal from '../../../../constants/formModal';
-import { BLACK } from '../../../../constants/color';
 import { Category } from '../../../../types/category';
+import { convertToCategory } from '../formUtils';
+import useGetParam from '../../../../hook/use-get-param/useGetParam';
 
 const FormModalUpdateCategory: React.FC = () => {
   const { rootStore } = useStore();
+  const id = useGetParam();
   const updateCategoryFormStore = rootStore.modalStore.updateCategoryFormStore;
   const { show } = updateCategoryFormStore;
 
@@ -67,6 +69,22 @@ const FormModalUpdateCategory: React.FC = () => {
     }
   };
 
+  const updateIncomeCategory = (): void => {
+    if (incomeCategoryId && name && inputColor) {
+      const incomeCategory = convertToCategory(id, name, inputColor);
+      rootStore.categoryStore.updateIncomeCategory(incomeCategory, incomeCategoryId);
+      modalToggle();
+    }
+  };
+
+  const updateExpenditureCategory = (): void => {
+    if (expenditureCategoryId && name && inputColor) {
+      const expenditureCategory = convertToCategory(id, name, inputColor);
+      rootStore.categoryStore.updateExpenditureCategory(expenditureCategory, expenditureCategoryId);
+      modalToggle();
+    }
+  };
+
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
@@ -79,6 +97,7 @@ const FormModalUpdateCategory: React.FC = () => {
           blueName={'완료'}
           redName={'삭제'}
           closeModal={modalToggle}
+          clickBlue={updateCategoryFormStore.incomeFlag ? updateIncomeCategory : updateExpenditureCategory}
           clickRed={updateCategoryFormStore.incomeFlag ? deleteIncomeCategory : deleteExpenditureCategory}
         />
         <FormModalItem>
