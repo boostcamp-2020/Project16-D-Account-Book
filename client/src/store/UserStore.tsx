@@ -18,12 +18,17 @@ export default class UserStore {
   @observable
   profileUrl: string;
 
+  //현재 선택한 가계부의 admin 인가?
+  @observable
+  isAdmin: boolean;
+
   constructor(rootStore: RootStore) {
     makeObservable(this);
     this.userId = null;
     this.provider = '';
     this.nickname = '';
     this.profileUrl = '';
+    this.isAdmin = false;
     this.rootStore = rootStore;
   }
 
@@ -46,5 +51,15 @@ export default class UserStore {
   checkAuth = async (): Promise<void> => {
     const user = await authService.getCurrentUser();
     this.updateUser(user);
+  };
+
+  checkAuthority = async (accountbookId: number): Promise<void> => {
+    const { authority } = await authService.getAuthority(accountbookId);
+    this.setIsAdmin(authority);
+  };
+
+  @action
+  setIsAdmin = (isAdmin: boolean): void => {
+    this.isAdmin = isAdmin;
   };
 }
