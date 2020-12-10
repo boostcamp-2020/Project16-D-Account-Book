@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
 import useStore from '../../../hook/use-store/useStore';
 
-const CategoryWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean }>`
+export const CategoryWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean }>`
   width: 100%;
   max-width: 115px;
   height: 100%;
@@ -24,7 +24,7 @@ const CategoryWrapper = styled.div<{ bgColor: string; textColor: string; shadow?
   }
 `;
 
-interface CategoryProps {
+export interface CategoryProps {
   text: string | undefined;
   bgColor: string;
   shadow?: boolean;

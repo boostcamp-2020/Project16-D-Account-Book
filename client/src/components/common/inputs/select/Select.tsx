@@ -24,7 +24,7 @@ interface SelectWrapperProps {
 
 const SelectWrapper = styled.div<SelectWrapperProps>`
   width: 100%;
-  padding: 10px 5px;
+  padding: 5px 5px;
   font-size: 1rem;
   border-radius: 5px;
   border: 1px solid lightgray;
