@@ -78,6 +78,11 @@ export default class CategoryStore {
     this.expenditureCategories = this.expenditureCategories.filter((item) => item.id !== expenditureCategoryId);
   };
 
+  updateIncomeCategory = async (category: CategoryRequest, incomeCategoryId: number): Promise<void> => {
+    await CategoryService.updateIncomeCategory(category, incomeCategoryId);
+    this.updateIncomeCategories(category.accountbookId);
+  };
+
   @computed
   get incomeOptions(): Options[] {
     const data: Options[] = this.incomeCategories.map((income) => {
