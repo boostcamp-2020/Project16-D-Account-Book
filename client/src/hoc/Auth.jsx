@@ -18,6 +18,7 @@ export default (SpecificComponent) => {
         userStore.checkAuthority(accountbookId);
       }
     }, []);
+
     if (userStore.userId === null || userStore.isAdmin === null) {
       return <></>;
     } else {
