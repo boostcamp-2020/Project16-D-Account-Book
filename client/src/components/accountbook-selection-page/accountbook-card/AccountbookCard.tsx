@@ -19,16 +19,17 @@ const AccountbookWrapper = styled.div<{
   min-height: 100px;
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};
-  padding: 15px;
+  padding: 15px 15px 20px 15px;
   display: flex;
   cursor: pointer;
   &:hover {
     box-shadow: 2px 3px 7px gray;
   }
   border-radius: 10px;
+  flex-direction: column;
 `;
 
-const ElementsWrapper = styled.div`
+const HeaderWrapper = styled.div`
   display: flex;
   margin-left: auto;
 `;
@@ -37,19 +38,27 @@ const ElementWrapper = styled.div`
   padding-left: 10px;
 `;
 
+const TitleWrapper = styled.div`
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding-bottom: 10px;
+`;
+
 const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
   const { rootStore } = useStore();
   const textColor = getTextColor(accountbook.color);
   return (
     <AccountbookWrapper bgColor={accountbook.color} textColor={textColor}>
-      <ElementsWrapper>
+      <HeaderWrapper>
         <ElementWrapper>
           <AccountbookSetting id={accountbook.id} bgColor={accountbook.color} />
         </ElementWrapper>
         <ElementWrapper>
           <AccountbookElimination id={accountbook.id} bgColor={accountbook.color} />
         </ElementWrapper>
-      </ElementsWrapper>
+      </HeaderWrapper>
+      <TitleWrapper>{accountbook.title}</TitleWrapper>
+      {accountbook.description}
     </AccountbookWrapper>
   );
 };
