@@ -77,15 +77,11 @@ export default class DateStore {
     await socialService.giveAdmin(userAccountbookId, authority);
     runInAction(() => {
       this.userAccountbooks = this.userAccountbooks.map((userAccountbook) => {
-        if (userAccountbook.authority) {
-          userAccountbook.authority = false;
-        }
+        userAccountbook.authority = userAccountbook.authority ? false : true;
         return userAccountbook;
       });
       this.userAccountbooks = this.userAccountbooks.map((userAccountbook) => {
-        if (userAccountbook.id === userAccountbookId) {
-          userAccountbook.authority = true;
-        }
+        userAccountbook.authority = userAccountbook.id === userAccountbookId ? true : false;
         return userAccountbook;
       });
       this.userAccountbooks.sort((userAccountbook1, userAccountbook2) => {
