@@ -74,9 +74,9 @@ const FormModalAccount: React.FC = () => {
         <FormModalItem>
           <FormModalLabel>{formModal.ACCOUNT_LABEL_NAME}</FormModalLabel>
           <InputText maxLength={8} placeholder={formModal.ACCOUNT_PLACEHOLDER} value={name} onChange={onChangeName} />
-          {check ? <CheckSuccess /> : <CheckFail />}
+          {check ? name && <CheckSuccess /> : <CheckFail />}
         </FormModalItem>
-        {check ? '사용 가능한 이름입니다.' : '이미 사용 중인 이름입니다.'}
+        <FormModalItem>{check ? name && <CheckSuccessText /> : <CheckFailText />}</FormModalItem>
       </FormModalWrapper>
     </ModalBackground>
   );
