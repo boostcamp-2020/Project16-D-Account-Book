@@ -9,7 +9,19 @@ export default class UpdateCategoryFormStore {
   show = false;
 
   @observable
+  check = true;
+
+  @observable
+  noChange = true;
+
+  @observable
   incomeFlag = true;
+
+  @observable
+  orginalIncomeCategoryName = '';
+
+  @observable
+  orginalExpenditureCategoryName = '';
 
   @observable
   incomeCategory: Category | undefined = undefined;
@@ -38,6 +50,26 @@ export default class UpdateCategoryFormStore {
   };
 
   @action
+  setCheckTrue = (): void => {
+    this.check = true;
+  };
+
+  @action
+  setCheckFalse = (): void => {
+    this.check = false;
+  };
+
+  @action
+  setNoChangeTrue = (): void => {
+    this.noChange = true;
+  };
+
+  @action
+  setNoChangeFalse = (): void => {
+    this.noChange = false;
+  };
+
+  @action
   setIncomeFlagTrue = (): void => {
     this.incomeFlag = true;
   };
@@ -55,5 +87,15 @@ export default class UpdateCategoryFormStore {
   @action
   loadExpenditureCategory = (expenditureCategory: Category): void => {
     this.expenditureCategory = expenditureCategory;
+  };
+
+  @action
+  loadOriginalIncomeCategory = (incomeCategoryName: string): void => {
+    this.orginalIncomeCategoryName = incomeCategoryName;
+  };
+
+  @action
+  loadOriginalExpenditureCategory = (expenditureName: string): void => {
+    this.orginalExpenditureCategoryName = expenditureName;
   };
 }
