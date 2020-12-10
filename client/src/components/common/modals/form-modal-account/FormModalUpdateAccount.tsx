@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStore from '../../../../hook/use-store/useStore';
 import FormModalWrapper from '../form-modal-template/FormModalWrapper';
 import FormModalItem from '../form-modal-template/FormModalItemWrapper';
@@ -12,6 +12,12 @@ import formModal from '../../../../constants/formModal';
 import useGetParam from '../../../../hook/use-get-param/useGetParam';
 import { convertToAccount } from '../formUtils';
 import { Account } from '../../../../types/account';
+import CheckSuccess from '../../check/check-success/CheckSuccess';
+import CheckFail from '../../check/check-fail/CheckFail';
+import CheckSuccessText from '../../check/check-text/CheckSuccessText';
+import CheckFailText from '../../check/check-text/CheckFailText';
+import CheckNoActionText from '../../check/check-text/CheckNoActionText';
+import CheckNoAction from '../../check/check-no-action/CheckNoAction';
 
 const FormModalUpdateAccount: React.FC = () => {
   const { rootStore } = useStore();
@@ -20,11 +26,26 @@ const FormModalUpdateAccount: React.FC = () => {
   const { show } = updateAccountFormStore;
   const [name, setName] = useState<string>((updateAccountFormStore.account as Account).name);
   const [inputColor, setInputColor] = useState<string>((updateAccountFormStore.account as Account).color);
+  const { check, noChange } = rootStore.modalStore.updateAccountFormStore;
 
   const accountId = updateAccountFormStore.account?.id;
 
+  useEffect(() => {
+    updateAccountFormStore.loadOriginalAccount((updateAccountFormStore.account as Account).name);
+  }, []);
+
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+    if (rootStore.accountStore.accountNames.includes(e.target.value)) {
+      rootStore.modalStore.updateAccountFormStore.setCheckFalse();
+    } else {
+      rootStore.modalStore.updateAccountFormStore.setCheckTrue();
+    }
+    if (updateAccountFormStore.orginalAccountName === e.target.value) {
+      rootStore.modalStore.updateAccountFormStore.setNoChangeTrue();
+    } else {
+      rootStore.modalStore.updateAccountFormStore.setNoChangeFalse();
+    }
   };
 
   const onChange = (color: { hex: string }): void => {
@@ -51,6 +72,7 @@ const FormModalUpdateAccount: React.FC = () => {
     if (accountId && name && inputColor) {
       const account = convertToAccount(id, name, inputColor);
       rootStore.accountStore.updateAccount(account, accountId);
+      rootStore.modalStore.updateAccountFormStore.setNoChangeFalse();
       modalToggle();
     }
   };
@@ -62,21 +84,64 @@ const FormModalUpdateAccount: React.FC = () => {
     return (
       <ModalBackground show={show} closeModal={modalToggle}>
         <FormModalWrapper>
-          <FormModalHeader
-            modalName={formModal.UPDATE_ACCOUNT_MODAL_NAME}
-            blueName={'완료'}
-            redName={'삭제'}
-            closeModal={modalToggle}
-            clickRed={deleteAccount}
-            clickBlue={updateAccount}
-          />
+          {check ? (
+            name && !noChange ? (
+              <FormModalHeader
+                modalName={formModal.UPDATE_ACCOUNT_MODAL_NAME}
+                blueName={'완료'}
+                redName={'삭제'}
+                closeModal={modalToggle}
+                clickRed={deleteAccount}
+                clickBlue={updateAccount}
+              />
+            ) : (
+              <FormModalHeader
+                modalName={formModal.UPDATE_ACCOUNT_MODAL_NAME}
+                closeModal={modalToggle}
+                redName={'삭제'}
+                clickRed={deleteAccount}
+                disabledName={'완료'}
+              />
+            )
+          ) : (
+            <FormModalHeader
+              modalName={formModal.UPDATE_ACCOUNT_MODAL_NAME}
+              closeModal={modalToggle}
+              redName={'삭제'}
+              clickRed={deleteAccount}
+              disabledName={'완료'}
+            />
+          )}
+
           <FormModalItem>
             <AccountPreview name={name} color={inputColor} onChange={onChange} />
           </FormModalItem>
           <FormModalItem>
             <FormModalLabel>{formModal.ACCOUNT_LABEL_NAME}</FormModalLabel>
             <InputText maxLength={8} placeholder={formModal.ACCOUNT_PLACEHOLDER} value={name} onChange={onChangeName} />
+            {check ? (
+              name && !noChange ? (
+                <CheckSuccess />
+              ) : (
+                <CheckNoAction />
+              )
+            ) : updateAccountFormStore.orginalAccountName !== name ? (
+              <CheckFail />
+            ) : (
+              <CheckNoAction />
+            )}
           </FormModalItem>
+          {check ? (
+            name && !noChange ? (
+              <CheckSuccessText />
+            ) : (
+              <CheckNoActionText />
+            )
+          ) : !noChange ? (
+            <CheckFailText />
+          ) : (
+            <CheckNoActionText />
+          )}
         </FormModalWrapper>
       </ModalBackground>
     );
