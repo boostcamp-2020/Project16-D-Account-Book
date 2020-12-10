@@ -2,19 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import ProfileImage from '../profile-image/ProfileImage';
 import { GRAY, LIGHT_GRAY } from '../../../constants/color';
+import useStore from '../../../hook/use-store/useStore';
+import { observer } from 'mobx-react';
+import authService from '../../../services/auth';
 
 interface ProfileDropdownProps {
   src: string;
 }
 
-const Menu = styled.a`
+const Menu = styled.div`
   color: black;
   padding: 12px 16px;
-  text-decoration: none;
   display: block;
 
   &:hover {
     background-color: ${LIGHT_GRAY};
+    cursor: pointer;
   }
 `;
 
@@ -38,15 +41,24 @@ const ProfileDropdownWrapper = styled.div`
 `;
 
 const ProfileDropdown = ({ src }: ProfileDropdownProps): JSX.Element => {
+  const { userStore } = useStore().rootStore;
+
+  const logout = async () => {
+    const responseStatus = await authService.logout();
+    if (responseStatus === 200) {
+      userStore.deleteUser();
+      window.location.href = '/login';
+    }
+  };
+
   return (
     <ProfileDropdownWrapper>
       <ProfileImage src={src} />
       <DropdownWrapper>
-        <Menu href="#">프로필 설정</Menu>
-        <Menu href="#">로그아웃</Menu>
+        <Menu onClick={logout}>로그아웃</Menu>
       </DropdownWrapper>
     </ProfileDropdownWrapper>
   );
 };
 
-export default ProfileDropdown;
+export default observer(ProfileDropdown);

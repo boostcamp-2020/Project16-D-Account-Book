@@ -4,11 +4,8 @@ import LargeKakaoLoginButton from '../../components/login-button/kakao-login-but
 import SmallKakaoLoginButton from '../../components/login-button/kakao-login-button/SmallKakaoLoginButton';
 import LargeNaverLoginButton from '../../components/login-button/naver-login-button/LargeNaverLoginButton';
 import SmallNaverLoginButton from '../../components/login-button/naver-login-button/SmallNaverLoginButton';
-import useStore from '../../hook/use-store/useStore';
-import { useHistory } from 'react-router-dom';
 import { useObserver } from 'mobx-react';
-import authService from '../../services/auth';
-import User from '../../types/user';
+import { v4 } from 'uuid';
 
 const MainContainer = styled.div`
   box-sizing: content-box;
@@ -71,21 +68,6 @@ const Title = styled.div`
 `;
 
 const LoginPage: React.FC = () => {
-  const { rootStore } = useStore();
-  const history = useHistory();
-
-  const kakaoLogin = async () => {
-    const user: User = await authService.kakaoLogin();
-    rootStore.userStore.updateUser(user);
-    history.push('/');
-  };
-
-  const naverLogin = async () => {
-    const user: User = await authService.naverLogin();
-    rootStore.userStore.updateUser(user);
-    history.push('/');
-  };
-
   return useObserver(() => (
     <MainContainer>
       <Title>
@@ -94,12 +76,36 @@ const LoginPage: React.FC = () => {
         Accountbook
       </Title>
       <LargeLoginButtonContainer>
-        <LargeKakaoLoginButton onClick={kakaoLogin} />
-        <LargeNaverLoginButton onClick={naverLogin} />
+        <a
+          href={`https://kauth.kakao.com/oauth/authorize?client_id=${
+            process.env.REACT_APP_KAKAO_CLIENT_ID
+          }&response_type=code&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URL}&state=${v4()}`}
+        >
+          <LargeKakaoLoginButton />
+        </a>
+        <a
+          href={`http://nid.naver.com/oauth2.0/authorize?client_id=${
+            process.env.REACT_APP_NAVER_CLIENT_ID
+          }&response_type=code&redirect_uri=${process.env.REACT_APP_NAVER_REDIRECT_URL}&state=${v4()}`}
+        >
+          <LargeNaverLoginButton />
+        </a>
       </LargeLoginButtonContainer>
       <SmallLoginButtonContainer>
-        <SmallKakaoLoginButton onClick={kakaoLogin} />
-        <SmallNaverLoginButton onClick={naverLogin} />
+        <a
+          href={`https://kauth.kakao.com/oauth/authorize?client_id=${
+            process.env.REACT_APP_KAKAO_CLIENT_ID
+          }&response_type=code&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URL}&state=${v4()}`}
+        >
+          <SmallKakaoLoginButton />
+        </a>
+        <a
+          href={`http://nid.naver.com/oauth2.0/authorize?client_id=${
+            process.env.REACT_APP_NAVER_CLIENT_ID
+          }&response_type=code&redirect_uri=${process.env.REACT_APP_NAVER_REDIRECT_URL}&state=${v4()}`}
+        >
+          <SmallNaverLoginButton />
+        </a>
       </SmallLoginButtonContainer>
     </MainContainer>
   ));

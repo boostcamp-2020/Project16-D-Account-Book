@@ -1,6 +1,7 @@
 import { observable, action, makeObservable } from 'mobx';
 import RootStore from './RootStore';
 import User from '../types/user';
+import authService from '../services/auth';
 
 export default class UserStore {
   rootStore: RootStore;
@@ -28,7 +29,7 @@ export default class UserStore {
 
   @action
   updateUser = (user: User): void => {
-    this.userId = user.userId;
+    this.userId = user.id;
     this.provider = user.provider;
     this.nickname = user.nickname;
     this.profileUrl = user.profileUrl;
@@ -40,5 +41,10 @@ export default class UserStore {
     this.provider = '';
     this.nickname = '';
     this.profileUrl = '';
+  };
+
+  checkAuth = async (): Promise<void> => {
+    const user = await authService.getCurrentUser();
+    this.updateUser(user);
   };
 }

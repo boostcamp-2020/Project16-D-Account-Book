@@ -4,7 +4,7 @@ const serverConfig = require('@config/server');
 
 const startServer = async () => {
   const app = new Koa();
-  const port = serverConfig.port || 3000;
+  const port = serverConfig.serverPort || 3000;
 
   await server(app);
   app.listen(port, () => {
