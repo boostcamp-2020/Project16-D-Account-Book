@@ -22,28 +22,28 @@ const createExpenditureTransaction = async (ctx) => {
 };
 
 const updateIncomeTransaction = async (ctx) => {
-  const { id } = ctx.request.params;
+  const { income_id: incomeId } = ctx.request.params;
   const incomeData = ctx.request.body;
-  const income = await transactionService.updateIncome(id, incomeData);
+  const income = await transactionService.updateIncome(incomeId, incomeData);
   ctx.body = income;
 };
 
 const updateExpenditureTransaction = async (ctx) => {
-  const { id } = ctx.request.params;
+  const { expenditure_id: expenditureId } = ctx.request.params;
   const expenditureData = ctx.request.body;
-  const expenditure = await transactionService.updateExpenditure(id, expenditureData);
+  const expenditure = await transactionService.updateExpenditure(expenditureId, expenditureData);
   ctx.body = expenditure;
 };
 
 const deleteIncomeTransaction = async (ctx) => {
-  const { id } = ctx.request.params;
-  await transactionService.deleteIncomeById(id);
+  const { income_id: incomeId } = ctx.request.params;
+  await transactionService.deleteIncomeById(incomeId);
   ctx.status = 204;
 };
 
 const deleteExpenditureTransaction = async (ctx) => {
-  const { id } = ctx.request.params;
-  await transactionService.deleteExpenditureById(id);
+  const { expenditure_id: expenditureId } = ctx.request.params;
+  await transactionService.deleteExpenditureById(expenditureId);
   ctx.status = 204;
 };
 

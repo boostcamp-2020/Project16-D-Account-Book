@@ -7,9 +7,9 @@ const router = new Router();
 router.get('/', verificationOfAuth, transactionController.findTransactions);
 router.post('/income', verificationOfAuth, transactionController.createIncomeTransaction);
 router.post('/expenditure', verificationOfAuth, transactionController.createExpenditureTransaction);
-router.patch('/income/:id', verificationOfAuth, transactionController.updateIncomeTransaction);
-router.patch('/expenditure/:id', verificationOfAuth, transactionController.updateExpenditureTransaction);
-router.delete('/income/:id', verificationOfAuth, transactionController.deleteIncomeTransaction);
-router.delete('/expenditure/:id', verificationOfAuth, transactionController.deleteExpenditureTransaction);
+router.patch('/income/:income_id', verificationOfAuth, transactionController.updateIncomeTransaction);
+router.patch('/expenditure/:expenditure_id', verificationOfAuth, transactionController.updateExpenditureTransaction);
+router.delete('/income/:income_id', verificationOfAuth, transactionController.deleteIncomeTransaction);
+router.delete('/expenditure/:expenditure_id', verificationOfAuth, transactionController.deleteExpenditureTransaction);
 
 module.exports = router;
