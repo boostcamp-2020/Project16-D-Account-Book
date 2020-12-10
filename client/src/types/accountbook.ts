@@ -1,6 +1,6 @@
 export interface Accountbook {
   id: number;
-  name: string;
+  title: string;
   color: string;
   description: string;
 }
