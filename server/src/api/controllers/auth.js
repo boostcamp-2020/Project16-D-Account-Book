@@ -32,7 +32,11 @@ const getAuthority = async (ctx) => {
     }
     const [decoded, user] = await decodeTokenForValidation(token);
     const userAccountbook = await db.userAccountbook.findOne({ where: { userId: user.id, accountbookId } });
-    ctx.body = { authority: userAccountbook.authority };
+    if (userAccountbook === null) {
+      ctx.body = { authority: null };
+    } else {
+      ctx.body = { authority: userAccountbook.authority };
+    }
   } catch (err) {
     ctx.throw(401, err);
   }
