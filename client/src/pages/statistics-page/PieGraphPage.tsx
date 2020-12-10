@@ -12,16 +12,19 @@ import BoxGraph from '../../components/graph/box-graph/BoxGraph';
 import CategoryNoDependency from '../../components/common/category/CategoryNoDependency';
 import { text } from '../../constants/pieGraphPage';
 import color from '../../constants/color';
+import InputRadio from '../../components/common/inputs/input-radio/InputRadio';
+import { graphChangeChecker } from '../../types/inputRadio';
 
-const PieGraphPageWrapper = styled.div`
+export const PieGraphPageWrapper = styled.div`
   margin: 0 auto;
   width: 70%;
 `;
-const PieHeaderFilter = styled.div`
+export const PieHeaderFilter = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-top: 1em;
 `;
 const DropdownWrapper = styled.div`
   flex: 1;
@@ -58,20 +61,23 @@ const BarChartList = styled.ul`
   padding: 0;
 `;
 
-const IncomeExpenditureSwitch = styled.div`
+export const IncomeExpenditureSwitch = styled.div`
   position: fixed;
   right: 5%;
   bottom: 5%;
 `;
 
 interface IPieGraphPage {
-  changePage: (change: boolean) => void;
+  changePage: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PieGraphPage: React.FC<IPieGraphPage> = ({ changePage }: IPieGraphPage) => {
   const { rootStore } = useStore();
   const id = useGetParam();
   const pieGraphStore = rootStore.pieGraphPageStore;
+  const name = graphChangeChecker.name;
+  const left = { ...graphChangeChecker.left, checked: true, onChange: changePage };
+  const right = { ...graphChangeChecker.right, checked: false, onChange: changePage };
   useEffect(() => {
     pieGraphStore.loadTransactions(id);
   }, []);
@@ -106,7 +112,10 @@ const PieGraphPage: React.FC<IPieGraphPage> = ({ changePage }: IPieGraphPage) =>
           />
         </InputWrapper>
       </PieHeaderFilter>
-      {pieGraphStore.transactions.length === 0 ? (
+      <PieHeaderFilter>
+        <InputRadio name={name} left={left} right={right} />
+      </PieHeaderFilter>
+      {pieGraphStore.pieChartValue.length === 0 ? (
         <NotFoundTransaction />
       ) : (
         <>
@@ -127,17 +136,17 @@ const PieGraphPage: React.FC<IPieGraphPage> = ({ changePage }: IPieGraphPage) =>
                 return <BoxGraph key={barChart.title} {...barChart} />;
               })}
             </BarChartList>
-            <IncomeExpenditureSwitch>
-              <CategoryNoDependency
-                id={99}
-                color={color.NAVER_GREEN}
-                name={pieGraphStore.incomeMode ? text.SHOW_EXPENDITURE : text.SHOW_INCOME}
-                onClick={switchIncomeExpenditure}
-              ></CategoryNoDependency>
-            </IncomeExpenditureSwitch>
           </BarChartWrapper>
         </>
       )}
+      <IncomeExpenditureSwitch>
+        <CategoryNoDependency
+          id={99}
+          color={color.NAVER_GREEN}
+          name={pieGraphStore.incomeMode ? text.SHOW_EXPENDITURE : text.SHOW_INCOME}
+          onClick={switchIncomeExpenditure}
+        ></CategoryNoDependency>
+      </IncomeExpenditureSwitch>
     </PieGraphPageWrapper>
   );
 };
