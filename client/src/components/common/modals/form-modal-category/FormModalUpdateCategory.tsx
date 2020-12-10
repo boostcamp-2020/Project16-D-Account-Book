@@ -10,14 +10,23 @@ import CategoryPreview from '../../category-preview/CategoryPreview';
 import InputText from '../../inputs/input-text/InputText';
 import formModal from '../../../../constants/formModal';
 import { BLACK } from '../../../../constants/color';
+import { Category } from '../../../../types/category';
 
 const FormModalUpdateCategory: React.FC = () => {
   const { rootStore } = useStore();
   const updateCategoryFormStore = rootStore.modalStore.updateCategoryFormStore;
   const { show } = updateCategoryFormStore;
 
-  const [name, setName] = useState<string>('카테고리 1');
-  const [inputColor, setInputColor] = useState<string>(BLACK);
+  const [name, setName] = useState<string>(
+    updateCategoryFormStore.incomeFlag
+      ? (updateCategoryFormStore.incomeCategory as Category).name
+      : (updateCategoryFormStore.expenditureCategory as Category).name,
+  );
+  const [inputColor, setInputColor] = useState<string>(
+    updateCategoryFormStore.incomeFlag
+      ? (updateCategoryFormStore.incomeCategory as Category).color
+      : (updateCategoryFormStore.expenditureCategory as Category).color,
+  );
 
   const incomeCategoryId = updateCategoryFormStore.incomeCategory?.id;
   const expenditureCategoryId = updateCategoryFormStore.expenditureCategory?.id;
