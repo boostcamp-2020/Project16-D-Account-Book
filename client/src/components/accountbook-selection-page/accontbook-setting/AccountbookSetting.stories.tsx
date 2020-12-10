@@ -20,7 +20,7 @@ export const WhiteItem = (): JSX.Element => {
   const tempColor1 = '#000000';
   return (
     <TempDiv bgColor={tempColor1}>
-      <AccountbookSetting accountbookId={1} bgColor={tempColor1} />
+      <AccountbookSetting id={1} bgColor={tempColor1} />
     </TempDiv>
   );
 };
@@ -29,7 +29,7 @@ export const BlackItem = (): JSX.Element => {
   const tempColor2 = '#E0F8EC';
   return (
     <TempDiv bgColor={tempColor2}>
-      <AccountbookSetting accountbookId={2} bgColor={tempColor2} />
+      <AccountbookSetting id={2} bgColor={tempColor2} />
     </TempDiv>
   );
 };
