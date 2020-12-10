@@ -9,6 +9,9 @@ export default class AccountStore {
   @observable
   accounts: Account[] = [];
 
+  @observable
+  accountNames: string[] = [];
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeObservable(this);
@@ -22,6 +25,7 @@ export default class AccountStore {
   updateAccounts = async (id: number): Promise<void> => {
     const accounts = await AccountService.getAccountsById(id);
     this.changeAccounts(accounts);
+    this.accountNames = accounts.map((item) => item.name);
   };
 
   createAccount = async (account: AccountRequest): Promise<void> => {
