@@ -65,7 +65,9 @@ const FormModalCategory: React.FC = () => {
       <FormModalWrapper>
         <FormModalHeader
           modalName={
-            toggle.incomeFlag ? formModal.CREATE_INCOME_CATEGORY_MODAL_NAME : formModal.CREATE_EXPENDITURE_CATEGORY_MODAL_NAME
+            toggle.incomeFlag
+              ? formModal.CREATE_INCOME_CATEGORY_MODAL_NAME
+              : formModal.CREATE_EXPENDITURE_CATEGORY_MODAL_NAME
           }
           blueName={'생성'}
           closeModal={modalToggle}
