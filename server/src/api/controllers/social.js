@@ -24,9 +24,17 @@ const deleteUser = async (ctx) => {
   ctx.status = 204;
 };
 
+const updateAuthority = async (ctx) => {
+  const { user_accountbook_id: userAccountbookId } = ctx.request.params;
+  const { authority } = ctx.request.body;
+  const patchedUser = await socialService.updateAuthority(userAccountbookId, authority);
+  ctx.body = patchedUser;
+};
+
 module.exports = {
   searchUser,
   addUser,
   findUsers,
   deleteUser,
+  updateAuthority,
 };

@@ -46,9 +46,26 @@ const deleteUser = async (accountbookId, userId) => {
   await db.userAccountbook.destroy({ where: { accountbookId, userId } });
 };
 
+const updateAuthority = async (userAccountbookId, authority) => {
+  await db.userAccountbook.update({ authority }, { where: { id: userAccountbookId } });
+  const patchedUser = await db.userAccountbook.findOne({
+    where: { id: userAccountbookId },
+    attributes: ['id', 'authority'],
+    include: [
+      {
+        model: db.user,
+        as: 'user',
+        attributes: ['id', 'nickname', 'email', 'profileUrl'],
+      },
+    ],
+  });
+  return patchedUser;
+};
+
 module.exports = {
   findUserByEmail,
   addUser,
   findUsers,
   deleteUser,
+  updateAuthority,
 };
