@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HeaderNavigation from '../../components/common/header-navigation/HeaderNavigation';
 import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
 import Sidebar from '../../components/common/sidebar/Sidebar';
@@ -12,6 +12,7 @@ const PageWrapper = styled.div`
 `;
 
 const StatisticsPage: React.FC = () => {
+  const [pieGraph, setPieGraph] = useState<boolean>(true);
   return (
     <>
       <Sidebar smallAccountbooks={smallAccountbookItems} />
@@ -19,7 +20,7 @@ const StatisticsPage: React.FC = () => {
         <HeaderNavigation currentPage={'statistics'} />
       </HeaderNavigationRightTopWrapper>
       <PageWrapper>
-        <PieGraphPage />
+        <PieGraphPage changePage={setPieGraph} />
       </PageWrapper>
     </>
   );
