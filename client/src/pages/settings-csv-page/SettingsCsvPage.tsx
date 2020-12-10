@@ -36,7 +36,7 @@ const Content = styled.p`
 const SettingsCsvPage = (): JSX.Element => {
   return (
     <SettingsCsvPageWrapper>
-      <SettingsSidebar currentPage={'csv'} />
+      <SettingsSidebar currentpage={'csv'} />
       <SettingsBody>
         <SettingsItemWrapper>
           <Label>

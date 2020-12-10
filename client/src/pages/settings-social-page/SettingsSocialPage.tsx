@@ -28,7 +28,7 @@ const SettingsSocialPage: React.FC = () => {
 
   return (
     <SettingsPageWrapper>
-      <SettingsSidebar currentPage={'social'} />
+      <SettingsSidebar currentpage={'social'} />
       <SettingsBody>
         <h2>{socialPage.TITLE}</h2>
         <br />

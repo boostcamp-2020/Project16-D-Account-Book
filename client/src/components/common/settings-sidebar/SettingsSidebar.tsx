@@ -14,14 +14,14 @@ const SettingsSidebarWrapper = styled.div`
 `;
 
 interface SettingsSidebarProps {
-  currentPage: string;
+  currentpage: string;
 }
 
-const SettingsSidebar = ({ currentPage }: SettingsSidebarProps): JSX.Element => {
+const SettingsSidebar = ({ currentpage }: SettingsSidebarProps): JSX.Element => {
   return (
     <SettingsSidebarWrapper>
       <SettingsSidebarHeader />
-      <SettingsSidebarBody currentPage={currentPage} />
+      <SettingsSidebarBody currentpage={currentpage} />
     </SettingsSidebarWrapper>
   );
 };
