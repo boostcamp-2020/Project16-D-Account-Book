@@ -11,11 +11,12 @@ const Wrapper = styled.div<{ itemColor: string }>`
   }
 `;
 
-interface CategoryProps {
+interface SettingProps {
+  accountbookId: number;
   bgColor: string;
 }
 
-const AccountbookSetting = ({ bgColor }: CategoryProps): JSX.Element => {
+const AccountbookSetting = ({ accountbookId, bgColor }: SettingProps): JSX.Element => {
   const itemColor = getTextColor(bgColor);
   return (
     <Wrapper itemColor={itemColor}>
