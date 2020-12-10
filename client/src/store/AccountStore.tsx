@@ -25,13 +25,13 @@ export default class AccountStore {
   };
 
   createAccount = async (account: AccountRequest): Promise<void> => {
-    const createdAccount = await AccountService.createAccount(account);
-    this.addNewAccount(createdAccount);
+    await AccountService.createAccount(account);
+    this.addNewAccount(account.accountbookId);
   };
 
   @action
-  addNewAccount = (account: Account): void => {
-    this.accounts = [...this.accounts, account];
+  addNewAccount = (accountbookId: number): void => {
+    this.updateAccounts(accountbookId);
   };
 
   deleteAccount = async (accountId: number): Promise<void> => {
