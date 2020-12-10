@@ -15,7 +15,11 @@ import Auth from './hoc/Auth';
 
 function App(): JSX.Element {
   return (
+<<<<<<< Updated upstream
     <>
+=======
+    <GlobalFonts>
+>>>>>>> Stashed changes
       <RootProvider>
         <Router>
           <GlobalFonts />
@@ -32,7 +36,11 @@ function App(): JSX.Element {
           </Switch>
         </Router>
       </RootProvider>
+<<<<<<< Updated upstream
     </>
+=======
+    </GlobalFonts>
+>>>>>>> Stashed changes
   );
 }
 
