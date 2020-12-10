@@ -1,5 +1,7 @@
 const jwtConfig = require('@config/jwt');
 const { generateToken, decodeTokenForValidation } = require('@utils/jwt-utils');
+const authService = require('@services/auth');
+
 const db = require('@models');
 
 const getCurrentUser = async (ctx) => {
@@ -26,20 +28,8 @@ const getCurrentUser = async (ctx) => {
 const getAuthority = async (ctx) => {
   const token = ctx.cookies.get('jwt');
   const { accountbook_id: accountbookId } = ctx.request.query;
-  try {
-    if (!token) {
-      throw new Error('jwt토큰 없음');
-    }
-    const [decoded, user] = await decodeTokenForValidation(token);
-    const userAccountbook = await db.userAccountbook.findOne({ where: { userId: user.id, accountbookId } });
-    if (userAccountbook === null) {
-      ctx.body = { authority: null };
-    } else {
-      ctx.body = { authority: userAccountbook.authority };
-    }
-  } catch (err) {
-    ctx.throw(401, err);
-  }
+  const authority = await authService.getAuthority(token, accountbookId);
+  ctx.body = authority;
 };
 
 module.exports = {
