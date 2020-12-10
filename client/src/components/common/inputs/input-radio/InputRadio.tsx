@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { IInputRadio } from '../../../../types/inputRadio';
 
 const InputRadioWrapper = styled.div`
-  width: 250px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  z-index: 6;
 `;
 
 interface InputRadioProps {
@@ -15,10 +16,11 @@ interface InputRadioProps {
 }
 
 const LabelRadioInput = styled.label.attrs((props) => ({
-  for: props.id,
+  htmlFor: props.id,
 }))`
+  display: inline-block;
   font-size: 1rem;
-  width: 100px;
+  margin-right: 3em;
   margin-top: 5px;
 `;
 
@@ -34,13 +36,25 @@ const RadioButton = styled.input.attrs((props) => ({
   margin-right: 10px;
 `;
 
-const InputRadio = (): JSX.Element => {
+const InputRadio: React.FC<IInputRadio> = ({ name, left, right }: IInputRadio): JSX.Element => {
   return (
     <InputRadioWrapper>
-      <RadioButton id="sunday" name="startDay" value="sunday" checked={true}></RadioButton>
-      <LabelRadioInput id="sunday">일요일</LabelRadioInput>
-      <RadioButton id="monday" name="startDay" value="monday"></RadioButton>
-      <LabelRadioInput id="monday">월요일</LabelRadioInput>
+      <RadioButton
+        id={left.id}
+        name={name}
+        value={left.value}
+        checked={left.checked}
+        onChange={left.onChange}
+      ></RadioButton>
+      <LabelRadioInput id={left.id}>{left.label}</LabelRadioInput>
+      <RadioButton
+        id={right.id}
+        name={name}
+        value={right.value}
+        checked={right.checked}
+        onChange={right.onChange}
+      ></RadioButton>
+      <LabelRadioInput id={right.id}>{right.label}</LabelRadioInput>
     </InputRadioWrapper>
   );
 };
