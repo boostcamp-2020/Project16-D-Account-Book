@@ -72,7 +72,6 @@ export default class LineChartStore {
       };
       return convert;
     });
-    console.log(lineValues);
     return lineValues;
   }
 
