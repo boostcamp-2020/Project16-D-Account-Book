@@ -7,7 +7,7 @@ import SingleInputDropDown from '../../components/common/inputs/single-input-dro
 import GMT from '../../__dummy-data__/components/settings/gmtData';
 import InputRadio from '../../components/common/inputs/input-radio/InputRadio';
 import { DODGER_BLUE } from '../../constants/color';
-
+import { startDateChecker } from '../../types/inputRadio';
 const SettingsAccountbookPageWrapper = styled.div`
   display: flex;
 `;
@@ -50,7 +50,7 @@ const SettingsAccountbookPage = (): JSX.Element => {
   const [inputColor, setInputColor] = useState<string>('black');
   const [title, setTitle] = useState<string>('가계부 1');
   const [description, setDescription] = useState<string>('부스트캠프 커넥트 재단 가계부');
-
+  const { name, left, right } = startDateChecker;
   const onChange = (color: { hex: string }): void => {
     setInputColor(color.hex);
   };
@@ -91,7 +91,7 @@ const SettingsAccountbookPage = (): JSX.Element => {
         </SettingsItemWrapper>
         <SettingsItemWrapper>
           <Label>한 주의 시작 요일 설정</Label>
-          <InputRadio />
+          <InputRadio name={name} left={left} right={right} />
         </SettingsItemWrapper>
         <SettingsItemWrapper>
           <Label>GMT 설정</Label>
