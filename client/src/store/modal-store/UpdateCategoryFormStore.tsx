@@ -18,10 +18,10 @@ export default class UpdateCategoryFormStore {
   incomeFlag = true;
 
   @observable
-  orginalIncomeCategoryName = '';
+  originalIncomeCategoryName = '';
 
   @observable
-  orginalExpenditureCategoryName = '';
+  originalExpenditureCategoryName = '';
 
   @observable
   incomeCategory: Category | undefined = undefined;
@@ -91,11 +91,11 @@ export default class UpdateCategoryFormStore {
 
   @action
   loadOriginalIncomeCategory = (incomeCategoryName: string): void => {
-    this.orginalIncomeCategoryName = incomeCategoryName;
+    this.originalIncomeCategoryName = incomeCategoryName;
   };
 
   @action
   loadOriginalExpenditureCategory = (expenditureName: string): void => {
-    this.orginalExpenditureCategoryName = expenditureName;
+    this.originalExpenditureCategoryName = expenditureName;
   };
 }

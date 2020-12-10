@@ -64,7 +64,6 @@ export default class CategoryStore {
   @action
   addNewExpenditureCategory = (accountbookId: number): void => {
     this.updateExpenditureCategories(accountbookId);
-    // this.expenditureCategories = [...this.expenditureCategories, expenditureCategory];
   };
 
   deleteIncomeCategory = async (incomeCategoryId: number): Promise<void> => {
