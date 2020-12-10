@@ -8,6 +8,7 @@ import AddButton from '../add-button/AddButton';
 import useGetParam from '../../../hook/use-get-param/useGetParam';
 import useStore from '../../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
+import socialPage from '../../../constants/socialPage';
 
 const UserItemWrapper = styled.div<{ type: string | undefined }>`
   display: flex;
@@ -65,15 +66,19 @@ const UserItem = ({ email, nickname, profileUrl, type, userId, userAccountbookId
   const { socialStore, userStore } = useStore().rootStore;
 
   const onClickAdd = () => {
-    socialStore.addUser({ accountbookId, userId });
+    if (confirm(socialPage.ADD_CONFIRM_MESSAGE)) {
+      socialStore.addUser({ accountbookId, userId });
+    }
   };
 
   const onClickDelete = () => {
-    socialStore.deleteUser({ accountbookId, userId });
+    if (confirm(socialPage.DELETE_CONFIRM_MESSAGE)) {
+      socialStore.deleteUser({ accountbookId, userId });
+    }
   };
 
   const onClickAdminSetting = () => {
-    if (confirm('관리자 권한을 위임하시겠습니까? 위임한 이후에 관리자 권한을 잃게됩니다.')) {
+    if (confirm(socialPage.GIVE_ADMIN_CONFIRM_MESSAGE)) {
       socialStore.giveAdmin(userAccountbookId, 1);
     }
   };
