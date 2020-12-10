@@ -12,7 +12,6 @@ const SVGAnimation = () => keyframes`
 `;
 
 const SVG = styled.svg`
-  transform: rotate(-90deg);
   animation: ${() => SVGAnimation()} 2s alternate infinite;
 `;
 
