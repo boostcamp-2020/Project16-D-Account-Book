@@ -4,8 +4,8 @@ import { LIGHT_GREEN } from '../../../../constants/color';
 
 const CheckSuccessTextWrapper = styled.p`
   color: ${LIGHT_GREEN};
-  padding: 0;
-  margin: 0;
+  text-align: center;
+  height: 1rem;
 `;
 
 const CheckSuccessText: React.FC = () => {

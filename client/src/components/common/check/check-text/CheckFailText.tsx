@@ -4,8 +4,8 @@ import { FAIL_RED } from '../../../../constants/color';
 
 const CheckFailTextWrapper = styled.p`
   color: ${FAIL_RED};
-  padding: 0;
-  margin: 0;
+  text-align: center;
+  height: 1rem;
 `;
 
 const CheckFailText: React.FC = () => {
