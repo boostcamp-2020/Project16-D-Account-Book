@@ -72,6 +72,7 @@ const FormModalTransaction: React.FC = () => {
           blueName={'완료'}
           closeModal={modalToggle}
           clickBlue={inputs.classify ? incomeClick : expenditureClick}
+          sms={true}
         />
         <TransactionInputList inputs={inputListInputs} changes={changes} />
       </FormModalWrapper>

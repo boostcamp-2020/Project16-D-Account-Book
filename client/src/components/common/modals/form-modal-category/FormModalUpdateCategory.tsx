@@ -35,7 +35,7 @@ const FormModalUpdateCategory: React.FC = () => {
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
         <FormModalHeader
-          modalName={formModal.UpdateCategorytModalName}
+          modalName={formModal.UPDATE_CATEGORY_MODAL_NAME}
           blueName={'완료'}
           redName={'삭제'}
           closeModal={modalToggle}
@@ -46,8 +46,8 @@ const FormModalUpdateCategory: React.FC = () => {
           <CategoryPreview title={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
-          <FormModalLabel>{formModal.CategoryLabelName}</FormModalLabel>
-          <InputText maxLength={8} placeholder={formModal.CategoryPlaceholder} value={name} onChange={onChangeName} />
+          <FormModalLabel>{formModal.CATEGORY_LABEL_NAME}</FormModalLabel>
+          <InputText maxLength={8} placeholder={formModal.CATEGORY_PLACEHOLDER} value={name} onChange={onChangeName} />
         </FormModalItem>
       </FormModalWrapper>
     </ModalBackground>
