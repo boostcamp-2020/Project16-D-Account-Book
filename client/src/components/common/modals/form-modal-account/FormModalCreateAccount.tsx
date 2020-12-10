@@ -62,12 +62,28 @@ const FormModalAccount: React.FC = () => {
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
-        <FormModalHeader
-          modalName={formModal.CREATE_ACCOUNT_MODAL_NAME}
-          blueName={'생성'}
-          closeModal={modalToggle}
-          clickBlue={onCreate}
-        />
+        {check ? (
+          name ? (
+            <FormModalHeader
+              modalName={formModal.CREATE_ACCOUNT_MODAL_NAME}
+              blueName={'생성'}
+              closeModal={modalToggle}
+              clickBlue={onCreate}
+            />
+          ) : (
+            <FormModalHeader
+              modalName={formModal.CREATE_ACCOUNT_MODAL_NAME}
+              closeModal={modalToggle}
+              disabledName={'생성'}
+            />
+          )
+        ) : (
+          <FormModalHeader
+            modalName={formModal.CREATE_ACCOUNT_MODAL_NAME}
+            closeModal={modalToggle}
+            disabledName={'생성'}
+          />
+        )}
         <FormModalItem>
           <AccountPreview name={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
