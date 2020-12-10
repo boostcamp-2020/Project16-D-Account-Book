@@ -13,6 +13,12 @@ export default class CategoryStore {
   @observable
   expenditureCategories: Category[] = [];
 
+  @observable
+  incomeCategoryNames: string[] = [];
+
+  @observable
+  expenditureCategoryNames: string[] = [];
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeObservable(this);
@@ -31,31 +37,34 @@ export default class CategoryStore {
   updateIncomeCategories = async (id: number): Promise<void> => {
     const incomeCategories = await CategoryService.getIncomeCategoryById(id);
     this.changeIncomeCategories(incomeCategories);
+    this.incomeCategoryNames = incomeCategories.map((item) => item.name);
   };
 
   updateExpenditureCategories = async (id: number): Promise<void> => {
     const expenditureCategories = await CategoryService.getExpenditureCategoryById(id);
     this.changeExpenditureCategories(expenditureCategories);
+    this.expenditureCategoryNames = expenditureCategories.map((item) => item.name);
   };
 
   createIncomeCategory = async (incomeCategory: CategoryRequest): Promise<void> => {
-    const createdIncomeCategory = await CategoryService.createIncomeCategory(incomeCategory);
-    this.addNewIncomeCategory(createdIncomeCategory);
+    await CategoryService.createIncomeCategory(incomeCategory);
+    this.addNewIncomeCategory(incomeCategory.accountbookId);
   };
 
   @action
-  addNewIncomeCategory = (incomeCategory: Category): void => {
-    this.incomeCategories = [...this.incomeCategories, incomeCategory];
+  addNewIncomeCategory = (accountbookId: number): void => {
+    this.updateIncomeCategories(accountbookId);
   };
 
   createExpenditureCategory = async (expenditureCategory: CategoryRequest): Promise<void> => {
-    const createdExpenditureCategory = await CategoryService.createExpenditureCategory(expenditureCategory);
-    this.addNewExpenditureCategory(createdExpenditureCategory);
+    await CategoryService.createExpenditureCategory(expenditureCategory);
+    this.addNewExpenditureCategory(expenditureCategory.accountbookId);
   };
 
   @action
-  addNewExpenditureCategory = (expenditureCategory: Category): void => {
-    this.expenditureCategories = [...this.expenditureCategories, expenditureCategory];
+  addNewExpenditureCategory = (accountbookId: number): void => {
+    this.updateExpenditureCategories(accountbookId);
+    // this.expenditureCategories = [...this.expenditureCategories, expenditureCategory];
   };
 
   deleteIncomeCategory = async (incomeCategoryId: number): Promise<void> => {
