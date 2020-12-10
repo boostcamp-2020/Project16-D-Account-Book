@@ -52,25 +52,25 @@ const FormModalUpdateCategory: React.FC = () => {
     setName(e.target.value);
     if (updateCategoryFormStore.incomeFlag) {
       if (rootStore.categoryStore.incomeCategoryNames.includes(e.target.value)) {
-        rootStore.modalStore.updateCategoryFormStore.setCheckFalse();
+        updateCategoryFormStore.setCheckFalse();
       } else {
-        rootStore.modalStore.updateCategoryFormStore.setCheckTrue();
+        updateCategoryFormStore.setCheckTrue();
       }
       if (updateCategoryFormStore.originalIncomeCategoryName === e.target.value) {
-        rootStore.modalStore.updateCategoryFormStore.setNoChangeTrue();
+        updateCategoryFormStore.setNoChangeTrue();
       } else {
-        rootStore.modalStore.updateCategoryFormStore.setNoChangeFalse();
+        updateCategoryFormStore.setNoChangeFalse();
       }
     } else {
       if (rootStore.categoryStore.expenditureCategoryNames.includes(e.target.value)) {
-        rootStore.modalStore.updateCategoryFormStore.setCheckFalse();
+        updateCategoryFormStore.setCheckFalse();
       } else {
-        rootStore.modalStore.updateCategoryFormStore.setCheckTrue();
+        updateCategoryFormStore.setCheckTrue();
       }
       if (updateCategoryFormStore.originalExpenditureCategoryName === e.target.value) {
-        rootStore.modalStore.updateCategoryFormStore.setNoChangeTrue();
+        updateCategoryFormStore.setNoChangeTrue();
       } else {
-        rootStore.modalStore.updateCategoryFormStore.setNoChangeFalse();
+        updateCategoryFormStore.setNoChangeFalse();
       }
     }
   };

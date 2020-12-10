@@ -37,14 +37,14 @@ const FormModalUpdateAccount: React.FC = () => {
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
     if (rootStore.accountStore.accountNames.includes(e.target.value)) {
-      rootStore.modalStore.updateAccountFormStore.setCheckFalse();
+      updateAccountFormStore.setCheckFalse();
     } else {
-      rootStore.modalStore.updateAccountFormStore.setCheckTrue();
+      updateAccountFormStore.setCheckTrue();
     }
     if (updateAccountFormStore.orginalAccountName === e.target.value) {
-      rootStore.modalStore.updateAccountFormStore.setNoChangeTrue();
+      updateAccountFormStore.setNoChangeTrue();
     } else {
-      rootStore.modalStore.updateAccountFormStore.setNoChangeFalse();
+      updateAccountFormStore.setNoChangeFalse();
     }
   };
 
@@ -72,7 +72,7 @@ const FormModalUpdateAccount: React.FC = () => {
     if (accountId && name && inputColor) {
       const account = convertToAccount(id, name, inputColor);
       rootStore.accountStore.updateAccount(account, accountId);
-      rootStore.modalStore.updateAccountFormStore.setNoChangeFalse();
+      updateAccountFormStore.setNoChangeFalse();
       modalToggle();
     }
   };
@@ -125,7 +125,7 @@ const FormModalUpdateAccount: React.FC = () => {
               ) : (
                 <CheckNoAction />
               )
-            ) : updateAccountFormStore.orginalAccountName !== name ? (
+            ) : !noChange ? (
               <CheckFail />
             ) : (
               <CheckNoAction />
