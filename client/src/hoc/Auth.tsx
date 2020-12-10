@@ -11,12 +11,13 @@ export default (SpecificComponent: any): any => {
     useEffect(() => {
       // 로그인 검증
       userStore.checkAuth();
+
       // 선택한 가계부에대한 authority 검증
       if (params.id) {
         userStore.checkAuthority(params.id);
       }
     }, []);
-    if (userStore.userId === null) {
+    if (userStore.userId === null || userStore.isAdmin === null) {
       return <></>;
     } else {
       return <SpecificComponent {...props} />;
