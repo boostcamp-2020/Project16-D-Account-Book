@@ -6,14 +6,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(15),
         allowNull: false,
       },
-      gmt: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      startDay: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-      },
     },
     {
       tableName: 'accountbook',
