@@ -84,17 +84,17 @@ const UserItem = ({ email, nickname, profileUrl, type, userId, userAccountbookId
   };
 
   const firstButton = () => {
-    if (type === 'user' && userStore.isAdmin === true) {
+    if (type === 'user' && userStore.isAdmin) {
       return <AdminSettingButton onClick={onClickAdminSetting} />;
     }
     return <></>;
   };
 
   const secondButton = () => {
-    if (type === 'user' && userStore.isAdmin === true) {
+    if (type === 'user' && userStore.isAdmin) {
       return <DeleteButton onClick={onClickDelete} />;
     }
-    if (type === 'search' && userStore.isAdmin === true) {
+    if (type === 'search' && userStore.isAdmin) {
       return <AddButton onClick={onClickAdd} />;
     }
     return <></>;
