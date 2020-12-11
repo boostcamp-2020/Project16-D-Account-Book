@@ -6,9 +6,9 @@ const { isAdmin, isAccountbookUser } = require('@middlewares/accountbookAuth');
 const router = new Router();
 
 router.get('/', verificationOfAuth, socialController.searchUser);
-router.post('/', isAdmin, socialController.addUser);
+router.post('/', isAccountbookUser, socialController.addUser);
 router.get('/users', isAccountbookUser, socialController.findUsers);
 router.delete('/', isAdmin, socialController.deleteUser);
-router.patch('/:user_accountbook_id', socialController.giveAdmin);
+router.patch('/:user_accountbook_id', isAdmin, socialController.giveAdmin);
 
 module.exports = router;
