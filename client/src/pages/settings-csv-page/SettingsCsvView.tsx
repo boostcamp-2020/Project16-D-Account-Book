@@ -8,8 +8,7 @@ import useStore from '../../hook/use-store/useStore';
 import Expenditure from '../../types/expenditure';
 import Income from '../../types/income';
 import { toJS } from 'mobx';
-import CsvTransaction from '../../types/csvTransaction';
-
+import { sortByDate } from '../../utils/sortByDate';
 interface Props {
   accountbookId: number;
 }
@@ -69,14 +68,7 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
     return toJS(item);
   });
 
-  const sortBy = (data: CsvTransaction[], key: string): CsvTransaction[] => {
-    data.sort((a, b) => {
-      return a[key] - b[key];
-    });
-    return data;
-  };
-
-  sortBy(data, 'date');
+  sortByDate(data, 'date');
 
   const headers = [
     { label: '금액', key: 'amount' },
