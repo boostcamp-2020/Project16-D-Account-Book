@@ -7,7 +7,6 @@ const findUserByEmail = async (email) => {
 };
 
 const addUser = async (accountbookId, userId) => {
-  console.log('here!!!!!!!!!!!!!!!!!!!!!');
   const user = await db.userAccountbook.findOne({ where: { userId, accountbookId } });
 
   if (user) {

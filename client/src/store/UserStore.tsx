@@ -40,7 +40,6 @@ export default class UserStore {
     this.nickname = user.nickname;
     this.profileUrl = user.profileUrl;
     this.accountAuthorList = user.userAccountbooks;
-    console.log('updateUser', this.accountAuthorList);
   };
 
   @action
@@ -72,8 +71,6 @@ export default class UserStore {
 
   isUser = (accountbookId: number): boolean => {
     const flag = this.accountAuthorList?.some((accounts) => accounts.accountbookId === accountbookId);
-
-    console.log('useIsUser', flag);
     if (flag === undefined) {
       return false;
     }
