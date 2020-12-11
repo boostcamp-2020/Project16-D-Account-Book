@@ -30,15 +30,19 @@ const FormModalCategory: React.FC = () => {
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
-    if (incomeFlag && rootStore.categoryStore.incomeCategoryNames.includes(e.target.value)) {
-      rootStore.modalStore.createCategoryFormStore.setCheckFalse();
-    } else if (incomeFlag && !rootStore.categoryStore.incomeCategoryNames.includes(e.target.value)) {
-      rootStore.modalStore.createCategoryFormStore.setCheckTrue();
+    if (incomeFlag) {
+      if (rootStore.categoryStore.incomeCategoryNames.includes(e.target.value)) {
+        rootStore.modalStore.createCategoryFormStore.setCheckFalse();
+      } else if (!rootStore.categoryStore.incomeCategoryNames.includes(e.target.value)) {
+        rootStore.modalStore.createCategoryFormStore.setCheckTrue();
+      }
     }
-    if (!incomeFlag && rootStore.categoryStore.expenditureCategoryNames.includes(e.target.value)) {
-      rootStore.modalStore.createCategoryFormStore.setCheckFalse();
-    } else if (!incomeFlag && !rootStore.categoryStore.expenditureCategoryNames.includes(e.target.value)) {
-      rootStore.modalStore.createCategoryFormStore.setCheckTrue();
+    if (!incomeFlag) {
+      if (rootStore.categoryStore.expenditureCategoryNames.includes(e.target.value)) {
+        rootStore.modalStore.createCategoryFormStore.setCheckFalse();
+      } else if (!rootStore.categoryStore.expenditureCategoryNames.includes(e.target.value)) {
+        rootStore.modalStore.createCategoryFormStore.setCheckTrue();
+      }
     }
   };
 
