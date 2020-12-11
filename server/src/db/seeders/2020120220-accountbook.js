@@ -4,8 +4,6 @@ module.exports = {
       {
         id: 1,
         title: 'accountbook1',
-        gmt: 9,
-        start_day: true,
         created_at: '2020-11-23',
         updated_at: '2020-11-23',
         deleted_at: null,
