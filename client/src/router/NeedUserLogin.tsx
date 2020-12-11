@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Auth from '../hoc/Auth';
 import useGetAuthority from '../hook/use-get-authority/useGetAuthority';
 import AccountbookSelectionPage from '../pages/accountbook-selection-page/AccountbookSelectionPage';
 import SettingsAccountbookPage from '../pages/settings-accountbook-page/SettingsAccountbookPage';
