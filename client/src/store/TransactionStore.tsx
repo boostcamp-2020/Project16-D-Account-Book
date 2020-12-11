@@ -1,6 +1,7 @@
 import { observable, makeObservable, runInAction, action, computed } from 'mobx';
 import Income, { IncomeRequest, isIncome } from '../types/income';
 import Expenditure, { ExpenditureRequest } from '../types/expenditure';
+import CsvTransaction from '../types/csvTransaction';
 import transactionService from '../services/transaction';
 import RootStore from './RootStore';
 import { filtering } from '../utils/filter';
@@ -16,12 +17,20 @@ export default class TransactionStore {
   @observable
   isLoading = true;
 
+  @observable
+  csvTransactions: Array<CsvTransaction> = [];
+
   rootStore: RootStore;
 
   constructor(rootStore: RootStore) {
     makeObservable(this);
     this.rootStore = rootStore;
   }
+
+  @action
+  loadCsvTransactions = (transactions: CsvTransaction[]): void => {
+    this.csvTransactions = transactions;
+  };
 
   @action
   findTransactions = async (accountbookId: number, startDate: Date, endDate: Date): Promise<void> => {
