@@ -20,6 +20,13 @@ const findAccountById = async (id) => {
 };
 
 const createAccount = async ({ accountbookId, name, color }) => {
+  const duplicatedAccount = await db.account.findOne({
+    where: { accountbookId, name },
+  });
+  if (duplicatedAccount) {
+    throw new Error('이미 존재하는 결제수단입니다.');
+  }
+
   const accountbook = await getAccountbookById(accountbookId);
   const createdAccount = await accountbook.createAccount({
     name,
