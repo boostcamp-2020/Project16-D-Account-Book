@@ -23,6 +23,7 @@ const ContentWrapper = styled.div`
 const SettingsSocialPage: React.FC = () => {
   const accountbookId = useGetParam();
   const { socialStore, userStore } = useStore().rootStore;
+  const isAdmin = userStore.isAdmin(accountbookId);
 
   useEffect(() => {
     socialStore.findUsers(accountbookId);
@@ -36,7 +37,7 @@ const SettingsSocialPage: React.FC = () => {
       ) : (
         <SettingsBody>
           <h2>{socialPage.TITLE}</h2>
-          {userStore.isAdmin && (
+          {isAdmin && (
             <>
               <br />
               <Description>{socialPage.DESCRIPTION1}</Description>
@@ -44,7 +45,7 @@ const SettingsSocialPage: React.FC = () => {
             </>
           )}
           <ContentWrapper>
-            {userStore.isAdmin && <SearchContainer />}
+            {isAdmin && <SearchContainer />}
             <UserItemContainer />
           </ContentWrapper>
         </SettingsBody>

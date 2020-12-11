@@ -64,6 +64,7 @@ interface Props {
 const UserItem = ({ email, nickname, profileUrl, type, userId, userAccountbookId }: Props): JSX.Element => {
   const accountbookId = useGetParam();
   const { socialStore, userStore } = useStore().rootStore;
+  const isAdmin = userStore.isAdmin(accountbookId);
 
   const onClickAdd = () => {
     if (confirm(socialPage.ADD_CONFIRM_MESSAGE)) {
@@ -79,22 +80,22 @@ const UserItem = ({ email, nickname, profileUrl, type, userId, userAccountbookId
 
   const onClickAdminSetting = () => {
     if (confirm(socialPage.GIVE_ADMIN_CONFIRM_MESSAGE)) {
-      socialStore.giveAdmin(userAccountbookId, 1);
+      socialStore.giveAdmin(userAccountbookId, 1, accountbookId);
     }
   };
 
   const firstButton = () => {
-    if (type === 'user' && userStore.isAdmin) {
+    if (type === 'user' && isAdmin) {
       return <AdminSettingButton onClick={onClickAdminSetting} />;
     }
     return <></>;
   };
 
   const secondButton = () => {
-    if (type === 'user' && userStore.isAdmin) {
+    if (type === 'user' && isAdmin) {
       return <DeleteButton onClick={onClickDelete} />;
     }
-    if (type === 'search' && userStore.isAdmin) {
+    if (type === 'search' && isAdmin) {
       return <AddButton onClick={onClickAdd} />;
     }
     return <></>;
