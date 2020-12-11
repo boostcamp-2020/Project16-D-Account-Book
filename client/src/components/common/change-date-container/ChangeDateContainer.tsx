@@ -4,7 +4,7 @@ import PreviousButton from '../back-button/PreviousButton';
 import NextButton from '../next-button/NextButton';
 import useStore from '../../../hook/use-store/useStore';
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   width: 100%;
   -ms-user-select: none;
@@ -14,7 +14,7 @@ const Container = styled.div`
   user-select: none;
 `;
 
-const PreviousButtonWrapper = styled.div`
+export const PreviousButtonWrapper = styled.div`
   width: 32%;
   padding-top: 0.5rem;
   text-align: right;
@@ -25,7 +25,7 @@ const PreviousButtonWrapper = styled.div`
   }
 `;
 
-const NextButtonWrapper = styled.div`
+export const NextButtonWrapper = styled.div`
   width: 32%;
   padding-top: 0.5rem;
   text-align: left;
@@ -35,7 +35,7 @@ const NextButtonWrapper = styled.div`
     cursor: pointer;
   }
 `;
-const DateWrapper = styled.div`
+export const DateWrapper = styled.div`
   width: 36%;
   display: flex;
   flex-direction: column;
