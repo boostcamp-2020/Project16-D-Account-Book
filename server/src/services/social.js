@@ -2,8 +2,8 @@ const db = require('@models');
 const accountbookService = require('@services/accountbook');
 const { decodeTokenForValidation } = require('@utils/jwt-utils');
 
-const findUserByEmail = async (email) => {
-  const user = await db.user.findOne({
+const findUsersByEmail = async (email) => {
+  const user = await db.user.findAll({
     where: { email },
     attributes: ['id', 'email', 'nickname', 'profileUrl', 'provider'],
   });
@@ -84,7 +84,7 @@ const giveAdmin = async (userAccountbookId, authority, token) => {
 };
 
 module.exports = {
-  findUserByEmail,
+  findUsersByEmail,
   addUser,
   findUsers,
   deleteUser,

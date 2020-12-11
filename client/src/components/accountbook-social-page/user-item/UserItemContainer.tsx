@@ -21,7 +21,7 @@ const UserItemContainer = (): JSX.Element => {
           provider={userAccountbook.user.provider}
           userAccountbookId={userAccountbook.id}
           userId={userAccountbook.user.id}
-          key={userAccountbook.user.email}
+          key={userAccountbook.user.id}
           email={userAccountbook.user.email}
           profileUrl={userAccountbook.user.profileUrl}
           nickname={userAccountbook.user.nickname}

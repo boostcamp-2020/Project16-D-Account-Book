@@ -30,15 +30,17 @@ const SearchContainer = (): JSX.Element => {
       <SearchBar />
       {socialStore.searchSuccess === true ? (
         <SearchedUserWrapper>
-          <UserItem
-            type="search"
-            provider={(socialStore.searchedUser as SearchedUser).provider}
-            email={(socialStore.searchedUser as SearchedUser).email}
-            profileUrl={(socialStore.searchedUser as SearchedUser).profileUrl}
-            nickname={(socialStore.searchedUser as SearchedUser).nickname}
-            userId={(socialStore.searchedUser as SearchedUser).id}
-            userAccountbookId={0}
-          />
+          {socialStore.searchedUsers.map((searchedUser) => (
+            <UserItem
+              type="search"
+              provider={searchedUser.provider}
+              email={searchedUser.email}
+              profileUrl={searchedUser.profileUrl}
+              userId={searchedUser.id}
+              userAccountbookId={0}
+              key={`search${searchedUser.id}`}
+            />
+          ))}
         </SearchedUserWrapper>
       ) : null}
       {socialStore.searchSuccess === false ? (

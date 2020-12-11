@@ -10,7 +10,7 @@ export default class DateStore {
   isLoading = true;
 
   @observable
-  searchedUser: SearchedUser | null = null;
+  searchedUsers: SearchedUser[] = [];
 
   @observable
   searchSuccess: boolean | null = null;
@@ -25,13 +25,13 @@ export default class DateStore {
 
   @action
   searchUser = async (email: string): Promise<void> => {
-    const user = await socialService.searchUser(email);
+    const users = await socialService.searchUser(email);
     runInAction(() => {
-      if (user) {
-        this.searchedUser = user;
+      if (users.length > 0) {
+        this.searchedUsers = users;
         this.searchSuccess = true;
       } else {
-        this.searchedUser = null;
+        this.searchedUsers = [];
         this.searchSuccess = false;
       }
     });
@@ -54,8 +54,8 @@ export default class DateStore {
       const userAccountbook = await socialService.addUser({ accountbookId, userId });
       runInAction(() => {
         this.userAccountbooks.push(userAccountbook);
-        this.searchedUser = null;
-        this.searchSuccess = null;
+        this.searchedUsers = this.searchedUsers.filter((user) => user.id !== userId);
+        this.searchSuccess = this.searchedUsers.length > 0 ? true : null;
       });
     } catch (error) {
       if (error.response.data.message) {

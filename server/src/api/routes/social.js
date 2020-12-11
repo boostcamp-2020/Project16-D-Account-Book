@@ -5,7 +5,7 @@ const { isAdmin, isAccountbookUser } = require('@middlewares/accountbookAuth');
 
 const router = new Router();
 
-router.get('/', verificationOfAuth, socialController.searchUser);
+router.get('/', verificationOfAuth, socialController.searchUsers);
 router.post('/', isAccountbookUser, socialController.addUser);
 router.get('/users', isAccountbookUser, socialController.findUsers);
 router.delete('/', isAdmin, socialController.deleteUser);

@@ -55,7 +55,7 @@ const ButtonWrapper = styled.div`
 interface Props {
   provider: string;
   email: string;
-  nickname: string;
+  nickname?: string;
   profileUrl: string;
   userId: number;
   type?: string;

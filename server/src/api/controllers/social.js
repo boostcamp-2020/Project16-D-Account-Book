@@ -1,8 +1,8 @@
 const socialService = require('@services/social');
 
-const searchUser = async (ctx) => {
+const searchUsers = async (ctx) => {
   const { user_email: email } = ctx.request.query;
-  const user = await socialService.findUserByEmail(email);
+  const user = await socialService.findUsersByEmail(email);
   ctx.body = user;
 };
 
@@ -34,7 +34,7 @@ const giveAdmin = async (ctx) => {
 };
 
 module.exports = {
-  searchUser,
+  searchUsers,
   addUser,
   findUsers,
   deleteUser,
