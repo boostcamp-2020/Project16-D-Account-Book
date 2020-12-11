@@ -10,6 +10,24 @@ module.exports = {
         updated_at: '2020-11-23',
         deleted_at: null,
       },
+      {
+        id: 2,
+        title: 'accountbook2',
+        gmt: 9,
+        start_day: true,
+        created_at: '2020-11-23',
+        updated_at: '2020-11-23',
+        deleted_at: null,
+      },
+      {
+        id: 3,
+        title: 'accountbook3',
+        gmt: 9,
+        start_day: true,
+        created_at: '2020-11-23',
+        updated_at: '2020-11-23',
+        deleted_at: null,
+      },
     ]);
   },
 
