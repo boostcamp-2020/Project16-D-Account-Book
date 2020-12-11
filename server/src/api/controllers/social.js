@@ -8,6 +8,7 @@ const searchUser = async (ctx) => {
 
 const addUser = async (ctx) => {
   const { userId, accountbookId } = ctx.request.body;
+  console.log('userId', userId, 'accountbookId', accountbookId);
   const addedUser = await socialService.addUser(accountbookId, userId);
   ctx.body = addedUser;
 };

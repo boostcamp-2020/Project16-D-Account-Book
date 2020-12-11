@@ -7,7 +7,8 @@ const findUserByEmail = async (email) => {
 };
 
 const addUser = async (accountbookId, userId) => {
-  const user = await db.userAccountbook.findOne({ where: { userId } });
+  console.log('here!!!!!!!!!!!!!!!!!!!!!');
+  const user = await db.userAccountbook.findOne({ where: { userId, accountbookId } });
 
   if (user) {
     throw new Error('이미 가계부에 존재하는 유저입니다.');
