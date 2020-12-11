@@ -39,15 +39,11 @@ const SettingsSocialPage: React.FC = () => {
       ) : (
         <SettingsBody>
           <h2>{socialPage.TITLE}</h2>
-          {userStore.isAdmin && (
-            <>
-              <br />
-              <Description>{socialPage.DESCRIPTION1}</Description>
-              <Description>{socialPage.DESCRIPTION2}</Description>
-            </>
-          )}
+          <br />
+          <Description>{socialPage.DESCRIPTION1}</Description>
+          <Description>{socialPage.DESCRIPTION2}</Description>
           <ContentWrapper>
-            {userStore.isAdmin && <SearchContainer />}
+            <SearchContainer />
             <UserItemContainer />
           </ContentWrapper>
         </SettingsBody>

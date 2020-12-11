@@ -94,7 +94,7 @@ const UserItem = ({ email, nickname, profileUrl, type, userId, userAccountbookId
     if (type === 'user' && userStore.isAdmin) {
       return <DeleteButton onClick={onClickDelete} />;
     }
-    if (type === 'search' && userStore.isAdmin) {
+    if (type === 'search') {
       return <AddButton onClick={onClickAdd} />;
     }
     return <></>;
