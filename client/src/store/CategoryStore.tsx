@@ -54,6 +54,7 @@ export default class CategoryStore {
   @action
   addNewIncomeCategory = (incomeCategory: Category): void => {
     this.incomeCategories = [...this.incomeCategories, incomeCategory];
+    this.incomeCategoryNames = this.incomeCategories.map((item) => item.name);
   };
 
   createExpenditureCategory = async (expenditureCategory: CategoryRequest): Promise<void> => {
@@ -64,6 +65,7 @@ export default class CategoryStore {
   @action
   addNewExpenditureCategory = (expenditureCategory: Category): void => {
     this.expenditureCategories = [...this.expenditureCategories, expenditureCategory];
+    this.expenditureCategoryNames = this.expenditureCategories.map((item) => item.name);
   };
 
   deleteIncomeCategory = async (incomeCategoryId: number): Promise<void> => {
@@ -74,6 +76,7 @@ export default class CategoryStore {
   @action
   deleteIncomeCategoryById = (incomeCategoryId: number): void => {
     this.incomeCategories = this.incomeCategories.filter((item) => item.id !== incomeCategoryId);
+    this.incomeCategoryNames = this.incomeCategories.map((item) => item.name);
   };
 
   deleteExpenditureCategory = async (expenditureCategoryId: number): Promise<void> => {
@@ -84,6 +87,7 @@ export default class CategoryStore {
   @action
   deleteExpenditureCategoryById = (expenditureCategoryId: number): void => {
     this.expenditureCategories = this.expenditureCategories.filter((item) => item.id !== expenditureCategoryId);
+    this.expenditureCategoryNames = this.expenditureCategories.map((item) => item.name);
   };
 
   updateIncomeCategory = async (category: CategoryRequest, incomeCategoryId: number): Promise<void> => {
@@ -96,6 +100,7 @@ export default class CategoryStore {
     this.incomeCategories = this.incomeCategories.map((item) =>
       item.id === incomeCategory.id ? incomeCategory : item,
     );
+    this.incomeCategoryNames = this.incomeCategories.map((item) => item.name);
   };
 
   updateExpenditureCategory = async (category: CategoryRequest, expenditureCategoryId: number): Promise<void> => {
@@ -108,6 +113,7 @@ export default class CategoryStore {
     this.expenditureCategories = this.expenditureCategories.map((item) =>
       item.id === expenditureCategory.id ? expenditureCategory : item,
     );
+    this.expenditureCategoryNames = this.expenditureCategories.map((item) => item.name);
   };
 
   @computed
