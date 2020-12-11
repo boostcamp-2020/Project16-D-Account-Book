@@ -6,34 +6,42 @@ const findAccountbookId = async (ctx) => {
     const income = await db.income.findOne({ where: { id: ctx.request.params.income_id } });
     return income.accountbookId;
   }
+
   if (ctx.request.params.expenditure_id) {
-    const income = await db.expenditure.findOne({ where: { id: ctx.request.params.expenditure_id } });
-    return income.accountbookId;
+    const expenditure = await db.expenditure.findOne({ where: { id: ctx.request.params.expenditure_id } });
+    return expenditure.accountbookId;
   }
+
   if (ctx.request.params.income_category_id) {
-    const category = await db.incomeCategory.findOne({ where: { id: ctx.request.params.income_category_id } });
-    return category.accountbookId;
+    const incomeCategory = await db.incomeCategory.findOne({ where: { id: ctx.request.params.income_category_id } });
+    return incomeCategory.accountbookId;
   }
+
   if (ctx.request.params.expenditure_category_id) {
-    const category = await db.expenditureCategory.findOne({
+    const expenditureCategory = await db.expenditureCategory.findOne({
       where: { id: ctx.request.params.expenditure_category_id },
     });
-    return category.accountbookId;
+    return expenditureCategory.accountbookId;
   }
+
   if (ctx.request.params.account_id) {
-    const category = await db.account.findOne({ where: { id: ctx.request.params.account_id } });
-    return category.accountbookId;
+    const account = await db.account.findOne({ where: { id: ctx.request.params.account_id } });
+    return account.accountbookId;
   }
+
   if (ctx.request.params.user_accountbook_id) {
     const userAccountbook = await db.userAccountbook.findOne({ where: { id: ctx.request.params.user_accountbook_id } });
     return userAccountbook.accountbookId;
   }
+
   if (ctx.request.query.accountbook_id) {
     return ctx.request.query.accountbook_id;
   }
+
   if (ctx.request.params.accountbook_id) {
     return ctx.request.params.accountbook_id;
   }
+
   if (ctx.request.body.accountbookId) {
     return ctx.request.body.accountbookId;
   }
