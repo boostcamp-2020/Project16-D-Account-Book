@@ -29,6 +29,14 @@ const createAccount = async ({ accountbookId, name, color }) => {
 };
 
 const updateAccount = async (accountId, { name, color }) => {
+  const currentAccount = await db.account.findOne({ where: { id: accountId } });
+  const duplicatedAccount = await db.account.findOne({
+    where: { accountbookId: currentAccount.toJSON().accountbookId, name },
+  });
+  if (duplicatedAccount) {
+    throw new Error('이미 존재하는 결제수단입니다.');
+  }
+
   await db.account.update(
     {
       name,
