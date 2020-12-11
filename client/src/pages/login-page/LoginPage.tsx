@@ -79,14 +79,14 @@ const LoginPage: React.FC = () => {
         <a
           href={`https://kauth.kakao.com/oauth/authorize?client_id=${
             process.env.REACT_APP_KAKAO_CLIENT_ID
-          }&response_type=code&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URL}&state=${v4()}`}
+          }&response_type=code&redirect_uri=${process.env.REACT_APP_KAKAO_CALLBACK_URL}&state=${v4()}`}
         >
           <LargeKakaoLoginButton />
         </a>
         <a
           href={`http://nid.naver.com/oauth2.0/authorize?client_id=${
             process.env.REACT_APP_NAVER_CLIENT_ID
-          }&response_type=code&redirect_uri=${process.env.REACT_APP_NAVER_REDIRECT_URL}&state=${v4()}`}
+          }&response_type=code&redirect_uri=${process.env.REACT_APP_NAVER_CALLBACK_URL}&state=${v4()}`}
         >
           <LargeNaverLoginButton />
         </a>
@@ -95,14 +95,14 @@ const LoginPage: React.FC = () => {
         <a
           href={`https://kauth.kakao.com/oauth/authorize?client_id=${
             process.env.REACT_APP_KAKAO_CLIENT_ID
-          }&response_type=code&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URL}&state=${v4()}`}
+          }&response_type=code&redirect_uri=${process.env.REACT_APP_KAKAO_CALLBACK_URL}&state=${v4()}`}
         >
           <SmallKakaoLoginButton />
         </a>
         <a
           href={`http://nid.naver.com/oauth2.0/authorize?client_id=${
             process.env.REACT_APP_NAVER_CLIENT_ID
-          }&response_type=code&redirect_uri=${process.env.REACT_APP_NAVER_REDIRECT_URL}&state=${v4()}`}
+          }&response_type=code&redirect_uri=${process.env.REACT_APP_NAVER_CALLBACK_URL}&state=${v4()}`}
         >
           <SmallNaverLoginButton />
         </a>
