@@ -1,6 +1,6 @@
-import { observable, action, makeObservable } from 'mobx';
+import { observable, action, makeObservable, computed } from 'mobx';
 import RootStore from './RootStore';
-import User from '../types/user';
+import User, { UserAuthorType } from '../types/user';
 import authService from '../services/auth';
 
 export default class UserStore {
@@ -21,7 +21,7 @@ export default class UserStore {
   //현재 선택한 가계부의 admin 인가?
   // true: 어드민, false: 일반유저, null: 가계부의 구성원이 아님
   @observable
-  isAdmin: boolean | null;
+  accountAuthorList: UserAuthorType[] | null;
 
   constructor(rootStore: RootStore) {
     makeObservable(this);
@@ -29,7 +29,7 @@ export default class UserStore {
     this.provider = '';
     this.nickname = '';
     this.profileUrl = '';
-    this.isAdmin = null;
+    this.accountAuthorList = null;
     this.rootStore = rootStore;
   }
 
@@ -39,6 +39,8 @@ export default class UserStore {
     this.provider = user.provider;
     this.nickname = user.nickname;
     this.profileUrl = user.profileUrl;
+    this.accountAuthorList = user.userAccountbooks;
+    console.log('updateUser', this.accountAuthorList);
   };
 
   @action
@@ -47,25 +49,51 @@ export default class UserStore {
     this.provider = '';
     this.nickname = '';
     this.profileUrl = '';
+    this.accountAuthorList = [];
   };
 
-  checkAuth = async (): Promise<void> => {
-    const user = await authService.getCurrentUser();
-    this.updateUser(user);
-  };
-
-  checkAuthority = async (accountbookId: number): Promise<void> => {
-    const { authority } = await authService.getAuthority(accountbookId);
-    if (authority === null) {
-      this.setIsAdmin(null);
-      window.location.href = '/';
-    } else {
-      this.setIsAdmin(authority);
+  getAuthority = async (): Promise<void> => {
+    try {
+      const user = await authService.getCurrentUser();
+      this.updateUser(user);
+    } catch (e) {
+      window.location.href = '/login';
     }
   };
 
   @action
-  setIsAdmin = (isAdmin: boolean | null): void => {
-    this.isAdmin = isAdmin;
+  changeAuthority = (accountbookId: number, authority: boolean): void => {
+    this.accountAuthorList?.forEach((accounts) => {
+      if (accounts !== null && accounts.accountbookId === accountbookId) {
+        accounts.authority = authority;
+      }
+    });
+  };
+
+  isUser = (accountbookId: number): boolean => {
+    const flag = this.accountAuthorList?.some((accounts) => accounts.accountbookId === accountbookId);
+
+    console.log('useIsUser', flag);
+    if (flag === undefined) {
+      return false;
+    }
+
+    return flag;
+  };
+
+  isAdmin = (accountbookId: number): boolean => {
+    const flag = this.accountAuthorList?.some(
+      (accounts) => accounts.accountbookId === accountbookId && accounts.authority,
+    );
+
+    if (flag === undefined) {
+      return false;
+    }
+
+    return flag;
+  };
+
+  isUserAdmin = (accountbookId: number): boolean => {
+    return this.isUser(accountbookId) || this.isAdmin(accountbookId);
   };
 }
