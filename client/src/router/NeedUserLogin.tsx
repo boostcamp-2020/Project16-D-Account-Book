@@ -20,12 +20,12 @@ const NeedUserLogin: React.FC = () => {
     <Switch>
       <Route exact path="/" component={AccountbookSelectionPage} />
       <Route exact path="/accountbooks/:id" component={LoginGuard(TransactionPage)} />
-      <Route exact path="/accountbooks/:id/settings/accountbook" component={SettingsAccountbookPage} />
-      <Route exact path="/accountbooks/:id/settings/categories" component={SettingsCategoriesPage} />
-      <Route exact path="/accountbooks/:id/settings/accounts" component={SettingsAccountsPage} />
-      <Route exact path="/accountbooks/:id/settings/csv" component={SettingsCsvPage} />
-      <Route exact path="/accountbooks/:id/settings/social" component={SettingsSocialPage} />
-      <Route exact path="/accountbooks/:id/statistics" component={StatisticsPage} />
+      <Route exact path="/accountbooks/:id/settings/accountbook" component={LoginGuard(SettingsAccountbookPage)} />
+      <Route exact path="/accountbooks/:id/settings/categories" component={LoginGuard(SettingsCategoriesPage)} />
+      <Route exact path="/accountbooks/:id/settings/accounts" component={LoginGuard(SettingsAccountsPage)} />
+      <Route exact path="/accountbooks/:id/settings/csv" component={LoginGuard(SettingsCsvPage)} />
+      <Route exact path="/accountbooks/:id/settings/social" component={LoginGuard(SettingsSocialPage)} />
+      <Route exact path="/accountbooks/:id/statistics" component={LoginGuard(StatisticsPage)} />
     </Switch>
   );
 };
