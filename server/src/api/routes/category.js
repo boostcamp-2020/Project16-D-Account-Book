@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 const categoryController = require('@controllers/category');
-const { isAdmin, isAccountbookUser } = require('@middlewares/accountbook-auth');
+const { isAdmin, isAccountbookUser } = require('@middlewares/accountbookAuth');
 
 const router = new Router();
 

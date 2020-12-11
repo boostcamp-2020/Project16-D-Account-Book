@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 const transactionController = require('@controllers/transaction');
-const { isAccountbookUser } = require('@middlewares/accountbook-auth');
+const { isAccountbookUser } = require('@middlewares/accountbookAuth');
 
 const router = new Router();
 

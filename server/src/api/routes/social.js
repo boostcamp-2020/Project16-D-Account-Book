@@ -1,7 +1,7 @@
 const Router = require('koa-router');
-const verificationOfAuth = require('@middlewares/jwt-authentication');
+const verificationOfAuth = require('@middlewares/jwtAuthentication');
 const socialController = require('@controllers/social');
-const { isAdmin, isAccountbookUser } = require('@middlewares/accountbook-auth');
+const { isAdmin, isAccountbookUser } = require('@middlewares/accountbookAuth');
 
 const router = new Router();
 
