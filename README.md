@@ -37,7 +37,7 @@
   
 
 ## 기술 스택 🛠
-> 선정 이유가 궁금하다면 [여기](https://www.notion.so/158a594255e243d396b841adeb329c35)로!
+> 선정 이유가 궁금하다면 [**여기**](https://www.notion.so/158a594255e243d396b841adeb329c35)로!
 
 <div align="center">
   <img src="https://i.imgur.com/kdvp91a.png"/>
