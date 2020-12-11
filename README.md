@@ -44,7 +44,7 @@
 </div>
 <br><br><br>
 
-## 사용 방법
+## 사용 방법 :computer:
 
 1. 레포지토리를 클론하고자 하는 디렉토리에서 아래 명령어를 수행
 
@@ -95,7 +95,7 @@
   COOKIE_EXPIRES_IN=[Cookie 만료시간]
   ```
 
-  > NAVER 혹은 Kakao Application이 존재하지 않을 경우 로그인을 할 수 없습니다. Application을 등록하려면 아래 사이트를 참고바랍니다.<br>- [NAVER Developers](https://developers.naver.com/apps/#/list)<br> - [Kakao Developers](https://developers.kakao.com/console/app)
+  > NAVER 혹은 Kakao Application이 존재하지 않을 경우 로그인을 할 수 없습니다.<br>Application을 등록하려면 아래 사이트를 참고바랍니다.<br><br>- [NAVER Developers](https://developers.naver.com/apps/#/list)<br> - [Kakao Developers](https://developers.kakao.com/console/app)
 
 <br>
 
