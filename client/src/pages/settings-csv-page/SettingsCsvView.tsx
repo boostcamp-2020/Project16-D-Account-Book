@@ -83,14 +83,6 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
         </Label>
         <Content>현재 선택한 가계부에 기록되어 있는 거래 내역을 CSV 파일로 생성하여 다운받으실 수 있습니다.</Content>
       </SettingsItemWrapper>
-      <SettingsItemWrapper>
-        <Label>
-          데이터 불러오기
-          <ImportButton />
-        </Label>
-        <Content>선택한 CSV 파일 내용을 현재 가계부 내용에 추가하실 수 있습니다.</Content>
-        <Content>단, CSV 파일은 다음의 형식을 지켜야 합니다.</Content>
-      </SettingsItemWrapper>
     </SettingsCsvViewWrapper>
   );
 };
