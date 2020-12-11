@@ -29,13 +29,13 @@ export default class AccountStore {
   };
 
   createAccount = async (account: AccountRequest): Promise<void> => {
-    await AccountService.createAccount(account);
-    this.addNewAccount(account.accountbookId);
+    const createdAccount = await AccountService.createAccount(account);
+    this.addNewAccount(createdAccount);
   };
 
   @action
-  addNewAccount = (accountbookId: number): void => {
-    this.updateAccounts(accountbookId);
+  addNewAccount = (account: Account): void => {
+    this.accounts = [...this.accounts, account];
   };
 
   deleteAccount = async (accountId: number): Promise<void> => {
@@ -49,8 +49,13 @@ export default class AccountStore {
   };
 
   updateAccount = async (account: AccountRequest, accountId: number): Promise<void> => {
-    await AccountService.updateAccount(account, accountId);
-    this.updateAccounts(account.accountbookId);
+    const updatedAccount = await AccountService.updateAccount(account, accountId);
+    this.updateAccountById(updatedAccount);
+  };
+
+  @action
+  updateAccountById = (account: Account): void => {
+    this.accounts = this.accounts.map((item) => (item.id === account.id ? account : item));
   };
 
   @computed
