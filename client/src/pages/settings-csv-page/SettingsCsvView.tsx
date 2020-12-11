@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
+import { CSVLink } from 'react-csv';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
 import ExportButton from '../../components/export-button/ExportButton';
 import ImportButton from '../../components/import-button/ImportButton';
 import useStore from '../../hook/use-store/useStore';
+import Expenditure from '../../types/expenditure';
+import Income from '../../types/income';
 
 interface Props {
   accountbookId: number;
@@ -40,6 +43,26 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
 
   useEffect(() => {
     transactionStore.findTransactions(accountbookId, new Date(0), new Date());
+    const csvTransactions = transactionStore.transactions.map((item) => {
+      if ((item as Expenditure).place) {
+        return {
+          id: item.id,
+          amount: -item.amount,
+          account: (item as Expenditure).place,
+          date: item.date,
+          memo: item.memo,
+        };
+      } else {
+        return {
+          id: item.id,
+          amount: item.amount,
+          account: (item as Income).content,
+          date: item.date,
+          memo: item.memo,
+        };
+      }
+    });
+    transactionStore.loadCsvTransactions(csvTransactions);
   }, []);
 
   return (
