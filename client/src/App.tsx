@@ -11,7 +11,7 @@ import SettingsCsvPage from './pages/settings-csv-page/SettingsCsvPage';
 import SettingsSocialPage from './pages/settings-social-page/SettingsSocialPage';
 import StatisticsPage from './pages/statistics-page/StatisticsPage';
 import AccountbookSelectionPage from './pages/accountbook-selection-page/AccountbookSelectionPage';
-import Auth from './hoc/Auth';
+import Auth from './hoc/Auth.jsx';
 
 function App(): JSX.Element {
   return (

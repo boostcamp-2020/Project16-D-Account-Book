@@ -7,7 +7,7 @@ interface IFormModal {
 
 const FormModalItemWrapper = styled.div`
   width: 30vw;
-  padding: 3vh 0;
+  padding: 6vh 0 0 0;
   margin: 0 auto;
   display: flex;
   justify-content: center;

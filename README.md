@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="https://i.imgur.com/q2Rkxp9.png" width=300/>
+<img src="https://i.imgur.com/7hUyD13.png" width=300/>
 
 [![GitHub Open Issues](https://img.shields.io/github/issues-raw/boostcamp-2020/Project16-D-Account-Book?color=green)](https://github.com/boostcamp-2020/Project16-D-Account-Book/issues)
 [![GitHub Closed Issues](https://img.shields.io/github/issues-closed-raw/boostcamp-2020/Project16-D-Account-Book?color=red)](https://github.com/boostcamp-2020/Project16-D-Account-Book/issues)

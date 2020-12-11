@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputText from './input-text/InputText';
 import styled from 'styled-components';
 import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions';

@@ -11,6 +11,7 @@ export const DODGER_BLUE = '#1E90FF';
 export const LIGHT_GREEN = '#11CD6E';
 export const BLACK = '#000000';
 export const NAVER_GREEN = '#2EA043';
+export const FAIL_RED = '#ff2111';
 
 const color = {
   BLUE,
@@ -26,6 +27,7 @@ const color = {
   LIGHT_GREEN,
   BLACK,
   NAVER_GREEN,
+  FAIL_RED,
 };
 
 export default color;

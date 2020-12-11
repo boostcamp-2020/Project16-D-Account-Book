@@ -1,5 +1,7 @@
 const jwtConfig = require('@config/jwt');
 const { generateToken, decodeTokenForValidation } = require('@utils/jwt-utils');
+const authService = require('@services/auth');
+
 const db = require('@models');
 
 const getCurrentUser = async (ctx) => {
@@ -23,6 +25,14 @@ const getCurrentUser = async (ctx) => {
   }
 };
 
+const getAuthority = async (ctx) => {
+  const token = ctx.cookies.get('jwt');
+  const { accountbook_id: accountbookId } = ctx.request.query;
+  const authority = await authService.getAuthority(token, accountbookId);
+  ctx.body = authority;
+};
+
 module.exports = {
   getCurrentUser,
+  getAuthority,
 };

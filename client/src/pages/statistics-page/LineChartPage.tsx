@@ -13,6 +13,7 @@ import NotFoundTransaction from '../../components/common/not-found-transaction/N
 import LineChart from '../../components/graph/line-chart/LineChart';
 import { text } from '../../constants/pieGraphPage';
 import color from '../../constants/color';
+import { numberWithCommas } from '../../utils/number';
 
 interface ILineChartPage {
   changePage: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -21,10 +22,11 @@ interface ILineChartPage {
 const LineChartTotalValueWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
 `;
 const LineChartTotalValue = styled.p`
-  width: 100%;
+  margin-right: 1em;
+  display: inline-block;
+  font-size: 1.3em;
 `;
 
 const LineChartPage: React.FC<ILineChartPage> = ({ changePage }: ILineChartPage) => {
@@ -53,6 +55,12 @@ const LineChartPage: React.FC<ILineChartPage> = ({ changePage }: ILineChartPage)
       ) : (
         <>
           <LineChart transactions={lineChartStore.monthlyTransactions} />
+          <LineChartTotalValueWrapper>
+            <LineChartTotalValue>
+              {lineChartStore.incomeMode ? `${text.TOTAL_INCOME} : ` : `${text.TOTAL_EXPENDITURE} : `}
+            </LineChartTotalValue>
+            <LineChartTotalValue>{numberWithCommas(lineChartStore.monthlyTotalValue) + '원'}</LineChartTotalValue>
+          </LineChartTotalValueWrapper>
         </>
       )}
       <IncomeExpenditureSwitch>

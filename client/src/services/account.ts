@@ -29,7 +29,7 @@ export default {
       throw new Error('삭제 실패');
     }
   },
-  updateAccount: async (account: AccountRequest, accountId: number): Promise<number> => {
+  updateAccount: async (account: AccountRequest, accountId: number): Promise<Account> => {
     try {
       const response = await instance.patch(accountAPIAddress.updateAccount + `/${accountId}`, account);
       return response.data;

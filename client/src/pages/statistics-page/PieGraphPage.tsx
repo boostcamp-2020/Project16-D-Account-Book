@@ -17,7 +17,7 @@ import { graphChangeChecker } from '../../types/inputRadio';
 
 export const PieGraphPageWrapper = styled.div`
   margin: 0 auto;
-  width: 70%;
+  width: 80%;
 `;
 export const PieHeaderFilter = styled.div`
   display: flex;

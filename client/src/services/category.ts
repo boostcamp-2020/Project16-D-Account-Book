@@ -8,6 +8,8 @@ const categoryAPIAddress = {
   createExpenditure: '/api/categories/expenditure',
   deleteIncomeCategory: '/api/categories/income',
   deleteExpenditureCategory: '/api/categories/expenditure',
+  updateIncomeCategory: '/api/categories/income',
+  updateExpenditureCategory: '/api/categories/expenditure',
 };
 
 export default {
@@ -49,6 +51,31 @@ export default {
       return expenditureCategoryId;
     } catch {
       throw new Error('삭제 실패');
+    }
+  },
+  updateIncomeCategory: async (incomeCategory: CategoryRequest, incomeCategoryId: number): Promise<Category> => {
+    try {
+      const response = await instance.patch(
+        categoryAPIAddress.updateIncomeCategory + `/${incomeCategoryId}`,
+        incomeCategory,
+      );
+      return response.data;
+    } catch {
+      throw new Error('수정 실패');
+    }
+  },
+  updateExpenditureCategory: async (
+    expenditureCategory: CategoryRequest,
+    expenditureCategoryId: number,
+  ): Promise<Category> => {
+    try {
+      const response = await instance.patch(
+        categoryAPIAddress.updateExpenditureCategory + `/${expenditureCategoryId}`,
+        expenditureCategory,
+      );
+      return response.data;
+    } catch {
+      throw new Error('수정 실패');
     }
   },
 };

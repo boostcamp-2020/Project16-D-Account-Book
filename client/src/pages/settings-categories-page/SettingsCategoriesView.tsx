@@ -45,6 +45,7 @@ interface Props {
 const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
   const { rootStore } = useStore();
   const { categoryStore } = rootStore;
+  const { show } = rootStore.modalStore.updateCategoryFormStore;
   const createCategoryFormStore = rootStore.modalStore.createCategoryFormStore;
   const updateCategoryFormStore = rootStore.modalStore.updateCategoryFormStore;
 
@@ -98,7 +99,7 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
   return (
     <SettingsCategoryViewWrapper>
       <FormModalCategory />
-      <FormModalUpdateCategory />
+      {show && <FormModalUpdateCategory />}
       <SettingsItemWrapper>
         <Label>지출</Label>
         <CategoryWrapper>

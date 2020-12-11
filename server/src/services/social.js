@@ -1,4 +1,5 @@
 const db = require('@models');
+const { decodeTokenForValidation } = require('@utils/jwt-utils');
 
 const findUserByEmail = async (email) => {
   const user = await db.user.findOne({ where: { email }, attributes: ['id', 'email', 'nickname', 'profileUrl'] });
@@ -46,9 +47,33 @@ const deleteUser = async (accountbookId, userId) => {
   await db.userAccountbook.destroy({ where: { accountbookId, userId } });
 };
 
+const giveAdmin = async (userAccountbookId, authority, token) => {
+  await db.userAccountbook.update({ authority }, { where: { id: userAccountbookId } });
+  const patchedUser = await db.userAccountbook.findOne({
+    where: { id: userAccountbookId },
+    attributes: ['id', 'authority', 'accountbookId'],
+    include: [
+      {
+        model: db.user,
+        as: 'user',
+        attributes: ['id', 'nickname', 'email', 'profileUrl'],
+      },
+    ],
+  });
+
+  const [decoded, user] = await decodeTokenForValidation(token);
+  await db.userAccountbook.update(
+    { authority: 0 },
+    { where: { accountbookId: patchedUser.toJSON().accountbookId, userId: user.id } },
+  );
+
+  return patchedUser;
+};
+
 module.exports = {
   findUserByEmail,
   addUser,
   findUsers,
   deleteUser,
+  giveAdmin,
 };

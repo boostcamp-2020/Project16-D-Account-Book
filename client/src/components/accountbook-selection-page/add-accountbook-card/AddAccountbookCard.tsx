@@ -10,6 +10,10 @@ const DivWrapper = styled.div`
   display: flex;
   justify-content: center;
   background-color: ${GRAY};
+  cursor: pointer;
+  &:hover {
+    box-shadow: 2px 3px 7px gray;
+  }
 `;
 
 const AddAccountbookCard: React.FC = () => {

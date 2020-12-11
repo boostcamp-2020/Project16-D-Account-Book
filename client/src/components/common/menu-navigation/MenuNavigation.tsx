@@ -4,6 +4,9 @@ import CreateButton from './create-button/CreateButton';
 import SettingButton from './setting-button/SettingButton';
 import styled from 'styled-components';
 import useStore from '../../../hook/use-store/useStore';
+import useGetParam from '../../../hook/use-get-param/useGetParam';
+import { useHistory } from 'react-router-dom';
+
 const NavigationWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -26,6 +29,8 @@ const ButtonWrapper = styled.div`
 const MenuNavigation: React.FC = () => {
   const { rootStore } = useStore();
   const createTransactionForm = rootStore.modalStore.createTransactionFormStore;
+  const accountbookId = useGetParam();
+  const history = useHistory();
 
   const openCreateTransactionForm = (): void => {
     createTransactionForm.toggleShow();
@@ -36,7 +41,7 @@ const MenuNavigation: React.FC = () => {
       <ButtonWrapper>
         <FilterButton width={24} height={24} />
       </ButtonWrapper>
-      <ButtonWrapper>
+      <ButtonWrapper onClick={() => history.push(`/accountbooks/${accountbookId}/settings/accountbook`)}>
         <SettingButton width={24} height={24} />
       </ButtonWrapper>
       <ButtonWrapper onClick={openCreateTransactionForm}>
