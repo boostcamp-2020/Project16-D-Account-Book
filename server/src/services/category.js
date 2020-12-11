@@ -56,6 +56,14 @@ const createExpenditureCategory = async ({ accountbookId, name, color }) => {
 };
 
 const updateIncomeCategory = async (incomeCategoryId, { name, color }) => {
+  const currentCategory = await db.incomeCategory.findOne({ where: { id: incomeCategoryId } });
+  const duplicateCategory = await db.incomeCategory.findOne({
+    where: { accountbookId: currentCategory.toJSON().accountbookId, name },
+  });
+  if (duplicateCategory) {
+    throw new Error('이미 존재하는 카테고리 입니다.');
+  }
+
   await db.incomeCategory.update(
     {
       name,
