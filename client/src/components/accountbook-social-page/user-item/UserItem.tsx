@@ -7,6 +7,8 @@ import { GRAY, LIGHT_GREEN } from '../../../constants/color';
 import AddButton from '../add-button/AddButton';
 import useGetParam from '../../../hook/use-get-param/useGetParam';
 import useStore from '../../../hook/use-store/useStore';
+import { observer } from 'mobx-react';
+import socialPage from '../../../constants/socialPage';
 
 const UserItemWrapper = styled.div<{ type: string | undefined }>`
   display: flex;
@@ -54,34 +56,45 @@ interface Props {
   email: string;
   nickname: string;
   profileUrl: string;
-  id: number;
+  userId: number;
   type?: string;
+  userAccountbookId: number;
 }
 
-const UserItem = ({ email, nickname, profileUrl, type, id }: Props): JSX.Element => {
+const UserItem = ({ email, nickname, profileUrl, type, userId, userAccountbookId }: Props): JSX.Element => {
   const accountbookId = useGetParam();
-  const { socialStore } = useStore().rootStore;
+  const { socialStore, userStore } = useStore().rootStore;
 
   const onClickAdd = () => {
-    socialStore.addUser({ accountbookId, userId: id });
+    if (confirm(socialPage.ADD_CONFIRM_MESSAGE)) {
+      socialStore.addUser({ accountbookId, userId });
+    }
   };
 
   const onClickDelete = () => {
-    socialStore.deleteUser({ accountbookId, userId: id });
+    if (confirm(socialPage.DELETE_CONFIRM_MESSAGE)) {
+      socialStore.deleteUser({ accountbookId, userId });
+    }
+  };
+
+  const onClickAdminSetting = () => {
+    if (confirm(socialPage.GIVE_ADMIN_CONFIRM_MESSAGE)) {
+      socialStore.giveAdmin(userAccountbookId, 1);
+    }
   };
 
   const firstButton = () => {
-    if (type === 'user') {
-      return <AdminSettingButton />;
+    if (type === 'user' && userStore.isAdmin === true) {
+      return <AdminSettingButton onClick={onClickAdminSetting} />;
     }
     return <></>;
   };
 
   const secondButton = () => {
-    if (type === 'user') {
+    if (type === 'user' && userStore.isAdmin === true) {
       return <DeleteButton onClick={onClickDelete} />;
     }
-    if (type === 'search') {
+    if (type === 'search' && userStore.isAdmin === true) {
       return <AddButton onClick={onClickAdd} />;
     }
     return <></>;
@@ -105,4 +118,4 @@ const UserItem = ({ email, nickname, profileUrl, type, id }: Props): JSX.Element
   );
 };
 
-export default UserItem;
+export default observer(UserItem);

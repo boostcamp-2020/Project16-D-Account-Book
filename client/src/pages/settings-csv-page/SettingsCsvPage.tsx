@@ -13,6 +13,7 @@ export const SettingsBody = styled.div`
   top: 0%;
   left: 25%;
   padding: 50px 50px;
+  min-width: 550px;
 `;
 
 const SettingsItemWrapper = styled.div`

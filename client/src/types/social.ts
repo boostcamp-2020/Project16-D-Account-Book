@@ -17,6 +17,6 @@ export interface SearchedUser {
 
 export interface UserAccountbook {
   id: number;
-  authority: number;
+  authority: boolean;
   user: SearchedUser;
 }

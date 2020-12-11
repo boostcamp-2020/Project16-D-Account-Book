@@ -15,7 +15,7 @@ import color from '../../constants/color';
 
 const PieGraphPageWrapper = styled.div`
   margin: 0 auto;
-  width: 70%;
+  width: 80%;
 `;
 const PieHeaderFilter = styled.div`
   display: flex;

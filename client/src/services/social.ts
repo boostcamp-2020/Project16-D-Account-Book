@@ -6,6 +6,7 @@ const socialAPIAddress = {
   findUsers: '/api/social/users',
   addUser: 'api/social',
   deleteUser: 'api/social',
+  updateAuthority: 'api/social',
 };
 
 export default {
@@ -39,6 +40,11 @@ export default {
         user_id: userId,
       },
     });
+    return response.data;
+  },
+
+  giveAdmin: async (userAccountbookId: number, authority: number): Promise<UserAccountbook> => {
+    const response = await instance.patch(`${socialAPIAddress.updateAuthority}/${userAccountbookId}`, { authority });
     return response.data;
   },
 };
