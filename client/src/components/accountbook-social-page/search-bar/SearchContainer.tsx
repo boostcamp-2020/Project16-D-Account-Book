@@ -32,6 +32,7 @@ const SearchContainer = (): JSX.Element => {
         <SearchedUserWrapper>
           <UserItem
             type="search"
+            provider={(socialStore.searchedUser as SearchedUser).provider}
             email={(socialStore.searchedUser as SearchedUser).email}
             profileUrl={(socialStore.searchedUser as SearchedUser).profileUrl}
             nickname={(socialStore.searchedUser as SearchedUser).nickname}

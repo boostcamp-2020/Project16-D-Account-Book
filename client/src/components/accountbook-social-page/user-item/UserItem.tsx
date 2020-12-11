@@ -27,10 +27,10 @@ const Cell = styled.div`
     margin-right: 1rem;
   }
   &:nth-child(2) {
-    width: 40%;
+    width: 45%;
   }
   &:nth-child(3) {
-    width: 17%;
+    width: 12%;
   }
   &:nth-child(4) {
     width: 25%;
@@ -53,6 +53,7 @@ const ButtonWrapper = styled.div`
 `;
 
 interface Props {
+  provider: string;
   email: string;
   nickname: string;
   profileUrl: string;
@@ -61,7 +62,7 @@ interface Props {
   userAccountbookId: number;
 }
 
-const UserItem = ({ email, nickname, profileUrl, type, userId, userAccountbookId }: Props): JSX.Element => {
+const UserItem = ({ email, nickname, profileUrl, type, userId, userAccountbookId, provider }: Props): JSX.Element => {
   const accountbookId = useGetParam();
   const { socialStore, userStore } = useStore().rootStore;
 
@@ -106,7 +107,7 @@ const UserItem = ({ email, nickname, profileUrl, type, userId, userAccountbookId
         <ProfileImage src={profileUrl} />
       </Cell>
       <Cell>{email}</Cell>
-      <Cell>{nickname}</Cell>
+      <Cell>{provider}</Cell>
       <Cell />
       <Cell>
         <ButtonWrapper>{firstButton()}</ButtonWrapper>

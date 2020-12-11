@@ -3,7 +3,10 @@ const accountbookService = require('@services/accountbook');
 const { decodeTokenForValidation } = require('@utils/jwt-utils');
 
 const findUserByEmail = async (email) => {
-  const user = await db.user.findOne({ where: { email }, attributes: ['id', 'email', 'nickname', 'profileUrl'] });
+  const user = await db.user.findOne({
+    where: { email },
+    attributes: ['id', 'email', 'nickname', 'profileUrl', 'provider'],
+  });
   return user;
 };
 
@@ -31,7 +34,7 @@ const addUser = async (accountbookId, userId, token) => {
       {
         model: db.user,
         as: 'user',
-        attributes: ['id', 'nickname', 'email', 'profileUrl'],
+        attributes: ['id', 'nickname', 'email', 'profileUrl', 'provider'],
       },
     ],
   });
@@ -46,7 +49,7 @@ const findUsers = async (accountbookId) => {
       {
         model: db.user,
         as: 'user',
-        attributes: ['id', 'nickname', 'email', 'profileUrl'],
+        attributes: ['id', 'nickname', 'email', 'profileUrl', 'provider'],
       },
     ],
   });
@@ -66,7 +69,7 @@ const giveAdmin = async (userAccountbookId, authority, token) => {
       {
         model: db.user,
         as: 'user',
-        attributes: ['id', 'nickname', 'email', 'profileUrl'],
+        attributes: ['id', 'nickname', 'email', 'profileUrl', 'provider'],
       },
     ],
   });

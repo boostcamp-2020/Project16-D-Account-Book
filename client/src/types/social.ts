@@ -13,6 +13,7 @@ export interface SearchedUser {
   nickname: string;
   profileUrl: string;
   email: string;
+  provider: string;
 }
 
 export interface UserAccountbook {
