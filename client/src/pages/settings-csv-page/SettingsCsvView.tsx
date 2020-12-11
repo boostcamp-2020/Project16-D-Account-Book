@@ -8,6 +8,7 @@ import useStore from '../../hook/use-store/useStore';
 import Expenditure from '../../types/expenditure';
 import Income from '../../types/income';
 import { toJS } from 'mobx';
+import CsvTransaction from '../../types/csvTransaction';
 
 interface Props {
   accountbookId: number;
@@ -50,7 +51,7 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
           id: item.id,
           amount: -item.amount,
           account: (item as Expenditure).place,
-          date: item.date,
+          date: new Date((item.date as string).split('T')[0]),
           memo: item.memo,
         };
       } else {
@@ -58,7 +59,7 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
           id: item.id,
           amount: item.amount,
           account: (item as Income).content,
-          date: item.date,
+          date: new Date((item.date as string).split('T')[0]),
           memo: item.memo,
         };
       }
@@ -69,6 +70,15 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
   const data = transactionStore.csvTransactions.map((item) => {
     return toJS(item);
   });
+
+  const sortBy = (data: CsvTransaction[], key: string): CsvTransaction[] => {
+    data.sort((a, b) => {
+      return a[key] - b[key];
+    });
+    return data;
+  };
+
+  sortBy(data, 'date');
 
   const headers = [
     { label: '번호', key: 'id' },
