@@ -7,8 +7,9 @@ const searchUser = async (ctx) => {
 };
 
 const addUser = async (ctx) => {
+  const token = ctx.cookies.get('jwt');
   const { userId, accountbookId } = ctx.request.body;
-  const addedUser = await socialService.addUser(accountbookId, userId);
+  const addedUser = await socialService.addUser(accountbookId, userId, token);
   ctx.body = addedUser;
 };
 
