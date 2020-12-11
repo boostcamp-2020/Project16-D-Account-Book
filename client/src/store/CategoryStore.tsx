@@ -47,23 +47,23 @@ export default class CategoryStore {
   };
 
   createIncomeCategory = async (incomeCategory: CategoryRequest): Promise<void> => {
-    await CategoryService.createIncomeCategory(incomeCategory);
-    this.addNewIncomeCategory(incomeCategory.accountbookId);
+    const createdIncomeCategory = await CategoryService.createIncomeCategory(incomeCategory);
+    this.addNewIncomeCategory(createdIncomeCategory);
   };
 
   @action
-  addNewIncomeCategory = (accountbookId: number): void => {
-    this.updateIncomeCategories(accountbookId);
+  addNewIncomeCategory = (incomeCategory: Category): void => {
+    this.incomeCategories = [...this.incomeCategories, incomeCategory];
   };
 
   createExpenditureCategory = async (expenditureCategory: CategoryRequest): Promise<void> => {
-    await CategoryService.createExpenditureCategory(expenditureCategory);
-    this.addNewExpenditureCategory(expenditureCategory.accountbookId);
+    const createdExpenditureCategory = await CategoryService.createExpenditureCategory(expenditureCategory);
+    this.addNewExpenditureCategory(createdExpenditureCategory);
   };
 
   @action
-  addNewExpenditureCategory = (accountbookId: number): void => {
-    this.updateExpenditureCategories(accountbookId);
+  addNewExpenditureCategory = (expenditureCategory: Category): void => {
+    this.expenditureCategories = [...this.expenditureCategories, expenditureCategory];
   };
 
   deleteIncomeCategory = async (incomeCategoryId: number): Promise<void> => {
@@ -87,13 +87,27 @@ export default class CategoryStore {
   };
 
   updateIncomeCategory = async (category: CategoryRequest, incomeCategoryId: number): Promise<void> => {
-    await CategoryService.updateIncomeCategory(category, incomeCategoryId);
-    this.updateIncomeCategories(category.accountbookId);
+    const updatedIncomeCategory = await CategoryService.updateIncomeCategory(category, incomeCategoryId);
+    this.updateIncomeCategoryById(updatedIncomeCategory);
+  };
+
+  @action
+  updateIncomeCategoryById = (incomeCategory: Category): void => {
+    this.incomeCategories = this.incomeCategories.map((item) =>
+      item.id === incomeCategory.id ? incomeCategory : item,
+    );
   };
 
   updateExpenditureCategory = async (category: CategoryRequest, expenditureCategoryId: number): Promise<void> => {
-    await CategoryService.updateExpenditureCategory(category, expenditureCategoryId);
-    this.updateExpenditureCategories(category.accountbookId);
+    const updatedExpenditureCategory = await CategoryService.updateExpenditureCategory(category, expenditureCategoryId);
+    this.updateExpenditureCategoryById(updatedExpenditureCategory);
+  };
+
+  @action
+  updateExpenditureCategoryById = (expenditureCategory: Category): void => {
+    this.expenditureCategories = this.expenditureCategories.map((item) =>
+      item.id === expenditureCategory.id ? expenditureCategory : item,
+    );
   };
 
   @computed
