@@ -4,3 +4,5 @@ export const csvHeaders = [
   { label: '날짜', key: 'date' },
   { label: '메모', key: 'memo' },
 ];
+
+export const fileName = 'accountbook_all_transactions.csv';

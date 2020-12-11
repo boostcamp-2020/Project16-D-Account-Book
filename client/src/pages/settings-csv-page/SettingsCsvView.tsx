@@ -9,7 +9,7 @@ import Expenditure from '../../types/expenditure';
 import Income from '../../types/income';
 import { toJS } from 'mobx';
 import { sortByDate } from '../../utils/sortByDate';
-import { csvHeaders } from '../../constants/csvHeaders';
+import { csvHeaders, fileName } from '../../constants/csv';
 
 interface Props {
   accountbookId: number;
@@ -77,7 +77,7 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
       <SettingsItemWrapper>
         <Label>
           데이터 내보내기
-          <CSVLink headers={csvHeaders} data={data} filename="accountbook_all_transactions.csv">
+          <CSVLink headers={csvHeaders} data={data} filename={fileName}>
             <ExportButton />
           </CSVLink>
         </Label>
