@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
 import ExportButton from '../../components/export-button/ExportButton';
 import ImportButton from '../../components/import-button/ImportButton';
+import useStore from '../../hook/use-store/useStore';
 
 interface Props {
   accountbookId: number;
@@ -34,6 +35,13 @@ const Content = styled.p`
 `;
 
 const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
+  const { rootStore } = useStore();
+  const { transactionStore } = rootStore;
+
+  useEffect(() => {
+    transactionStore.findTransactions(accountbookId, new Date(0), new Date());
+  }, []);
+
   return (
     <SettingsCsvViewWrapper>
       <SettingsItemWrapper>
