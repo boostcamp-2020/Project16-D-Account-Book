@@ -8,6 +8,9 @@ export default class CreateCategoryFormStore {
   show = false;
 
   @observable
+  check = true;
+
+  @observable
   incomeFlag = true;
 
   constructor(rootStore: RootStore) {
@@ -24,6 +27,16 @@ export default class CreateCategoryFormStore {
   @action
   setShow = (show: boolean): void => {
     this.show = show;
+  };
+
+  @action
+  setCheckTrue = (): void => {
+    this.check = true;
+  };
+
+  @action
+  setCheckFalse = (): void => {
+    this.check = false;
   };
 
   @action

@@ -9,6 +9,15 @@ export default class UpdateAccountFormStore {
   show = false;
 
   @observable
+  check = true;
+
+  @observable
+  noChange = true;
+
+  @observable
+  orginalAccountName = '';
+
+  @observable
   account: Account | undefined = undefined;
 
   constructor(rootStore: RootStore) {
@@ -32,8 +41,33 @@ export default class UpdateAccountFormStore {
   };
 
   @action
+  setCheckTrue = (): void => {
+    this.check = true;
+  };
+
+  @action
+  setCheckFalse = (): void => {
+    this.check = false;
+  };
+
+  @action
+  setNoChangeTrue = (): void => {
+    this.noChange = true;
+  };
+
+  @action
+  setNoChangeFalse = (): void => {
+    this.noChange = false;
+  };
+
+  @action
   loadAccount = (account: Account): void => {
     this.account = account;
+  };
+
+  @action
+  loadOriginalAccount = (accountName: string): void => {
+    this.orginalAccountName = accountName;
   };
 
   @computed

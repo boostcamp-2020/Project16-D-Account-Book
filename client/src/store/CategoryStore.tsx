@@ -13,6 +13,12 @@ export default class CategoryStore {
   @observable
   expenditureCategories: Category[] = [];
 
+  @observable
+  incomeCategoryNames: string[] = [];
+
+  @observable
+  expenditureCategoryNames: string[] = [];
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeObservable(this);
@@ -31,11 +37,13 @@ export default class CategoryStore {
   updateIncomeCategories = async (id: number): Promise<void> => {
     const incomeCategories = await CategoryService.getIncomeCategoryById(id);
     this.changeIncomeCategories(incomeCategories);
+    this.incomeCategoryNames = incomeCategories.map((item) => item.name);
   };
 
   updateExpenditureCategories = async (id: number): Promise<void> => {
     const expenditureCategories = await CategoryService.getExpenditureCategoryById(id);
     this.changeExpenditureCategories(expenditureCategories);
+    this.expenditureCategoryNames = expenditureCategories.map((item) => item.name);
   };
 
   createIncomeCategory = async (incomeCategory: CategoryRequest): Promise<void> => {
@@ -76,6 +84,30 @@ export default class CategoryStore {
   @action
   deleteExpenditureCategoryById = (expenditureCategoryId: number): void => {
     this.expenditureCategories = this.expenditureCategories.filter((item) => item.id !== expenditureCategoryId);
+  };
+
+  updateIncomeCategory = async (category: CategoryRequest, incomeCategoryId: number): Promise<void> => {
+    const updatedIncomeCategory = await CategoryService.updateIncomeCategory(category, incomeCategoryId);
+    this.updateIncomeCategoryById(updatedIncomeCategory);
+  };
+
+  @action
+  updateIncomeCategoryById = (incomeCategory: Category): void => {
+    this.incomeCategories = this.incomeCategories.map((item) =>
+      item.id === incomeCategory.id ? incomeCategory : item,
+    );
+  };
+
+  updateExpenditureCategory = async (category: CategoryRequest, expenditureCategoryId: number): Promise<void> => {
+    const updatedExpenditureCategory = await CategoryService.updateExpenditureCategory(category, expenditureCategoryId);
+    this.updateExpenditureCategoryById(updatedExpenditureCategory);
+  };
+
+  @action
+  updateExpenditureCategoryById = (expenditureCategory: Category): void => {
+    this.expenditureCategories = this.expenditureCategories.map((item) =>
+      item.id === expenditureCategory.id ? expenditureCategory : item,
+    );
   };
 
   @computed
