@@ -48,7 +48,6 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
     const csvTransactions = transactionStore.transactions.map((item) => {
       if ((item as Expenditure).place) {
         return {
-          id: item.id,
           amount: -item.amount,
           account: (item as Expenditure).place,
           date: new Date((item.date as string).split('T')[0]),
@@ -56,7 +55,6 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
         };
       } else {
         return {
-          id: item.id,
           amount: item.amount,
           account: (item as Income).content,
           date: new Date((item.date as string).split('T')[0]),
@@ -81,7 +79,6 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
   sortBy(data, 'date');
 
   const headers = [
-    { label: '번호', key: 'id' },
     { label: '금액', key: 'amount' },
     { label: '결제수단', key: 'account' },
     { label: '날짜', key: 'date' },
