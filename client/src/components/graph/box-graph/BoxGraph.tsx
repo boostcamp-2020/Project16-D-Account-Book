@@ -10,13 +10,13 @@ const BoxGraphWrapper = styled.div`
 `;
 
 const BoxGraphTitle = styled.p`
-  width: 10%;
+  width: 12%;
   margin-right: 1em;
 `;
 
 const BoxGraphRatio = styled.p`
   width: 10%;
-  margin-right: 3em;
+  margin-right: 1em;
 `;
 
 const BoxGraphMain = styled.svg`
@@ -69,10 +69,11 @@ const Box = styled.rect<Box>`
 `;
 
 const BoxGraphValue = styled.p`
-  width: 10%;
+  width: 20%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  text-align: right;
 `;
 
 const BoxGraph: React.FC<BoxChartValue> = ({ title, color, ratio, value }: BoxChartValue) => {

@@ -4,8 +4,20 @@ module.exports = {
       {
         id: 1,
         title: 'accountbook1',
-        gmt: 9,
-        start_day: true,
+        created_at: '2020-11-23',
+        updated_at: '2020-11-23',
+        deleted_at: null,
+      },
+      {
+        id: 2,
+        title: 'accountbook2',
+        created_at: '2020-11-23',
+        updated_at: '2020-11-23',
+        deleted_at: null,
+      },
+      {
+        id: 3,
+        title: 'accountbook3',
         created_at: '2020-11-23',
         updated_at: '2020-11-23',
         deleted_at: null,

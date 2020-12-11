@@ -35,7 +35,8 @@ const SearchContainer = (): JSX.Element => {
             email={(socialStore.searchedUser as SearchedUser).email}
             profileUrl={(socialStore.searchedUser as SearchedUser).profileUrl}
             nickname={(socialStore.searchedUser as SearchedUser).nickname}
-            id={(socialStore.searchedUser as SearchedUser).id}
+            userId={(socialStore.searchedUser as SearchedUser).id}
+            userAccountbookId={0}
           />
         </SearchedUserWrapper>
       ) : null}

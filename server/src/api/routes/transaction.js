@@ -1,15 +1,15 @@
 const Router = require('koa-router');
 const transactionController = require('@controllers/transaction');
-const verificationOfAuth = require('@middlewares/jwt-authentication');
+const { isAccountbookUser } = require('@middlewares/accountbookAuth');
 
 const router = new Router();
 
-router.get('/', verificationOfAuth, transactionController.findTransactions);
-router.post('/income', verificationOfAuth, transactionController.createIncomeTransaction);
-router.post('/expenditure', verificationOfAuth, transactionController.createExpenditureTransaction);
-router.patch('/income/:id', verificationOfAuth, transactionController.updateIncomeTransaction);
-router.patch('/expenditure/:id', verificationOfAuth, transactionController.updateExpenditureTransaction);
-router.delete('/income/:id', verificationOfAuth, transactionController.deleteIncomeTransaction);
-router.delete('/expenditure/:id', verificationOfAuth, transactionController.deleteExpenditureTransaction);
+router.get('/', isAccountbookUser, transactionController.findTransactions);
+router.post('/income', isAccountbookUser, transactionController.createIncomeTransaction);
+router.post('/expenditure', isAccountbookUser, transactionController.createExpenditureTransaction);
+router.patch('/income/:income_id', isAccountbookUser, transactionController.updateIncomeTransaction);
+router.patch('/expenditure/:expenditure_id', isAccountbookUser, transactionController.updateExpenditureTransaction);
+router.delete('/income/:income_id', isAccountbookUser, transactionController.deleteIncomeTransaction);
+router.delete('/expenditure/:expenditure_id', isAccountbookUser, transactionController.deleteExpenditureTransaction);
 
 module.exports = router;

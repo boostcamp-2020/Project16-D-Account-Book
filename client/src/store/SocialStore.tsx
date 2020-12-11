@@ -7,6 +7,9 @@ export default class DateStore {
   rootStore: RootStore;
 
   @observable
+  isLoading = true;
+
+  @observable
   searchedUser: SearchedUser | null = null;
 
   @observable
@@ -39,8 +42,9 @@ export default class DateStore {
     this.userAccountbooks = await socialService.findUsers(accountbookId);
     runInAction(() => {
       this.userAccountbooks.sort((userAccountbook1, userAccountbook2) => {
-        return userAccountbook2.authority - userAccountbook1.authority;
+        return Number(userAccountbook2.authority) - Number(userAccountbook1.authority);
       });
+      this.isLoading = false;
     });
   };
 
@@ -65,6 +69,25 @@ export default class DateStore {
     await socialService.deleteUser({ accountbookId, userId });
     runInAction(() => {
       this.userAccountbooks = this.userAccountbooks.filter((userAccountbook) => userAccountbook.user.id != userId);
+    });
+  };
+
+  @action
+  giveAdmin = async (userAccountbookId: number, authority: number, accountbookId: number): Promise<void> => {
+    await socialService.giveAdmin(userAccountbookId, authority);
+    runInAction(() => {
+      this.userAccountbooks = this.userAccountbooks.map((userAccountbook) => {
+        userAccountbook.authority = userAccountbook.authority ? false : true;
+        return userAccountbook;
+      });
+      this.userAccountbooks = this.userAccountbooks.map((userAccountbook) => {
+        userAccountbook.authority = userAccountbook.id === userAccountbookId ? true : false;
+        return userAccountbook;
+      });
+      this.userAccountbooks.sort((userAccountbook1, userAccountbook2) => {
+        return Number(userAccountbook2.authority) - Number(userAccountbook1.authority);
+      });
+      this.rootStore.userStore.changeAuthority(accountbookId, false);
     });
   };
 }
