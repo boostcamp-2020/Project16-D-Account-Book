@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { GRAY } from '../../../constants/color';
 import SettingsSidebarHeader from './settings-sidebar-header/SettingsSidebarHeader';
 import SettingsSidebarBody from './settings-sidebar-body/SettingsSidebarBody';
+import { useHistory } from 'react-router-dom';
 
 const SettingsSidebarWrapper = styled.div`
   width: 18%;
@@ -18,9 +19,11 @@ interface SettingsSidebarProps {
 }
 
 const SettingsSidebar = ({ currentpage }: SettingsSidebarProps): JSX.Element => {
+  const history = useHistory();
+
   return (
     <SettingsSidebarWrapper>
-      <SettingsSidebarHeader />
+      <SettingsSidebarHeader goToPreviousPage={() => history.goBack()} />
       <SettingsSidebarBody currentpage={currentpage} />
     </SettingsSidebarWrapper>
   );
