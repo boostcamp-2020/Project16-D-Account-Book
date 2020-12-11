@@ -23,6 +23,7 @@ const ContentWrapper = styled.div`
 const SettingsSocialPage: React.FC = () => {
   const accountbookId = useGetParam();
   const { socialStore, userStore } = useStore().rootStore;
+  const isAdmin = userStore.isAdmin(accountbookId);
 
   useEffect(() => {
     socialStore.findUsers(accountbookId);

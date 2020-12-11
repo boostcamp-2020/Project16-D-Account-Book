@@ -73,7 +73,7 @@ export default class DateStore {
   };
 
   @action
-  giveAdmin = async (userAccountbookId: number, authority: number): Promise<void> => {
+  giveAdmin = async (userAccountbookId: number, authority: number, accountbookId: number): Promise<void> => {
     await socialService.giveAdmin(userAccountbookId, authority);
     runInAction(() => {
       this.userAccountbooks = this.userAccountbooks.map((userAccountbook) => {
@@ -87,7 +87,7 @@ export default class DateStore {
       this.userAccountbooks.sort((userAccountbook1, userAccountbook2) => {
         return Number(userAccountbook2.authority) - Number(userAccountbook1.authority);
       });
-      this.rootStore.userStore.isAdmin = false;
+      this.rootStore.userStore.changeAuthority(accountbookId, false);
     });
   };
 }

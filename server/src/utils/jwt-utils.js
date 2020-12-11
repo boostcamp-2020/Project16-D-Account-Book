@@ -28,6 +28,10 @@ const decodeTokenForValidation = async (token) => {
   let user = await db.user.findOne({
     where: { id: decodedToken.userId },
     attributes: ['id', 'provider', 'nickname', 'profileUrl', 'token'],
+    include: {
+      model: db.userAccountbook,
+      attributes: ['authority', 'accountbookId'],
+    },
   });
   if (!user) {
     throw new Error('decoded payload에 기재된 유저가 없음');
