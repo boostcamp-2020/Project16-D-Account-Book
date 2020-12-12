@@ -4,6 +4,10 @@ import { Redirect } from 'react-router-dom';
 import useGetParam from '../hook/use-get-param/useGetParam';
 import useStore from '../hook/use-store/useStore';
 import socket, { event } from '../socket';
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import useGetParam from '../hook/use-get-param/useGetParam';
+import useStore from '../hook/use-store/useStore';
 
 const LoginGuard = (HOC: React.ComponentType<any>): React.FC => {
   const LoginGuardChecker = (props: any) => {
@@ -16,6 +20,7 @@ const LoginGuard = (HOC: React.ComponentType<any>): React.FC => {
         socket.emit(event.LEAVE, accountbookId);
       };
     }, [accountbookId]);
+
 
     const flag = userStore.isUserAdmin(accountbookId);
 
