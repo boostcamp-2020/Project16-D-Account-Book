@@ -1,5 +1,6 @@
 import Account, { AccountRequest } from '../types/account';
 import instance from '../api/axios';
+import querystring from 'querystring';
 
 const accountAPIAddress = {
   getAccounts: '/api/accounts',
@@ -7,14 +8,20 @@ const accountAPIAddress = {
   deleteAccount: '/api/accounts',
   updateAccount: '/api/accounts',
 };
-export default {
-  getAccountsById: async (id: number): Promise<Account[]> => {
-    const response = await instance.get(accountAPIAddress.getAccounts, {
-      params: {
-        accountbook_id: id,
-      },
-    });
 
+const AccountCache = new Map();
+
+export default {
+  getAccountsById: async function* (id: number): AsyncGenerator<Account[]> {
+    const requestURL =
+      accountAPIAddress.getAccounts +
+      '?' +
+      querystring.stringify({
+        accountbook_id: id,
+      });
+    yield AccountCache.get(requestURL);
+    const response = await instance.get(requestURL);
+    AccountCache.set(requestURL, response.data);
     return response.data;
   },
   createAccount: async (account: AccountRequest): Promise<Account> => {
