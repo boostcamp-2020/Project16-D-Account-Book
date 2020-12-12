@@ -2,6 +2,7 @@ import instance from '../api/axios';
 import { getFormattedDate } from '../utils/date';
 import Income, { IncomeRequest } from '../types/income';
 import Expenditure, { ExpenditureRequest } from '../types/expenditure';
+import querystring from 'querystring';
 import { getIncomeCategoriesHandler } from '../__dummy-data__/api/category/getIncome';
 
 const transactionAPIAddress = {
@@ -14,15 +15,25 @@ const transactionAPIAddress = {
   deleteExpenditure: '/api/transactions/expenditure',
 };
 
+const TransactionCache = new Map();
+
 export default {
-  getTransactions: async (
+  getTransactions: async function* (
     accountbookId: number,
     startDate: Date,
     endDate: Date,
-  ): Promise<Array<Income | Expenditure>> => {
+  ): AsyncGenerator<Array<Income | Expenditure>> {
     const formattedStartDate = getFormattedDate({ date: startDate, format: '.' });
     const foramttedEndDate = getFormattedDate({ date: endDate, format: '.' });
+    const query = querystring.stringify({
+      accountbook_id: accountbookId,
+      start_date: formattedStartDate,
+      end_date: foramttedEndDate,
+    });
+    const requestURL = transactionAPIAddress.getTransactions + `?${query}`;
 
+    // 캐시 리턴
+    yield TransactionCache.get(requestURL);
     const response = await instance.get(transactionAPIAddress.getTransactions, {
       params: {
         accountbook_id: accountbookId,
@@ -30,7 +41,9 @@ export default {
         end_date: foramttedEndDate,
       },
     });
-    return response.data;
+    //캐시 업데이트
+    TransactionCache.set(requestURL, response.data);
+    yield response.data;
   },
 
   createIncome: async (income: IncomeRequest): Promise<Income> => {
