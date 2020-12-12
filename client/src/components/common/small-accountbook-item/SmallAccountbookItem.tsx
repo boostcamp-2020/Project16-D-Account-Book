@@ -29,12 +29,10 @@ const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>
   transition: all ease 0.3s 0s;
 
   &:hover {
-    border: white 2px solid;
-    width: 50px;
-    height: 50px;
-    font-size: 1.9em;
+    border: ${({ textColor }) => textColor} 3px solid;
     cursor: pointer;
   }
+
   .text {
     text-align: center;
   }
