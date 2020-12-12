@@ -1,4 +1,4 @@
-import { observable, makeObservable, runInAction, action, computed } from 'mobx';
+import { observable, makeObservable, runInAction, action, computed, flow } from 'mobx';
 import Income, { IncomeRequest, isIncome } from '../types/income';
 import Expenditure, { ExpenditureRequest } from '../types/expenditure';
 import transactionService from '../services/transaction';
@@ -23,14 +23,18 @@ export default class TransactionStore {
     this.rootStore = rootStore;
   }
 
-  @action
-  findTransactions = async (accountbookId: number, startDate: Date, endDate: Date): Promise<void> => {
-    const transactions = await transactionService.getTransactions(accountbookId, startDate, endDate);
-    runInAction(() => {
-      this.transactions = transactions;
+  findTransactions = flow(function* (this: TransactionStore, accountbookId: number, startDate: Date, endDate: Date) {
+    const generation = transactionService.getTransactions(accountbookId, startDate, endDate);
+
+    const cached = yield generation.next();
+    if (cached.value !== undefined) {
       this.isLoading = false;
-    });
-  };
+      this.transactions = cached.value;
+    }
+    const refreshedData = yield generation.next();
+    this.isLoading = false;
+    this.transactions = refreshedData.value;
+  });
 
   @action
   filterTransactions = async (
