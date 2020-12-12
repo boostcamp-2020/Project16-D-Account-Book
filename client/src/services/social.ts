@@ -10,7 +10,7 @@ const socialAPIAddress = {
 };
 
 export default {
-  searchUser: async (email: string): Promise<SearchedUser> => {
+  searchUser: async (email: string): Promise<SearchedUser[]> => {
     const response = await instance.get(socialAPIAddress.searchUser, {
       params: {
         user_email: email,

@@ -10,9 +10,8 @@ import SettingsCsvPage from '../pages/settings-csv-page/SettingsCsvPage';
 import SettingsSocialPage from '../pages/settings-social-page/SettingsSocialPage';
 import StatisticsPage from '../pages/statistics-page/StatisticsPage';
 import TransactionPage from '../pages/transaction-page/TransactionPage';
-import LoginGuard from './LoginGuard';
-import UserAuthorityGuard from './UserAuthorityGuard';
-
+import LoginGuard from '../hoc/LoginGuard';
+import UserAuthorityGuard from '../hoc/UserAuthorityGuard';
 const NeedUserLogin: React.FC = () => {
   useGetAuthority();
 

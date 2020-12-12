@@ -14,6 +14,7 @@ const Wrapper = styled.div`
 export const Default = (): JSX.Element => {
   return (
     <UserItem
+      provider="kakao"
       userAccountbookId={3}
       userId={1}
       email={'mu1616@naver.com'}
@@ -30,6 +31,7 @@ export const ApplyWrapper = (): JSX.Element => {
     <Wrapper>
       <h3>가계부 구성원 목록</h3>
       <UserItem
+        provider="kakao"
         userAccountbookId={3}
         userId={1}
         type="admin"
@@ -40,6 +42,7 @@ export const ApplyWrapper = (): JSX.Element => {
         }
       />
       <UserItem
+        provider="kakao"
         userAccountbookId={3}
         userId={1}
         type="user"
@@ -50,6 +53,7 @@ export const ApplyWrapper = (): JSX.Element => {
         }
       />
       <UserItem
+        provider="kakao"
         userAccountbookId={3}
         userId={1}
         type="user"
@@ -60,6 +64,7 @@ export const ApplyWrapper = (): JSX.Element => {
         }
       />
       <UserItem
+        provider="kakao"
         userAccountbookId={3}
         userId={1}
         type="search"

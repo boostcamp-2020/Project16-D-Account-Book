@@ -38,6 +38,13 @@ const findExpenditureCategoryById = async (id) => {
 };
 
 const createIncomeCategory = async ({ accountbookId, name, color }) => {
+  const duplicateCategory = await db.incomeCategory.findOne({
+    where: { accountbookId, name },
+  });
+  if (duplicateCategory) {
+    throw new Error('이미 존재하는 카테고리 입니다.');
+  }
+
   const accountbook = await getAccountbookById(accountbookId);
   const createdIncomeCategory = await accountbook.createIncomeCategory({
     name,
@@ -47,6 +54,13 @@ const createIncomeCategory = async ({ accountbookId, name, color }) => {
 };
 
 const createExpenditureCategory = async ({ accountbookId, name, color }) => {
+  const duplicateCategory = await db.expenditureCategory.findOne({
+    where: { accountbookId, name },
+  });
+  if (duplicateCategory) {
+    throw new Error('이미 존재하는 카테고리 입니다.');
+  }
+
   const accountbook = await getAccountbookById(accountbookId);
   const createdExpenditureCategory = await accountbook.createExpenditureCategory({
     name,
@@ -56,6 +70,14 @@ const createExpenditureCategory = async ({ accountbookId, name, color }) => {
 };
 
 const updateIncomeCategory = async (incomeCategoryId, { name, color }) => {
+  const currentCategory = await db.incomeCategory.findOne({ where: { id: incomeCategoryId } });
+  const duplicateCategory = await db.incomeCategory.findOne({
+    where: { accountbookId: currentCategory.toJSON().accountbookId, name },
+  });
+  if (duplicateCategory) {
+    throw new Error('이미 존재하는 카테고리 입니다.');
+  }
+
   await db.incomeCategory.update(
     {
       name,
@@ -70,6 +92,14 @@ const updateIncomeCategory = async (incomeCategoryId, { name, color }) => {
 };
 
 const updateExpenditureCategory = async (expenditureCategoryId, { name, color }) => {
+  const currentCategory = await db.expenditureCategory.findOne({ where: { id: expenditureCategoryId } });
+  const duplicateCategory = await db.expenditureCategory.findOne({
+    where: { accountbookId: currentCategory.toJSON().accountbookId, name },
+  });
+  if (duplicateCategory) {
+    throw new Error('이미 존재하는 카테고리 입니다.');
+  }
+
   await db.expenditureCategory.update(
     {
       name,

@@ -41,6 +41,7 @@ export default class AccountStore {
   @action
   addNewAccount = (account: Account): void => {
     this.accounts = [...this.accounts, account];
+    this.accountNames = this.accounts.map((item) => item.name);
   };
 
   deleteAccount = async (accountId: number): Promise<void> => {
@@ -51,6 +52,7 @@ export default class AccountStore {
   @action
   deleteAccountById = (accountId: number): void => {
     this.accounts = this.accounts.filter((item) => item.id !== accountId);
+    this.accountNames = this.accounts.map((item) => item.name);
   };
 
   updateAccount = async (account: AccountRequest, accountId: number): Promise<void> => {
@@ -61,6 +63,7 @@ export default class AccountStore {
   @action
   updateAccountById = (account: Account): void => {
     this.accounts = this.accounts.map((item) => (item.id === account.id ? account : item));
+    this.accountNames = this.accounts.map((item) => item.name);
   };
 
   @computed
