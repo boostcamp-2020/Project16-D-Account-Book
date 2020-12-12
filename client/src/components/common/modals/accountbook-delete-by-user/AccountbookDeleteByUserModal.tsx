@@ -5,32 +5,14 @@ import RedButton from '../../buttons/RedButton';
 import ModalBackground from '../modal-background/ModalBackground';
 import useStore from '../../../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
+import {
+  ModalContentWrapper,
+  ModalContentText,
+  ModalButtonList,
+  ButtonWrapper,
+} from '../accountbook-delete-by-admin/AccountbookDeleteByAdminModal';
 
-export const ModalContentWrapper = styled.div`
-  background-color: white;
-  width: 30%;
-  padding: 10px 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-export const ModalContentText = styled.p`
-  text-align: center;
-`;
-
-export const ModalButtonList = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-export const ButtonWrapper = styled.div`
-  flex: 1;
-  margin: 0px 10px;
-`;
-
-const AccountbookDeleteByAdminModal: React.FC = () => {
+const AccountbookDeleteByUserModal: React.FC = () => {
   const { deleteAccountbookByAdminStore } = useStore().rootStore.modalStore;
 
   const closeModal = () => {
@@ -40,10 +22,8 @@ const AccountbookDeleteByAdminModal: React.FC = () => {
   return (
     <ModalBackground show={true} closeModal={closeModal}>
       <ModalContentWrapper>
-        <ModalContentText>당신은 관리자입니다.</ModalContentText>
-        <ModalContentText>관리자가 가계부를 삭제하길 희망하는 경우</ModalContentText>
-        <ModalContentText>다른 구성원을 관리자로 지정해줘야합니다.</ModalContentText>
-        <ModalContentText>정말 삭제하시겠습니까?</ModalContentText>
+        <ModalContentText>선택한 가계부를 삭제하시겠습니까?</ModalContentText>
+        <br />
         <ModalButtonList>
           <ButtonWrapper>
             <GrayButton onClick={closeModal}>취소</GrayButton>
@@ -57,4 +37,4 @@ const AccountbookDeleteByAdminModal: React.FC = () => {
   );
 };
 
-export default observer(AccountbookDeleteByAdminModal);
+export default observer(AccountbookDeleteByUserModal);
