@@ -19,6 +19,11 @@ const AccountbookDeleteByUserModal: React.FC = () => {
     deleteAccountbookByUserStore.setShow(false);
   };
 
+  const onClickDelete = () => {
+    deleteAccountbookByUserStore.deleteAccountbook();
+    closeModal();
+  };
+
   return (
     <ModalBackground show={true} closeModal={closeModal}>
       <ModalContentWrapper>
@@ -29,7 +34,7 @@ const AccountbookDeleteByUserModal: React.FC = () => {
             <GrayButton onClick={closeModal}>취소</GrayButton>
           </ButtonWrapper>
           <ButtonWrapper>
-            <RedButton onClick={undefined}>삭제</RedButton>
+            <RedButton onClick={onClickDelete}>삭제</RedButton>
           </ButtonWrapper>
         </ModalButtonList>
       </ModalContentWrapper>

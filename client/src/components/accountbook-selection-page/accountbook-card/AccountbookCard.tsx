@@ -52,6 +52,7 @@ const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
       deleteAccountbookByAdminStore.setShow(true);
     } else {
       deleteAccountbookByUserStore.setShow(true);
+      deleteAccountbookByUserStore.selectedAccountbookId = accountbook.accountbookId as number;
     }
   };
 
