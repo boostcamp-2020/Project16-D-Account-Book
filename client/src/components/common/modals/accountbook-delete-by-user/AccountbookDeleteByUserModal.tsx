@@ -13,10 +13,10 @@ import {
 } from '../accountbook-delete-by-admin/AccountbookDeleteByAdminModal';
 
 const AccountbookDeleteByUserModal: React.FC = () => {
-  const { deleteAccountbookByAdminStore } = useStore().rootStore.modalStore;
+  const { deleteAccountbookByUserStore } = useStore().rootStore.modalStore;
 
   const closeModal = () => {
-    deleteAccountbookByAdminStore.setShow(false);
+    deleteAccountbookByUserStore.setShow(false);
   };
 
   return (

@@ -45,11 +45,14 @@ const TitleWrapper = styled.div`
 
 const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
   const { userStore } = useStore().rootStore;
-  const { deleteAccountbookByAdminStore } = useStore().rootStore.modalStore;
+  const { deleteAccountbookByAdminStore, deleteAccountbookByUserStore } = useStore().rootStore.modalStore;
 
   const onClickDelete = () => {
-    deleteAccountbookByAdminStore.setShow(true);
-    console.log(userStore.isAdmin(accountbook.accountbookId as number));
+    if (userStore.isAdmin(accountbook.accountbookId as number)) {
+      deleteAccountbookByAdminStore.setShow(true);
+    } else {
+      deleteAccountbookByUserStore.setShow(true);
+    }
   };
 
   const textColor = getTextColor(accountbook.color);

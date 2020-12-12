@@ -7,13 +7,14 @@ import AccountbookDeleteByUserModal from '../components/common/modals/accountboo
 
 const AccountbookDeleteTestPage = (): JSX.Element => {
   const { userStore } = useStore().rootStore;
-  const { deleteAccountbookByAdminStore } = useStore().rootStore.modalStore;
-
+  const { deleteAccountbookByAdminStore, deleteAccountbookByUserStore } = useStore().rootStore.modalStore;
+  console.log(userStore.accountAuthorList);
   return (
     <>
-      <AccountbookDeleteByUserModal />
+      {deleteAccountbookByUserStore.show && <AccountbookDeleteByUserModal />}
       {deleteAccountbookByAdminStore.show && <AccountbookDeleteByAdminModal />}
-      <AccountbookCard id={3} title="가계부" color="#000000" description="삭제테스트" accountbookId={1} />
+      <AccountbookCard id={4} title="어드민" color="#000000" description="삭제테스트" accountbookId={1} />
+      <AccountbookCard id={8} title="일반유저" color="#ffff00" description="삭제테스트" accountbookId={2} />
     </>
   );
 };
