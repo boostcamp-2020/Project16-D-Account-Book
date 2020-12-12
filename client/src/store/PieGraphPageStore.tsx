@@ -69,13 +69,23 @@ export default class PieGraphPageStore {
   dateChange = flow(function* (this: PieGraphPageStore, startDate: Date, endDate: Date, accountbookId: number) {
     this.startDate = startDate;
     this.endDate = endDate;
-    const transactions = yield transactionService.getTransactions(accountbookId, startDate, endDate);
-    this.transactions = transactions;
+    const generation = transactionService.getTransactions(accountbookId, startDate, endDate);
+    const { value: cachedValue } = yield generation.next();
+    if (cachedValue !== undefined) {
+      this.transactions = cachedValue;
+    }
+    const { value: refreshedValue } = yield generation.next();
+    this.transactions = refreshedValue;
   });
 
   loadTransactions = flow(function* (this: PieGraphPageStore, accountbookId: number) {
-    const transactions = yield transactionService.getTransactions(accountbookId, this.startDate, this.endDate);
-    this.transactions = transactions;
+    const generation = transactionService.getTransactions(accountbookId, this.startDate, this.endDate);
+    const { value: cachedValue } = yield generation.next();
+    if (cachedValue !== undefined) {
+      this.transactions = cachedValue;
+    }
+    const { value: refreshedValue } = yield generation.next();
+    this.transactions = refreshedValue;
   });
 
   getBeforeDateByPeriod = (endDate: Date, selectedType: string): Date => {
