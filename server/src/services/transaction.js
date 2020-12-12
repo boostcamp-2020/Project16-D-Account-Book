@@ -181,9 +181,7 @@ const deleteExpenditureById = async (id) => {
   await db.expenditure.destroy({ where: { id } });
 };
 
-const parsingTextContent = async (text) => {
-  console.log(text);
-  console.log(typeof text);
+const parsingTextContent = (text) => {
   const textTokenization = (string) => {
     return string
       .replace(/\[web발신\]/i, '')
