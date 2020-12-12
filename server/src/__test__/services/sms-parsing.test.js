@@ -223,4 +223,22 @@ describe('----------롯데----------', () => {
       });
     });
   });
+
+  describe('Case 2. 승인 (쉼표가 두 번 이상 나오는 큰 숫자)', () => {
+    test('카드명: 롯데\n', () => {
+      expect(
+        parsingTextContent(`롯데1234 승인
+			1,235,200원 일시불
+			09/15 18:31
+			월드크리닝 롯데마트`),
+      ).toEqual({
+        cardname: '롯데',
+        amount: 1235200,
+        date: '09/15',
+        time: '18:31',
+        transactionType: '승인',
+        isDeposit: false,
+      });
+    });
+  });
 });
