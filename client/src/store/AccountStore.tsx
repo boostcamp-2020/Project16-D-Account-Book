@@ -1,7 +1,7 @@
 import RootStore from './RootStore';
 import Account, { AccountRequest } from '../types/account';
 import AccountService from '../services/account';
-import { observable, action, makeObservable, computed } from 'mobx';
+import { observable, action, makeObservable, computed, flow } from 'mobx';
 import Options from '../types/dropdownOptions';
 export default class AccountStore {
   rootStore;
@@ -22,11 +22,17 @@ export default class AccountStore {
     this.accounts = accounts;
   };
 
-  updateAccounts = async (id: number): Promise<void> => {
-    const accounts = await AccountService.getAccountsById(id);
-    this.changeAccounts(accounts);
-    this.accountNames = accounts.map((item) => item.name);
-  };
+  updateAccounts = flow(function* (this: AccountStore, id: number) {
+    const generator = AccountService.getAccountsById(id);
+    const { value: cachedValue } = yield generator.next();
+    if (cachedValue !== undefined) {
+      this.changeAccounts(cachedValue);
+      this.accountNames = cachedValue.map((item) => item.name);
+    }
+    const { value: refreshedValue } = yield generator.next();
+    this.changeAccounts(refreshedValue);
+    this.accountNames = refreshedValue.map((item) => item.name);
+  });
 
   createAccount = async (account: AccountRequest): Promise<void> => {
     const createdAccount = await AccountService.createAccount(account);
