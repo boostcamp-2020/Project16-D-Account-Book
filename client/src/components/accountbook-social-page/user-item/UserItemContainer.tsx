@@ -18,9 +18,10 @@ const UserItemContainer = (): JSX.Element => {
       <h3>가계부 구성원 목록</h3>
       {socialStore.userAccountbooks?.map((userAccountbook) => (
         <UserItem
+          provider={userAccountbook.user.provider}
           userAccountbookId={userAccountbook.id}
           userId={userAccountbook.user.id}
-          key={userAccountbook.user.email}
+          key={userAccountbook.user.id}
           email={userAccountbook.user.email}
           profileUrl={userAccountbook.user.profileUrl}
           nickname={userAccountbook.user.nickname}

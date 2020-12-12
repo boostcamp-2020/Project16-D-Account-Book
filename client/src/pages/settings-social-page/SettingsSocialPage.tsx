@@ -27,6 +27,9 @@ const SettingsSocialPage: React.FC = () => {
 
   useEffect(() => {
     socialStore.findUsers(accountbookId);
+    return () => {
+      socialStore.searchSuccess = null;
+    };
   }, []);
 
   return (
@@ -37,15 +40,11 @@ const SettingsSocialPage: React.FC = () => {
       ) : (
         <SettingsBody>
           <h2>{socialPage.TITLE}</h2>
-          {isAdmin && (
-            <>
-              <br />
-              <Description>{socialPage.DESCRIPTION1}</Description>
-              <Description>{socialPage.DESCRIPTION2}</Description>
-            </>
-          )}
+          <br />
+          <Description>{socialPage.DESCRIPTION1}</Description>
+          <Description>{socialPage.DESCRIPTION2}</Description>
           <ContentWrapper>
-            {isAdmin && <SearchContainer />}
+            <SearchContainer />
             <UserItemContainer />
           </ContentWrapper>
         </SettingsBody>

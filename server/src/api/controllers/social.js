@@ -1,14 +1,15 @@
 const socialService = require('@services/social');
 
-const searchUser = async (ctx) => {
+const searchUsers = async (ctx) => {
   const { user_email: email } = ctx.request.query;
-  const user = await socialService.findUserByEmail(email);
+  const user = await socialService.findUsersByEmail(email);
   ctx.body = user;
 };
 
 const addUser = async (ctx) => {
+  const token = ctx.cookies.get('jwt');
   const { userId, accountbookId } = ctx.request.body;
-  const addedUser = await socialService.addUser(accountbookId, userId);
+  const addedUser = await socialService.addUser(accountbookId, userId, token);
   ctx.body = addedUser;
 };
 
@@ -33,7 +34,7 @@ const giveAdmin = async (ctx) => {
 };
 
 module.exports = {
-  searchUser,
+  searchUsers,
   addUser,
   findUsers,
   deleteUser,
