@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import ProfileImage from '../../profile-image/ProfileImage';
 import { DEEP_GRAY, LIGHT_GREEN } from '../../../../constants/color';
-import useStore from '../../../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 
 const UserItemWrapper = styled.div<{ type: string | undefined }>`
@@ -66,8 +65,6 @@ const UserItemWithRadio = ({
   provider,
   onChange,
 }: Props): JSX.Element => {
-  const { socialStore, userStore } = useStore().rootStore;
-
   return (
     <UserItemWrapper type={type}>
       <Cell>

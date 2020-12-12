@@ -10,7 +10,6 @@ import UserItemWithRadio from './UserItemWithRadio';
 import { MODAL_WHITE } from '../../../../constants/color';
 import socialService from '../../../../services/social';
 import { UserAccountbook } from '../../../../types/social';
-import Spinner from '../../spinner/Spinner';
 
 const FormModalWrapper = styled.div`
   background-color: ${MODAL_WHITE};
@@ -72,14 +71,21 @@ const FormModalFilter = (): JSX.Element => {
     giveAdminStore.setShow(false);
   };
 
-  const onClickDelete = () => {
+  const onClickDelete = async () => {
     if (userAccountbooks.length == 0) {
       giveAdminStore.deleteAccountbook();
-    } else {
-      if (checkedUserAccountbookId === 0) {
-        alert('관리자를 지정한 이후에 삭제할 수 있습니다.');
-      }
+      closeModal();
+      return;
     }
+
+    if (checkedUserAccountbookId === 0) {
+      alert('관리자를 지정한 이후에 삭제할 수 있습니다.');
+      return;
+    }
+
+    await socialService.giveAdmin(checkedUserAccountbookId, 1);
+    giveAdminStore.deleteAccountbook();
+    closeModal();
   };
 
   return (
