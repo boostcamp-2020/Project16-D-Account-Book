@@ -207,7 +207,7 @@ const parsingTextContent = (text) => {
       result.cardname = cardName;
     }
     if (token.includes('원') && !result.amount) {
-      result.amount = Number(token.match(/[0-9]+(,?[0-9]+)+/)[0].replace(',', ''));
+      result.amount = Number(token.match(/[0-9]+(,?[0-9]+)+/)[0].replace(/,/g, ''));
       return;
     }
     if (token.includes(':')) {
