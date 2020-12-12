@@ -26,7 +26,6 @@ const AccountbookNameWrapper = styled.div`
   position: absolute;
   left: 100%;
   background-color: ${GRAY};
-  min-width: 160px;
   box-shadow: 0px 4px 8px 0px;
   z-index: 1;
 `;
