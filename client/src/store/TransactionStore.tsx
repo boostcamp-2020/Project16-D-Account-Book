@@ -6,6 +6,7 @@ import transactionService from '../services/transaction';
 import RootStore from './RootStore';
 import { filtering } from '../utils/filter';
 import Query from '../types/query';
+import { CancellablePromise } from 'mobx/dist/api/flow';
 
 export default class TransactionStore {
   @observable
@@ -22,6 +23,9 @@ export default class TransactionStore {
 
   rootStore: RootStore;
 
+  transactionDebounceTimer: undefined | number;
+  latestFindTransactions: CancellablePromise<void> | undefined;
+
   constructor(rootStore: RootStore) {
     makeObservable(this);
     this.rootStore = rootStore;
@@ -32,7 +36,21 @@ export default class TransactionStore {
     this.csvTransactions = transactions;
   };
 
-  findTransactions = flow(function* (this: TransactionStore, accountbookId: number, startDate: Date, endDate: Date) {
+  findTransactions = (accountbookId: number, startDate: Date, endDate: Date): void => {
+    if (this.transactionDebounceTimer !== undefined) {
+      if (this.latestFindTransactions !== undefined) {
+        this.latestFindTransactions.cancel();
+      }
+      clearTimeout(this.transactionDebounceTimer);
+    }
+
+    this.transactionDebounceTimer = setTimeout(async () => {
+      const cancel = this.getTransactions(accountbookId, startDate, endDate);
+      this.latestFindTransactions = cancel;
+    }, 100);
+  };
+
+  getTransactions = flow(function* (this: TransactionStore, accountbookId: number, startDate: Date, endDate: Date) {
     const generation = transactionService.getTransactions(accountbookId, startDate, endDate);
 
     const cached = yield generation.next();
