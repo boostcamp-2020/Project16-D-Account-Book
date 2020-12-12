@@ -61,6 +61,8 @@ const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>
 
   &:hover ${AccountbookNameWrapper} {
     display: block;
+    font-size: 0.8em;
+    font-weight: 400;
   }
 `;
 
