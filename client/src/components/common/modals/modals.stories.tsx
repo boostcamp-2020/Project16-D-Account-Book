@@ -31,14 +31,7 @@ export const AccountbookDeleteByAdminDefault: React.FC = () => {
   const deleteClick = () => {
     // 삭제 버튼을 누르는 함수
   };
-  return (
-    <AcoountbookDeleteByAdminModal
-      cancelClick={cancelClick}
-      deleteClick={deleteClick}
-      show={state}
-      closeModal={closeModal}
-    />
-  );
+  return <AcoountbookDeleteByAdminModal />;
 };
 
 export const FormModalHeaderDefault: React.FC = () => {
