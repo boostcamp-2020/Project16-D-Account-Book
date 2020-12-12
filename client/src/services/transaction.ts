@@ -22,9 +22,14 @@ export default {
     accountbookId: number,
     startDate: Date,
     endDate: Date,
+    beforeStartDate?: Date,
+    afterEndDate?: Date,
   ): AsyncGenerator<Array<Income | Expenditure>> {
     const formattedStartDate = getFormattedDate({ date: startDate, format: '.' });
     const foramttedEndDate = getFormattedDate({ date: endDate, format: '.' });
+    const gap = endDate.valueOf() - startDate.valueOf();
+    console.log(gap);
+
     const query = querystring.stringify({
       accountbook_id: accountbookId,
       start_date: formattedStartDate,
@@ -34,6 +39,38 @@ export default {
 
     // 캐시 리턴
     yield TransactionCache.get(requestURL);
+
+    // 이전 달 업데이트
+    if (beforeStartDate !== undefined) {
+      const beforeMonthQuery =
+        transactionAPIAddress.getTransactions +
+        `?` +
+        querystring.stringify({
+          accountbook_id: accountbookId,
+          start_date: getFormattedDate({ date: beforeStartDate, format: '.' }),
+          end_date: formattedStartDate,
+        });
+      instance.get(beforeMonthQuery).then((response) => {
+        TransactionCache.set(beforeMonthQuery, response.data);
+      });
+    }
+
+    // 다음 달 미리 캐싱
+    if (afterEndDate !== undefined) {
+      const beforeMonthQuery =
+        transactionAPIAddress.getTransactions +
+        `?` +
+        querystring.stringify({
+          accountbook_id: accountbookId,
+          start_date: foramttedEndDate,
+          end_date: getFormattedDate({ date: afterEndDate, format: '.' }),
+        });
+
+      instance.get(beforeMonthQuery).then((response) => {
+        TransactionCache.set(beforeMonthQuery, response.data);
+      });
+    }
+
     const response = await instance.get(transactionAPIAddress.getTransactions, {
       params: {
         accountbook_id: accountbookId,
@@ -41,6 +78,7 @@ export default {
         end_date: foramttedEndDate,
       },
     });
+
     //캐시 업데이트
     TransactionCache.set(requestURL, response.data);
     yield response.data;

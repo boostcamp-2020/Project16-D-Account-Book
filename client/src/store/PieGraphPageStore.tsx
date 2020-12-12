@@ -36,6 +36,7 @@ export default class PieGraphPageStore {
     this.endDate = new Date();
     this.startDate = new Date();
     this.startDate.setMonth(this.endDate.getMonth() - 1);
+    this.endDate.setDate(this.endDate.getDate() + 1);
 
     makeObservable(this);
   }
@@ -60,9 +61,6 @@ export default class PieGraphPageStore {
   @action
   moveToNext = (accountbookId: number): void => {
     const nextDate = this.getNextDateByPeriod(this.endDate, this.selectedDate);
-    if (nextDate.valueOf() > new Date().valueOf()) {
-      return;
-    }
     this.dateChange(this.endDate, nextDate, accountbookId);
   };
 
@@ -92,7 +90,9 @@ export default class PieGraphPageStore {
   _dateChange = flow(function* (this: PieGraphPageStore, startDate: Date, endDate: Date, accountbookId: number) {
     this.startDate = startDate;
     this.endDate = endDate;
-    const generation = transactionService.getTransactions(accountbookId, startDate, endDate);
+    const beforeDate = this.getBeforeDateByPeriod(this.startDate, this.selectedDate);
+    const afterDate = this.getNextDateByPeriod(this.endDate, this.selectedDate);
+    const generation = transactionService.getTransactions(accountbookId, startDate, endDate, beforeDate, afterDate);
     const { value: cachedValue } = yield generation.next();
     if (cachedValue !== undefined) {
       this.transactions = cachedValue;
@@ -102,7 +102,15 @@ export default class PieGraphPageStore {
   });
 
   loadTransactions = flow(function* (this: PieGraphPageStore, accountbookId: number) {
-    const generation = transactionService.getTransactions(accountbookId, this.startDate, this.endDate);
+    const beforeDate = this.getBeforeDateByPeriod(this.startDate, this.selectedDate);
+    const afterDate = this.getNextDateByPeriod(this.startDate, this.selectedDate);
+    const generation = transactionService.getTransactions(
+      accountbookId,
+      this.startDate,
+      this.endDate,
+      beforeDate,
+      afterDate,
+    );
     const { value: cachedValue } = yield generation.next();
     if (cachedValue !== undefined) {
       this.transactions = cachedValue;
@@ -123,7 +131,7 @@ export default class PieGraphPageStore {
     const result = new Date(endDate.valueOf());
     result.setFullYear(endDate.getFullYear() + datePeriodNumber[selectedType].year);
     result.setMonth(endDate.getMonth() + datePeriodNumber[selectedType].month);
-    result.setDate(endDate.getDate() + datePeriodNumber[selectedType].day);
+    result.setDate(endDate.getDate() + datePeriodNumber[selectedType].day + 1);
     return result;
   };
 

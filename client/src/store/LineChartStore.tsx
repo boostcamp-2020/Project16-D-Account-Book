@@ -6,6 +6,7 @@ import transactionService from '../services/transaction';
 import { getOnlyIncome, getOnlyExpenditure } from '../utils/filter';
 import ITransaction from '../types/lineChartValue';
 import { CancellablePromise } from 'mobx/dist/api/flow';
+import { getFirstDateOfNextMonth, getFirstDateOfPreviousMonth } from '../utils/date';
 type IncomeExpenditure = Income | Expenditure;
 
 export default class LineChartStore {
@@ -77,10 +78,18 @@ export default class LineChartStore {
 
   callTransactions = flow(function* (this: LineChartStore, accountbookId) {
     const nextDate = new Date(this.currentDate.valueOf());
+    const beforeDate = getFirstDateOfPreviousMonth(this.currentDate);
+    const afterDate = getFirstDateOfNextMonth(nextDate);
     nextDate.setMonth(this.currentDate.getMonth() + 1);
     nextDate.setDate(1);
 
-    const generation = transactionService.getTransactions(accountbookId, this.currentDate, nextDate);
+    const generation = transactionService.getTransactions(
+      accountbookId,
+      this.currentDate,
+      nextDate,
+      beforeDate,
+      afterDate,
+    );
     const { value: cachedValue } = yield generation.next();
     if (cachedValue !== undefined) {
       this.transactions = cachedValue;

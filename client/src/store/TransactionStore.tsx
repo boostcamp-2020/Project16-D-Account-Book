@@ -7,7 +7,7 @@ import RootStore from './RootStore';
 import { filtering } from '../utils/filter';
 import Query from '../types/query';
 import { CancellablePromise } from 'mobx/dist/api/flow';
-
+import { getFirstDateOfNextMonth, getFirstDateOfPreviousMonth } from '../utils/date';
 export default class TransactionStore {
   @observable
   transactions: Array<Income | Expenditure> = [];
@@ -55,7 +55,9 @@ export default class TransactionStore {
   };
 
   getTransactions = flow(function* (this: TransactionStore, accountbookId: number, startDate: Date, endDate: Date) {
-    const generation = transactionService.getTransactions(accountbookId, startDate, endDate);
+    const beforeMonth = getFirstDateOfPreviousMonth(startDate);
+    const afterMonth = getFirstDateOfNextMonth(endDate);
+    const generation = transactionService.getTransactions(accountbookId, startDate, endDate, beforeMonth, afterMonth);
 
     const cached = yield generation.next();
     if (cached.value !== undefined) {
