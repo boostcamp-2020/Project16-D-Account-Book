@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
+import { GRAY, LIGHT_GRAY } from '../../../constants/color';
 
 interface SmallAccountbookItemWrapperProps {
   bgColor: string;
@@ -8,6 +9,27 @@ interface SmallAccountbookItemWrapperProps {
   textColor: string;
   onClick?: () => void;
 }
+
+const AccountbookName = styled.div`
+  color: black;
+  padding: 10px 14px;
+  display: block;
+
+  &:hover {
+    background-color: ${LIGHT_GRAY};
+    cursor: pointer;
+  }
+`;
+
+const AccountbookNameWrapper = styled.div`
+  display: none;
+  position: absolute;
+  left: 100%;
+  background-color: ${GRAY};
+  min-width: 160px;
+  box-shadow: 0px 4px 8px 0px;
+  z-index: 1;
+`;
 
 const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>`
   display: flex;
@@ -36,6 +58,10 @@ const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>
   .text {
     text-align: center;
   }
+
+  &:hover ${AccountbookNameWrapper} {
+    display: block;
+  }
 `;
 
 interface SmallAccountbookItemProps {
@@ -50,6 +76,9 @@ const SmallAccountbookItem = ({ id, bgColor, show, onClick }: SmallAccountbookIt
   return (
     <SmallAccountbookItemWrapper bgColor={bgColor} textColor={textColor} show={show} onClick={onClick}>
       <div className="text">{id}</div>
+      <AccountbookNameWrapper>
+        <AccountbookName>가계부 이름</AccountbookName>
+      </AccountbookNameWrapper>
     </SmallAccountbookItemWrapper>
   );
 };
