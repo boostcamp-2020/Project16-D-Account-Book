@@ -48,13 +48,13 @@ const deleteExpenditureTransaction = async (ctx) => {
 };
 
 const parsingTextContent = async (ctx) => {
-  const textContent = ctx.request.body;
-  if (!textContent) {
+  const { text } = ctx.request.body;
+  if (!text) {
     const error = new Error('문자 내역이 존재하지 않습니다.');
     error.status = 400;
     throw error;
   }
-  const result = await transactionService.parsingTextContent(textContent);
+  const result = await transactionService.parsingTextContent(text);
   if (result.transactionType === '거절') {
     const error = new Error('승인 거절된 거래 내역은 가계부의 거래 내역으로 등록할 수 없습니다.');
     error.status = 400;
