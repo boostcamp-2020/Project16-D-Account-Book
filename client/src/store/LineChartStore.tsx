@@ -57,9 +57,15 @@ export default class LineChartStore {
   getTransactions = flow(function* (this: LineChartStore, accountbookId) {
     const nextDate = new Date(this.currentDate.valueOf());
     nextDate.setMonth(this.currentDate.getMonth() + 1);
-    nextDate.setDate(0);
-    const transactions = yield transactionService.getTransactions(accountbookId, this.currentDate, nextDate);
-    this.transactions = transactions;
+    nextDate.setDate(1);
+
+    const generation = transactionService.getTransactions(accountbookId, this.currentDate, nextDate);
+    const { value: cachedValue } = yield generation.next();
+    if (cachedValue !== undefined) {
+      this.transactions = cachedValue;
+    }
+    const { value: refreshedValue } = yield generation.next();
+    this.transactions = refreshedValue;
   });
 
   @computed
