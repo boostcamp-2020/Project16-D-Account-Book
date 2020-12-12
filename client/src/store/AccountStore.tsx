@@ -20,6 +20,7 @@ export default class AccountStore {
   @action
   changeAccounts = (accounts: Account[]): void => {
     this.accounts = accounts;
+    this.accountNames = accounts.map((item) => item.name);
   };
 
   updateAccounts = flow(function* (this: AccountStore, id: number) {
@@ -27,11 +28,9 @@ export default class AccountStore {
     const { value: cachedValue } = yield generator.next();
     if (cachedValue !== undefined) {
       this.changeAccounts(cachedValue);
-      this.accountNames = cachedValue.map((item) => item.name);
     }
     const { value: refreshedValue } = yield generator.next();
     this.changeAccounts(refreshedValue);
-    this.accountNames = refreshedValue.map((item) => item.name);
   });
 
   createAccount = async (account: AccountRequest): Promise<void> => {

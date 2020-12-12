@@ -27,11 +27,13 @@ export default class CategoryStore {
   @action
   changeIncomeCategories = (category: Category[]): void => {
     this.incomeCategories = category;
+    this.incomeCategoryNames = category.map((item) => item.name);
   };
 
   @action
   changeExpenditureCategories = (category: Category[]): void => {
     this.expenditureCategories = category;
+    this.expenditureCategoryNames = category.map((item) => item.name);
   };
 
   updateIncomeCategories = flow(function* (this: CategoryStore, id: number) {
@@ -39,11 +41,9 @@ export default class CategoryStore {
     const { value: cachedValue } = yield generator.next();
     if (cachedValue !== undefined) {
       this.changeIncomeCategories(cachedValue);
-      this.incomeCategoryNames = this.incomeCategories.map((item) => item.name);
     }
     const { value: refreshedValue } = yield generator.next();
     this.changeIncomeCategories(refreshedValue);
-    this.incomeCategoryNames = this.incomeCategories.map((item) => item.name);
   });
 
   updateExpenditureCategories = flow(function* (this: CategoryStore, id: number) {
@@ -51,11 +51,9 @@ export default class CategoryStore {
     const { value: cachedValue } = yield generator.next();
     if (cachedValue !== undefined) {
       this.changeExpenditureCategories(cachedValue);
-      this.expenditureCategoryNames = cachedValue.map((item) => item.name);
     }
     const { value: refreshedValue } = yield generator.next();
     this.changeExpenditureCategories(refreshedValue);
-    this.expenditureCategoryNames = refreshedValue.map((item) => item.name);
   });
 
   createIncomeCategory = async (incomeCategory: CategoryRequest): Promise<void> => {
