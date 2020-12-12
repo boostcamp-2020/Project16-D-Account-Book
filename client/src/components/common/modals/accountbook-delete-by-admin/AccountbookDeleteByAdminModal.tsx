@@ -5,9 +5,10 @@ import RedButton from '../../buttons/RedButton';
 import ModalBackground from '../modal-background/ModalBackground';
 import useStore from '../../../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
+import color from '../../../../constants/color';
 
 export const ModalContentWrapper = styled.div`
-  background-color: white;
+  background-color: ${color.MODAL_WHITE};
   width: 30%;
   padding: 10px 20px;
   position: absolute;
@@ -31,10 +32,15 @@ export const ButtonWrapper = styled.div`
 `;
 
 const AccountbookDeleteByAdminModal: React.FC = () => {
-  const { deleteAccountbookByAdminStore } = useStore().rootStore.modalStore;
+  const { deleteAccountbookByAdminStore, giveAdminStore } = useStore().rootStore.modalStore;
 
   const closeModal = () => {
     deleteAccountbookByAdminStore.setShow(false);
+  };
+
+  const onClickDelete = () => {
+    closeModal();
+    giveAdminStore.setShow(true);
   };
 
   return (
@@ -49,7 +55,7 @@ const AccountbookDeleteByAdminModal: React.FC = () => {
             <GrayButton onClick={closeModal}>취소</GrayButton>
           </ButtonWrapper>
           <ButtonWrapper>
-            <RedButton onClick={undefined}>삭제</RedButton>
+            <RedButton onClick={onClickDelete}>삭제</RedButton>
           </ButtonWrapper>
         </ModalButtonList>
       </ModalContentWrapper>

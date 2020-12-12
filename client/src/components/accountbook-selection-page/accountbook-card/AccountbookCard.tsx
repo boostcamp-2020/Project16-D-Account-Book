@@ -45,11 +45,16 @@ const TitleWrapper = styled.div`
 
 const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
   const { userStore } = useStore().rootStore;
-  const { deleteAccountbookByAdminStore, deleteAccountbookByUserStore } = useStore().rootStore.modalStore;
+  const {
+    deleteAccountbookByAdminStore,
+    deleteAccountbookByUserStore,
+    giveAdminStore,
+  } = useStore().rootStore.modalStore;
 
   const onClickDelete = () => {
     if (userStore.isAdmin(accountbook.accountbookId as number)) {
       deleteAccountbookByAdminStore.setShow(true);
+      giveAdminStore.selectedAccountbookId = accountbook.accountbookId as number;
     } else {
       deleteAccountbookByUserStore.setShow(true);
       deleteAccountbookByUserStore.selectedAccountbookId = accountbook.accountbookId as number;
