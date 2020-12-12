@@ -24,10 +24,11 @@ const Cell = styled.div`
     width: 45%;
   }
   &:nth-child(3) {
-    width: 12%;
+    width: 27%;
+    text-align: center;
   }
   &:nth-child(4) {
-    width: 25%;
+    width: 10%;
   }
   &:nth-child(5) {
     width: 6%;
