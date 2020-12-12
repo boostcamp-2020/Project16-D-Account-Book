@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import AccountbookSetting from '../accontbook-setting/AccountbookSetting';
 import AccountbookElimination from '../accountbook-elimination/AccountbookElimination';
-
 import { getTextColor } from '../../../utils/color';
 import useStore from '../../../hook/use-store/useStore';
 import { Accountbook } from '../../../types/accountbook';
@@ -45,7 +44,14 @@ const TitleWrapper = styled.div`
 `;
 
 const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
-  const { rootStore } = useStore();
+  const { userStore } = useStore().rootStore;
+  const { deleteAccountbookByAdminStore } = useStore().rootStore.modalStore;
+
+  const onClickDelete = () => {
+    deleteAccountbookByAdminStore.setShow(true);
+    console.log(userStore.isAdmin(accountbook.accountbookId as number));
+  };
+
   const textColor = getTextColor(accountbook.color);
   return (
     <AccountbookWrapper bgColor={accountbook.color} textColor={textColor}>
@@ -54,7 +60,7 @@ const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
           <AccountbookSetting id={accountbook.id} bgColor={accountbook.color} />
         </ElementWrapper>
         <ElementWrapper>
-          <AccountbookElimination id={accountbook.id} bgColor={accountbook.color} />
+          <AccountbookElimination id={accountbook.id} bgColor={accountbook.color} onClick={onClickDelete} />
         </ElementWrapper>
       </HeaderWrapper>
       <TitleWrapper>{accountbook.title}</TitleWrapper>
