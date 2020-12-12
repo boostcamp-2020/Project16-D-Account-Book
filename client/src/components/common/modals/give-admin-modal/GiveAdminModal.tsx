@@ -53,7 +53,7 @@ const NoMember = styled.div`
 
 const FormModalFilter = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
-  const { deleteAccountbookByAdminStore, giveAdminStore } = useStore().rootStore.modalStore;
+  const { giveAdminStore } = useStore().rootStore.modalStore;
   const [userAccountbooks, setUserAccountbook] = useState<UserAccountbook[]>([]);
   const [checkedUserAccountbookId, setCheckedUserAccountbookId] = useState(0);
 

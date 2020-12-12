@@ -93,4 +93,11 @@ export default class UserStore {
   isUserAdmin = (accountbookId: number): boolean => {
     return this.isUser(accountbookId) || this.isAdmin(accountbookId);
   };
+
+  @action
+  deleteAuthor = (accountbookId: number): void => {
+    this.accountAuthorList = (this.rootStore.userStore.accountAuthorList as UserAuthorType[]).filter(
+      (author) => author.accountbookId !== accountbookId,
+    );
+  };
 }

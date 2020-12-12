@@ -8,6 +8,7 @@ import GiveAdminModal from '../components/common/modals/give-admin-modal/GiveAdm
 
 const AccountbookDeleteTestPage = (): JSX.Element => {
   const { userStore } = useStore().rootStore;
+  //console.log(userStore.accountAuthorList);
   const {
     deleteAccountbookByAdminStore,
     deleteAccountbookByUserStore,
