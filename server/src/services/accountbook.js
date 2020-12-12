@@ -1,4 +1,5 @@
 const db = require('@models');
+const { decodeTokenForValidation } = require('@utils/jwt-utils');
 
 const getAccountbookById = async (id) => {
   const accountbook = await db.accountbook.findOne({
@@ -24,7 +25,12 @@ const getAccountbooksByUserId = async (userId) => {
   return accountbooks;
 };
 
+const deleteAccountbook = async (accountbookId, userId) => {
+  await db.userAccountbook.destroy({ where: { accountbookId, userId } });
+};
+
 module.exports = {
   getAccountbookById,
   getAccountbooksByUserId,
+  deleteAccountbook,
 };
