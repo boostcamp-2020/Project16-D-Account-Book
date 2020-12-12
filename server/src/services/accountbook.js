@@ -27,6 +27,10 @@ const getAccountbooksByUserId = async (userId) => {
 
 const deleteAccountbook = async (accountbookId, userId) => {
   await db.userAccountbook.destroy({ where: { accountbookId, userId } });
+  const userAccountbooks = await db.userAccountbook.findAll({ where: { accountbookId } });
+  if (userAccountbooks.length === 0) {
+    db.accountbook.destroy({ where: { id: accountbookId } });
+  }
 };
 
 module.exports = {
