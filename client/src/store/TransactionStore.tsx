@@ -43,10 +43,14 @@ export default class TransactionStore {
       }
       clearTimeout(this.transactionDebounceTimer);
     }
+    this.latestFindTransactions = undefined;
 
     this.transactionDebounceTimer = setTimeout(async () => {
       const cancel = this.getTransactions(accountbookId, startDate, endDate);
       this.latestFindTransactions = cancel;
+      cancel.catch(() => {
+        this.latestFindTransactions = undefined;
+      });
     }, 100);
   };
 

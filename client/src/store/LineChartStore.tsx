@@ -5,7 +5,7 @@ import RootStore from './RootStore';
 import transactionService from '../services/transaction';
 import { getOnlyIncome, getOnlyExpenditure } from '../utils/filter';
 import ITransaction from '../types/lineChartValue';
-
+import { CancellablePromise } from 'mobx/dist/api/flow';
 type IncomeExpenditure = Income | Expenditure;
 
 export default class LineChartStore {
@@ -25,6 +25,9 @@ export default class LineChartStore {
     this.currentDate.setDate(1);
     makeObservable(this);
   }
+
+  transactionDebounceTimer: undefined | number;
+  latestFindTransactions: CancellablePromise<void> | undefined;
 
   @action
   nextMonth = (accountbookId: number): void => {
@@ -50,11 +53,29 @@ export default class LineChartStore {
   };
 
   @action
-  loadTransactions = (accountbookId): void => {
+  loadTransactions = (accountbookId: number): void => {
     this.getTransactions(accountbookId);
   };
 
-  getTransactions = flow(function* (this: LineChartStore, accountbookId) {
+  getTransactions = (accountbookId: number): void => {
+    if (this.transactionDebounceTimer !== undefined) {
+      if (this.latestFindTransactions !== undefined) {
+        this.latestFindTransactions.cancel();
+      }
+      clearTimeout(this.transactionDebounceTimer);
+    }
+    this.latestFindTransactions = undefined;
+
+    this.transactionDebounceTimer = setTimeout(async () => {
+      const cancel = this.callTransactions(accountbookId);
+      this.latestFindTransactions = cancel;
+      cancel.catch(() => {
+        this.latestFindTransactions = undefined;
+      });
+    }, 100);
+  };
+
+  callTransactions = flow(function* (this: LineChartStore, accountbookId) {
     const nextDate = new Date(this.currentDate.valueOf());
     nextDate.setMonth(this.currentDate.getMonth() + 1);
     nextDate.setDate(1);

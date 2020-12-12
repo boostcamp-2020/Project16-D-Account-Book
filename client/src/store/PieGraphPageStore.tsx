@@ -8,6 +8,7 @@ import transactionService from '../services/transaction';
 import PieChartValue from '../types/pieChartValue';
 import { getOnlyIncome, getTopFiveCategory, getOnlyExpenditure } from '../utils/filter';
 import BoxChartValue from '../types/boxChartValue';
+import { CancellablePromise } from 'mobx/dist/api/flow';
 export default class PieGraphPageStore {
   rootStore: RootStore;
   dateOptions = dateOptions;
@@ -26,6 +27,10 @@ export default class PieGraphPageStore {
 
   @observable
   endDate: Date;
+
+  transactionDebounceTimer: undefined | number;
+  latestFindTransactions: CancellablePromise<void> | undefined;
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     this.endDate = new Date();
@@ -66,7 +71,25 @@ export default class PieGraphPageStore {
     this.incomeMode = !this.incomeMode;
   };
 
-  dateChange = flow(function* (this: PieGraphPageStore, startDate: Date, endDate: Date, accountbookId: number) {
+  dateChange = (startDate: Date, endDate: Date, accountbookId: number): void => {
+    if (this.transactionDebounceTimer !== undefined) {
+      if (this.latestFindTransactions !== undefined) {
+        this.latestFindTransactions.cancel();
+      }
+      clearTimeout(this.transactionDebounceTimer);
+    }
+    this.latestFindTransactions = undefined;
+
+    this.transactionDebounceTimer = setTimeout(async () => {
+      const cancel = this._dateChange(startDate, endDate, accountbookId);
+      this.latestFindTransactions = cancel;
+      cancel.catch(() => {
+        this.latestFindTransactions = undefined;
+      });
+    }, 100);
+  };
+
+  _dateChange = flow(function* (this: PieGraphPageStore, startDate: Date, endDate: Date, accountbookId: number) {
     this.startDate = startDate;
     this.endDate = endDate;
     const generation = transactionService.getTransactions(accountbookId, startDate, endDate);
