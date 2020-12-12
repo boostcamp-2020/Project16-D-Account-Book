@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 const db = require('@models');
 const { Op } = require('sequelize');
 const { getAccountbookById } = require('@services/accountbook');
@@ -180,6 +181,47 @@ const deleteExpenditureById = async (id) => {
   await db.expenditure.destroy({ where: { id } });
 };
 
+const parsingTextContent = async (text) => {
+  console.log(text);
+  console.log(typeof text);
+  const textTokenization = (string) => {
+    return string
+      .replace(/\[web발신\]/i, '')
+      .trim()
+      .split(/[\s\n\r]/g);
+  };
+
+  const result = {};
+
+  const transactionTypeToken = text.match('취소|거절');
+  result.transactionType = transactionTypeToken ? transactionTypeToken[0] : '승인';
+
+  if (result.transactionType === '거절') {
+    return result;
+  }
+
+  const isDepositToken = text.match('입금');
+  result.isDeposit = !!(isDepositToken || result.transactionType === '취소');
+  const tokens = textTokenization(text);
+  tokens.forEach((token, i) => {
+    if (i === 0) {
+      const cardName = token.replace(/[[\]]/gi, '').substring(0, 2).toUpperCase();
+      result.cardname = cardName;
+    }
+    if (token.includes('원') && !result.amount) {
+      result.amount = Number(token.match(/[0-9]+(,?[0-9]+)+/)[0].replace(',', ''));
+      return;
+    }
+    if (token.includes(':')) {
+      result.time = token.match(/[0-9]{2}:[0-9]{2}/)[0];
+    }
+    if (token.includes('/')) {
+      result.date = token.match(/[0-9]{2}\/[0-9]{2}/)[0];
+    }
+  });
+  return result;
+};
+
 module.exports = {
   findIncomes,
   findExpenditures,
@@ -189,4 +231,5 @@ module.exports = {
   updateExpenditure,
   deleteIncomeById,
   deleteExpenditureById,
+  parsingTextContent,
 };
