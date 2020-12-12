@@ -32,7 +32,7 @@ export default {
     //캐시 업데이트
     IncomeCategory.set(requestURL, response.data);
 
-    return response.data;
+    yield response.data;
   },
 
   getExpenditureCategoryById: async function* (id: number): AsyncGenerator<Category[]> {
@@ -50,7 +50,7 @@ export default {
     //캐시 업데이트
     ExpenditureCategory.set(requestURL, response.data);
 
-    return response.data;
+    yield response.data;
   },
   createIncomeCategory: async (incomeCategory: CategoryRequest): Promise<Category> => {
     const response = await instance.post(categoryAPIAddress.createIncome, incomeCategory);

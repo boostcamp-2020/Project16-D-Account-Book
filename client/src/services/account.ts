@@ -22,7 +22,7 @@ export default {
     yield AccountCache.get(requestURL);
     const response = await instance.get(requestURL);
     AccountCache.set(requestURL, response.data);
-    return response.data;
+    yield response.data;
   },
   createAccount: async (account: AccountRequest): Promise<Account> => {
     const response = await instance.post(accountAPIAddress.createAccount, account);
