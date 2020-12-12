@@ -24,10 +24,11 @@ const AccountbookName = styled.div`
 const AccountbookNameWrapper = styled.div`
   display: none;
   position: absolute;
-  left: 100%;
+  left: 115%;
   background-color: ${GRAY};
-  box-shadow: 0px 4px 8px 0px;
+  box-shadow: 2px 3px 7px gray;
   z-index: 1;
+  border-radius: 5px;
 `;
 
 const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>`
