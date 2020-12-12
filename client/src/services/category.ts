@@ -20,17 +20,14 @@ export default {
   getIncomeCategoryById: async function* (id: number): AsyncGenerator<Category[]> {
     const requestURL =
       categoryAPIAddress.getIncome +
+      '?' +
       querystring.stringify({
         accountbook_id: id,
       });
     //캐시 리턴
     yield IncomeCategory.get(requestURL);
 
-    const response = await instance.get(categoryAPIAddress.getIncome, {
-      params: {
-        accountbook_id: id,
-      },
-    });
+    const response = await instance.get(requestURL);
 
     //캐시 업데이트
     IncomeCategory.set(requestURL, response.data);
@@ -41,17 +38,14 @@ export default {
   getExpenditureCategoryById: async function* (id: number): AsyncGenerator<Category[]> {
     const requestURL =
       categoryAPIAddress.getExpenditure +
+      '?' +
       querystring.stringify({
         accountbook_id: id,
       });
     //캐시 리턴
     yield ExpenditureCategory.get(requestURL);
 
-    const response = await instance.get(categoryAPIAddress.getExpenditure, {
-      params: {
-        accountbook_id: id,
-      },
-    });
+    const response = await instance.get(requestURL);
 
     //캐시 업데이트
     ExpenditureCategory.set(requestURL, response.data);
