@@ -1,5 +1,3 @@
-import { Options } from './options';
-
 export interface ITransactionForm {
   classify: boolean;
   price: number | string;

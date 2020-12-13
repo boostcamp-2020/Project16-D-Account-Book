@@ -6,10 +6,15 @@ interface ModalBackgroundProps {
   children?: React.ReactNode;
   show?: boolean;
   closeModal?: () => void;
+  position?: string;
 }
 
 interface ModalWrapperProps {
   show?: boolean;
+}
+
+interface ChildrenWrapperProps {
+  position?: string;
 }
 
 const Background = styled.div<ModalWrapperProps>`
@@ -27,16 +32,21 @@ const ModalBackgroundWrapper = styled.div<ModalWrapperProps>`
   display: ${({ show }) => (show ? 'block' : 'none')};
 `;
 
-const ChildrenWrapper = styled.div`
+const ChildrenWrapper = styled.div<ChildrenWrapperProps>`
   z-index: 100;
-  position: absolute;
+  position: ${({ position }) => (position ? position : 'fixed')};
   left: 50%;
   top: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
 `;
 
-const ModalBackground: React.FC<ModalBackgroundProps> = ({ children, show, closeModal }: ModalBackgroundProps) => {
+const ModalBackground: React.FC<ModalBackgroundProps> = ({
+  children,
+  show,
+  closeModal,
+  position,
+}: ModalBackgroundProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   if (closeModal !== undefined) {
     useClickMe(modalRef, closeModal);
@@ -44,7 +54,7 @@ const ModalBackground: React.FC<ModalBackgroundProps> = ({ children, show, close
   return (
     <ModalBackgroundWrapper show={show}>
       <Background ref={modalRef} />
-      <ChildrenWrapper>{children}</ChildrenWrapper>
+      <ChildrenWrapper position={position}>{children}</ChildrenWrapper>
     </ModalBackgroundWrapper>
   );
 };

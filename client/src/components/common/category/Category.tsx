@@ -1,12 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
+import useStore from '../../../hook/use-store/useStore';
+import { SingleCategory } from '../../../types/category';
+import { convertToCategoryObj } from '../modals/formUtils';
 
-const CategoryWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean }>`
+export const CategoryWrapper = styled.div<{
+  bgColor: string;
+  textColor: string;
+  shadow?: boolean;
+  minWidth?: string;
+  preview?: string;
+}>`
   width: 100%;
   max-width: 115px;
+  min-width: ${({ minWidth }) => minWidth};
   height: 100%;
   max-height: 50px;
+  min-height: 43px;
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};
   box-sizing: border-box;
@@ -17,24 +28,41 @@ const CategoryWrapper = styled.div<{ bgColor: string; textColor: string; shadow?
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  pointer-events: ${({ preview }) => preview};
 
   &:hover {
     box-shadow: ${({ shadow }) => (shadow === true ? '2px 3px 7px gray' : 0)};
   }
 `;
 
-interface CategoryProps {
-  text: string;
-  bgColor: string;
-  shadow?: boolean;
-  onClick?: () => void;
-}
+const Category = (singleCategory: SingleCategory): JSX.Element => {
+  const { rootStore } = useStore();
+  const updateCategoryForm = rootStore.modalStore.updateCategoryFormStore;
 
-const Category = ({ text, bgColor, shadow, onClick }: CategoryProps): JSX.Element => {
-  const textColor = getTextColor(bgColor);
+  const openUpdateCategoryForm = (): void => {
+    updateCategoryForm.toggleShow();
+    if (singleCategory.onClick !== undefined) {
+      singleCategory.onClick();
+    }
+    const category = convertToCategoryObj(singleCategory.id, singleCategory.name, singleCategory.color);
+    if (updateCategoryForm.incomeFlag) {
+      updateCategoryForm.loadIncomeCategory(category);
+    } else {
+      updateCategoryForm.loadExpenditureCategory(category);
+    }
+  };
+
+  const textColor = getTextColor(singleCategory.color);
   return (
-    <CategoryWrapper bgColor={bgColor} textColor={textColor} shadow={shadow} onClick={onClick}>
-      {text}
+    <CategoryWrapper
+      bgColor={singleCategory.color}
+      textColor={textColor}
+      shadow={singleCategory.shadow}
+      minWidth={singleCategory.minWidth}
+      preview={singleCategory.preview}
+      onClick={openUpdateCategoryForm}
+    >
+      {singleCategory.name}
     </CategoryWrapper>
   );
 };

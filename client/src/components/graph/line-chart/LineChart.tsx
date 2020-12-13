@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import LineChartBackground from './LineChartBackground';
 import LineChartText from './LineChartText';
 import XAxisDraw from './XAxisDraw';
-import LineChartDot from './LineChartDot';
+import LineChartDrawDot from './LineChartDrawDot';
 import { ITransaction } from '../../../types/lineChartValue';
 import {
   sortTransactionByValue,
@@ -44,7 +44,7 @@ const Path = styled.path<IPath>`
   stroke: dodgerblue;
   stroke-width: 0;
   stroke-dasharray: ${(props) => props.length};
-  animation: ${(props) => pathAnimation(props.length)} 2s ease 1.7s both;
+  animation: ${(props) => pathAnimation(props.length)} 1.5s ease 1.7s both;
 `;
 
 const LineChart: React.FC<IProps> = ({ transactions }: IProps) => {
@@ -99,19 +99,13 @@ const LineChart: React.FC<IProps> = ({ transactions }: IProps) => {
         return <LineChartText key={x.position} x={chartGap + x.position} y={viewY - chartGap / 2} value={x.date} />;
       })}
 
-      {dotsPosition.map((position, id) => {
-        return (
-          <LineChartDot
-            x={position[0]}
-            y={position[1]}
-            key={sortedByDate[id].date.valueOf()}
-            date={sortedByDate[id].date}
-            value={valueFitUnit(sortedByDate[id].value, unit)}
-            yWidth={viewY - 2 * chartGap}
-            gap={chartGap}
-          />
-        );
-      })}
+      <LineChartDrawDot
+        dotsPosition={dotsPosition}
+        sortedByDate={sortedByDate}
+        unit={unit}
+        viewY={viewY}
+        chartGap={chartGap}
+      />
       <Path d={pathD} length={pathDLength} />
     </svg>
   );

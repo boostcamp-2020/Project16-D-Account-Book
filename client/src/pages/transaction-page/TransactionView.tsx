@@ -8,23 +8,20 @@ import AllTransactionContainer from '../../components/common/transactions/all-tr
 import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
 import useStore from '../../hook/use-store/useStore';
-import { useObserver } from 'mobx-react';
+import { observer } from 'mobx-react';
 import Income, { isIncome } from '../../types/income';
 import Expenditure from '../../types/expenditure';
 import { ParsedQuery } from 'query-string';
 import FilterOption from '../../components/transaction-page/filter-option/FilterOption';
-import { useHistory } from 'react-router-dom';
 import FormModalFilter from '../../components/common/modals/form-modal-filter/FormModalFilter';
+import FormModalCreateTransaction from '../../components/common/modals/form-modal-transaction/FormModalCreateTransaction';
+import FormModalUpdateTransaction from '../../components/common/modals/form-modal-transaction/FormModalUpdateTransaction';
+import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
+import socket, { event } from '../../socket';
 
 const ViewWrapper = styled.div`
   width: 70%;
   margin: 0 auto;
-`;
-
-const HeaderNavigationWrapper = styled.div`
-  position: absolute;
-  right: 2%;
-  top: 2%;
 `;
 
 const TransactionHeaderWrapper = styled.div`
@@ -62,16 +59,20 @@ const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<numbe
 
 const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
-  const { dateStore, transactionStore } = rootStore;
-  const history = useHistory();
+  const { dateStore, transactionStore, modalStore } = rootStore;
+  const { formFilterStore } = rootStore.modalStore;
+  const { createTransactionFormStore, updateTransactionFormStore } = modalStore;
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
-  useEffect(() => {
+  const updateTransactions = () => {
+    transactionStore.accountbookId = accountbookId;
     if (!query) {
+      transactionStore.isFilterMode = false;
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
       return;
     }
 
+    transactionStore.isFilterMode = true;
     const { start_date, end_date, account, income_category, expenditure_category } = query;
     transactionStore.filterTransactions(accountbookId, {
       startDate: start_date,
@@ -80,16 +81,33 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       incomeCategory: income_category,
       expenditureCategory: expenditure_category,
     });
+    formFilterStore.query = query;
+    formFilterStore.setFilterInfo();
+  };
+
+  useEffect(() => {
+    socket.on(event.UPDATE_TRANSACTIONS, () => {
+      updateTransactions();
+    });
+    return () => {
+      socket.off(event.UPDATE_TRANSACTIONS);
+    };
+  }, [accountbookId]);
+
+  useEffect(() => {
+    updateTransactions();
   }, [query, accountbookId]);
 
-  return useObserver(() => (
+  return (
     <>
-      <FormModalFilter accountbookId={accountbookId} />
+      {formFilterStore.show && <FormModalFilter accountbookId={accountbookId} />}
+      {createTransactionFormStore.show && <FormModalCreateTransaction />}
+      {updateTransactionFormStore.show && <FormModalUpdateTransaction />}
       <Sidebar smallAccountbooks={smallAccountbookItems} />
       <MenuNavigation />
-      <HeaderNavigationWrapper>
+      <HeaderNavigationRightTopWrapper>
         <HeaderNavigation currentPage={'transaction'} />
-      </HeaderNavigationWrapper>
+      </HeaderNavigationRightTopWrapper>
       <ViewWrapper>
         <TransactionHeaderWrapper>
           {query ? (
@@ -116,7 +134,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
         <AllTransactionContainer transactions={transactionStore.transactions} />
       </ViewWrapper>
     </>
-  ));
+  );
 };
 
-export default TransactionView;
+export default observer(TransactionView);

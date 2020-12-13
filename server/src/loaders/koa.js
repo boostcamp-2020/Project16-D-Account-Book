@@ -4,6 +4,7 @@ const logger = require('koa-logger');
 const cors = require('@koa/cors');
 
 const indexRouter = require('@routes');
+const { clientHost, clientPort } = require('@config/server');
 
 const router = new Router();
 
@@ -18,7 +19,12 @@ const errorHandler = async (ctx, next) => {
 };
 
 const koa = async (app) => {
-  app.use(cors());
+  app.use(
+    cors({
+      origin: `${clientHost}:${clientPort}`,
+      credentials: true,
+    }),
+  );
   app.use(bodyParser());
   app.use(logger());
   app.use(errorHandler);

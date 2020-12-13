@@ -53,6 +53,9 @@ const CircleSVG = (props: CircleSVGProps): JSX.Element => {
   const CircleDiameter = Math.PI * radius * 2;
 
   const getLengthByRatio = (ratio: number): number => {
+    if (ratio < 0) {
+      return 0;
+    }
     return (CircleDiameter / 100) * ratio;
   };
 

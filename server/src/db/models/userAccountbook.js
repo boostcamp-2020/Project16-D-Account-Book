@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: {
         name: 'userId',
         allowNull: false,
+        as: 'user',
       },
     });
     userAccountbook.belongsTo(models.accountbook, {

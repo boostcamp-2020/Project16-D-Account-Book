@@ -1,7 +1,8 @@
-const db = require('@models');
-
 const axios = require('axios');
 const qs = require('querystring');
+
+const db = require('@models');
+const { decodeToken } = require('@utils/jwt-utils');
 
 const getAccessToken = async (code, state, config) => {
   const requestParams = {
@@ -77,7 +78,13 @@ const findOrCreateUser = async (oauthUser) => {
   return ourServiceUserInfo;
 };
 
+const logout = async (token) => {
+  const decoded = decodeToken(token);
+  await db.user.update({ token: null }, { where: { id: decoded.userId } });
+};
+
 module.exports = {
   getUserInfo,
   findOrCreateUser,
+  logout,
 };

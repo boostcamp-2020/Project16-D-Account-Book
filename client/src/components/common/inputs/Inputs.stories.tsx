@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputText from './input-text/InputText';
 import styled from 'styled-components';
 import dummyOptions from '../../../__dummy-data__/components/inputs/dummyOptions';
@@ -9,6 +9,7 @@ import MultiInputDropdownWithCheckBox from './multi-input-dropdown/MultiInputDro
 import ModalClassify from './modal-classify/ModalClassify';
 import InputDateTime from './input-datetime/InputDateTime';
 import InputRadio from './input-radio/InputRadio';
+import { startDateChecker } from '../../../types/inputRadio';
 
 const SmallDiv = styled.div`
   width: 300px;
@@ -81,5 +82,6 @@ export const InputDateTimeDefault: React.FC = () => {
 };
 
 export const InputRadioDefault: React.FC = () => {
-  return <InputRadio />;
+  const { name, left, right } = startDateChecker;
+  return <InputRadio name={name} left={left} right={right} />;
 };

@@ -1,7 +1,9 @@
-import { observable, action, makeObservable } from 'mobx';
-import Category from '../types/category';
+import { observable, action, makeObservable, computed } from 'mobx';
+import Category, { CategoryRequest } from '../types/category';
 import RootStore from './RootStore';
 import CategoryService from '../services/category';
+import Options from '../types/dropdownOptions';
+
 export default class CategoryStore {
   rootStore;
 
@@ -11,18 +13,154 @@ export default class CategoryStore {
   @observable
   expenditureCategories: Category[] = [];
 
+  @observable
+  incomeCategoryNames: string[] = [];
+
+  @observable
+  expenditureCategoryNames: string[] = [];
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeObservable(this);
   }
 
   @action
-  updateIncomeCategories = async (id: number): Promise<void> => {
-    this.incomeCategories = await CategoryService.getIncomeCategoryById(id);
+  changeIncomeCategories = (category: Category[]): void => {
+    this.incomeCategories = category;
   };
 
   @action
-  updateExpenditureCategories = async (id: number): Promise<void> => {
-    this.expenditureCategories = await CategoryService.getExpenditureCategoryById(id);
+  changeExpenditureCategories = (category: Category[]): void => {
+    this.expenditureCategories = category;
   };
+
+  updateIncomeCategories = async (id: number): Promise<void> => {
+    const incomeCategories = await CategoryService.getIncomeCategoryById(id);
+    this.changeIncomeCategories(incomeCategories);
+    this.incomeCategoryNames = incomeCategories.map((item) => item.name);
+  };
+
+  updateExpenditureCategories = async (id: number): Promise<void> => {
+    const expenditureCategories = await CategoryService.getExpenditureCategoryById(id);
+    this.changeExpenditureCategories(expenditureCategories);
+    this.expenditureCategoryNames = expenditureCategories.map((item) => item.name);
+  };
+
+  createIncomeCategory = async (incomeCategory: CategoryRequest): Promise<void> => {
+    const createdIncomeCategory = await CategoryService.createIncomeCategory(incomeCategory);
+    this.addNewIncomeCategory(createdIncomeCategory);
+  };
+
+  @action
+  addNewIncomeCategory = (incomeCategory: Category): void => {
+    this.incomeCategories = [...this.incomeCategories, incomeCategory];
+    this.incomeCategoryNames = this.incomeCategories.map((item) => item.name);
+  };
+
+  createExpenditureCategory = async (expenditureCategory: CategoryRequest): Promise<void> => {
+    const createdExpenditureCategory = await CategoryService.createExpenditureCategory(expenditureCategory);
+    this.addNewExpenditureCategory(createdExpenditureCategory);
+  };
+
+  @action
+  addNewExpenditureCategory = (expenditureCategory: Category): void => {
+    this.expenditureCategories = [...this.expenditureCategories, expenditureCategory];
+    this.expenditureCategoryNames = this.expenditureCategories.map((item) => item.name);
+  };
+
+  deleteIncomeCategory = async (incomeCategoryId: number): Promise<void> => {
+    await CategoryService.deleteIncomeCategory(incomeCategoryId);
+    this.deleteIncomeCategoryById(incomeCategoryId);
+  };
+
+  @action
+  deleteIncomeCategoryById = (incomeCategoryId: number): void => {
+    this.incomeCategories = this.incomeCategories.filter((item) => item.id !== incomeCategoryId);
+    this.incomeCategoryNames = this.incomeCategories.map((item) => item.name);
+  };
+
+  deleteExpenditureCategory = async (expenditureCategoryId: number): Promise<void> => {
+    await CategoryService.deleteExpenditureCategory(expenditureCategoryId);
+    this.deleteExpenditureCategoryById(expenditureCategoryId);
+  };
+
+  @action
+  deleteExpenditureCategoryById = (expenditureCategoryId: number): void => {
+    this.expenditureCategories = this.expenditureCategories.filter((item) => item.id !== expenditureCategoryId);
+    this.expenditureCategoryNames = this.expenditureCategories.map((item) => item.name);
+  };
+
+  updateIncomeCategory = async (category: CategoryRequest, incomeCategoryId: number): Promise<void> => {
+    const updatedIncomeCategory = await CategoryService.updateIncomeCategory(category, incomeCategoryId);
+    this.updateIncomeCategoryById(updatedIncomeCategory);
+  };
+
+  @action
+  updateIncomeCategoryById = (incomeCategory: Category): void => {
+    this.incomeCategories = this.incomeCategories.map((item) =>
+      item.id === incomeCategory.id ? incomeCategory : item,
+    );
+    this.incomeCategoryNames = this.incomeCategories.map((item) => item.name);
+  };
+
+  updateExpenditureCategory = async (category: CategoryRequest, expenditureCategoryId: number): Promise<void> => {
+    const updatedExpenditureCategory = await CategoryService.updateExpenditureCategory(category, expenditureCategoryId);
+    this.updateExpenditureCategoryById(updatedExpenditureCategory);
+  };
+
+  @action
+  updateExpenditureCategoryById = (expenditureCategory: Category): void => {
+    this.expenditureCategories = this.expenditureCategories.map((item) =>
+      item.id === expenditureCategory.id ? expenditureCategory : item,
+    );
+    this.expenditureCategoryNames = this.expenditureCategories.map((item) => item.name);
+  };
+
+  @computed
+  get incomeOptions(): Options[] {
+    const data: Options[] = this.incomeCategories.map((income) => {
+      return {
+        value: income.id + '',
+        label: income.name,
+      };
+    });
+
+    return data;
+  }
+
+  @computed
+  get incomeFilterOptions(): Options[] {
+    const data: Options[] = this.incomeCategories.map((income) => {
+      return {
+        value: income.name,
+        label: income.name,
+      };
+    });
+
+    return data;
+  }
+
+  @computed
+  get expenditureOptions(): Options[] {
+    const data: Options[] = this.expenditureCategories.map((income) => {
+      return {
+        value: income.id + '',
+        label: income.name,
+      };
+    });
+
+    return data;
+  }
+
+  @computed
+  get expenditureFilterOptions(): Options[] {
+    const data: Options[] = this.expenditureCategories.map((income) => {
+      return {
+        value: income.name,
+        label: income.name,
+      };
+    });
+
+    return data;
+  }
 }

@@ -1,3 +1,5 @@
-export default interface LoginButton {
+export interface LoginButton {
   onClick?: () => void;
 }
+
+export default LoginButton;

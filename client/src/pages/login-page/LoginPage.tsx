@@ -4,6 +4,8 @@ import LargeKakaoLoginButton from '../../components/login-button/kakao-login-but
 import SmallKakaoLoginButton from '../../components/login-button/kakao-login-button/SmallKakaoLoginButton';
 import LargeNaverLoginButton from '../../components/login-button/naver-login-button/LargeNaverLoginButton';
 import SmallNaverLoginButton from '../../components/login-button/naver-login-button/SmallNaverLoginButton';
+import { useObserver } from 'mobx-react';
+import { v4 } from 'uuid';
 
 const MainContainer = styled.div`
   box-sizing: content-box;
@@ -66,7 +68,7 @@ const Title = styled.div`
 `;
 
 const LoginPage: React.FC = () => {
-  return (
+  return useObserver(() => (
     <MainContainer>
       <Title>
         Manage <br />
@@ -74,15 +76,39 @@ const LoginPage: React.FC = () => {
         Accountbook
       </Title>
       <LargeLoginButtonContainer>
-        <LargeKakaoLoginButton />
-        <LargeNaverLoginButton />
+        <a
+          href={`https://kauth.kakao.com/oauth/authorize?client_id=${
+            process.env.REACT_APP_KAKAO_CLIENT_ID
+          }&response_type=code&redirect_uri=${process.env.REACT_APP_KAKAO_CALLBACK_URL}&state=${v4()}`}
+        >
+          <LargeKakaoLoginButton />
+        </a>
+        <a
+          href={`http://nid.naver.com/oauth2.0/authorize?client_id=${
+            process.env.REACT_APP_NAVER_CLIENT_ID
+          }&response_type=code&redirect_uri=${process.env.REACT_APP_NAVER_CALLBACK_URL}&state=${v4()}`}
+        >
+          <LargeNaverLoginButton />
+        </a>
       </LargeLoginButtonContainer>
       <SmallLoginButtonContainer>
-        <SmallKakaoLoginButton />
-        <SmallNaverLoginButton />
+        <a
+          href={`https://kauth.kakao.com/oauth/authorize?client_id=${
+            process.env.REACT_APP_KAKAO_CLIENT_ID
+          }&response_type=code&redirect_uri=${process.env.REACT_APP_KAKAO_CALLBACK_URL}&state=${v4()}`}
+        >
+          <SmallKakaoLoginButton />
+        </a>
+        <a
+          href={`http://nid.naver.com/oauth2.0/authorize?client_id=${
+            process.env.REACT_APP_NAVER_CLIENT_ID
+          }&response_type=code&redirect_uri=${process.env.REACT_APP_NAVER_CALLBACK_URL}&state=${v4()}`}
+        >
+          <SmallNaverLoginButton />
+        </a>
       </SmallLoginButtonContainer>
     </MainContainer>
-  );
+  ));
 };
 
 export default LoginPage;

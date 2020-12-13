@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { GRAY } from '../../../constants/color';
 import SettingsSidebarHeader from './settings-sidebar-header/SettingsSidebarHeader';
 import SettingsSidebarBody from './settings-sidebar-body/SettingsSidebarBody';
+import { useHistory } from 'react-router-dom';
 
 const SettingsSidebarWrapper = styled.div`
   width: 18%;
   height: 100vh;
-  overflow: auto;
   position: fixed;
   top: 0%;
   left: 0%;
@@ -15,14 +15,16 @@ const SettingsSidebarWrapper = styled.div`
 `;
 
 interface SettingsSidebarProps {
-  currentPage: string;
+  currentpage: string;
 }
 
-const SettingsSidebar = ({ currentPage }: SettingsSidebarProps): JSX.Element => {
+const SettingsSidebar = ({ currentpage }: SettingsSidebarProps): JSX.Element => {
+  const history = useHistory();
+
   return (
     <SettingsSidebarWrapper>
-      <SettingsSidebarHeader />
-      <SettingsSidebarBody currentPage={currentPage} />
+      <SettingsSidebarHeader goToPreviousPage={() => history.goBack()} />
+      <SettingsSidebarBody currentpage={currentpage} />
     </SettingsSidebarWrapper>
   );
 };

@@ -4,8 +4,7 @@ const router = new Router();
 
 const oauthController = require('@controllers/oauth');
 
-router.get('/:provider', oauthController.redirectToOauthLoginPage);
-
+router.get('/logout', oauthController.logout);
 router.get('/callback/:provider', oauthController.login);
 
 module.exports = router;

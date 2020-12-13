@@ -1,7 +1,7 @@
 import React from 'react';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 
-const HamburgerButtonWrapper = Styled.div`
+const HamburgerButtonWrapper = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
   width: 30px;

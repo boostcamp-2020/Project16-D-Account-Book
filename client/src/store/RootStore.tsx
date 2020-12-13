@@ -1,21 +1,35 @@
-import { action } from 'mobx';
 import React, { createContext } from 'react';
 import DateStore from './DateStore';
 import CategoryStore from './CategoryStore';
 import TransactionStore from './TransactionStore';
 import ModalStore from './modal-store/ModalStore';
+import AccountStore from './AccountStore';
+import UserStore from './UserStore';
+import SocialStore from './SocialStore';
+import PieGraphPageStore from './PieGraphPageStore';
+import LineChartStore from './LineChartStore';
 
 export default class RootStore {
-  dateStore;
-  transactionStore;
-  modalStore;
-  categoryStore;
+  dateStore: DateStore;
+  transactionStore: TransactionStore;
+  modalStore: ModalStore;
+  categoryStore: CategoryStore;
+  accountStore: AccountStore;
+  userStore: UserStore;
+  socialStore: SocialStore;
+  pieGraphPageStore: PieGraphPageStore;
+  lineChartStore: LineChartStore;
 
   constructor() {
+    this.categoryStore = new CategoryStore(this);
+    this.accountStore = new AccountStore(this);
+    this.userStore = new UserStore(this);
     this.dateStore = new DateStore(this);
     this.transactionStore = new TransactionStore(this);
     this.modalStore = new ModalStore(this);
-    this.categoryStore = new CategoryStore(this);
+    this.socialStore = new SocialStore(this);
+    this.pieGraphPageStore = new PieGraphPageStore(this);
+    this.lineChartStore = new LineChartStore(this);
   }
 }
 

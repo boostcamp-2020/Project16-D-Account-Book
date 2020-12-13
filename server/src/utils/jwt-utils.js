@@ -3,22 +3,22 @@ const jwt = require('jsonwebtoken');
 const jwtConfig = require('@config/jwt');
 const db = require('@models');
 
-const generateToken = async (user) => {
-  const jwtToken = jwt.sign({ iss: 'moa', userId: user.id }, jwtConfig.jwtSecretKey, {
+const generateToken = async (id) => {
+  const jwtToken = jwt.sign({ iss: 'moa', userId: id }, jwtConfig.jwtSecretKey, {
     expiresIn: jwtConfig.jwtExpiresIn,
   });
   await db.user.update(
     { token: jwtToken },
     {
       where: {
-        id: user.id,
+        id,
       },
     },
   );
   return jwtToken;
 };
 
-const decodeToken = async (token) => {
+const decodeTokenForValidation = async (token) => {
   const decodedToken = jwt.verify(token, jwtConfig.jwtSecretKey, (err, decoded) => {
     if (err) {
       throw new Error('jwt secret이 잘못되었음');
@@ -28,6 +28,10 @@ const decodeToken = async (token) => {
   let user = await db.user.findOne({
     where: { id: decodedToken.userId },
     attributes: ['id', 'provider', 'nickname', 'profileUrl', 'token'],
+    include: {
+      model: db.userAccountbook,
+      attributes: ['authority', 'accountbookId'],
+    },
   });
   if (!user) {
     throw new Error('decoded payload에 기재된 유저가 없음');
@@ -37,10 +41,16 @@ const decodeToken = async (token) => {
   }
   user = user.toJSON();
   delete user.token;
-  return [user, decodedToken];
+  return [decodedToken, user];
+};
+
+const decodeToken = (token) => {
+  const decoded = jwt.verify(token, jwtConfig.jwtSecretKey);
+  return decoded;
 };
 
 module.exports = {
   generateToken,
   decodeToken,
+  decodeTokenForValidation,
 };

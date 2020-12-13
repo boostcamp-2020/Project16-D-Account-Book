@@ -7,21 +7,21 @@ export default {
 };
 
 export const AccountbookSettingsPage = (): JSX.Element => {
-  return <SettingsSidebarBody currentPage={'accountbook'} />;
+  return <SettingsSidebarBody currentpage={'accountbook'} />;
 };
 
 export const CategoriesSettingsPage = (): JSX.Element => {
-  return <SettingsSidebarBody currentPage={'categories'} />;
+  return <SettingsSidebarBody currentpage={'categories'} />;
 };
 
 export const AccountsSettingsPage = (): JSX.Element => {
-  return <SettingsSidebarBody currentPage={'accounts'} />;
+  return <SettingsSidebarBody currentpage={'accounts'} />;
 };
 
 export const SocialSettingsPage = (): JSX.Element => {
-  return <SettingsSidebarBody currentPage={'social'} />;
+  return <SettingsSidebarBody currentpage={'social'} />;
 };
 
 export const CsvSettingsPage = (): JSX.Element => {
-  return <SettingsSidebarBody currentPage={'csv'} />;
+  return <SettingsSidebarBody currentpage={'csv'} />;
 };

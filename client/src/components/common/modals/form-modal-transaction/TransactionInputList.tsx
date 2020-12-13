@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Options } from '../../../../types/options';
+import { Options } from '../../../../types/dropdownOptions';
 import InputText from '../../inputs/input-text/InputText';
 import ModalClassify from '../../inputs/modal-classify/ModalClassify';
 import SingleInputDropdown from '../../inputs/single-input-dropdown/SingleInputDropdown';
@@ -96,7 +96,12 @@ const TransactionInputList: React.FC<ITransactionInputList> = ({ inputs, changes
       <InputWrapper>
         <InputLabel>카테고리</InputLabel>
         <Inputs>
-          <SingleInputDropdown placeholder={'카테고리'} items={inputs.categories.items} onChange={changes.categories} />
+          <SingleInputDropdown
+            placeholder={'카테고리'}
+            items={inputs.categories.items}
+            onChange={changes.categories}
+            defaultSelectValue={inputs.categories.selected}
+          />
         </Inputs>
       </InputWrapper>
       <InputWrapper>
@@ -106,13 +111,14 @@ const TransactionInputList: React.FC<ITransactionInputList> = ({ inputs, changes
             placeholder={'결제수단을 선택하세요'}
             items={inputs.accounts?.items}
             onChange={changes.accounts}
+            defaultSelectValue={inputs.accounts.selected}
           />
         </Inputs>
       </InputWrapper>
       <InputWrapper>
         <InputLabel>내용</InputLabel>
         <Inputs>
-          <InputText placeholder={'날짜'} value={inputs.content} onChange={changes.content} />
+          <InputText placeholder={'내용'} value={inputs.content} onChange={changes.content} />
         </Inputs>
       </InputWrapper>
       <InputWrapper>
