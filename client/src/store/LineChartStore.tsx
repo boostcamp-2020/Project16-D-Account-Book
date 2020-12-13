@@ -5,7 +5,8 @@ import RootStore from './RootStore';
 import transactionService from '../services/transaction';
 import { getOnlyIncome, getOnlyExpenditure } from '../utils/filter';
 import ITransaction from '../types/lineChartValue';
-
+import { CancellablePromise } from 'mobx/dist/api/flow';
+import { getFirstDateOfNextMonth, getFirstDateOfPreviousMonth } from '../utils/date';
 type IncomeExpenditure = Income | Expenditure;
 
 export default class LineChartStore {
@@ -25,6 +26,9 @@ export default class LineChartStore {
     this.currentDate.setDate(1);
     makeObservable(this);
   }
+
+  transactionDebounceTimer: undefined | number;
+  latestFindTransactions: CancellablePromise<void> | undefined;
 
   @action
   nextMonth = (accountbookId: number): void => {
@@ -50,16 +54,48 @@ export default class LineChartStore {
   };
 
   @action
-  loadTransactions = (accountbookId): void => {
+  loadTransactions = (accountbookId: number): void => {
     this.getTransactions(accountbookId);
   };
 
-  getTransactions = flow(function* (this: LineChartStore, accountbookId) {
+  getTransactions = (accountbookId: number): void => {
+    if (this.transactionDebounceTimer !== undefined) {
+      if (this.latestFindTransactions !== undefined) {
+        this.latestFindTransactions.cancel();
+      }
+      clearTimeout(this.transactionDebounceTimer);
+    }
+    this.latestFindTransactions = undefined;
+
+    this.transactionDebounceTimer = setTimeout(async () => {
+      const cancel = this.callTransactions(accountbookId);
+      this.latestFindTransactions = cancel;
+      cancel.catch(() => {
+        this.latestFindTransactions = undefined;
+      });
+    }, 100);
+  };
+
+  callTransactions = flow(function* (this: LineChartStore, accountbookId) {
     const nextDate = new Date(this.currentDate.valueOf());
+    const beforeDate = getFirstDateOfPreviousMonth(this.currentDate);
+    const afterDate = getFirstDateOfNextMonth(nextDate);
     nextDate.setMonth(this.currentDate.getMonth() + 1);
-    nextDate.setDate(0);
-    const transactions = yield transactionService.getTransactions(accountbookId, this.currentDate, nextDate);
-    this.transactions = transactions;
+    nextDate.setDate(1);
+
+    const generation = transactionService.getTransactions(
+      accountbookId,
+      this.currentDate,
+      nextDate,
+      beforeDate,
+      afterDate,
+    );
+    const { value: cachedValue } = yield generation.next();
+    if (cachedValue !== undefined) {
+      this.transactions = cachedValue;
+    }
+    const { value: refreshedValue } = yield generation.next();
+    this.transactions = refreshedValue;
   });
 
   @computed

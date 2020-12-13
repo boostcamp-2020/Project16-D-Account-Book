@@ -10,7 +10,8 @@ const startServer = async () => {
   const app = new Koa();
   const port = serverConfig.serverPort || 3000;
   const httpServer = http.createServer(app.callback());
-  const io = socketIO(httpServer, { cors: { origin: `${clientHost}:${clientPort}`, credentials: true } });
+  const origin = `${clientHost}${clientPort === '80' ? '' : `:${clientPort}`}`;
+  const io = socketIO(httpServer, { cors: { origin, credentials: true } });
 
   connectOn(io);
   await server(app);

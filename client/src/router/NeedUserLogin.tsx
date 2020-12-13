@@ -11,21 +11,29 @@ import SettingsSocialPage from '../pages/settings-social-page/SettingsSocialPage
 import StatisticsPage from '../pages/statistics-page/StatisticsPage';
 import TransactionPage from '../pages/transaction-page/TransactionPage';
 import LoginGuard from '../hoc/LoginGuard';
+import UserAuthorityGuard from '../hoc/UserAuthorityGuard';
 import AccountbookDeleteTestPage from '../pages/AccountbookDeleteTestPage';
-
 const NeedUserLogin: React.FC = () => {
   useGetAuthority();
 
   return (
     <Switch>
-      <Route exact path="/" component={AccountbookSelectionPage} />
-      <Route exact path="/accountbooks/:id" component={LoginGuard(TransactionPage)} />
-      <Route exact path="/accountbooks/:id/settings/accountbook" component={LoginGuard(SettingsAccountbookPage)} />
-      <Route exact path="/accountbooks/:id/settings/categories" component={LoginGuard(SettingsCategoriesPage)} />
-      <Route exact path="/accountbooks/:id/settings/accounts" component={LoginGuard(SettingsAccountsPage)} />
-      <Route exact path="/accountbooks/:id/settings/csv" component={LoginGuard(SettingsCsvPage)} />
-      <Route exact path="/accountbooks/:id/settings/social" component={LoginGuard(SettingsSocialPage)} />
-      <Route exact path="/accountbooks/:id/statistics" component={LoginGuard(StatisticsPage)} />
+      <Route exact path="/" component={LoginGuard(AccountbookSelectionPage)} />
+      <Route exact path="/accountbooks/:id" component={UserAuthorityGuard(TransactionPage)} />
+      <Route
+        exact
+        path="/accountbooks/:id/settings/accountbook"
+        component={UserAuthorityGuard(SettingsAccountbookPage)}
+      />
+      <Route
+        exact
+        path="/accountbooks/:id/settings/categories"
+        component={UserAuthorityGuard(SettingsCategoriesPage)}
+      />
+      <Route exact path="/accountbooks/:id/settings/accounts" component={UserAuthorityGuard(SettingsAccountsPage)} />
+      <Route exact path="/accountbooks/:id/settings/csv" component={UserAuthorityGuard(SettingsCsvPage)} />
+      <Route exact path="/accountbooks/:id/settings/social" component={UserAuthorityGuard(SettingsSocialPage)} />
+      <Route exact path="/accountbooks/:id/statistics" component={UserAuthorityGuard(StatisticsPage)} />
       <Route exact path="/test" component={AccountbookDeleteTestPage} />
     </Switch>
   );

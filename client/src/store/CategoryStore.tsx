@@ -1,4 +1,4 @@
-import { observable, action, makeObservable, computed } from 'mobx';
+import { observable, action, makeObservable, computed, flow } from 'mobx';
 import Category, { CategoryRequest } from '../types/category';
 import RootStore from './RootStore';
 import CategoryService from '../services/category';
@@ -27,24 +27,34 @@ export default class CategoryStore {
   @action
   changeIncomeCategories = (category: Category[]): void => {
     this.incomeCategories = category;
+    this.incomeCategoryNames = category.map((item) => item.name);
   };
 
   @action
   changeExpenditureCategories = (category: Category[]): void => {
     this.expenditureCategories = category;
+    this.expenditureCategoryNames = category.map((item) => item.name);
   };
 
-  updateIncomeCategories = async (id: number): Promise<void> => {
-    const incomeCategories = await CategoryService.getIncomeCategoryById(id);
-    this.changeIncomeCategories(incomeCategories);
-    this.incomeCategoryNames = incomeCategories.map((item) => item.name);
-  };
+  updateIncomeCategories = flow(function* (this: CategoryStore, id: number) {
+    const generator = CategoryService.getIncomeCategoryById(id);
+    const { value: cachedValue } = yield generator.next();
+    if (cachedValue !== undefined) {
+      this.changeIncomeCategories(cachedValue);
+    }
+    const { value: refreshedValue } = yield generator.next();
+    this.changeIncomeCategories(refreshedValue);
+  });
 
-  updateExpenditureCategories = async (id: number): Promise<void> => {
-    const expenditureCategories = await CategoryService.getExpenditureCategoryById(id);
-    this.changeExpenditureCategories(expenditureCategories);
-    this.expenditureCategoryNames = expenditureCategories.map((item) => item.name);
-  };
+  updateExpenditureCategories = flow(function* (this: CategoryStore, id: number) {
+    const generator = CategoryService.getExpenditureCategoryById(id);
+    const { value: cachedValue } = yield generator.next();
+    if (cachedValue !== undefined) {
+      this.changeExpenditureCategories(cachedValue);
+    }
+    const { value: refreshedValue } = yield generator.next();
+    this.changeExpenditureCategories(refreshedValue);
+  });
 
   createIncomeCategory = async (incomeCategory: CategoryRequest): Promise<void> => {
     const createdIncomeCategory = await CategoryService.createIncomeCategory(incomeCategory);
