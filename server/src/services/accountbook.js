@@ -1,5 +1,4 @@
 const db = require('@models');
-const { decodeTokenForValidation } = require('@utils/jwt-utils');
 
 const getAccountbookById = async (id) => {
   const accountbook = await db.accountbook.findOne({
@@ -27,25 +26,10 @@ const getAccountbooksByUserId = async (userId) => {
         attributes: ['title'],
       },
     ],
+    raw: true,
   });
   return accountbooks;
 };
-
-// const getAccountbooksForClient = async (userId) => {
-//   const accountbooks = await db.userAccountbook.findAll({
-//     where: {
-//       userId,
-//     },
-//     attributes: ['id', 'authority', 'description', 'color', 'accountbookId'],
-//     include: [
-//       {
-//         model: db.accountbook,
-//         attributes: ['title'],
-//       },
-//     ],
-//   });
-//   return accountbooks;
-// };
 
 const deleteAccountbook = async (accountbookId, userId) => {
   await db.userAccountbook.destroy({ where: { accountbookId, userId } });
