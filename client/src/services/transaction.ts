@@ -2,6 +2,7 @@ import instance from '../api/axios';
 import { getFormattedDate } from '../utils/date';
 import Income, { IncomeRequest } from '../types/income';
 import Expenditure, { ExpenditureRequest } from '../types/expenditure';
+import querystring from 'querystring';
 import { getIncomeCategoriesHandler } from '../__dummy-data__/api/category/getIncome';
 
 const transactionAPIAddress = {
@@ -14,14 +15,60 @@ const transactionAPIAddress = {
   deleteExpenditure: '/api/transactions/expenditure',
 };
 
+const TransactionCache = new Map();
+
 export default {
-  getTransactions: async (
+  getTransactions: async function* (
     accountbookId: number,
     startDate: Date,
     endDate: Date,
-  ): Promise<Array<Income | Expenditure>> => {
+    beforeStartDate?: Date,
+    afterEndDate?: Date,
+  ): AsyncGenerator<Array<Income | Expenditure>> {
     const formattedStartDate = getFormattedDate({ date: startDate, format: '.' });
     const foramttedEndDate = getFormattedDate({ date: endDate, format: '.' });
+    const gap = endDate.valueOf() - startDate.valueOf();
+
+    const query = querystring.stringify({
+      accountbook_id: accountbookId,
+      start_date: formattedStartDate,
+      end_date: foramttedEndDate,
+    });
+    const requestURL = transactionAPIAddress.getTransactions + `?${query}`;
+
+    // 캐시 리턴
+    yield TransactionCache.get(requestURL);
+
+    // 이전 달 업데이트
+    if (beforeStartDate !== undefined) {
+      const beforeMonthQuery =
+        transactionAPIAddress.getTransactions +
+        `?` +
+        querystring.stringify({
+          accountbook_id: accountbookId,
+          start_date: getFormattedDate({ date: beforeStartDate, format: '.' }),
+          end_date: formattedStartDate,
+        });
+      instance.get(beforeMonthQuery).then((response) => {
+        TransactionCache.set(beforeMonthQuery, response.data);
+      });
+    }
+
+    // 다음 달 미리 캐싱
+    if (afterEndDate !== undefined) {
+      const beforeMonthQuery =
+        transactionAPIAddress.getTransactions +
+        `?` +
+        querystring.stringify({
+          accountbook_id: accountbookId,
+          start_date: foramttedEndDate,
+          end_date: getFormattedDate({ date: afterEndDate, format: '.' }),
+        });
+
+      instance.get(beforeMonthQuery).then((response) => {
+        TransactionCache.set(beforeMonthQuery, response.data);
+      });
+    }
 
     const response = await instance.get(transactionAPIAddress.getTransactions, {
       params: {
@@ -30,7 +77,10 @@ export default {
         end_date: foramttedEndDate,
       },
     });
-    return response.data;
+
+    //캐시 업데이트
+    TransactionCache.set(requestURL, response.data);
+    yield response.data;
   },
 
   createIncome: async (income: IncomeRequest): Promise<Income> => {

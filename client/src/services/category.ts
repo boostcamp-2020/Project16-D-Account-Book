@@ -1,5 +1,6 @@
 import Category, { CategoryRequest } from '../types/category';
 import instance from '../api/axios';
+import querystring from 'querystring';
 
 const categoryAPIAddress = {
   getIncome: '/api/categories/income',
@@ -12,22 +13,44 @@ const categoryAPIAddress = {
   updateExpenditureCategory: '/api/categories/expenditure',
 };
 
+const IncomeCategory = new Map();
+const ExpenditureCategory = new Map();
+
 export default {
-  getIncomeCategoryById: async (id: number): Promise<Category[]> => {
-    const response = await instance.get(categoryAPIAddress.getIncome, {
-      params: {
+  getIncomeCategoryById: async function* (id: number): AsyncGenerator<Category[]> {
+    const requestURL =
+      categoryAPIAddress.getIncome +
+      '?' +
+      querystring.stringify({
         accountbook_id: id,
-      },
-    });
-    return response.data;
+      });
+    //캐시 리턴
+    yield IncomeCategory.get(requestURL);
+
+    const response = await instance.get(requestURL);
+
+    //캐시 업데이트
+    IncomeCategory.set(requestURL, response.data);
+
+    yield response.data;
   },
-  getExpenditureCategoryById: async (id: number): Promise<Category[]> => {
-    const response = await instance.get(categoryAPIAddress.getExpenditure, {
-      params: {
+
+  getExpenditureCategoryById: async function* (id: number): AsyncGenerator<Category[]> {
+    const requestURL =
+      categoryAPIAddress.getExpenditure +
+      '?' +
+      querystring.stringify({
         accountbook_id: id,
-      },
-    });
-    return response.data;
+      });
+    //캐시 리턴
+    yield ExpenditureCategory.get(requestURL);
+
+    const response = await instance.get(requestURL);
+
+    //캐시 업데이트
+    ExpenditureCategory.set(requestURL, response.data);
+
+    yield response.data;
   },
   createIncomeCategory: async (incomeCategory: CategoryRequest): Promise<Category> => {
     const response = await instance.post(categoryAPIAddress.createIncome, incomeCategory);

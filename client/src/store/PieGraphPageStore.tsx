@@ -8,6 +8,7 @@ import transactionService from '../services/transaction';
 import PieChartValue from '../types/pieChartValue';
 import { getOnlyIncome, getTopFiveCategory, getOnlyExpenditure } from '../utils/filter';
 import BoxChartValue from '../types/boxChartValue';
+import { CancellablePromise } from 'mobx/dist/api/flow';
 export default class PieGraphPageStore {
   rootStore: RootStore;
   dateOptions = dateOptions;
@@ -26,11 +27,16 @@ export default class PieGraphPageStore {
 
   @observable
   endDate: Date;
+
+  transactionDebounceTimer: undefined | number;
+  latestFindTransactions: CancellablePromise<void> | undefined;
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     this.endDate = new Date();
     this.startDate = new Date();
     this.startDate.setMonth(this.endDate.getMonth() - 1);
+    this.endDate.setDate(this.endDate.getDate() + 1);
 
     makeObservable(this);
   }
@@ -55,9 +61,6 @@ export default class PieGraphPageStore {
   @action
   moveToNext = (accountbookId: number): void => {
     const nextDate = this.getNextDateByPeriod(this.endDate, this.selectedDate);
-    if (nextDate.valueOf() > new Date().valueOf()) {
-      return;
-    }
     this.dateChange(this.endDate, nextDate, accountbookId);
   };
 
@@ -66,23 +69,61 @@ export default class PieGraphPageStore {
     this.incomeMode = !this.incomeMode;
   };
 
-  dateChange = flow(function* (this: PieGraphPageStore, startDate: Date, endDate: Date, accountbookId: number) {
+  dateChange = (startDate: Date, endDate: Date, accountbookId: number): void => {
+    if (this.transactionDebounceTimer !== undefined) {
+      if (this.latestFindTransactions !== undefined) {
+        this.latestFindTransactions.cancel();
+      }
+      clearTimeout(this.transactionDebounceTimer);
+    }
+    this.latestFindTransactions = undefined;
+
+    this.transactionDebounceTimer = setTimeout(async () => {
+      const cancel = this._dateChange(startDate, endDate, accountbookId);
+      this.latestFindTransactions = cancel;
+      cancel.catch(() => {
+        this.latestFindTransactions = undefined;
+      });
+    }, 100);
+  };
+
+  _dateChange = flow(function* (this: PieGraphPageStore, startDate: Date, endDate: Date, accountbookId: number) {
     this.startDate = startDate;
     this.endDate = endDate;
-    const transactions = yield transactionService.getTransactions(accountbookId, startDate, endDate);
-    this.transactions = transactions;
+    const beforeDate = this.getBeforeDateByPeriod(this.startDate, this.selectedDate);
+    const afterDate = this.getNextDateByPeriod(this.endDate, this.selectedDate);
+    const generation = transactionService.getTransactions(accountbookId, startDate, endDate, beforeDate, afterDate);
+    const { value: cachedValue } = yield generation.next();
+    if (cachedValue !== undefined) {
+      this.transactions = cachedValue;
+    }
+    const { value: refreshedValue } = yield generation.next();
+    this.transactions = refreshedValue;
   });
 
   loadTransactions = flow(function* (this: PieGraphPageStore, accountbookId: number) {
-    const transactions = yield transactionService.getTransactions(accountbookId, this.startDate, this.endDate);
-    this.transactions = transactions;
+    const beforeDate = this.getBeforeDateByPeriod(this.startDate, this.selectedDate);
+    const afterDate = this.getNextDateByPeriod(this.startDate, this.selectedDate);
+    const generation = transactionService.getTransactions(
+      accountbookId,
+      this.startDate,
+      this.endDate,
+      beforeDate,
+      afterDate,
+    );
+    const { value: cachedValue } = yield generation.next();
+    if (cachedValue !== undefined) {
+      this.transactions = cachedValue;
+    }
+    const { value: refreshedValue } = yield generation.next();
+    this.transactions = refreshedValue;
   });
 
   getBeforeDateByPeriod = (endDate: Date, selectedType: string): Date => {
     const result = new Date(endDate.valueOf());
     result.setFullYear(endDate.getFullYear() - datePeriodNumber[selectedType].year);
     result.setMonth(endDate.getMonth() - datePeriodNumber[selectedType].month);
-    result.setDate(endDate.getDate() - datePeriodNumber[selectedType].day);
+    result.setDate(endDate.getDate() - datePeriodNumber[selectedType].day - 1);
     return result;
   };
 
@@ -90,7 +131,7 @@ export default class PieGraphPageStore {
     const result = new Date(endDate.valueOf());
     result.setFullYear(endDate.getFullYear() + datePeriodNumber[selectedType].year);
     result.setMonth(endDate.getMonth() + datePeriodNumber[selectedType].month);
-    result.setDate(endDate.getDate() + datePeriodNumber[selectedType].day);
+    result.setDate(endDate.getDate() + datePeriodNumber[selectedType].day + 1);
     return result;
   };
 
