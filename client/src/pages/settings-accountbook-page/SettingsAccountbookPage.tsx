@@ -4,7 +4,9 @@ import SettingsSidebar from '../../components/common/settings-sidebar/SettingsSi
 import Preview from '../../components/common/preview/Preview';
 import InputText from '../../components/common/inputs/input-text/InputText';
 import { DODGER_BLUE } from '../../constants/color';
-import { startDateChecker } from '../../types/inputRadio';
+import useStore from '../../hook/use-store/useStore';
+import useGetParam from '../../hook/use-get-param/useGetParam';
+
 const SettingsAccountbookPageWrapper = styled.div`
   display: flex;
 `;
@@ -47,7 +49,10 @@ const SettingsAccountbookPage = (): JSX.Element => {
   const [inputColor, setInputColor] = useState<string>('black');
   const [title, setTitle] = useState<string>('가계부 1');
   const [description, setDescription] = useState<string>('부스트캠프 커넥트 재단 가계부');
-  const { name, left, right } = startDateChecker;
+  const accountbookId = useGetParam();
+  const { userStore } = useStore().rootStore;
+  const isAdmin = userStore.isAdmin(accountbookId);
+
   const onChange = (color: { hex: string }): void => {
     setInputColor(color.hex);
   };
@@ -68,15 +73,17 @@ const SettingsAccountbookPage = (): JSX.Element => {
         <PreviewWrapper>
           <Preview title={title} description={description} color={inputColor} onChange={onChange} />
         </PreviewWrapper>
-        <SettingsItemWrapper>
-          <Label>가계부 별칭</Label>
-          <InputText
-            maxLength={15}
-            placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
-            value={title}
-            onChange={onChangeTitle}
-          />
-        </SettingsItemWrapper>
+        {isAdmin ? (
+          <SettingsItemWrapper>
+            <Label>가계부 별칭</Label>
+            <InputText
+              maxLength={15}
+              placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
+              value={title}
+              onChange={onChangeTitle}
+            />
+          </SettingsItemWrapper>
+        ) : null}
         <SettingsItemWrapper>
           <Label>가계부 설명</Label>
           <InputText
