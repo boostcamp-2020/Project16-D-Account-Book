@@ -21,14 +21,15 @@ const AccountbookName = styled.div`
   }
 `;
 
-const AccountbookNameWrapper = styled.div`
+const AccountbookNameWrapper = styled.div<{ bgColor: string }>`
   display: none;
   position: absolute;
   left: 115%;
-  background-color: ${GRAY};
+  background-color: ${({ bgColor }) => bgColor};
   box-shadow: 2px 3px 7px gray;
   z-index: 1;
   border-radius: 5px;
+  height: 10vh;
 `;
 
 const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>`
@@ -78,8 +79,9 @@ const SmallAccountbookItem = ({ id, bgColor, show, onClick }: SmallAccountbookIt
   return (
     <SmallAccountbookItemWrapper bgColor={bgColor} textColor={textColor} show={show} onClick={onClick}>
       <div className="text">{id}</div>
-      <AccountbookNameWrapper>
-        <AccountbookName>가계부 이름</AccountbookName>
+      <AccountbookNameWrapper bgColor={bgColor}>
+        <AccountbookName>가계부 {id}</AccountbookName>
+        <AccountbookName>가계부 {id}에 대한 설명입니다.</AccountbookName>
       </AccountbookNameWrapper>
     </SmallAccountbookItemWrapper>
   );
