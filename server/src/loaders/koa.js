@@ -18,10 +18,11 @@ const errorHandler = async (ctx, next) => {
   }
 };
 
+const origin = `${clientHost}${clientPort === '80' ? '' : `:${clientPort}`}`;
 const koa = async (app) => {
   app.use(
     cors({
-      origin: `${clientHost}:${clientPort}`,
+      origin,
       credentials: true,
     }),
   );
