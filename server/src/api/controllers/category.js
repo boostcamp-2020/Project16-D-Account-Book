@@ -36,6 +36,7 @@ const updateIncomeCategory = async (ctx) => {
   const { income_category_id: incomeCategoryId } = ctx.request.params;
   const incomeCategoryData = ctx.request.body;
   const updatedIncomeCategory = await categoryService.updateIncomeCategory(incomeCategoryId, incomeCategoryData);
+  console.log(updatedIncomeCategory.toJSON());
   ctx.body = updatedIncomeCategory;
 };
 
