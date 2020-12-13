@@ -8,6 +8,13 @@ const getAccountbooksByUserId = async (ctx) => {
   ctx.body = accountbooks;
 };
 
+const updateAccountbook = async (ctx) => {
+  const { accountbook_id: accountbookId } = ctx.params;
+  const accountbookData = ctx.request.body;
+  const updatedAccountbook = await accountbookService.updateAccountbook(accountbookId, accountbookData);
+  ctx.body = updatedAccountbook;
+};
+
 const deleteAccountbook = async (ctx) => {
   const token = ctx.cookies.get('jwt');
   const { accountbook_id: accountbookId } = ctx.params;
@@ -18,5 +25,6 @@ const deleteAccountbook = async (ctx) => {
 
 module.exports = {
   getAccountbooksByUserId,
+  updateAccountbook,
   deleteAccountbook,
 };
