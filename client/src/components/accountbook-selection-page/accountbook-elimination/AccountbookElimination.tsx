@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
-import { RED, NAVER_GREEN } from '../../../constants/color';
+import { RED } from '../../../constants/color';
 
 const Wrapper = styled.div<{ itemColor: string; bgColor: string }>`
   width: 1rem;
@@ -10,11 +10,7 @@ const Wrapper = styled.div<{ itemColor: string; bgColor: string }>`
   .elimination {
     fill: ${({ itemColor }) => itemColor};
   }
-  /* &:hover .elimination {
-    fill: ${({ bgColor }) => {
-    return bgColor === RED ? NAVER_GREEN : RED;
-  }};
-  } */
+
   &:hover .elimination {
     fill: ${RED};
     stroke: ${({ bgColor, itemColor }) => {
