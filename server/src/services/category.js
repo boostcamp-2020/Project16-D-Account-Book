@@ -67,7 +67,8 @@ const createExpenditureCategory = async ({ accountbookId, name, color }) => {
     name,
     color,
   });
-  return createdExpenditureCategory;
+  const expenditureCategory = await findExpenditureCategoryById(createdExpenditureCategory.id);
+  return expenditureCategory;
 };
 
 const updateIncomeCategory = async (incomeCategoryId, { name, color }) => {
