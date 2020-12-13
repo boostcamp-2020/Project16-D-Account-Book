@@ -50,10 +50,10 @@ const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 20px auto;
-  transition: all ease 0.3s 0s;
+  transition: all ease 0.1s 0s;
 
   &:hover {
-    border: ${({ textColor }) => textColor} 3px solid;
+    border: ${({ textColor }) => textColor} 2px solid;
     cursor: pointer;
   }
 
