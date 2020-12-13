@@ -43,25 +43,28 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
   const { transactionStore } = rootStore;
 
   useEffect(() => {
-    transactionStore.findTransactions(accountbookId, new Date(0), new Date());
-    const csvTransactions = transactionStore.transactions.map((item) => {
-      if ((item as Expenditure).place) {
-        return {
-          amount: -item.amount,
-          account: (item as Expenditure).place,
-          date: new Date(item.date as string),
-          memo: item.memo,
-        };
-      } else {
-        return {
-          amount: item.amount,
-          account: (item as Income).content,
-          date: new Date(item.date as string),
-          memo: item.memo,
-        };
-      }
-    });
-    transactionStore.loadCsvTransactions(csvTransactions);
+    const loadTransaction = async () => {
+      await transactionStore.getTransactions(accountbookId, new Date(0), new Date());
+      const csvTransactions = transactionStore.transactions.map((item) => {
+        if ((item as Expenditure).place) {
+          return {
+            amount: -item.amount,
+            account: (item as Expenditure).place,
+            date: new Date(item.date as string),
+            memo: item.memo,
+          };
+        } else {
+          return {
+            amount: item.amount,
+            account: (item as Income).content,
+            date: new Date(item.date as string),
+            memo: item.memo,
+          };
+        }
+      });
+      transactionStore.loadCsvTransactions(csvTransactions);
+    };
+    loadTransaction();
   }, []);
 
   const data = transactionStore.csvTransactions.map((item) => {
