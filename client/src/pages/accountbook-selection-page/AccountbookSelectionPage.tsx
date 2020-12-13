@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import useStore from '../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import AccountbookCard from '../../components/accountbook-selection-page/accountbook-card/AccountbookCard';
 import AddAccountbookCard from '../../components/accountbook-selection-page/add-accountbook-card/AddAccountbookCard';
@@ -15,6 +16,14 @@ const ViewWrapper = styled.div`
   width: 40%;
   padding-top: 5%;
   margin: 0 auto;
+
+  a {
+    text-decoration: none;
+  }
+
+  a:visited {
+    text-decoration: none;
+  }
 `;
 
 const AccountbookSelectionPage: React.FC = () => {
@@ -43,13 +52,15 @@ const AccountbookSelectionPage: React.FC = () => {
         {accountbookStore.accountbooks.map((accountbook) => {
           return (
             <div key={accountbook.id}>
-              <AccountbookCard
-                id={accountbook.id}
-                title={accountbook.title}
-                color={accountbook.color}
-                description={accountbook.description}
-                accountbookId={accountbook.accountbookId}
-              />
+              <Link to={`/accountbooks/${accountbook.accountbookId}`} className="accountbook">
+                <AccountbookCard
+                  id={accountbook.id}
+                  title={accountbook.title}
+                  color={accountbook.color}
+                  description={accountbook.description}
+                  accountbookId={accountbook.accountbookId}
+                />
+              </Link>
             </div>
           );
         })}
