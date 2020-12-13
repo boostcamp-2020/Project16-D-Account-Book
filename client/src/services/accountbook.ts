@@ -1,5 +1,6 @@
 import instance from '../api/axios';
 import Accountbook from '../types/accountbook';
+import renameKey from '../utils/renameObjectKey';
 
 const accountbookAPIAddress = {
   getAccountbooks: '/api/accountbooks',
@@ -9,8 +10,11 @@ const accountbookAPIAddress = {
 
 export default {
   getAccountbooks: async (): Promise<Accountbook[]> => {
-    const response = await instance.get(`${accountbookAPIAddress.getAccountbooks}`);
-    return response.data;
+    let { data } = await instance.get(`${accountbookAPIAddress.getAccountbooks}`);
+    data = data.map((item) => {
+      return renameKey(item, 'accountbook.title', 'title');
+    });
+    return data;
   },
   updateAccountbook: async (accountbookId: number): Promise<void> => {
     try {
