@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
+import { LIGHT_GRAY } from '../../../constants/color';
 
 interface SmallAccountbookItemWrapperProps {
   bgColor: string;
@@ -8,6 +9,29 @@ interface SmallAccountbookItemWrapperProps {
   textColor: string;
   onClick?: () => void;
 }
+
+const AccountbookName = styled.div<{ textColor: string }>`
+  color: ${({ textColor }) => textColor};
+  padding: 10px 14px;
+  display: block;
+`;
+
+const AccountbookDescription = styled.div<{ textColor: string }>`
+  color: ${({ textColor }) => textColor};
+  padding: 10px 14px;
+  display: block;
+  font-size: 0.8em;
+`;
+
+const AccountbookViewWrapper = styled.div<{ bgColor: string }>`
+  display: none;
+  position: absolute;
+  left: 115%;
+  background-color: ${({ bgColor }) => bgColor};
+  box-shadow: 2px 3px 7px gray;
+  z-index: 1;
+  border-radius: 5px;
+`;
 
 const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>`
   display: flex;
@@ -26,17 +50,21 @@ const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 20px auto;
-  transition: all ease 0.3s 0s;
+  transition: all ease 0.1s 0s;
 
   &:hover {
-    border: white 2px solid;
-    width: 50px;
-    height: 50px;
-    font-size: 1.9em;
+    border: ${({ textColor }) => textColor} 2px solid;
     cursor: pointer;
   }
+
   .text {
     text-align: center;
+  }
+
+  &:hover ${AccountbookViewWrapper} {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 400;
   }
 `;
 
@@ -52,6 +80,10 @@ const SmallAccountbookItem = ({ id, bgColor, show, onClick }: SmallAccountbookIt
   return (
     <SmallAccountbookItemWrapper bgColor={bgColor} textColor={textColor} show={show} onClick={onClick}>
       <div className="text">{id}</div>
+      <AccountbookViewWrapper bgColor={bgColor}>
+        <AccountbookName textColor={textColor}>가계부 {id}</AccountbookName>
+        <AccountbookDescription textColor={textColor}>가계부 {id}에 대한 설명입니다.</AccountbookDescription>
+      </AccountbookViewWrapper>
     </SmallAccountbookItemWrapper>
   );
 };
