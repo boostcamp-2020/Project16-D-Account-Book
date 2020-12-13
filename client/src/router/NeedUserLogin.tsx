@@ -11,6 +11,8 @@ import SettingsSocialPage from '../pages/settings-social-page/SettingsSocialPage
 import StatisticsPage from '../pages/statistics-page/StatisticsPage';
 import TransactionPage from '../pages/transaction-page/TransactionPage';
 import LoginGuard from '../hoc/LoginGuard';
+import AccountbookDeleteTestPage from '../pages/AccountbookDeleteTestPage';
+
 
 const NeedUserLogin: React.FC = () => {
   useGetAuthority();
@@ -25,6 +27,7 @@ const NeedUserLogin: React.FC = () => {
       <Route exact path="/accountbooks/:id/settings/csv" component={LoginGuard(SettingsCsvPage)} />
       <Route exact path="/accountbooks/:id/settings/social" component={LoginGuard(SettingsSocialPage)} />
       <Route exact path="/accountbooks/:id/statistics" component={LoginGuard(StatisticsPage)} />
+      <Route exact path="/test" component={AccountbookDeleteTestPage} />
     </Switch>
   );
 };

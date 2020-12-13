@@ -3,7 +3,6 @@ import FormFilter from './FormFilter';
 import ModalBackground from '../modal-background/ModalBackground';
 import FormModalWrapper from '../form-modal-template/FormModalWrapper';
 import FormModalHeader from '../form-modal-header/FormModalHeader';
-import { inputs, changes } from '../../../../__dummy-data__/components/modal/modalFilter';
 import useStore from '../../../../hook/use-store/useStore';
 import { useObserver } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
@@ -33,7 +32,7 @@ const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Elem
 
   return useObserver(() => (
     <>
-      <ModalBackground show={true} closeModal={closeModal}>
+      <ModalBackground show={true} closeModal={closeModal} position="absolute">
         <FormModalWrapper>
           <FormModalHeader
             modalName={'필터'}
@@ -43,7 +42,7 @@ const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Elem
             clickRed={formFilterStore.init}
             closeModal={closeModal}
           />
-          <FormFilter inputs={inputs} changes={changes} />
+          <FormFilter />
         </FormModalWrapper>
       </ModalBackground>
     </>

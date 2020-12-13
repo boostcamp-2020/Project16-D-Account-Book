@@ -8,35 +8,6 @@ import { MODAL_WHITE } from '../../../../constants/color';
 import useStore from '../../../../hook/use-store/useStore';
 import { useObserver } from 'mobx-react';
 
-interface IFormModalFilter {
-  inputs: {
-    dateRange: {
-      placeholder: string;
-      items: Options[];
-    };
-    startDate: string;
-    endDate: string;
-    payment: {
-      placeholder: string;
-      items: Options[];
-    };
-    incomeCategories: {
-      placeholder: string;
-      items: Options[];
-    };
-    expenditureCategories: {
-      placeholder: string;
-      items: Options[];
-    };
-  };
-  changes: {
-    dateRage: (e: string) => void;
-    payment: (e: string[]) => void;
-    incomeCategories: (e: string[]) => void;
-    expenditureCategories: (e: string[]) => void;
-  };
-}
-
 const ItemWrapper = styled.div`
   background-color: ${MODAL_WHITE};
   width: 100%;
@@ -62,7 +33,7 @@ const DateRange = styled.div`
   justify-content: space-between;
 `;
 
-const FormModalFilter: React.FC<IFormModalFilter> = ({ inputs, changes }: IFormModalFilter) => {
+const FormModalFilter: React.FC = () => {
   const { formFilterStore } = useStore().rootStore.modalStore;
 
   return useObserver(() => (

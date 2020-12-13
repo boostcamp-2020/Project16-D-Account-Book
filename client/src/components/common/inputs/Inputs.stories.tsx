@@ -85,4 +85,3 @@ export const InputRadioDefault: React.FC = () => {
   const { name, left, right } = startDateChecker;
   return <InputRadio name={name} left={left} right={right} />;
 };
-
