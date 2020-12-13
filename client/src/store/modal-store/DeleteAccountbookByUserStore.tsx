@@ -1,4 +1,4 @@
-import { observable, action, makeAutoObservable, runInAction } from 'mobx';
+import { observable, action, makeAutoObservable } from 'mobx';
 import RootStore from '../RootStore';
 import accountbookService from '../../services/accountbook';
 
