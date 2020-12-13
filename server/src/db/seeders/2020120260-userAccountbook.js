@@ -1,7 +1,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const id = [1, 2, 3, 4, 5, 6, 7, 8];
-    const authority = [true, false, false, false, false, true, false, false];
+    const id = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const authority = [true, false, false, false, false, true, false, false, false];
     const description = [
       '테스트용 accountbook',
       '테스트용 accountbook',
@@ -11,12 +11,13 @@ module.exports = {
       '테스트용 accountbook',
       '테스트용 accountbook',
       '테스트용 accountbook',
+      '테스트용 accountbook',
     ];
-    const color = ['#1E90FF', '#1E90FF', '#1E90FF', '#1E90FF', '#1E90FF', '#1E90FF', '#1E90FF', '#1E90FF'];
+    const color = ['#1E90FF', '#1E90FF', '#1E90FF', '#1E90FF', '#1E90FF', '#1E90FF', '#1E90FF', '#1E90FF', '#1E90FF'];
     // eslint-disable-next-line camelcase
-    const accountbook_id = [1, 1, 1, 1, 2, 2, 2, 2];
+    const accountbook_id = [1, 1, 1, 1, 2, 2, 2, 2, 1];
     // eslint-disable-next-line camelcase
-    const user_id = [1, 2, 3, 4, 1, 2, 3, 4];
+    const user_id = [1, 2, 3, 4, 1, 2, 3, 4, 5];
     // eslint-disable-next-line camelcase
     const created_at = [
       '2020-11-02',
@@ -27,9 +28,10 @@ module.exports = {
       '2020-11-02',
       '2020-11-02',
       '2020-11-02',
+      '2020-11-02',
     ];
     // eslint-disable-next-line camelcase
-    const deleted_at = [null, null, null, null, null, null, null, null];
+    const deleted_at = [null, null, null, null, null, null, null, null, null];
 
     const bulkData = id.map((item, index) => {
       return {

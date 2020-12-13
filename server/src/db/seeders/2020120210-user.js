@@ -41,6 +41,16 @@ module.exports = {
         created_at: '2020-11-26',
         updated_at: '2020-11-26',
       },
+      {
+        id: 5,
+        provider: 'kakao',
+        email: 'bhko0524@naver.com',
+        nickname: 'bhko0524',
+        profile_url: 'http://k.kakaocdn.net/dn/pvmbX/btqxUFwwYwc/LKCfn1SWdtUM579o5KEyC1/img_640x640.jpg',
+        token: null,
+        created_at: '2020-11-25',
+        updated_at: '2020-11-25',
+      },
     ]);
   },
 
