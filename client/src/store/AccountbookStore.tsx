@@ -19,4 +19,9 @@ export default class AccountStore {
     const accountbooks = await accountbookService.getAccountbooks();
     this.accountbooks = accountbooks;
   };
+
+  @action
+  deleteAccountbook = (AccountbookId: number): void => {
+    this.accountbooks = this.accountbooks.filter((item) => item.accountbookId !== AccountbookId);
+  };
 }
