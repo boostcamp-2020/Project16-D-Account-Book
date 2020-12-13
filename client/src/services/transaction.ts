@@ -28,7 +28,6 @@ export default {
     const formattedStartDate = getFormattedDate({ date: startDate, format: '.' });
     const foramttedEndDate = getFormattedDate({ date: endDate, format: '.' });
     const gap = endDate.valueOf() - startDate.valueOf();
-    console.log(gap);
 
     const query = querystring.stringify({
       accountbook_id: accountbookId,

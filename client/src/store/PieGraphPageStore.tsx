@@ -123,7 +123,7 @@ export default class PieGraphPageStore {
     const result = new Date(endDate.valueOf());
     result.setFullYear(endDate.getFullYear() - datePeriodNumber[selectedType].year);
     result.setMonth(endDate.getMonth() - datePeriodNumber[selectedType].month);
-    result.setDate(endDate.getDate() - datePeriodNumber[selectedType].day);
+    result.setDate(endDate.getDate() - datePeriodNumber[selectedType].day - 1);
     return result;
   };
 
