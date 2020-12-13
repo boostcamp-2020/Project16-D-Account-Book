@@ -8,6 +8,7 @@ import { filtering } from '../utils/filter';
 import Query from '../types/query';
 import { CancellablePromise } from 'mobx/dist/api/flow';
 import { getFirstDateOfNextMonth, getFirstDateOfPreviousMonth } from '../utils/date';
+import socket, { event } from '../socket';
 export default class TransactionStore {
   @observable
   transactions: Array<Income | Expenditure> = [];
@@ -20,6 +21,9 @@ export default class TransactionStore {
 
   @observable
   csvTransactions: Array<CsvTransaction> = [];
+
+  @observable
+  accountbookId = 0;
 
   rootStore: RootStore;
 
@@ -85,11 +89,13 @@ export default class TransactionStore {
   createIncome = async (income: IncomeRequest): Promise<void> => {
     const createdIncome = await transactionService.createIncome(income);
     this.addNewTransaction(createdIncome);
+    socket.emit(event.UPDATE_TRANSACTIONS, this.accountbookId);
   };
 
   createExpenditure = async (expenditure: ExpenditureRequest): Promise<void> => {
     const createdExpenditure = await transactionService.createExpenditure(expenditure);
     this.addNewTransaction(createdExpenditure);
+    socket.emit(event.UPDATE_TRANSACTIONS, this.accountbookId);
   };
 
   @action
@@ -126,6 +132,7 @@ export default class TransactionStore {
     try {
       await transactionService.deleteIncome(incomeId);
       this.deleteIncomeById(incomeId);
+      socket.emit(event.UPDATE_TRANSACTIONS, this.accountbookId);
     } catch {
       alert('삭제 실패');
     }
@@ -135,6 +142,7 @@ export default class TransactionStore {
     try {
       await transactionService.deleteExpenditure(expenditureId);
       this.deleteExpenditureById(expenditureId);
+      socket.emit(event.UPDATE_TRANSACTIONS, this.accountbookId);
     } catch {
       alert('삭제 실패');
     }
@@ -163,11 +171,13 @@ export default class TransactionStore {
   patchIncome = async (income: IncomeRequest, incomeId: number): Promise<void> => {
     const response = await transactionService.patchIncome(income, incomeId);
     this.updateIncomeTransaction(response);
+    socket.emit(event.UPDATE_TRANSACTIONS, this.accountbookId);
   };
 
   patchExpenditure = async (expenditure: ExpenditureRequest, expenditureId: number): Promise<void> => {
     const response = await transactionService.patchExpenditure(expenditure, expenditureId);
     this.updateExpenditureTransaction(response);
+    socket.emit(event.UPDATE_TRANSACTIONS, this.accountbookId);
   };
 
   @action

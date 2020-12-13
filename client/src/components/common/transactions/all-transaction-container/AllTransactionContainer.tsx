@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import DayTransactionContainer from '../day-transaction-container/DayTransactionContainer';
 import Income, { isIncome } from '../../../../types/income';
 import Expenditure from '../../../../types/expenditure';
@@ -45,6 +45,12 @@ const calcSameDateTransactions = (transactions: Array<Income | Expenditure>): Ar
 const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
   const { transactionStore } = useStore().rootStore;
   const sameDateTransactions = calcSameDateTransactions(transactions);
+
+  useEffect(() => {
+    return () => {
+      transactionStore.isLoading = true;
+    };
+  }, []);
 
   if (transactionStore.isLoading) return <Spinner />;
   if (transactions.length == 0) return <NotFoundTransaction />;

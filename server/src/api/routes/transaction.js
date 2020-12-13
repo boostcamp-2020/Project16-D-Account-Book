@@ -11,5 +11,6 @@ router.patch('/income/:income_id', isAccountbookUser, transactionController.upda
 router.patch('/expenditure/:expenditure_id', isAccountbookUser, transactionController.updateExpenditureTransaction);
 router.delete('/income/:income_id', isAccountbookUser, transactionController.deleteIncomeTransaction);
 router.delete('/expenditure/:expenditure_id', isAccountbookUser, transactionController.deleteExpenditureTransaction);
+router.post('/text-parsing', transactionController.parsingTextContent);
 
 module.exports = router;

@@ -3,6 +3,7 @@ export interface Accountbook {
   title: string;
   color: string;
   description: string;
+  accountbookId?: number;
 }
 
 export default Accountbook;

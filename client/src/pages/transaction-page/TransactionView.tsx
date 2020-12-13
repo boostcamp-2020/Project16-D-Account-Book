@@ -17,6 +17,7 @@ import FormModalFilter from '../../components/common/modals/form-modal-filter/Fo
 import FormModalCreateTransaction from '../../components/common/modals/form-modal-transaction/FormModalCreateTransaction';
 import FormModalUpdateTransaction from '../../components/common/modals/form-modal-transaction/FormModalUpdateTransaction';
 import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
+import socket, { event } from '../../socket';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -61,10 +62,10 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { dateStore, transactionStore, modalStore } = rootStore;
   const { formFilterStore } = rootStore.modalStore;
   const { createTransactionFormStore, updateTransactionFormStore } = modalStore;
-
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
-  useEffect(() => {
+  const updateTransactions = () => {
+    transactionStore.accountbookId = accountbookId;
     if (!query) {
       transactionStore.isFilterMode = false;
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
@@ -82,6 +83,19 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
     });
     formFilterStore.query = query;
     formFilterStore.setFilterInfo();
+  };
+
+  useEffect(() => {
+    socket.on(event.UPDATE_TRANSACTIONS, () => {
+      updateTransactions();
+    });
+    return () => {
+      socket.off(event.UPDATE_TRANSACTIONS);
+    };
+  }, [accountbookId]);
+
+  useEffect(() => {
+    updateTransactions();
   }, [query, accountbookId]);
 
   return (
