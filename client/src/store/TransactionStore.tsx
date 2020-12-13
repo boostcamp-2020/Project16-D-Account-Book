@@ -78,7 +78,7 @@ export default class TransactionStore {
     accountbookId: number,
     { startDate, endDate, incomeCategory, expenditureCategory, account }: Query,
   ): Promise<void> => {
-    await this.findTransactions(accountbookId, new Date(startDate as string), new Date(endDate as string));
+    await this.getTransactions(accountbookId, new Date(startDate as string), new Date(endDate as string));
     runInAction(() => {
       this.transactions = filtering(this.transactions, { account, incomeCategory, expenditureCategory });
       this.isFilterMode = true;
