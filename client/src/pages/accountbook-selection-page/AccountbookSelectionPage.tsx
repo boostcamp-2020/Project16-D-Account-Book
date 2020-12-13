@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import useStore from '../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
+import { Accountbook } from '../../types/accountbook';
 import styled from 'styled-components';
 
+import AccountbookCard from '../../components/accountbook-selection-page/accountbook-card/AccountbookCard';
 import AddAccountbookCard from '../../components/accountbook-selection-page/add-accountbook-card/AddAccountbookCard';
 
 const ViewWrapper = styled.div`
@@ -12,13 +14,40 @@ const ViewWrapper = styled.div`
 `;
 
 const AccountbookSelectionPage: React.FC = () => {
+  const { rootStore } = useStore();
+  const { userStore, accountbookStore } = rootStore;
+  // const {
+  //   deleteAccountbookByAdminStore,
+  //   deleteAccountbookByUserStore,
+  //   giveAdminStore,
+  // } = useStore().rootStore.modalStore;
+
+  const updateAccountbooks = () => {
+    accountbookStore.updateAccountbooks();
+  };
+
+  useEffect(() => {
+    updateAccountbooks();
+  }, []);
+
   return (
     <ViewWrapper>
-      <div>가계부 선택 페이지 임시</div>
-      <br />
+      {accountbookStore.accountbooks.map((accountbook) => {
+        return (
+          <div key={accountbook.id}>
+            <AccountbookCard
+              id={accountbook.id}
+              title={accountbook.title}
+              color={accountbook.color}
+              description={accountbook.description}
+              accountbookId={accountbook.accountbookId}
+            />
+          </div>
+        );
+      })}
       <AddAccountbookCard />
     </ViewWrapper>
   );
 };
 
-export default AccountbookSelectionPage;
+export default observer(AccountbookSelectionPage);
