@@ -67,7 +67,9 @@ const defaultState: ITransactionForm = {
   memo: '',
 };
 
-const UseTransactionForm = (initial: ITransactionForm = defaultState): [ITransactionForm, ITransactionFormChange] => {
+const UseTransactionForm = (
+  initial: ITransactionForm = defaultState,
+): [ITransactionForm, ITransactionFormChange, React.Dispatch<FormChangeAction>] => {
   const [state, dispatch] = useReducer(formReducer, initial);
   const changes: ITransactionFormChange = {
     classify: {
@@ -134,7 +136,7 @@ const UseTransactionForm = (initial: ITransactionForm = defaultState): [ITransac
       });
     },
   };
-  return [state, changes];
+  return [state, changes, dispatch];
 };
 
 export default UseTransactionForm;
