@@ -67,7 +67,7 @@ const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
     <AccountbookWrapper bgColor={accountbook.color} textColor={textColor}>
       <HeaderWrapper>
         <ElementWrapper>
-          <AccountbookSetting id={accountbook.id} bgColor={accountbook.color} />
+          <AccountbookSetting accountbookId={accountbook.accountbookId} bgColor={accountbook.color} />
         </ElementWrapper>
         <ElementWrapper>
           <AccountbookElimination id={accountbook.id} bgColor={accountbook.color} onClick={onClickDelete} />
