@@ -23,7 +23,7 @@ const Wrapper = styled.div<{ itemColor: string; bgColor: string }>`
 `;
 
 interface props {
-  accountbookId: number;
+  accountbookId: number | undefined;
   bgColor: string;
 }
 
