@@ -6,6 +6,7 @@ const { isAccountbookUser } = require('@middlewares/accountbookAuth');
 const router = new Router();
 
 router.get('/', verificationOfAuth, accountbookController.getAccountbooksByUserId);
+router.patch('/:accountbook_id', isAccountbookUser, accountbookController.updateAccountbook);
 router.delete('/:accountbook_id', isAccountbookUser, accountbookController.deleteAccountbook);
 
 module.exports = router;
