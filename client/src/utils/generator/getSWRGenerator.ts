@@ -9,7 +9,7 @@ const getSWRGenerator = (
   endDate: Date,
   beforeMonth: Date = getFirstDateOfPreviousMonth(startDate),
   afterMonth: Date = getFirstDateOfNextMonth(endDate),
-): AsyncGenerator<(Income | Expenditure)[], any, unknown> => {
+): AsyncGenerator<(Income | Expenditure)[] | undefined, any, unknown> => {
   return transactionService.getTransactions(accountbookId, startDate, endDate, beforeMonth, afterMonth);
 };
 
