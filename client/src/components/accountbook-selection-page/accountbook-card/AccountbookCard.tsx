@@ -19,6 +19,7 @@ const AccountbookWrapper = styled.div<{
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};
   padding: 15px 15px 20px 15px;
+  margin-bottom: 15px;
   display: flex;
   cursor: pointer;
   &:hover {
