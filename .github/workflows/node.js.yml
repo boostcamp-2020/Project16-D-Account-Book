@@ -31,7 +31,8 @@ jobs:
           cd moa/server
           git pull origin master
           npm install
-          pm2 reload app
+          pm2 stop app
+          npm run deploy
           cd ../client
           npm install
           npm run build
