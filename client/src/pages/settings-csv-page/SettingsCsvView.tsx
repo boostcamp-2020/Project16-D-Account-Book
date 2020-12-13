@@ -7,7 +7,6 @@ import useStore from '../../hook/use-store/useStore';
 import Expenditure from '../../types/expenditure';
 import Income from '../../types/income';
 import { toJS } from 'mobx';
-import { sortByDate } from '../../utils/sortByDate';
 import { csvHeaders, fileName } from '../../constants/csv';
 
 interface Props {
@@ -50,14 +49,14 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
         return {
           amount: -item.amount,
           account: (item as Expenditure).place,
-          date: new Date((item.date as string).split('T')[0]),
+          date: new Date(item.date as string),
           memo: item.memo,
         };
       } else {
         return {
           amount: item.amount,
           account: (item as Income).content,
-          date: new Date((item.date as string).split('T')[0]),
+          date: new Date(item.date as string),
           memo: item.memo,
         };
       }
@@ -69,14 +68,16 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
     return toJS(item);
   });
 
-  sortByDate(data, 'date');
+  const sortedData = data.slice().sort((transaction1, transaction2) => {
+    return new Date(transaction1.date).getTime() - new Date(transaction2.date).getTime();
+  });
 
   return (
     <SettingsCsvViewWrapper>
       <SettingsItemWrapper>
         <Label>
           데이터 내보내기
-          <CSVLink headers={csvHeaders} data={data} filename={fileName}>
+          <CSVLink headers={csvHeaders} data={sortedData} filename={fileName}>
             <ExportButton />
           </CSVLink>
         </Label>
