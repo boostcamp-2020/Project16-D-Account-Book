@@ -38,14 +38,14 @@ interface ITransactionInputList {
   };
 }
 
-const InputListWrapper = styled.div`
+export const InputListWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const InputWrapper = styled.div`
+export const InputWrapper = styled.div`
   width: 70%;
   padding: 0%;
   margin: 0%;
