@@ -14,11 +14,6 @@ const AccountbookName = styled.div<{ textColor: string }>`
   color: ${({ textColor }) => textColor};
   padding: 10px 14px;
   display: block;
-
-  &:hover {
-    background-color: ${LIGHT_GRAY};
-    cursor: pointer;
-  }
 `;
 
 const AccountbookDescription = styled.div<{ textColor: string }>`
@@ -26,14 +21,9 @@ const AccountbookDescription = styled.div<{ textColor: string }>`
   padding: 10px 14px;
   display: block;
   font-size: 0.8em;
-
-  &:hover {
-    background-color: ${LIGHT_GRAY};
-    cursor: pointer;
-  }
 `;
 
-const AccountbookNameWrapper = styled.div<{ bgColor: string }>`
+const AccountbookViewWrapper = styled.div<{ bgColor: string }>`
   display: none;
   position: absolute;
   left: 115%;
@@ -71,7 +61,7 @@ const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>
     text-align: center;
   }
 
-  &:hover ${AccountbookNameWrapper} {
+  &:hover ${AccountbookViewWrapper} {
     display: block;
     font-size: 0.8em;
     font-weight: 400;
@@ -90,10 +80,10 @@ const SmallAccountbookItem = ({ id, bgColor, show, onClick }: SmallAccountbookIt
   return (
     <SmallAccountbookItemWrapper bgColor={bgColor} textColor={textColor} show={show} onClick={onClick}>
       <div className="text">{id}</div>
-      <AccountbookNameWrapper bgColor={bgColor}>
+      <AccountbookViewWrapper bgColor={bgColor}>
         <AccountbookName textColor={textColor}>가계부 {id}</AccountbookName>
         <AccountbookDescription textColor={textColor}>가계부 {id}에 대한 설명입니다.</AccountbookDescription>
-      </AccountbookNameWrapper>
+      </AccountbookViewWrapper>
     </SmallAccountbookItemWrapper>
   );
 };
