@@ -21,9 +21,31 @@ const getAccountbooksByUserId = async (userId) => {
       userId,
     },
     attributes: ['id', 'authority', 'description', 'color', 'accountbookId'],
+    include: [
+      {
+        model: db.accountbook,
+        attributes: ['title'],
+      },
+    ],
   });
   return accountbooks;
 };
+
+// const getAccountbooksForClient = async (userId) => {
+//   const accountbooks = await db.userAccountbook.findAll({
+//     where: {
+//       userId,
+//     },
+//     attributes: ['id', 'authority', 'description', 'color', 'accountbookId'],
+//     include: [
+//       {
+//         model: db.accountbook,
+//         attributes: ['title'],
+//       },
+//     ],
+//   });
+//   return accountbooks;
+// };
 
 const deleteAccountbook = async (accountbookId, userId) => {
   await db.userAccountbook.destroy({ where: { accountbookId, userId } });
