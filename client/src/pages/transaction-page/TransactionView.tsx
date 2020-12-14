@@ -60,7 +60,7 @@ const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<numbe
 const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
   const { dateStore, transactionStore, modalStore, accountStore, categoryStore } = rootStore;
-  const { formFilterStore } = rootStore.modalStore;
+  const { filterFormStore } = rootStore.modalStore;
   const { createTransactionFormStore, updateTransactionFormStore } = modalStore;
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
@@ -80,8 +80,8 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       incomeCategory: income_category,
       expenditureCategory: expenditure_category,
     });
-    formFilterStore.query = query;
-    formFilterStore.setFilterInfo();
+    filterFormStore.query = query;
+    filterFormStore.setFilterInfo();
   };
 
   useEffect(() => {
@@ -109,7 +109,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
 
   return (
     <>
-      {formFilterStore.show && <FormModalFilter accountbookId={accountbookId} />}
+      {filterFormStore.show && <FormModalFilter accountbookId={accountbookId} />}
       {createTransactionFormStore.show && <FormModalCreateTransaction />}
       {updateTransactionFormStore.show && <FormModalUpdateTransaction />}
       <Sidebar smallAccountbooks={smallAccountbookItems} />

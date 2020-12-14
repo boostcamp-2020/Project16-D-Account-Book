@@ -25,7 +25,7 @@ const TransactionPage: React.FC<Props> = ({ match, location }: Props) => {
     rootStore.accountStore.updateAccounts(accountbookId);
     rootStore.categoryStore.updateIncomeCategories(accountbookId);
     rootStore.categoryStore.updateExpenditureCategories(accountbookId);
-    rootStore.modalStore.formFilterStore.init();
+    rootStore.modalStore.filterFormStore.init();
   }, []);
 
   return (

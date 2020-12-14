@@ -8,38 +8,40 @@ interface PreviewProps {
   description?: string;
   onChange: (color: { hex: string }) => void;
 }
-
 const PreviewWrapper = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: flex-end;
 `;
-
 interface PreviewContentProps {
   color: string;
 }
 const PreviewContent = styled.div<PreviewContentProps>`
-  flex: 1;
-  padding: 10px;
+  width: 40vw;
+  padding: 10px 20px;
   margin-right: 1em;
   background-color: ${(props) => props.color};
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  border-radius: 10px;
 `;
-
-const PreviewContentText = styled.p<PreviewContentProps>`
+const PreviewContentName = styled.p<PreviewContentProps>`
   color: ${(props) => props.color};
+  height: 25px;
+  :nth-child(1) {
+    font-weight: bold;
+    font-size: 1.7rem;
+  }
 `;
-
 const Preview: React.FC<PreviewProps> = ({ title, description, color, onChange }: PreviewProps) => {
   const fontColor = getTextColor(color);
   return (
     <PreviewWrapper>
       <PreviewContent color={color}>
-        {title && <PreviewContentText color={fontColor}>{title}</PreviewContentText>}
-        {description && <PreviewContentText color={fontColor}>{description}</PreviewContentText>}
+        <PreviewContentName color={fontColor}>{title}</PreviewContentName>
+        <PreviewContentName color={fontColor}>{description}</PreviewContentName>
       </PreviewContent>
       <ColorPicker inputColor={{ hex: color }} setInputColor={onChange} />
     </PreviewWrapper>
   );
 };
-
 export default Preview;

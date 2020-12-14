@@ -7,6 +7,7 @@ import { DODGER_BLUE } from '../../constants/color';
 import { startDateChecker } from '../../types/inputRadio';
 
 const SettingsAccountbookPageWrapper = styled.div`
+  font-family: 'Spoqa Han Sans';
   display: flex;
 `;
 

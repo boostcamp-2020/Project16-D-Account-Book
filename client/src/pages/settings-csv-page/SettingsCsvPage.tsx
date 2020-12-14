@@ -9,6 +9,7 @@ interface Props {
 }
 
 const SettingsCsvPageWrapper = styled.div`
+  font-family: 'Spoqa Han Sans';
   display: flex;
 `;
 

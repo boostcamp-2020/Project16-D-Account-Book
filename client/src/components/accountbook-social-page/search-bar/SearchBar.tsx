@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { LIGHT_BLUE, GRAY } from '../../../constants/color';
+import { GRAY } from '../../../constants/color';
 import SearchIcon from './SearchIcon';
 import useStore from '../../../hook/use-store/useStore';
 
@@ -19,6 +19,7 @@ const InputText = styled.input.attrs(() => ({
   border-radius: 5px 0px 0px 5px;
   border: 1px solid lightgray;
   outline: none;
+  font-family: 'Spoqa Han Sans';
 `;
 
 const SearchButton = styled.div`
