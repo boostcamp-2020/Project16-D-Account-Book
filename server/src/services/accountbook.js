@@ -31,6 +31,23 @@ const getAccountbooksByUserId = async (userId) => {
   return accountbooks;
 };
 
+const getAccountbookByAccountbookId = async (userAccountbookId) => {
+  const accountbook = await db.userAccountbook.findOne({
+    where: {
+      id: userAccountbookId,
+    },
+    attributes: ['id', 'authority', 'description', 'color', 'accountbookId'],
+    include: [
+      {
+        model: db.accountbook,
+        attributes: ['title'],
+      },
+    ],
+    raw: true,
+  });
+  return accountbook;
+};
+
 const deleteAccountbook = async (accountbookId, userId) => {
   await db.userAccountbook.destroy({ where: { accountbookId, userId } });
   const userAccountbooks = await db.userAccountbook.findAll({ where: { accountbookId } });
