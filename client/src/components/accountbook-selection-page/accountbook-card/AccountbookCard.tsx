@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import AccountbookSetting from '../accontbook-setting/AccountbookSetting';
 import AccountbookElimination from '../accountbook-elimination/AccountbookElimination';
+import { useHistory } from 'react-router-dom';
 import { getTextColor } from '../../../utils/color';
 import useStore from '../../../hook/use-store/useStore';
 import { Accountbook } from '../../../types/accountbook';
@@ -51,6 +52,7 @@ const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
     deleteAccountbookByUserStore,
     giveAdminStore,
   } = useStore().rootStore.modalStore;
+  const history = useHistory();
 
   const onClickDelete = () => {
     if (userStore.isAdmin(accountbook.accountbookId as number)) {
@@ -64,7 +66,11 @@ const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
 
   const textColor = getTextColor(accountbook.color);
   return (
-    <AccountbookWrapper bgColor={accountbook.color} textColor={textColor}>
+    <AccountbookWrapper
+      bgColor={accountbook.color}
+      textColor={textColor}
+      onClick={() => history.push(`/accountbooks/${accountbook.accountbookId}`)}
+    >
       <HeaderWrapper>
         <ElementWrapper>
           <AccountbookSetting accountbookId={accountbook.accountbookId} bgColor={accountbook.color} />

@@ -52,15 +52,13 @@ const AccountbookSelectionPage: React.FC = () => {
         {accountbookStore.accountbooks.map((accountbook) => {
           return (
             <div key={accountbook.id}>
-              <Link to={`/accountbooks/${accountbook.accountbookId}`} className="accountbook">
-                <AccountbookCard
-                  id={accountbook.id}
-                  title={accountbook.title}
-                  color={accountbook.color}
-                  description={accountbook.description}
-                  accountbookId={accountbook.accountbookId}
-                />
-              </Link>
+              <AccountbookCard
+                id={accountbook.id}
+                title={accountbook.title}
+                color={accountbook.color}
+                description={accountbook.description}
+                accountbookId={accountbook.accountbookId}
+              />
             </div>
           );
         })}
