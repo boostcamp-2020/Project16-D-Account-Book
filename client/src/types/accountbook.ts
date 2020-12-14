@@ -6,7 +6,7 @@ export interface Accountbook {
   accountbookId?: number;
 }
 
-export interface CeateAccountbookBody {
+export interface CreateAccountbookBody {
   title: string;
   color: string;
   description: string;
