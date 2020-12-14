@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SettingsSidebar from '../../components/common/settings-sidebar/SettingsSidebar';
 import Preview from '../../components/common/preview/Preview';
@@ -6,6 +6,8 @@ import InputText from '../../components/common/inputs/input-text/InputText';
 import { DODGER_BLUE } from '../../constants/color';
 import useStore from '../../hook/use-store/useStore';
 import useGetParam from '../../hook/use-get-param/useGetParam';
+import { observer } from 'mobx-react';
+import Accountbook from '../../types/accountbook';
 
 const SettingsAccountbookPageWrapper = styled.div`
   display: flex;
@@ -45,13 +47,29 @@ const ConfirmButton = styled.p<ConfirmButtonProps>`
   color: ${DODGER_BLUE};
 `;
 
-const SettingsAccountbookPage = (): JSX.Element => {
-  const [inputColor, setInputColor] = useState<string>('black');
-  const [title, setTitle] = useState<string>('가계부 1');
-  const [description, setDescription] = useState<string>('부스트캠프 커넥트 재단 가계부');
+const SettingsAccountbookPage: React.FC = () => {
   const accountbookId = useGetParam();
-  const { userStore } = useStore().rootStore;
+  const { userStore, accountbookStore } = useStore().rootStore;
+
   const isAdmin = userStore.isAdmin(accountbookId);
+
+  const [inputColor, setInputColor] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+
+  useEffect(() => {
+    const loadAccountbooks = async () => {
+      await accountbookStore.updateAccountbooks();
+      const [accountbook] = accountbookStore.accountbooks.filter(
+        (accountbook) => accountbook.accountbookId === accountbookId,
+      );
+      accountbookStore.updateAccountbook(accountbook);
+      setInputColor((accountbookStore.accountbook as Accountbook).color);
+      setTitle((accountbookStore.accountbook as Accountbook).title);
+      setDescription((accountbookStore.accountbook as Accountbook).description);
+    };
+    loadAccountbooks();
+  }, []);
 
   const onChange = (color: { hex: string }): void => {
     setInputColor(color.hex);
@@ -98,4 +116,4 @@ const SettingsAccountbookPage = (): JSX.Element => {
   );
 };
 
-export default SettingsAccountbookPage;
+export default observer(SettingsAccountbookPage);
