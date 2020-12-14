@@ -6,4 +6,10 @@ export interface Accountbook {
   accountbookId?: number;
 }
 
+export interface CeateAccountbookBody {
+  title: string;
+  color: string;
+  description: string;
+}
+
 export default Accountbook;
