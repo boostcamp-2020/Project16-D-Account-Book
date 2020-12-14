@@ -7,7 +7,7 @@ import SmallAccountbookItem from '../small-accountbook-item/SmallAccountbookItem
 import { GRAY } from '../../../constants/color';
 import { useHistory } from 'react-router-dom';
 import useStore from '../../../hook/use-store/useStore';
-import { observer } from 'mobx-react';
+import { Link } from 'react-router-dom';
 
 interface SidebarProps {
   smallAccountbooks: { id: number; color: string }[];
@@ -42,6 +42,15 @@ const HamburgerButtonWrapper = styled.div`
   z-index: 10;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+
+  &:visited {
+    text-decoration: none;
+  }
+`;
+
 const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleButton = (): void => {
@@ -57,13 +66,15 @@ const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
   }, []);
 
   const SmallAccountbooks = accountbookStore.accountbooks.map((item) => (
-    <SmallAccountbookItem
-      key={item.id}
-      title={item.title}
-      bgColor={item.color}
-      description={item.description}
-      show={isOpen}
-    />
+    <StyledLink to={`/accountbooks/${item.accountbookId}`} key={item.id}>
+      <SmallAccountbookItem
+        key={item.id}
+        title={item.title}
+        bgColor={item.color}
+        description={item.description}
+        show={isOpen}
+      />
+    </StyledLink>
   ));
   return (
     <div>
