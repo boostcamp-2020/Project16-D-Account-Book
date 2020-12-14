@@ -9,24 +9,24 @@ import { useHistory } from 'react-router-dom';
 
 const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Element => {
   const history = useHistory();
-  const { formFilterStore } = useStore().rootStore.modalStore;
+  const { filterFormStore } = useStore().rootStore.modalStore;
   const { transactionStore } = useStore().rootStore;
 
   const closeModal = () => {
-    formFilterStore.setShow(false);
+    filterFormStore.setShow(false);
   };
 
   const onClickApply = () => {
     closeModal();
-    const query = formFilterStore.getQuery;
+    const query = filterFormStore.getQuery;
     history.push(`/accountbooks/${accountbookId}?${query}`);
   };
 
   useEffect(() => {
-    formFilterStore.init();
+    filterFormStore.init();
 
     if (transactionStore.isFilterMode) {
-      formFilterStore.setFilterInfo();
+      filterFormStore.setFilterInfo();
     }
   }, []);
 
@@ -39,7 +39,7 @@ const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Elem
             redName={'초기화'}
             blueName={'적용'}
             clickBlue={onClickApply}
-            clickRed={formFilterStore.init}
+            clickRed={filterFormStore.init}
             closeModal={closeModal}
           />
           <FormFilter />

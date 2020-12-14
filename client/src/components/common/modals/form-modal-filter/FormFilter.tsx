@@ -34,7 +34,7 @@ const DateRange = styled.div`
 `;
 
 const FormModalFilter: React.FC = () => {
-  const { formFilterStore } = useStore().rootStore.modalStore;
+  const { filterFormStore } = useStore().rootStore.modalStore;
 
   return useObserver(() => (
     <ItemWrapper>
@@ -42,22 +42,22 @@ const FormModalFilter: React.FC = () => {
         <InputLabel>기간</InputLabel>
         <SingleInputDropdown
           placeholder={'기간'}
-          items={formFilterStore.dateOptions}
-          onChange={formFilterStore.onChangeDate}
-          defaultSelectValue={formFilterStore.selectedDate}
+          items={filterFormStore.dateOptions}
+          onChange={filterFormStore.onChangeDate}
+          defaultSelectValue={filterFormStore.selectedDate}
         />
         <DateRange>
-          <p>{formFilterStore.startDate.text}</p>
-          <p>{formFilterStore.endDate.text}</p>
+          <p>{filterFormStore.startDate.text}</p>
+          <p>{filterFormStore.endDate.text}</p>
         </DateRange>
       </InputWrapper>
       <InputWrapper>
         <InputLabel>결제수단</InputLabel>
         <SelectPaymentMethod
           placeholder={'결제수단'}
-          items={formFilterStore.accountOptions}
-          onChange={formFilterStore.onChangeAcoount}
-          defaultValue={formFilterStore.selectedAccounts}
+          items={filterFormStore.accountOptions}
+          onChange={filterFormStore.onChangeAcoount}
+          defaultValue={filterFormStore.selectedAccounts}
         />
       </InputWrapper>
       <InputWrapper>
@@ -65,16 +65,16 @@ const FormModalFilter: React.FC = () => {
         <MultiInputDropdownWithCheckBox
           placeholder={'지출'}
           checkBoxName={'지출'}
-          items={formFilterStore.expenditureCategoryOptions}
-          onChange={formFilterStore.onChangeExpenditureCategory}
-          defaultValue={formFilterStore.selectedExpenditureCategories}
+          items={filterFormStore.expenditureCategoryOptions}
+          onChange={filterFormStore.onChangeExpenditureCategory}
+          defaultValue={filterFormStore.selectedExpenditureCategories}
         />
         <MultiInputDropdownWithCheckBox
           placeholder={'수입'}
           checkBoxName={'수입'}
-          items={formFilterStore.incomeCategoryOptions}
-          onChange={formFilterStore.onChangeIncomeCategory}
-          defaultValue={formFilterStore.selectedIncomeCategories}
+          items={filterFormStore.incomeCategoryOptions}
+          onChange={filterFormStore.onChangeIncomeCategory}
+          defaultValue={filterFormStore.selectedIncomeCategories}
         />
       </InputWrapper>
     </ItemWrapper>

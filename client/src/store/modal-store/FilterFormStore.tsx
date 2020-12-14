@@ -1,12 +1,12 @@
 import { observable, action, makeObservable, computed } from 'mobx';
 import RootStore from '../RootStore';
-import { dateOptions } from '../../__dummy-data__/store/formFilterStore';
+import { dateOptions } from '../../__dummy-data__/store/filterFormStore';
 import datePeriod from '../../constants/datePeriod';
 import { getFormattedDate } from '../../utils/date';
 import Options from '../../types/dropdownOptions';
 import { ParsedQuery } from 'query-string';
 
-export default class FormFilterStore {
+export default class FilterFormStore {
   rootStore: RootStore;
   @observable show = false;
   @observable dateOptions: Options[] = dateOptions;

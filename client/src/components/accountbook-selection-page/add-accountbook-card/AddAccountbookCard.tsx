@@ -17,9 +17,13 @@ const DivWrapper = styled.div`
   }
 `;
 
-const AddAccountbookCard: React.FC = () => {
+interface Props {
+  onClick?: () => void;
+}
+
+const AddAccountbookCard: React.FC<Props> = ({ onClick }: Props) => {
   return (
-    <DivWrapper>
+    <DivWrapper onClick={onClick}>
       <PlusInCircle sideLength={'2rem'} />
     </DivWrapper>
   );

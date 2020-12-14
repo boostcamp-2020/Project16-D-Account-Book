@@ -110,7 +110,7 @@ export default class TransactionStore {
     const date = new Date(transaction.date);
     const startDate = this.rootStore.dateStore.startDate;
     const endDate = this.rootStore.dateStore.endDate;
-    const filterFormStore = this.rootStore.modalStore.formFilterStore;
+    const filterFormStore = this.rootStore.modalStore.filterFormStore;
 
     if (!this.isFilterMode) {
       if (date.getTime() >= startDate.getTime() && date.getTime() < endDate.getTime()) {
@@ -125,7 +125,7 @@ export default class TransactionStore {
         selectedAccounts: account,
         selectedIncomeCategories: incomeCategory,
         selectedExpenditureCategories: expenditureCategory,
-      } = this.rootStore.modalStore.formFilterStore;
+      } = this.rootStore.modalStore.filterFormStore;
 
       this.transactions = filtering(this.transactions, {
         account: account.join(' '),
