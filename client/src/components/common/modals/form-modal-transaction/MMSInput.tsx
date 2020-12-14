@@ -70,20 +70,26 @@ const MMSInput: React.FC<IMMSInput> = ({ dispatch, MMSToggle }: IMMSInput) => {
         });
       }
 
-      dispatch({
-        type: FormActionType.CLASSIFY_CHANGE,
-        data: response.isDeposit,
-      });
+      if (response.isDeposit !== undefined) {
+        dispatch({
+          type: FormActionType.CLASSIFY_CHANGE,
+          data: response.isDeposit,
+        });
+      }
 
-      dispatch({
-        type: FormActionType.PRICE_CHANGE,
-        data: response.amount,
-      });
+      if (response.amount !== undefined) {
+        dispatch({
+          type: FormActionType.PRICE_CHANGE,
+          data: response.amount,
+        });
+      }
 
-      dispatch({
-        type: FormActionType.DATE_CHANGE,
-        data: getDateString(response.date, response.time),
-      });
+      if (response.date !== undefined && response.time) {
+        dispatch({
+          type: FormActionType.DATE_CHANGE,
+          data: getDateString(response.date, response.time),
+        });
+      }
       MMSToggle();
     };
     mmsParsing();
