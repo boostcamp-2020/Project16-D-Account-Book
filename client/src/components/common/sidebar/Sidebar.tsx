@@ -5,6 +5,7 @@ import HamburgerButton from '../hamburger-button/HamburgerButton';
 import PlusButton from '../plus-button/PlusButton';
 import SmallAccountbookItem from '../small-accountbook-item/SmallAccountbookItem';
 import { GRAY } from '../../../constants/color';
+import { useHistory } from 'react-router-dom';
 
 interface SidebarProps {
   smallAccountbooks: { id: number; color: string }[];
@@ -44,6 +45,7 @@ const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
   const toggleButton = (): void => {
     setIsOpen(!isOpen);
   };
+  const history = useHistory();
 
   const SmallAccountbooks = smallAccountbooks.map((item) => (
     <SmallAccountbookItem key={item.id} id={item.id} bgColor={item.color} show={isOpen} />
@@ -55,7 +57,7 @@ const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
       </HamburgerButtonWrapper>
       <SidebarWrapper show={isOpen}>
         <ChildrenWrapper>
-          <HomeButton show={isOpen} />
+          <HomeButton show={isOpen} onClick={() => history.push(`/`)} />
           {SmallAccountbooks}
           <PlusButton show={isOpen} />
         </ChildrenWrapper>

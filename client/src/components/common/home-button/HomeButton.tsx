@@ -13,6 +13,7 @@ const HomeButtonWrapper = Styled.div<HomeButtonWrapperProps>`
   overflow: hidden;
   transition: all ease 0.3s 0s;
   margin: 40px auto;
+  cursor: pointer;
 `;
 
 interface HomeButton {
