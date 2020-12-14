@@ -24,6 +24,7 @@ const FormModalUpdateAccount: React.FC = () => {
   const id = useGetParam();
   const updateAccountFormStore = rootStore.modalStore.updateAccountFormStore;
   const { show } = updateAccountFormStore;
+  const [colorCheck, setColorCheck] = useState(false);
   const [name, setName] = useState<string>((updateAccountFormStore.account as Account).name);
   const [inputColor, setInputColor] = useState<string>((updateAccountFormStore.account as Account).color);
   const { check, noChange } = rootStore.modalStore.updateAccountFormStore;
@@ -50,6 +51,11 @@ const FormModalUpdateAccount: React.FC = () => {
 
   const onChange = (color: { hex: string }): void => {
     setInputColor(color.hex);
+    if (inputColor.toLowerCase() === (updateAccountFormStore.account as Account).color.toLowerCase()) {
+      setColorCheck(false);
+    } else {
+      setColorCheck(true);
+    }
   };
 
   const modalToggle = (): void => {
@@ -85,8 +91,8 @@ const FormModalUpdateAccount: React.FC = () => {
     return (
       <ModalBackground show={show} closeModal={modalToggle}>
         <FormModalWrapper>
-          {check ? (
-            name && !noChange ? (
+          {check || noChange ? (
+            (name && !noChange) || (name && colorCheck) ? (
               <FormModalHeader
                 modalName={formModal.UPDATE_ACCOUNT_MODAL_NAME}
                 blueName={'완료'}
