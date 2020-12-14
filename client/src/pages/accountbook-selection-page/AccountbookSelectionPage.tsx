@@ -14,6 +14,7 @@ const ViewWrapper = styled.div`
   width: 40%;
   padding-top: 5%;
   margin: 0 auto;
+  margin-bottom: 40px;
 
   a {
     text-decoration: none;
