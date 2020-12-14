@@ -29,6 +29,10 @@ const PreviewContent = styled.div<PreviewContentProps>`
 const PreviewContentText = styled.p<PreviewContentProps>`
   height: 25px;
   color: ${(props) => props.color};
+  :nth-child(1) {
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
 `;
 
 const Preview: React.FC<PreviewProps> = ({ title, description, color, onChange }: PreviewProps) => {
