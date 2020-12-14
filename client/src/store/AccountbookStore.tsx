@@ -26,7 +26,7 @@ export default class AccountbookStore {
     this.accountbooks = accountbooks;
   };
 
-  updateAccountbook = async (accountbook: Accountbook): Promise<void> => {
+  updateAccountbookSettings = async (accountbook: Accountbook): Promise<void> => {
     this.accountbook = accountbook;
     this.isLoading = false;
   };

@@ -65,7 +65,7 @@ const SettingsAccountbookPage: React.FC = () => {
       const [accountbook] = accountbookStore.accountbooks.filter(
         (accountbook) => accountbook.accountbookId === accountbookId,
       );
-      accountbookStore.updateAccountbook(accountbook);
+      accountbookStore.updateAccountbookSettings(accountbook);
       setTitle((accountbookStore.accountbook as Accountbook).title);
       setDescription((accountbookStore.accountbook as Accountbook).description);
       setInputColor((accountbookStore.accountbook as Accountbook).color);
@@ -85,7 +85,6 @@ const SettingsAccountbookPage: React.FC = () => {
     setDescription(e.target.value);
   };
 
-  // if (accountbookStore.isLoading) return <Spinner />;
   return (
     <SettingsAccountbookPageWrapper>
       <SettingsSidebar currentpage={'accountbook'} />
