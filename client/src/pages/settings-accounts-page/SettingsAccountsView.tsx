@@ -6,6 +6,7 @@ import useStore from '../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import FormModalAccount from '../../components/common/modals/form-modal-account/FormModalCreateAccount';
 import FormModalUpdateAccount from '../../components/common/modals/form-modal-account/FormModalUpdateAccount';
+import socket, { event } from '../../socket';
 
 const SettingsAccountViewWrapper = styled.div`
   position: absolute;
@@ -47,9 +48,19 @@ const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
   const { rootStore } = useStore();
   const { accountStore } = rootStore;
   const { show } = rootStore.modalStore.updateAccountFormStore;
+
   useEffect(() => {
     accountStore.updateAccounts(accountbookId);
   }, []);
+
+  useEffect(() => {
+    socket.on(event.UPDATE_ACCOUNTS, () => {
+      accountStore.updateAccounts(accountbookId);
+    });
+    return () => {
+      socket.off(event.UPDATE_ACCOUNTS);
+    };
+  }, [accountbookId]);
 
   const AccountsItems = accountStore.accounts.map((item) => (
     <AccountItemWrapper key={item.id}>

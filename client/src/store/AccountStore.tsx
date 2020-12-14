@@ -3,8 +3,10 @@ import Account, { AccountRequest } from '../types/account';
 import AccountService from '../services/account';
 import { observable, action, makeObservable, computed, flow } from 'mobx';
 import Options from '../types/dropdownOptions';
+import socket, { event } from '../socket';
+
 export default class AccountStore {
-  rootStore;
+  rootStore: RootStore;
 
   @observable
   accounts: Account[] = [];
@@ -42,6 +44,7 @@ export default class AccountStore {
   addNewAccount = (account: Account): void => {
     this.accounts = [...this.accounts, account];
     this.accountNames = this.accounts.map((item) => item.name);
+    socket.emit(event.UPDATE_ACCOUNTS, this.rootStore.accountbookStore.currentAccountbookId);
   };
 
   deleteAccount = async (accountId: number): Promise<void> => {
@@ -53,11 +56,13 @@ export default class AccountStore {
   deleteAccountById = (accountId: number): void => {
     this.accounts = this.accounts.filter((item) => item.id !== accountId);
     this.accountNames = this.accounts.map((item) => item.name);
+    socket.emit(event.UPDATE_ACCOUNTS, this.rootStore.accountbookStore.currentAccountbookId);
   };
 
   updateAccount = async (account: AccountRequest, accountId: number): Promise<void> => {
     const updatedAccount = await AccountService.updateAccount(account, accountId);
     this.updateAccountById(updatedAccount);
+    socket.emit(event.UPDATE_ACCOUNTS, this.rootStore.accountbookStore.currentAccountbookId);
   };
 
   @action
