@@ -1,5 +1,5 @@
 export interface ITransactionForm {
-  classify: boolean;
+  classify: boolean; // true이면 수입 , false이면 지출
   price: number | string;
   categories: string | undefined;
   accounts: string | undefined;
@@ -74,3 +74,12 @@ export type FormChangeAction =
   | CONTENT_CHANGE_ACTION
   | DATE_CHANGE_ACTION
   | MEMO_CHANGE_ACTION;
+
+export interface MMSType {
+  transactionType: string;
+  isDeposit: boolean;
+  cardname: string;
+  amount: number;
+  date: string;
+  time: string;
+}
