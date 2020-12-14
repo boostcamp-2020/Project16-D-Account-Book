@@ -9,6 +9,7 @@ const InputDateTimeWrapper = styled.input.attrs({
   font-size: 1rem;
   border-radius: 5px;
   border: 1px solid lightgray;
+  font-family: 'Spoqa Han Sans';
 `;
 
 interface InputDateTimeProps {

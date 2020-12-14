@@ -9,6 +9,7 @@ interface Props {
 }
 
 const SettingsCategoriesPageWrapper = styled.div`
+  font-family: 'Spoqa Han Sans';
   display: flex;
 `;
 

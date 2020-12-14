@@ -10,6 +10,8 @@ import AddAccountbookCard from '../../components/accountbook-selection-page/add-
 import AccountbookDeleteByUserModal from '../../components/common/modals/accountbook-delete-by-user/AccountbookDeleteByUserModal';
 import GiveAdminModal from '../../components/common/modals/give-admin-modal/GiveAdminModal';
 import AccountbookDeleteByAdminModal from '../../components/common/modals/accountbook-delete-by-admin/AccountbookDeleteByAdminModal';
+import ProfileDropdown from '../../components/common/profile-dropdown/ProfileDropdown';
+import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
 
 const ViewWrapper = styled.div`
   font-family: 'Spoqa Han Sans';
@@ -28,7 +30,7 @@ const ViewWrapper = styled.div`
 
 const AccountbookSelectionPage: React.FC = () => {
   const { rootStore } = useStore();
-  const { accountbookStore } = rootStore;
+  const { accountbookStore, userStore } = rootStore;
   const {
     deleteAccountbookByAdminStore,
     deleteAccountbookByUserStore,
@@ -45,6 +47,9 @@ const AccountbookSelectionPage: React.FC = () => {
 
   return (
     <>
+      <HeaderNavigationRightTopWrapper>
+        <ProfileDropdown />
+      </HeaderNavigationRightTopWrapper>
       {giveAdminStore.show && <GiveAdminModal />}
       {deleteAccountbookByUserStore.show && <AccountbookDeleteByUserModal />}
       {deleteAccountbookByAdminStore.show && <AccountbookDeleteByAdminModal />}

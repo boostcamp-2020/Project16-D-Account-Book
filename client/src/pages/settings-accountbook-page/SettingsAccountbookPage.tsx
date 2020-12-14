@@ -5,7 +5,9 @@ import Preview from '../../components/common/preview/Preview';
 import InputText from '../../components/common/inputs/input-text/InputText';
 import { DODGER_BLUE } from '../../constants/color';
 import { startDateChecker } from '../../types/inputRadio';
+
 const SettingsAccountbookPageWrapper = styled.div`
+  font-family: 'Spoqa Han Sans';
   display: flex;
 `;
 

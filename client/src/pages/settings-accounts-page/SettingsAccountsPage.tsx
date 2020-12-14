@@ -8,6 +8,7 @@ interface Props {
 }
 
 const SettingsAccountsPageWrapper = styled.div`
+  font-family: 'Spoqa Han Sans';
   display: flex;
 `;
 
