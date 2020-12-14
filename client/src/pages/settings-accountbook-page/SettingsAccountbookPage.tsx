@@ -95,7 +95,7 @@ const SettingsAccountbookPage: React.FC = () => {
     };
   };
 
-  const updateAccountbook = () => {
+  const updateAccountbook = (): void => {
     const accountbook = convertToAccountbook(title, inputColor, description, accountbookId);
     accountbookStore.updateAccountbook(accountbook);
   };
@@ -111,17 +111,17 @@ const SettingsAccountbookPage: React.FC = () => {
           <PreviewWrapper>
             <Preview title={title} description={description} color={inputColor} onChange={onChange} />
           </PreviewWrapper>
-          {isAdmin ? (
-            <SettingsItemWrapper>
-              <Label>가계부 별칭</Label>
-              <InputText
-                maxLength={15}
-                placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
-                value={title}
-                onChange={onChangeTitle}
-              />
-            </SettingsItemWrapper>
-          ) : null}
+          {/* {isAdmin ? ( */}
+          <SettingsItemWrapper>
+            <Label>가계부 별칭</Label>
+            <InputText
+              maxLength={15}
+              placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
+              value={title}
+              onChange={onChangeTitle}
+            />
+          </SettingsItemWrapper>
+          {/* ) : null} */}
           <SettingsItemWrapper>
             <Label>가계부 설명</Label>
             <InputText
