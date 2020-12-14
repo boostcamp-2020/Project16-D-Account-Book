@@ -1,4 +1,3 @@
-import { waitFor } from '@testing-library/react';
 import datePeriod from '../../constants/datePeriod';
 import PieGraphPageStore from '../../store/PieGraphPageStore';
 import RootStore from '../../store/RootStore';
@@ -11,9 +10,6 @@ describe('PieGraphStore Test', () => {
     const { pieGraphPageStore } = rootStore;
     pieGraphPageStore.dateChange = jest.fn();
     container = pieGraphPageStore;
-  });
-  afterEach(() => {
-    jest.clearAllTimers();
   });
   test('초기 선택된 값은 한달이다.', () => {
     const now = new Date();
