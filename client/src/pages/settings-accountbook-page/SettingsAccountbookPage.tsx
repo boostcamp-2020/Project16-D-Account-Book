@@ -85,6 +85,16 @@ const SettingsAccountbookPage: React.FC = () => {
     setDescription(e.target.value);
   };
 
+  const convertToAccountbook = (name, inputColor, description, accountbookId) => {
+    return {
+      id: (accountbookStore.accountbook as Accountbook).id,
+      name: name,
+      color: inputColor,
+      description: description,
+      accountbookId,
+    };
+  };
+
   return (
     <SettingsAccountbookPageWrapper>
       <SettingsSidebar currentpage={'accountbook'} />
