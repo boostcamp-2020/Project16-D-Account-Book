@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ModalBackground from '../modal-background/ModalBackground';
 import { MODAL_WHITE } from '../../../../constants/color';
 import useStore from '../../../../hook/use-store/useStore';
+import FormModalHeader from '../form-modal-header/FormModalHeader';
 
 const FormModalWrapper = styled.div`
   background-color: ${MODAL_WHITE};
@@ -19,7 +20,14 @@ const FormModalCreateAccountbook = (): JSX.Element => {
   const { createAccountbookFormStore } = useStore().rootStore.modalStore;
   return (
     <ModalBackground show={true} closeModal={() => createAccountbookFormStore.setShow(false)}>
-      <FormModalWrapper></FormModalWrapper>
+      <FormModalWrapper>
+        <FormModalHeader
+          modalName={'가계부 생성'}
+          blueName={'생성'}
+          clickBlue={undefined}
+          closeModal={() => createAccountbookFormStore.setShow(false)}
+        />
+      </FormModalWrapper>
     </ModalBackground>
   );
 };
