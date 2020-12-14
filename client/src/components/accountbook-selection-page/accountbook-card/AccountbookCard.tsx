@@ -54,7 +54,8 @@ const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
   } = useStore().rootStore.modalStore;
   const history = useHistory();
 
-  const onClickDelete = () => {
+  const onClickDelete = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
     if (userStore.isAdmin(accountbook.accountbookId as number)) {
       deleteAccountbookByAdminStore.setShow(true);
       giveAdminStore.selectedAccountbookId = accountbook.accountbookId as number;
