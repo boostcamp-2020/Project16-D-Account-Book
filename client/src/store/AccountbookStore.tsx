@@ -3,7 +3,7 @@ import Accountbook from '../types/accountbook';
 import { observable, action, makeObservable } from 'mobx';
 import accountbookService from '../services/accountbook';
 
-export default class AccountStore {
+export default class AccountbookStore {
   rootStore: RootStore;
 
   @observable
