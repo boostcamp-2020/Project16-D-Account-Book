@@ -24,4 +24,9 @@ export default class AccountbookStore {
   deleteAccountbook = (AccountbookId: number): void => {
     this.accountbooks = this.accountbooks.filter((item) => item.accountbookId !== AccountbookId);
   };
+
+  @action
+  addAccountbook = (accountbook: Accountbook): void => {
+    this.accountbooks.push(accountbook);
+  };
 }
