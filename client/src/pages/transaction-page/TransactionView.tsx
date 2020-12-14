@@ -59,7 +59,7 @@ const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<numbe
 
 const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
-  const { dateStore, transactionStore, modalStore, accountStore } = rootStore;
+  const { dateStore, transactionStore, modalStore, accountStore, categoryStore } = rootStore;
   const { formFilterStore } = rootStore.modalStore;
   const { createTransactionFormStore, updateTransactionFormStore } = modalStore;
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
@@ -94,7 +94,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
     });
     socket.on(event.UPDATE_INCOME_CATEGORIES, () => {
       updateTransactions();
-      accountStore.updateAccounts(accountbookId);
+      categoryStore.updateIncomeCategories(accountbookId);
     });
     return () => {
       socket.off(event.UPDATE_TRANSACTIONS);
