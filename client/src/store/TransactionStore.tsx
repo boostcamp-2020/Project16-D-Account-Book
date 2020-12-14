@@ -23,9 +23,6 @@ export default class TransactionStore {
   @observable
   csvTransactions: Array<CsvTransaction> = [];
 
-  @observable
-  accountbookId = 0;
-
   rootStore: RootStore;
 
   transactionDebounceTimer: undefined | number;
@@ -96,13 +93,13 @@ export default class TransactionStore {
   createIncome = async (income: IncomeRequest): Promise<void> => {
     const createdIncome = await transactionService.createIncome(income);
     this.addNewTransaction(createdIncome);
-    socket.emit(event.UPDATE_TRANSACTIONS, this.accountbookId);
+    socket.emit(event.UPDATE_TRANSACTIONS, this.rootStore.accountbookStore.currentAccountbookId);
   };
 
   createExpenditure = async (expenditure: ExpenditureRequest): Promise<void> => {
     const createdExpenditure = await transactionService.createExpenditure(expenditure);
     this.addNewTransaction(createdExpenditure);
-    socket.emit(event.UPDATE_TRANSACTIONS, this.accountbookId);
+    socket.emit(event.UPDATE_TRANSACTIONS, this.rootStore.accountbookStore.currentAccountbookId);
   };
 
   @action
@@ -139,7 +136,7 @@ export default class TransactionStore {
     try {
       await transactionService.deleteIncome(incomeId);
       this.deleteIncomeById(incomeId);
-      socket.emit(event.UPDATE_TRANSACTIONS, this.accountbookId);
+      socket.emit(event.UPDATE_TRANSACTIONS, this.rootStore.accountbookStore.currentAccountbookId);
     } catch {
       alert('삭제 실패');
     }
@@ -149,7 +146,7 @@ export default class TransactionStore {
     try {
       await transactionService.deleteExpenditure(expenditureId);
       this.deleteExpenditureById(expenditureId);
-      socket.emit(event.UPDATE_TRANSACTIONS, this.accountbookId);
+      socket.emit(event.UPDATE_TRANSACTIONS, this.rootStore.accountbookStore.currentAccountbookId);
     } catch {
       alert('삭제 실패');
     }
@@ -178,13 +175,13 @@ export default class TransactionStore {
   patchIncome = async (income: IncomeRequest, incomeId: number): Promise<void> => {
     const response = await transactionService.patchIncome(income, incomeId);
     this.updateIncomeTransaction(response);
-    socket.emit(event.UPDATE_TRANSACTIONS, this.accountbookId);
+    socket.emit(event.UPDATE_TRANSACTIONS, this.rootStore.accountbookStore.currentAccountbookId);
   };
 
   patchExpenditure = async (expenditure: ExpenditureRequest, expenditureId: number): Promise<void> => {
     const response = await transactionService.patchExpenditure(expenditure, expenditureId);
     this.updateExpenditureTransaction(response);
-    socket.emit(event.UPDATE_TRANSACTIONS, this.accountbookId);
+    socket.emit(event.UPDATE_TRANSACTIONS, this.rootStore.accountbookStore.currentAccountbookId);
   };
 
   @action

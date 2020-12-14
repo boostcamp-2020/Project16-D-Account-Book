@@ -9,6 +9,9 @@ export default class AccountbookStore {
   @observable
   accountbooks: Accountbook[] = [];
 
+  @observable
+  currentAccountbookId = 0;
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeObservable(this);
