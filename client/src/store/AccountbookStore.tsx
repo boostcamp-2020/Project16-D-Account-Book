@@ -31,6 +31,17 @@ export default class AccountbookStore {
     this.isLoading = false;
   };
 
+  updateAccountbook = async (accountbook: Accountbook): Promise<void> => {
+    const updatedAccountbook = await accountbookService.updateAccountbook(accountbook);
+    this.updateAccountbookById(updatedAccountbook);
+  };
+
+  @action
+  updateAccountbookById = (accountbook: Accountbook): void => {
+    this.updateAccountbooks();
+    this.accountbook = accountbook;
+  };
+
   @action
   deleteAccountbook = (AccountbookId: number): void => {
     this.accountbooks = this.accountbooks.filter((item) => item.accountbookId !== AccountbookId);
