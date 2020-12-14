@@ -23,12 +23,11 @@ const Wrapper = styled.div<{ itemColor: string; bgColor: string }>`
 `;
 
 interface SettingProps {
-  id: number;
   bgColor: string;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-const AccountbookElimination = ({ id, bgColor, onClick }: SettingProps): JSX.Element => {
+const AccountbookElimination = ({ bgColor, onClick }: SettingProps): JSX.Element => {
   const itemColor = getTextColor(bgColor);
   return (
     <Wrapper itemColor={itemColor} bgColor={bgColor} onClick={onClick}>
