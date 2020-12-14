@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import AccountbookSetting from '../accontbook-setting/AccountbookSetting';
 import AccountbookElimination from '../accountbook-elimination/AccountbookElimination';
+import { useHistory } from 'react-router-dom';
 import { getTextColor } from '../../../utils/color';
 import useStore from '../../../hook/use-store/useStore';
 import { Accountbook } from '../../../types/accountbook';
@@ -19,6 +20,7 @@ const AccountbookWrapper = styled.div<{
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};
   padding: 15px 15px 20px 15px;
+  margin-bottom: 15px;
   display: flex;
   cursor: pointer;
   &:hover {
@@ -50,8 +52,10 @@ const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
     deleteAccountbookByUserStore,
     giveAdminStore,
   } = useStore().rootStore.modalStore;
+  const history = useHistory();
 
-  const onClickDelete = () => {
+  const onClickDelete = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
     if (userStore.isAdmin(accountbook.accountbookId as number)) {
       deleteAccountbookByAdminStore.setShow(true);
       giveAdminStore.selectedAccountbookId = accountbook.accountbookId as number;
@@ -63,13 +67,17 @@ const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
 
   const textColor = getTextColor(accountbook.color);
   return (
-    <AccountbookWrapper bgColor={accountbook.color} textColor={textColor}>
+    <AccountbookWrapper
+      bgColor={accountbook.color}
+      textColor={textColor}
+      onClick={() => history.push(`/accountbooks/${accountbook.accountbookId}`)}
+    >
       <HeaderWrapper>
         <ElementWrapper>
-          <AccountbookSetting id={accountbook.id} bgColor={accountbook.color} />
+          <AccountbookSetting accountbookId={accountbook.accountbookId} bgColor={accountbook.color} />
         </ElementWrapper>
         <ElementWrapper>
-          <AccountbookElimination id={accountbook.id} bgColor={accountbook.color} onClick={onClickDelete} />
+          <AccountbookElimination bgColor={accountbook.color} onClick={onClickDelete} />
         </ElementWrapper>
       </HeaderWrapper>
       <TitleWrapper>{accountbook.title}</TitleWrapper>

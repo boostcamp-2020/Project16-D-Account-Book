@@ -8,6 +8,7 @@ import UserStore from './UserStore';
 import SocialStore from './SocialStore';
 import PieGraphPageStore from './PieGraphPageStore';
 import LineChartStore from './LineChartStore';
+import AccountbookStore from './AccountbookStore';
 
 export default class RootStore {
   dateStore: DateStore;
@@ -19,6 +20,7 @@ export default class RootStore {
   socialStore: SocialStore;
   pieGraphPageStore: PieGraphPageStore;
   lineChartStore: LineChartStore;
+  accountbookStore: AccountbookStore;
 
   constructor() {
     this.categoryStore = new CategoryStore(this);
@@ -30,6 +32,7 @@ export default class RootStore {
     this.socialStore = new SocialStore(this);
     this.pieGraphPageStore = new PieGraphPageStore(this);
     this.lineChartStore = new LineChartStore(this);
+    this.accountbookStore = new AccountbookStore(this);
   }
 }
 
