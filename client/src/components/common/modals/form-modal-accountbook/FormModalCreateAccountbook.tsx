@@ -9,18 +9,24 @@ import InputText from '../../inputs/input-text/InputText';
 
 const FormModalWrapper = styled.div`
   background-color: ${MODAL_WHITE};
-  width: 50%;
+  width: 55%;
   padding: 20px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 400px;
+  min-height: 400px;
+`;
+
+const ModalBody = styled.div`
+  margin: 0 auto;
+  width: 80%;
+  margin-bottom: 20px;
 `;
 
 const PreviewWrapper = styled.div`
   margin-top: 1rem;
-  width: 80%;
+  width: 90%;
 `;
 
 const Label = styled.div`
@@ -36,7 +42,8 @@ const ContentWrapper = styled.div`
 
 const FormModalCreateAccountbook = (): JSX.Element => {
   const { createAccountbookFormStore } = useStore().rootStore.modalStore;
-  const [inputColor, setInputColor] = useState<string>('black');
+  const { accountbookStore } = useStore().rootStore;
+  const [inputColor, setInputColor] = useState<string>('#000000');
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
 
@@ -52,36 +59,48 @@ const FormModalCreateAccountbook = (): JSX.Element => {
     setDescription(e.target.value);
   };
 
+  const onClickCreate = () => {
+    if (!title) {
+      alert('가계부 이름을 입력해주세요.');
+      return;
+    }
+
+    accountbookStore.createAccountbook({ title, color: inputColor, description });
+    createAccountbookFormStore.setShow(false);
+  };
+
   return (
     <ModalBackground show={true} closeModal={() => createAccountbookFormStore.setShow(false)}>
       <FormModalWrapper>
         <FormModalHeader
           modalName={'가계부 생성'}
           blueName={'생성'}
-          clickBlue={undefined}
+          clickBlue={onClickCreate}
           closeModal={() => createAccountbookFormStore.setShow(false)}
         />
-        <PreviewWrapper>
-          <Preview title={title} description={description} color={inputColor} onChange={onChangeColor} />
-        </PreviewWrapper>
-        <ContentWrapper>
-          <Label>가계부 별칭</Label>
-          <InputText
-            maxLength={15}
-            placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
-            value={title}
-            onChange={onChangeTitle}
-          />
-        </ContentWrapper>
-        <ContentWrapper>
-          <Label>가계부 설명</Label>
-          <InputText
-            maxLength={30}
-            placeholder={'가계부에 대한 설명을 기재해주세요.'}
-            value={description}
-            onChange={onChangeDescription}
-          />
-        </ContentWrapper>
+        <ModalBody>
+          <PreviewWrapper>
+            <Preview title={title} description={description} color={inputColor} onChange={onChangeColor} />
+          </PreviewWrapper>
+          <ContentWrapper>
+            <Label>가계부 별칭</Label>
+            <InputText
+              maxLength={15}
+              placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
+              value={title}
+              onChange={onChangeTitle}
+            />
+          </ContentWrapper>
+          <ContentWrapper>
+            <Label>가계부 설명</Label>
+            <InputText
+              maxLength={30}
+              placeholder={'가계부에 대한 설명을 기재해주세요.'}
+              value={description}
+              onChange={onChangeDescription}
+            />
+          </ContentWrapper>
+        </ModalBody>
       </FormModalWrapper>
     </ModalBackground>
   );

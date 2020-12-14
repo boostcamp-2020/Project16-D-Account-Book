@@ -1,5 +1,5 @@
 import RootStore from './RootStore';
-import Accountbook from '../types/accountbook';
+import Accountbook, { CeateAccountbookBody } from '../types/accountbook';
 import { observable, action, makeObservable } from 'mobx';
 import accountbookService from '../services/accountbook';
 
@@ -25,8 +25,17 @@ export default class AccountbookStore {
     this.accountbooks = this.accountbooks.filter((item) => item.accountbookId !== AccountbookId);
   };
 
+  createAccountbook = async ({ title, color, description }: CeateAccountbookBody): Promise<void> => {
+    const accountbook = await accountbookService.createAccountbook({ title, color, description });
+    this.addAccountbook(accountbook);
+  };
+
   @action
   addAccountbook = (accountbook: Accountbook): void => {
     this.accountbooks.push(accountbook);
+    this.rootStore.userStore.accountAuthorList?.push({
+      accountbookId: accountbook.accountbookId as number,
+      authority: true,
+    });
   };
 }
