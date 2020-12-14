@@ -48,7 +48,7 @@ export default class UserStore {
     this.provider = '';
     this.nickname = '';
     this.profileUrl = '';
-    this.accountAuthorList = [];
+    this.accountAuthorList = null;
   };
 
   getAuthority = async (): Promise<void> => {
