@@ -50,7 +50,8 @@ const createIncomeCategory = async ({ accountbookId, name, color }) => {
     name,
     color,
   });
-  return createdIncomeCategory;
+  const incomeCategory = await findIncomeCategoryById(createdIncomeCategory.toJSON().id);
+  return incomeCategory;
 };
 
 const createExpenditureCategory = async ({ accountbookId, name, color }) => {
@@ -66,7 +67,8 @@ const createExpenditureCategory = async ({ accountbookId, name, color }) => {
     name,
     color,
   });
-  return createdExpenditureCategory;
+  const expenditureCategory = await findExpenditureCategoryById(createdExpenditureCategory.id);
+  return expenditureCategory;
 };
 
 const updateIncomeCategory = async (incomeCategoryId, { name, color }) => {

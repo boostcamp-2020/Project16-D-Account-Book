@@ -32,7 +32,8 @@ const createAccount = async ({ accountbookId, name, color }) => {
     name,
     color,
   });
-  return createdAccount;
+  const account = await findAccountById(createdAccount.toJSON().id);
+  return account;
 };
 
 const updateAccount = async (accountId, { name, color }) => {
