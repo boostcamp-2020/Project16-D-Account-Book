@@ -25,6 +25,7 @@ const FormModalUpdateCategory: React.FC = () => {
   const updateCategoryFormStore = rootStore.modalStore.updateCategoryFormStore;
   const { show } = updateCategoryFormStore;
   const { check, noChange } = rootStore.modalStore.updateCategoryFormStore;
+  const [colorCheck, setColorCheck] = useState(false);
 
   const [name, setName] = useState<string>(
     updateCategoryFormStore.incomeFlag
@@ -61,7 +62,9 @@ const FormModalUpdateCategory: React.FC = () => {
       } else {
         updateCategoryFormStore.setNoChangeFalse();
       }
-    } else {
+    }
+
+    if (!updateCategoryFormStore.incomeFlag) {
       if (rootStore.categoryStore.expenditureCategoryNames.includes(e.target.value)) {
         updateCategoryFormStore.setCheckFalse();
       } else {
@@ -77,6 +80,21 @@ const FormModalUpdateCategory: React.FC = () => {
 
   const onChange = (color: { hex: string }): void => {
     setInputColor(color.hex);
+    if (updateCategoryFormStore.incomeFlag) {
+      if (inputColor === (updateCategoryFormStore.incomeCategory as Category).color) {
+        setColorCheck(false);
+      } else {
+        setColorCheck(true);
+      }
+    }
+
+    if (!updateCategoryFormStore.incomeFlag) {
+      if (inputColor === (updateCategoryFormStore.expenditureCategory as Category).color) {
+        setColorCheck(false);
+      } else {
+        setColorCheck(true);
+      }
+    }
   };
 
   const modalToggle = (): void => {
@@ -127,8 +145,8 @@ const FormModalUpdateCategory: React.FC = () => {
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
-        {check ? (
-          name && !noChange ? (
+        {check || noChange ? (
+          (name && !noChange) || (name && colorCheck) ? (
             <FormModalHeader
               modalName={
                 updateCategoryFormStore.incomeFlag
