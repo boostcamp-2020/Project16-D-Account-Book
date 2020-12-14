@@ -23,6 +23,8 @@ const PreviewContent = styled.div<PreviewContentProps>`
   padding: 10px;
   margin-right: 1em;
   background-color: ${(props) => props.color};
+  height: 90px;
+  border-radius: 10px;
 `;
 
 const PreviewContentText = styled.p<PreviewContentProps>`
