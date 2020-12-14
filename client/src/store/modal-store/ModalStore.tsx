@@ -9,7 +9,7 @@ import UpdateCategoryFormStore from './UpdateCategoryFormStore';
 import DeleteAccountbookByAdminStore from './DeleteAccountbookByAdminStore';
 import DeleteAccountbookByUserStore from './DeleteAccountbookByUserStore';
 import GiveAdminStore from './GiveAdminStore';
-
+import CreateAccountbookFormStore from './CreateAccountbookFormStore';
 export default class ModalStore {
   rootStore: RootStore;
   filterFormStore: FilterFormStore;
@@ -22,6 +22,7 @@ export default class ModalStore {
   deleteAccountbookByAdminStore: DeleteAccountbookByAdminStore;
   deleteAccountbookByUserStore: DeleteAccountbookByUserStore;
   giveAdminStore: GiveAdminStore;
+  createAccountbookFormStore: CreateAccountbookFormStore;
 
   constructor(rootStore: RootStore) {
     this.filterFormStore = new FilterFormStore(rootStore);
@@ -35,5 +36,6 @@ export default class ModalStore {
     this.deleteAccountbookByAdminStore = new DeleteAccountbookByAdminStore(rootStore);
     this.deleteAccountbookByUserStore = new DeleteAccountbookByUserStore(rootStore);
     this.giveAdminStore = new GiveAdminStore(rootStore);
+    this.createAccountbookFormStore = new CreateAccountbookFormStore(rootStore);
   }
 }
