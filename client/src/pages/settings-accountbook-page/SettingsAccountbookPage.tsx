@@ -85,10 +85,10 @@ const SettingsAccountbookPage: React.FC = () => {
     setDescription(e.target.value);
   };
 
-  const convertToAccountbook = (name, inputColor, description, accountbookId) => {
+  const convertToAccountbook = (title, inputColor, description, accountbookId) => {
     return {
       id: (accountbookStore.accountbook as Accountbook).id,
-      name: name,
+      title: title,
       color: inputColor,
       description: description,
       accountbookId,
@@ -96,7 +96,7 @@ const SettingsAccountbookPage: React.FC = () => {
   };
 
   const updateAccountbook = () => {
-    const accountbook = convertToAccountbook(name, inputColor, description, accountbookId);
+    const accountbook = convertToAccountbook(title, inputColor, description, accountbookId);
     accountbookStore.updateAccountbook(accountbook);
   };
 
