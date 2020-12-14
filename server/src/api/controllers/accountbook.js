@@ -9,10 +9,10 @@ const getAccountbooksByUserId = async (ctx) => {
 };
 
 const createAccountbook = async (ctx) => {
-  const { title, description, color } = ctx.request.body;
+  const accountbookData = ctx.request.body;
   const token = ctx.cookies.get('jwt');
-  const decoded = decodeToken(token);
-  const createdAccountbook = await accountbookService.createAccountbook(decoded.userId, title, description, color);
+  accountbookData.userId = decodeToken(token).userId;
+  const createdAccountbook = await accountbookService.createAccountbook(accountbookData);
   ctx.body = createdAccountbook;
 };
 
