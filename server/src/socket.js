@@ -4,6 +4,7 @@ const event = {
   LEAVE: 'leave',
   UPDATE_TRANSACTIONS: 'update transactions',
   UPDATE_ACCOUNTS: 'update accounts',
+  UPDATE_INCOME_CATEGORIES: 'update income categories',
 };
 
 const connectOn = (io) => {
@@ -22,6 +23,10 @@ const connectOn = (io) => {
 
     socket.on(event.UPDATE_ACCOUNTS, (accountbookId) => {
       socket.in(accountbookId).emit(event.UPDATE_ACCOUNTS, 'update accounts!');
+    });
+
+    socket.on(event.UPDATE_INCOME_CATEGORIES, (accountbookId) => {
+      socket.in(accountbookId).emit(event.UPDATE_INCOME_CATEGORIES, 'update income categories!');
     });
   });
 };
