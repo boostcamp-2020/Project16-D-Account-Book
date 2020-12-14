@@ -48,6 +48,16 @@ const getAccountbookByAccountbookId = async (userAccountbookId) => {
   return accountbook;
 };
 
+const updateAccountbook = async (accountbookId, accountbookData) => {
+  await db.accountbook.update({ name: accountbookData.name }, { where: { id: accountbookId } });
+  await db.userAccountbook.update(
+    { color: accountbookData.color, description: accountbookData.description },
+    { where: { id: accountbookData.id } },
+  );
+  const updatedAccountbook = await getAccountbookByAccountbookId(accountbookData.id);
+  return updatedAccountbook;
+};
+
 const deleteAccountbook = async (accountbookId, userId) => {
   await db.userAccountbook.destroy({ where: { accountbookId, userId } });
   const userAccountbooks = await db.userAccountbook.findAll({ where: { accountbookId } });
@@ -59,5 +69,6 @@ const deleteAccountbook = async (accountbookId, userId) => {
 module.exports = {
   getAccountbookById,
   getAccountbooksByUserId,
+  updateAccountbook,
   deleteAccountbook,
 };
