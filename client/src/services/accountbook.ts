@@ -16,9 +16,12 @@ export default {
     });
     return data;
   },
-  updateAccountbook: async (accountbookId: number): Promise<void> => {
+  updateAccountbook: async (accountbook: Accountbook): Promise<Accountbook> => {
     try {
-      const response = await instance.patch(`${accountbookAPIAddress.updateAccountbook}/${accountbookId}`);
+      const response = await instance.patch(
+        `${accountbookAPIAddress.updateAccountbook}/${accountbook.accountbookId}`,
+        accountbook,
+      );
       return response.data;
     } catch {
       throw new Error('수정 실패');
