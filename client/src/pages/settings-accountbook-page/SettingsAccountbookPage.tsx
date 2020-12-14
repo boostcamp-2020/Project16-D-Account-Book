@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SettingsSidebar from '../../components/common/settings-sidebar/SettingsSidebar';
 import Preview from '../../components/common/preview/Preview';
 import InputText from '../../components/common/inputs/input-text/InputText';
-import { DODGER_BLUE } from '../../constants/color';
+import { DODGER_BLUE, MODAL_GRAY } from '../../constants/color';
 import useStore from '../../hook/use-store/useStore';
 import useGetParam from '../../hook/use-get-param/useGetParam';
 import { observer } from 'mobx-react';
@@ -30,10 +30,11 @@ const SettingsItemWrapper = styled.div`
   margin-top: 50px;
 `;
 
-const Label = styled.div`
+const Label = styled.div<{ color?: string }>`
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 10px;
+  color: ${({ color }) => color};
 `;
 
 interface ConfirmButtonProps {
@@ -121,7 +122,18 @@ const SettingsAccountbookPage: React.FC = () => {
                 onChange={onChangeTitle}
               />
             </SettingsItemWrapper>
-          ) : null}
+          ) : (
+            <SettingsItemWrapper>
+              <Label color={'#e4e4e4'}>가계부 별칭</Label>
+              <InputText
+                maxLength={15}
+                placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
+                value={title}
+                onChange={onChangeTitle}
+                disabled={true}
+              />
+            </SettingsItemWrapper>
+          )}
           <SettingsItemWrapper>
             <Label>가계부 설명</Label>
             <InputText
