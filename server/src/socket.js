@@ -3,6 +3,7 @@ const event = {
   JOIN: 'join',
   LEAVE: 'leave',
   UPDATE_TRANSACTIONS: 'update transactions',
+  UPDATE_ACCOUNTS: 'update accounts',
 };
 
 const connectOn = (io) => {
@@ -17,6 +18,10 @@ const connectOn = (io) => {
 
     socket.on(event.UPDATE_TRANSACTIONS, (accountbookId) => {
       socket.in(accountbookId).emit(event.UPDATE_TRANSACTIONS, 'update transaction!');
+    });
+
+    socket.on(event.UPDATE_ACCOUNTS, (accountbookId) => {
+      socket.in(accountbookId).emit(event.UPDATE_ACCOUNTS, 'update accounts!');
     });
   });
 };
