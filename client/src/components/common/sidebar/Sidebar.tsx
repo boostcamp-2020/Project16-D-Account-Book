@@ -51,7 +51,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
+const Sidebar = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleButton = (): void => {
     setIsOpen(!isOpen);

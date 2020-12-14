@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import HeaderNavigation from '../../components/common/header-navigation/HeaderNavigation';
 import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
 import Sidebar from '../../components/common/sidebar/Sidebar';
-import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 import PieGraphPage from './PieGraphPage';
 import LineChartPage from './LineChartPage';
 import styled from 'styled-components';
@@ -23,7 +22,7 @@ const StatisticsPage: React.FC = () => {
   };
   return (
     <>
-      <Sidebar smallAccountbooks={smallAccountbookItems} />
+      <Sidebar />
       <HeaderNavigationRightTopWrapper>
         <HeaderNavigation currentPage={'statistics'} />
       </HeaderNavigationRightTopWrapper>

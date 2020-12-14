@@ -5,7 +5,6 @@ import HeaderNavigation from '../../components/common/header-navigation/HeaderNa
 import ChangeDateContainer from '../../components/common/change-date-container/ChangeDateContainer';
 import Amount from '../../components/common/amount/Amonut';
 import AllTransactionContainer from '../../components/common/transactions/all-transaction-container/AllTransactionContainer';
-import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
 import useStore from '../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
@@ -103,7 +102,7 @@ const InfiniteScrollTestView: React.FC<Props> = ({ accountbookId, query }: Props
       {formFilterStore.show && <FormModalFilter accountbookId={accountbookId} />}
       {createTransactionFormStore.show && <FormModalCreateTransaction />}
       {updateTransactionFormStore.show && <FormModalUpdateTransaction />}
-      <Sidebar smallAccountbooks={smallAccountbookItems} />
+      <Sidebar />
       <MenuNavigation />
       <HeaderNavigationRightTopWrapper>
         <HeaderNavigation currentPage={'calendar'} />
