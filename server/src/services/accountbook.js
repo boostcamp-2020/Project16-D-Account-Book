@@ -1,5 +1,4 @@
 const db = require('@models');
-const { decodeTokenForValidation } = require('@utils/jwt-utils');
 
 const getAccountbookById = async (id) => {
   const accountbook = await db.accountbook.findOne({
@@ -21,6 +20,13 @@ const getAccountbooksByUserId = async (userId) => {
       userId,
     },
     attributes: ['id', 'authority', 'description', 'color', 'accountbookId'],
+    include: [
+      {
+        model: db.accountbook,
+        attributes: ['title'],
+      },
+    ],
+    raw: true,
   });
   return accountbooks;
 };
