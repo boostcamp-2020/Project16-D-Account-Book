@@ -49,7 +49,7 @@ const getAccountbookByAccountbookId = async (userAccountbookId) => {
 };
 
 const updateAccountbook = async (accountbookId, accountbookData) => {
-  await db.accountbook.update({ name: accountbookData.name }, { where: { id: accountbookId } });
+  await db.accountbook.update({ title: accountbookData.title }, { where: { id: accountbookId } });
   await db.userAccountbook.update(
     { color: accountbookData.color, description: accountbookData.description },
     { where: { id: accountbookData.id } },
