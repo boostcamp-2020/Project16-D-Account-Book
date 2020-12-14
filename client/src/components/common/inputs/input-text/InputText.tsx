@@ -10,6 +10,7 @@ interface InputType {
 const InputTextContainer = styled.input.attrs((props) => ({
   type: 'text',
   maxLength: props.maxLength,
+  disabled: props.disabled,
 }))<InputType>`
   width: 100%;
   padding: 15px 10px;
@@ -28,15 +29,17 @@ interface InputTextProps {
   value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   maxLength?: number;
+  disabled?: boolean;
 }
 
-const InputText: React.FC<InputTextProps> = ({ maxLength, placeholder, value, onChange }: InputTextProps) => {
+const InputText: React.FC<InputTextProps> = ({ maxLength, placeholder, value, onChange, disabled }: InputTextProps) => {
   return (
     <InputTextContainer
       maxLength={maxLength}
       value={value}
       placeholder={placeholder}
       onChange={onChange}
+      disabled={disabled}
     ></InputTextContainer>
   );
 };
