@@ -8,6 +8,7 @@ import useStore from '../../hook/use-store/useStore';
 import useGetParam from '../../hook/use-get-param/useGetParam';
 import { observer } from 'mobx-react';
 import Accountbook from '../../types/accountbook';
+import Spinner from '../../components/common/spinner/Spinner';
 
 const SettingsAccountbookPageWrapper = styled.div`
   display: flex;
@@ -58,15 +59,16 @@ const SettingsAccountbookPage: React.FC = () => {
   const [description, setDescription] = useState<string>('');
 
   useEffect(() => {
+    accountbookStore.isLoading = true;
     const loadAccountbooks = async () => {
       await accountbookStore.updateAccountbooks();
       const [accountbook] = accountbookStore.accountbooks.filter(
         (accountbook) => accountbook.accountbookId === accountbookId,
       );
       accountbookStore.updateAccountbook(accountbook);
-      setInputColor((accountbookStore.accountbook as Accountbook).color);
       setTitle((accountbookStore.accountbook as Accountbook).title);
       setDescription((accountbookStore.accountbook as Accountbook).description);
+      setInputColor((accountbookStore.accountbook as Accountbook).color);
     };
     loadAccountbooks();
   }, []);
@@ -83,35 +85,40 @@ const SettingsAccountbookPage: React.FC = () => {
     setDescription(e.target.value);
   };
 
+  // if (accountbookStore.isLoading) return <Spinner />;
   return (
     <SettingsAccountbookPageWrapper>
       <SettingsSidebar currentpage={'accountbook'} />
-      <SettingsBody>
-        <ConfirmButton>완료</ConfirmButton>
-        <PreviewWrapper>
-          <Preview title={title} description={description} color={inputColor} onChange={onChange} />
-        </PreviewWrapper>
-        {isAdmin ? (
+      {accountbookStore.isLoading ? (
+        <Spinner />
+      ) : (
+        <SettingsBody>
+          <ConfirmButton>완료</ConfirmButton>
+          <PreviewWrapper>
+            <Preview title={title} description={description} color={inputColor} onChange={onChange} />
+          </PreviewWrapper>
+          {isAdmin ? (
+            <SettingsItemWrapper>
+              <Label>가계부 별칭</Label>
+              <InputText
+                maxLength={15}
+                placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
+                value={title}
+                onChange={onChangeTitle}
+              />
+            </SettingsItemWrapper>
+          ) : null}
           <SettingsItemWrapper>
-            <Label>가계부 별칭</Label>
+            <Label>가계부 설명</Label>
             <InputText
-              maxLength={15}
-              placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
-              value={title}
-              onChange={onChangeTitle}
+              maxLength={30}
+              placeholder={'가계부에 대한 설명을 기재해주세요.'}
+              value={description}
+              onChange={onChangeDescription}
             />
           </SettingsItemWrapper>
-        ) : null}
-        <SettingsItemWrapper>
-          <Label>가계부 설명</Label>
-          <InputText
-            maxLength={30}
-            placeholder={'가계부에 대한 설명을 기재해주세요.'}
-            value={description}
-            onChange={onChangeDescription}
-          />
-        </SettingsItemWrapper>
-      </SettingsBody>
+        </SettingsBody>
+      )}
     </SettingsAccountbookPageWrapper>
   );
 };

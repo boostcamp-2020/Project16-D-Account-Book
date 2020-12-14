@@ -12,6 +12,9 @@ export default class AccountbookStore {
   @observable
   accountbook: Accountbook | undefined = undefined;
 
+  @observable
+  isLoading = true;
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeObservable(this);
@@ -25,6 +28,7 @@ export default class AccountbookStore {
 
   updateAccountbook = async (accountbook: Accountbook): Promise<void> => {
     this.accountbook = accountbook;
+    this.isLoading = false;
   };
 
   @action
