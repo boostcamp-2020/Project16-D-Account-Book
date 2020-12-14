@@ -20,7 +20,7 @@ const AccountbookDescription = styled.div<{ textColor: string }>`
   color: ${({ textColor }) => textColor};
   padding: 10px 14px;
   display: block;
-  font-size: 0.8em;
+  font-size: 0.7em;
 `;
 
 const AccountbookViewWrapper = styled.div<{ bgColor: string }>`
