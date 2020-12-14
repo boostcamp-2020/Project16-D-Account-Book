@@ -6,6 +6,7 @@ export const event = {
   JOIN: 'join',
   LEAVE: 'leave',
   UPDATE_ACCOUNTS: 'update accounts',
+  UPDATE_INCOME_CATEGORIES: 'update income categories',
 };
 
 export default socket;
