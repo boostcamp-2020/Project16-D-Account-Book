@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TransactionInputList from './TransactionInputList';
 import UseTransactionForm from '../../../../hook/use-transaction-form/useTransactionForm';
 import FormModalWrapper from '../form-modal-template/FormModalWrapper';
@@ -8,9 +8,11 @@ import useStore from '../../../../hook/use-store/useStore';
 import { convertToIncome, convertToExpenditure } from '../formUtils';
 import { observer } from 'mobx-react';
 import useGetParam from '../../../../hook/use-get-param/useGetParam';
+import MMSInput from './MMSInput';
 
 const FormModalTransaction: React.FC = () => {
   const { rootStore } = useStore();
+  const [mmsMode, setMMSMode] = useState(false);
   const id = useGetParam();
   const toggle = rootStore.modalStore.createTransactionFormStore;
 
@@ -72,9 +74,12 @@ const FormModalTransaction: React.FC = () => {
           blueName={'완료'}
           closeModal={modalToggle}
           clickBlue={inputs.classify ? incomeClick : expenditureClick}
+          clickSMS={() => {
+            setMMSMode(!mmsMode);
+          }}
           sms={true}
         />
-        <TransactionInputList inputs={inputListInputs} changes={changes} />
+        {!mmsMode ? <TransactionInputList inputs={inputListInputs} changes={changes} /> : <MMSInput />}
       </FormModalWrapper>
     </ModalBackground>
   );

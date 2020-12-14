@@ -11,6 +11,7 @@ const DivWrapper = styled.div`
   justify-content: center;
   background-color: ${GRAY};
   cursor: pointer;
+  border-radius: 10px;
   &:hover {
     box-shadow: 2px 3px 7px gray;
   }

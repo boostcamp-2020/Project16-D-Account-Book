@@ -80,7 +80,7 @@ const FormModalHeader: React.FC<IFormModalHeaderProps> = ({
       </CloseModalButtonWrapper>
       <ModalName>{modalName}</ModalName>
       <Right />
-      {sms && <SMSIcon />}
+      {sms && <SMSIcon onClick={clickSMS} />}
       {redName && <RedButton onClick={clickRed}>{redName}</RedButton>}
       {blueName && <BlueButton onClick={clickBlue}>{blueName}</BlueButton>}
       {disabledName && <DisabledButton>{disabledName}</DisabledButton>}

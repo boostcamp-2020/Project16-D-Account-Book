@@ -15,8 +15,6 @@ const transactionAPIAddress = {
   deleteExpenditure: '/api/transactions/expenditure',
 };
 
-const TransactionCache = new Map();
-
 export default {
   getTransactions: async function* (
     accountbookId: number,
@@ -24,7 +22,7 @@ export default {
     endDate: Date,
     beforeStartDate?: Date,
     afterEndDate?: Date,
-  ): AsyncGenerator<Array<Income | Expenditure>> {
+  ): AsyncGenerator<Array<Income | Expenditure> | undefined> {
     const formattedStartDate = getFormattedDate({ date: startDate, format: '.' });
     const foramttedEndDate = getFormattedDate({ date: endDate, format: '.' });
     const gap = endDate.valueOf() - startDate.valueOf();
@@ -36,8 +34,12 @@ export default {
     });
     const requestURL = transactionAPIAddress.getTransactions + `?${query}`;
 
-    // 캐시 리턴
-    yield TransactionCache.get(requestURL);
+    const item = sessionStorage.getItem(requestURL);
+    if (item === null) {
+      yield undefined;
+    } else {
+      yield JSON.parse(item) as Array<Income | Expenditure>;
+    }
 
     // 이전 달 업데이트
     if (beforeStartDate !== undefined) {
@@ -50,7 +52,7 @@ export default {
           end_date: formattedStartDate,
         });
       instance.get(beforeMonthQuery).then((response) => {
-        TransactionCache.set(beforeMonthQuery, response.data);
+        sessionStorage.setItem(beforeMonthQuery, JSON.stringify(response.data));
       });
     }
 
@@ -66,7 +68,7 @@ export default {
         });
 
       instance.get(beforeMonthQuery).then((response) => {
-        TransactionCache.set(beforeMonthQuery, response.data);
+        sessionStorage.setItem(beforeMonthQuery, JSON.stringify(response.data));
       });
     }
 
@@ -79,7 +81,7 @@ export default {
     });
 
     //캐시 업데이트
-    TransactionCache.set(requestURL, response.data);
+    sessionStorage.setItem(requestURL, JSON.stringify(response.data));
     yield response.data;
   },
 

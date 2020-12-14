@@ -9,6 +9,7 @@ import PieChartValue from '../types/pieChartValue';
 import { getOnlyIncome, getTopFiveCategory, getOnlyExpenditure } from '../utils/filter';
 import BoxChartValue from '../types/boxChartValue';
 import { CancellablePromise } from 'mobx/dist/api/flow';
+import getSWRGenerator from '../utils/generator/getSWRGenerator';
 export default class PieGraphPageStore {
   rootStore: RootStore;
   dateOptions = dateOptions;
@@ -92,7 +93,7 @@ export default class PieGraphPageStore {
     this.endDate = endDate;
     const beforeDate = this.getBeforeDateByPeriod(this.startDate, this.selectedDate);
     const afterDate = this.getNextDateByPeriod(this.endDate, this.selectedDate);
-    const generation = transactionService.getTransactions(accountbookId, startDate, endDate, beforeDate, afterDate);
+    const generation = getSWRGenerator(accountbookId, startDate, endDate, beforeDate, afterDate);
     const { value: cachedValue } = yield generation.next();
     if (cachedValue !== undefined) {
       this.transactions = cachedValue;

@@ -9,6 +9,7 @@ import Query from '../types/query';
 import { CancellablePromise } from 'mobx/dist/api/flow';
 import { getFirstDateOfNextMonth, getFirstDateOfPreviousMonth } from '../utils/date';
 import socket, { event } from '../socket';
+import getSWRGenerator from '../utils/generator/getSWRGenerator';
 export default class TransactionStore {
   @observable
   transactions: Array<Income | Expenditure> = [];
@@ -59,9 +60,7 @@ export default class TransactionStore {
   };
 
   getTransactions = flow(function* (this: TransactionStore, accountbookId: number, startDate: Date, endDate: Date) {
-    const beforeMonth = getFirstDateOfPreviousMonth(startDate);
-    const afterMonth = getFirstDateOfNextMonth(endDate);
-    const generation = transactionService.getTransactions(accountbookId, startDate, endDate, beforeMonth, afterMonth);
+    const generation = getSWRGenerator(accountbookId, startDate, endDate);
 
     const cached = yield generation.next();
     if (cached.value !== undefined) {
@@ -73,18 +72,26 @@ export default class TransactionStore {
     this.transactions = refreshedData.value;
   });
 
-  @action
-  filterTransactions = async (
+  filterTransactions = flow(function* (
+    this: TransactionStore,
     accountbookId: number,
     { startDate, endDate, incomeCategory, expenditureCategory, account }: Query,
-  ): Promise<void> => {
-    await this.findTransactions(accountbookId, new Date(startDate as string), new Date(endDate as string));
-    runInAction(() => {
-      this.transactions = filtering(this.transactions, { account, incomeCategory, expenditureCategory });
-      this.isFilterMode = true;
+  ) {
+    const convertedStartDate = new Date(startDate as string);
+    const convertedEndDate = new Date(endDate as string);
+
+    const generation = getSWRGenerator(accountbookId, convertedStartDate, convertedEndDate);
+
+    const cached = yield generation.next();
+    if (cached.value !== undefined) {
       this.isLoading = false;
-    });
-  };
+      this.transactions = filtering(cached.value, { account, incomeCategory, expenditureCategory });
+    }
+    const refreshedData = yield generation.next();
+    this.isLoading = false;
+    this.transactions = filtering(refreshedData.value, { account, incomeCategory, expenditureCategory });
+    this.isFilterMode = true;
+  });
 
   createIncome = async (income: IncomeRequest): Promise<void> => {
     const createdIncome = await transactionService.createIncome(income);

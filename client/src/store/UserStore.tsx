@@ -1,4 +1,4 @@
-import { observable, action, makeObservable, computed } from 'mobx';
+import { observable, action, makeObservable } from 'mobx';
 import RootStore from './RootStore';
 import User, { UserAuthorType } from '../types/user';
 import authService from '../services/auth';
@@ -48,7 +48,7 @@ export default class UserStore {
     this.provider = '';
     this.nickname = '';
     this.profileUrl = '';
-    this.accountAuthorList = [];
+    this.accountAuthorList = null;
   };
 
   getAuthority = async (): Promise<void> => {

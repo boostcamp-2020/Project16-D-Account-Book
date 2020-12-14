@@ -12,7 +12,6 @@ import StatisticsPage from '../pages/statistics-page/StatisticsPage';
 import TransactionPage from '../pages/transaction-page/TransactionPage';
 import LoginGuard from '../hoc/LoginGuard';
 import UserAuthorityGuard from '../hoc/UserAuthorityGuard';
-import AccountbookDeleteTestPage from '../pages/AccountbookDeleteTestPage';
 const NeedUserLogin: React.FC = () => {
   useGetAuthority();
 
@@ -34,7 +33,6 @@ const NeedUserLogin: React.FC = () => {
       <Route exact path="/accountbooks/:id/settings/csv" component={UserAuthorityGuard(SettingsCsvPage)} />
       <Route exact path="/accountbooks/:id/settings/social" component={UserAuthorityGuard(SettingsSocialPage)} />
       <Route exact path="/accountbooks/:id/statistics" component={UserAuthorityGuard(StatisticsPage)} />
-      <Route exact path="/test" component={AccountbookDeleteTestPage} />
     </Switch>
   );
 };
