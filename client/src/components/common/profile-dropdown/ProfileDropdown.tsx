@@ -53,7 +53,7 @@ const ProfileDropdown = ({ src }: ProfileDropdownProps): JSX.Element => {
 
   return (
     <ProfileDropdownWrapper>
-      <ProfileImage src={src} />
+      <ProfileImage src={userStore.profileUrl} />
       <DropdownWrapper>
         <Menu onClick={logout}>로그아웃</Menu>
       </DropdownWrapper>
