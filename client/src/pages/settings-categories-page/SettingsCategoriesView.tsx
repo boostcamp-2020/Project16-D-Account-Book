@@ -6,6 +6,7 @@ import useStore from '../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import FormModalCategory from '../../components/common/modals/form-modal-category/FormModalCreateCategory';
 import FormModalUpdateCategory from '../../components/common/modals/form-modal-category/FormModalUpdateCategory';
+import socket, { event } from '../../socket';
 
 const SettingsCategoryViewWrapper = styled.div`
   position: absolute;
@@ -53,6 +54,15 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
     categoryStore.updateIncomeCategories(accountbookId);
     categoryStore.updateExpenditureCategories(accountbookId);
   }, []);
+
+  useEffect(() => {
+    socket.on(event.UPDATE_INCOME_CATEGORIES, () => {
+      categoryStore.updateIncomeCategories(accountbookId);
+    });
+    return () => {
+      socket.off(event.UPDATE_INCOME_CATEGORIES);
+    };
+  }, [accountbookId]);
 
   const setCategoryIncomeFlagTrue = (): void => {
     updateCategoryFormStore.setIncomeFlagTrue();
