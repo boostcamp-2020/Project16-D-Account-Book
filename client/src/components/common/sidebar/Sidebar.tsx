@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import styled from 'styled-components';
 import HomeButton from '../home-button/HomeButton';
 import HamburgerButton from '../hamburger-button/HamburgerButton';
@@ -6,6 +6,8 @@ import PlusButton from '../plus-button/PlusButton';
 import SmallAccountbookItem from '../small-accountbook-item/SmallAccountbookItem';
 import { GRAY } from '../../../constants/color';
 import { useHistory } from 'react-router-dom';
+import useStore from '../../../hook/use-store/useStore';
+import { observer } from 'mobx-react';
 
 interface SidebarProps {
   smallAccountbooks: { id: number; color: string }[];
@@ -47,8 +49,21 @@ const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
   };
   const history = useHistory();
 
-  const SmallAccountbooks = smallAccountbooks.map((item) => (
-    <SmallAccountbookItem key={item.id} id={item.id} bgColor={item.color} show={isOpen} />
+  const { rootStore } = useStore();
+  const { accountbookStore } = rootStore;
+
+  useEffect(() => {
+    accountbookStore.updateAccountbooks();
+  }, []);
+
+  const SmallAccountbooks = accountbookStore.accountbooks.map((item) => (
+    <SmallAccountbookItem
+      key={item.id}
+      title={item.title}
+      bgColor={item.color}
+      description={item.description}
+      show={isOpen}
+    />
   ));
   return (
     <div>
