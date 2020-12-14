@@ -6,7 +6,7 @@ const { isAccountbookUser } = require('@middlewares/accountbookAuth');
 const router = new Router();
 
 router.get('/', verificationOfAuth, accountbookController.getAccountbooksByUserId);
-router.post('/', isAccountbookUser, accountbookController.createAccountbook);
+router.post('/', verificationOfAuth, accountbookController.createAccountbook);
 router.delete('/:accountbook_id', isAccountbookUser, accountbookController.deleteAccountbook);
 
 module.exports = router;
