@@ -23,11 +23,11 @@ const PreviewContent = styled.div<PreviewContentProps>`
   padding: 10px;
   margin-right: 1em;
   background-color: ${(props) => props.color};
-  height: 90px;
   border-radius: 10px;
 `;
 
 const PreviewContentText = styled.p<PreviewContentProps>`
+  height: 25px;
   color: ${(props) => props.color};
 `;
 
@@ -36,8 +36,8 @@ const Preview: React.FC<PreviewProps> = ({ title, description, color, onChange }
   return (
     <PreviewWrapper>
       <PreviewContent color={color}>
-        {title && <PreviewContentText color={fontColor}>{title}</PreviewContentText>}
-        {description && <PreviewContentText color={fontColor}>{description}</PreviewContentText>}
+        <PreviewContentText color={fontColor}>{title}</PreviewContentText>
+        <PreviewContentText color={fontColor}>{description}</PreviewContentText>
       </PreviewContent>
       <ColorPicker inputColor={{ hex: color }} setInputColor={onChange} />
     </PreviewWrapper>
