@@ -81,7 +81,7 @@ const FormModalUpdateCategory: React.FC = () => {
   const onChange = (color: { hex: string }): void => {
     setInputColor(color.hex);
     if (updateCategoryFormStore.incomeFlag) {
-      if (inputColor === (updateCategoryFormStore.incomeCategory as Category).color) {
+      if (inputColor.toLowerCase() === (updateCategoryFormStore.incomeCategory as Category).color.toLowerCase()) {
         setColorCheck(false);
       } else {
         setColorCheck(true);
@@ -89,7 +89,7 @@ const FormModalUpdateCategory: React.FC = () => {
     }
 
     if (!updateCategoryFormStore.incomeFlag) {
-      if (inputColor === (updateCategoryFormStore.expenditureCategory as Category).color) {
+      if (inputColor.toLowerCase() === (updateCategoryFormStore.expenditureCategory as Category).color.toLowerCase()) {
         setColorCheck(false);
       } else {
         setColorCheck(true);
