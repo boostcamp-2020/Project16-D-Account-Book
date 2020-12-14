@@ -1,4 +1,4 @@
-import FormFilterStore from './FormFilterStore';
+import FilterFormStore from './FilterFormStore';
 import RootStore from '../RootStore';
 import CreateTransactionFormStore from './CreateTransactionFormStore';
 import UpdateTransactionFormStore from './UpdateTransactionFormStore';
@@ -12,7 +12,7 @@ import GiveAdminStore from './GiveAdminStore';
 
 export default class ModalStore {
   rootStore: RootStore;
-  formFilterStore: FormFilterStore;
+  filterFormStore: FilterFormStore;
   createTransactionFormStore: CreateTransactionFormStore;
   updateTransactionFormStore: UpdateTransactionFormStore;
   createAccountFormStore: CreateAccountFormStore;
@@ -24,7 +24,7 @@ export default class ModalStore {
   giveAdminStore: GiveAdminStore;
 
   constructor(rootStore: RootStore) {
-    this.formFilterStore = new FormFilterStore(rootStore);
+    this.filterFormStore = new FilterFormStore(rootStore);
     this.rootStore = rootStore;
     this.createTransactionFormStore = new CreateTransactionFormStore(rootStore);
     this.updateTransactionFormStore = new UpdateTransactionFormStore(rootStore);

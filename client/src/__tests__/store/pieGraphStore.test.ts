@@ -2,7 +2,6 @@ import { waitFor } from '@testing-library/react';
 import datePeriod from '../../constants/datePeriod';
 import PieGraphPageStore from '../../store/PieGraphPageStore';
 import RootStore from '../../store/RootStore';
-import { dateOptions } from '../../__dummy-data__/store/formFilterStore';
 
 describe('PieGraphStore Test', () => {
   let container: PieGraphPageStore;
