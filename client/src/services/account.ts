@@ -9,19 +9,24 @@ const accountAPIAddress = {
   updateAccount: '/api/accounts',
 };
 
-const AccountCache = new Map();
-
 export default {
-  getAccountsById: async function* (id: number): AsyncGenerator<Account[]> {
+  getAccountsById: async function* (id: number): AsyncGenerator<Account[] | undefined> {
     const requestURL =
       accountAPIAddress.getAccounts +
       '?' +
       querystring.stringify({
         accountbook_id: id,
       });
-    yield AccountCache.get(requestURL);
+
+    const item = sessionStorage.getItem(requestURL);
+    if (item === null) {
+      yield undefined;
+    } else {
+      yield JSON.parse(item) as Account[];
+    }
+
     const response = await instance.get(requestURL);
-    AccountCache.set(requestURL, response.data);
+    sessionStorage.setItem(requestURL, JSON.stringify(response.data));
     yield response.data;
   },
   createAccount: async (account: AccountRequest): Promise<Account> => {
