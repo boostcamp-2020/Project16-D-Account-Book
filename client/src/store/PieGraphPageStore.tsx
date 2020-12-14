@@ -46,9 +46,11 @@ export default class PieGraphPageStore {
   changeSelectedDate = (selectedType: string, accountbookId: number): void => {
     this.selectedDate = selectedType;
     const prevDate = this.getBeforeDateByPeriod(this.endDate, selectedType);
+    this.startDate = prevDate;
     this.dateChange(prevDate, this.endDate, accountbookId);
     if (selectedType === datePeriod.ALL) {
-      this.dateChange(new Date(0), new Date(), accountbookId);
+      this.startDate = new Date(0);
+      this.dateChange(this.startDate, this.endDate, accountbookId);
     }
   };
 
@@ -56,13 +58,16 @@ export default class PieGraphPageStore {
   moveToPrev = (accountbookId: number): void => {
     const endDate = this.startDate;
     const startDate = this.getBeforeDateByPeriod(endDate, this.selectedDate);
+    this.startDate = startDate;
+    this.endDate = endDate;
     this.dateChange(startDate, endDate, accountbookId);
   };
 
   @action
   moveToNext = (accountbookId: number): void => {
-    const nextDate = this.getNextDateByPeriod(this.endDate, this.selectedDate);
-    this.dateChange(this.endDate, nextDate, accountbookId);
+    this.startDate = this.endDate;
+    this.endDate = this.getNextDateByPeriod(this.endDate, this.selectedDate);
+    this.dateChange(this.startDate, this.endDate, accountbookId);
   };
 
   @action
@@ -89,8 +94,6 @@ export default class PieGraphPageStore {
   };
 
   _dateChange = flow(function* (this: PieGraphPageStore, startDate: Date, endDate: Date, accountbookId: number) {
-    this.startDate = startDate;
-    this.endDate = endDate;
     const beforeDate = this.getBeforeDateByPeriod(this.startDate, this.selectedDate);
     const afterDate = this.getNextDateByPeriod(this.endDate, this.selectedDate);
     const generation = getSWRGenerator(accountbookId, startDate, endDate, beforeDate, afterDate);

@@ -37,7 +37,7 @@ export default {
     const requestURL = transactionAPIAddress.getTransactions + `?${query}`;
 
     const item = sessionStorage.getItem(requestURL);
-    if (item === null) {
+    if (item === null || item === undefined) {
       yield undefined;
     } else {
       yield JSON.parse(item) as Array<Income | Expenditure>;
