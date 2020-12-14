@@ -69,7 +69,6 @@ const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>
 `;
 
 interface SmallAccountbookItemProps {
-  id: number;
   title: string;
   bgColor: string;
   description: string;
@@ -78,7 +77,6 @@ interface SmallAccountbookItemProps {
 }
 
 const SmallAccountbookItem = ({
-  id,
   title,
   bgColor,
   description,
