@@ -59,6 +59,7 @@ const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>
 
   .text {
     text-align: center;
+    font-size: 0.8em;
   }
 
   &:hover ${AccountbookViewWrapper} {
