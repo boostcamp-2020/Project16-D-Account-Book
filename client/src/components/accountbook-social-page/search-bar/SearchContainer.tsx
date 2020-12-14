@@ -5,7 +5,6 @@ import useStore from '../../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import UserItem from '../user-item/UserItem';
 import socialPage from '../../../constants/socialPage';
-import { SearchedUser } from '../../../types/social';
 import { RED } from '../../../constants/color';
 
 const Wrapper = styled.div`

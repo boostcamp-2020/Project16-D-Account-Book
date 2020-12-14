@@ -31,6 +31,7 @@ const SmallInput = styled.input`
   background-color: white;
   border: 1px solid lightgray;
   border-radius: 5px;
+  font-family: 'Spoqa Han Sans';
 `;
 
 interface IInputWithNextButton {
