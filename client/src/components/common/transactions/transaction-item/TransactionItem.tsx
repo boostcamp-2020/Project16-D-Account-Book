@@ -85,13 +85,14 @@ const TransactionItem = ({ transaction }: TrasnsactionItemProps): JSX.Element =>
   const { rootStore } = useStore();
   const modalUpdateForm = rootStore.modalStore.updateTransactionFormStore;
 
-  const clickItem = (): void => {
+  const clickItem = (e): void => {
+    e.stopPropagation();
     modalUpdateForm.setShowTrue();
     modalUpdateForm.loadIncomeExpenditure(transaction);
   };
 
   return (
-    <TransactionItemWrapper onClick={clickItem}>
+    <TransactionItemWrapper onClickCapture={clickItem}>
       <ContentItemWrapper>
         <CategoryWrapper>
           <Category id={category.id} name={category.name} color={category.color} />
