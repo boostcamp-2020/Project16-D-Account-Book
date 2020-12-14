@@ -29,6 +29,6 @@ export default class GiveAdminStore {
   deleteAccountbook = async (): Promise<void> => {
     await accountbookService.deleteAccountbook(this.selectedAccountbookId);
     this.rootStore.userStore.deleteAuthor(this.selectedAccountbookId);
-    //TODO: accountbook 스토어에서도 삭제해야함
+    this.rootStore.accountbookStore.deleteAccountbook(this.selectedAccountbookId);
   };
 }

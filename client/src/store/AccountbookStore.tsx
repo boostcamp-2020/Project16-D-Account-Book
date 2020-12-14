@@ -3,7 +3,7 @@ import Accountbook from '../types/accountbook';
 import { observable, action, makeObservable } from 'mobx';
 import accountbookService from '../services/accountbook';
 
-export default class AccountStore {
+export default class AccountbookStore {
   rootStore: RootStore;
 
   @observable
@@ -25,5 +25,10 @@ export default class AccountStore {
 
   updateAccountbook = async (accountbook: Accountbook): Promise<void> => {
     this.accountbook = accountbook;
+  };
+
+  @action
+  deleteAccountbook = (AccountbookId: number): void => {
+    this.accountbooks = this.accountbooks.filter((item) => item.accountbookId !== AccountbookId);
   };
 }

@@ -1,4 +1,4 @@
-import { observable, action, makeAutoObservable, runInAction } from 'mobx';
+import { observable, action, makeAutoObservable } from 'mobx';
 import RootStore from '../RootStore';
 import accountbookService from '../../services/accountbook';
 
@@ -30,6 +30,6 @@ export default class DeleteAccountbookByUserStore {
   deleteAccountbook = async (): Promise<void> => {
     await accountbookService.deleteAccountbook(this.selectedAccountbookId);
     this.rootStore.userStore.deleteAuthor(this.selectedAccountbookId);
-    //TODO: accountbook 스토어에서도 삭제해야함
+    this.rootStore.accountbookStore.deleteAccountbook(this.selectedAccountbookId);
   };
 }

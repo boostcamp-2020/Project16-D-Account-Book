@@ -43,6 +43,7 @@ module.exports = {
       },
       {
         id: 5,
+
         provider: 'kakao',
         email: 'bhko0524@naver.com',
         nickname: 'bhko0524',
@@ -50,6 +51,17 @@ module.exports = {
         token: null,
         created_at: '2020-11-25',
         updated_at: '2020-11-25',
+      },
+      {
+        id: 6,
+        provider: 'naver',
+        email: 'yhw8258@naver.com',
+        nickname: 'yhw8258',
+        profile_url:
+          'https://phinf.pstatic.net/contact/20190713_165/1563012670612Qex2W_JPEG/14593196_1755053014754528_1400338084_n.jpg',
+        token: null,
+        created_at: '2020-11-26',
+        updated_at: '2020-11-26',
       },
     ]);
   },

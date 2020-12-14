@@ -13,11 +13,8 @@ const categoryAPIAddress = {
   updateExpenditureCategory: '/api/categories/expenditure',
 };
 
-const IncomeCategory = new Map();
-const ExpenditureCategory = new Map();
-
 export default {
-  getIncomeCategoryById: async function* (id: number): AsyncGenerator<Category[]> {
+  getIncomeCategoryById: async function* (id: number): AsyncGenerator<Category[] | undefined> {
     const requestURL =
       categoryAPIAddress.getIncome +
       '?' +
@@ -25,17 +22,23 @@ export default {
         accountbook_id: id,
       });
     //캐시 리턴
-    yield IncomeCategory.get(requestURL);
+
+    const item = sessionStorage.getItem(requestURL);
+    if (item === null) {
+      yield undefined;
+    } else {
+      yield JSON.parse(item) as Category[];
+    }
 
     const response = await instance.get(requestURL);
 
     //캐시 업데이트
-    IncomeCategory.set(requestURL, response.data);
+    sessionStorage.setItem(requestURL, JSON.stringify(response.data));
 
     yield response.data;
   },
 
-  getExpenditureCategoryById: async function* (id: number): AsyncGenerator<Category[]> {
+  getExpenditureCategoryById: async function* (id: number): AsyncGenerator<Category[] | undefined> {
     const requestURL =
       categoryAPIAddress.getExpenditure +
       '?' +
@@ -43,12 +46,17 @@ export default {
         accountbook_id: id,
       });
     //캐시 리턴
-    yield ExpenditureCategory.get(requestURL);
+    const item = sessionStorage.getItem(requestURL);
+    if (item === null) {
+      yield undefined;
+    } else {
+      yield JSON.parse(item) as Category[];
+    }
 
     const response = await instance.get(requestURL);
 
     //캐시 업데이트
-    ExpenditureCategory.set(requestURL, response.data);
+    sessionStorage.setItem(requestURL, JSON.stringify(response.data));
 
     yield response.data;
   },
