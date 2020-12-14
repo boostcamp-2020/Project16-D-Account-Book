@@ -95,6 +95,11 @@ const SettingsAccountbookPage: React.FC = () => {
     };
   };
 
+  const updateAccountbook = () => {
+    const accountbook = convertToAccountbook(name, inputColor, description, accountbookId);
+    accountbookStore.updateAccountbook(accountbook);
+  };
+
   return (
     <SettingsAccountbookPageWrapper>
       <SettingsSidebar currentpage={'accountbook'} />
@@ -102,7 +107,7 @@ const SettingsAccountbookPage: React.FC = () => {
         <Spinner />
       ) : (
         <SettingsBody>
-          <ConfirmButton>완료</ConfirmButton>
+          <ConfirmButton onClick={updateAccountbook}>완료</ConfirmButton>
           <PreviewWrapper>
             <Preview title={title} description={description} color={inputColor} onChange={onChange} />
           </PreviewWrapper>
