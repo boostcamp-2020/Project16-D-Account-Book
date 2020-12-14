@@ -14,6 +14,7 @@ const NavigationItem = styled.div<{ currentPage: string }>`
   width: 24%;
   padding-top: 4px;
   text-align: center;
+  font-family: 'Spoqa Han Sans';
   &:nth-child(1) a {
     color: ${({ currentPage }) => (currentPage == 'transaction' ? BLUE : 'black')};
     font-weight: ${({ currentPage }) => (currentPage == 'transaction' ? 'bold' : 'normal')};

@@ -5,7 +5,9 @@ import Preview from '../../components/common/preview/Preview';
 import InputText from '../../components/common/inputs/input-text/InputText';
 import { DODGER_BLUE } from '../../constants/color';
 import { startDateChecker } from '../../types/inputRadio';
+
 const SettingsAccountbookPageWrapper = styled.div`
+  font-family: 'Spoqa Han Sans';
   display: flex;
 `;
 
@@ -47,7 +49,6 @@ const SettingsAccountbookPage = (): JSX.Element => {
   const [inputColor, setInputColor] = useState<string>('black');
   const [title, setTitle] = useState<string>('가계부 1');
   const [description, setDescription] = useState<string>('부스트캠프 커넥트 재단 가계부');
-  const { name, left, right } = startDateChecker;
   const onChange = (color: { hex: string }): void => {
     setInputColor(color.hex);
   };
