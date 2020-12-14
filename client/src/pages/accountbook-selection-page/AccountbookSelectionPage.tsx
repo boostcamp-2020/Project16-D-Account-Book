@@ -2,14 +2,12 @@ import React, { useEffect } from 'react';
 import useStore from '../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
 import AccountbookCard from '../../components/accountbook-selection-page/accountbook-card/AccountbookCard';
 import AddAccountbookCard from '../../components/accountbook-selection-page/add-accountbook-card/AddAccountbookCard';
-
 import AccountbookDeleteByUserModal from '../../components/common/modals/accountbook-delete-by-user/AccountbookDeleteByUserModal';
 import GiveAdminModal from '../../components/common/modals/give-admin-modal/GiveAdminModal';
 import AccountbookDeleteByAdminModal from '../../components/common/modals/accountbook-delete-by-admin/AccountbookDeleteByAdminModal';
+import FormModalCreateAccountbook from '../../components/common/modals/form-modal-accountbook/FormModalCreateAccountbook';
 import ProfileDropdown from '../../components/common/profile-dropdown/ProfileDropdown';
 import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
 
@@ -18,6 +16,7 @@ const ViewWrapper = styled.div`
   width: 40%;
   padding-top: 5%;
   margin: 0 auto;
+  margin-bottom: 40px;
 
   a {
     text-decoration: none;
@@ -35,6 +34,7 @@ const AccountbookSelectionPage: React.FC = () => {
     deleteAccountbookByAdminStore,
     deleteAccountbookByUserStore,
     giveAdminStore,
+    createAccountbookFormStore,
   } = useStore().rootStore.modalStore;
 
   const updateAccountbooks = () => {
@@ -50,6 +50,7 @@ const AccountbookSelectionPage: React.FC = () => {
       <HeaderNavigationRightTopWrapper>
         <ProfileDropdown />
       </HeaderNavigationRightTopWrapper>
+      {createAccountbookFormStore.show && <FormModalCreateAccountbook />}
       {giveAdminStore.show && <GiveAdminModal />}
       {deleteAccountbookByUserStore.show && <AccountbookDeleteByUserModal />}
       {deleteAccountbookByAdminStore.show && <AccountbookDeleteByAdminModal />}
@@ -67,7 +68,7 @@ const AccountbookSelectionPage: React.FC = () => {
             </div>
           );
         })}
-        <AddAccountbookCard />
+        <AddAccountbookCard onClick={() => createAccountbookFormStore.setShow(true)} />
       </ViewWrapper>
     </>
   );

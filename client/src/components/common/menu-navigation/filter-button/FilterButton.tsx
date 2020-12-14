@@ -18,7 +18,7 @@ const FilterButton: React.FC<Props> = ({ width, height }: Props) => {
   const { modalStore } = useStore().rootStore;
 
   const onClickFilterButton = () => {
-    modalStore.formFilterStore.setShow(true);
+    modalStore.filterFormStore.setShow(true);
   };
 
   return (

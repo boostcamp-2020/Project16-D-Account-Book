@@ -1,7 +1,7 @@
 import RootStore from './RootStore';
 import Income from '../types/income';
 import Expenditure from '../types/expenditure';
-import { dateOptions } from '../__dummy-data__/store/formFilterStore';
+import { dateOptions } from '../__dummy-data__/store/filterFormStore';
 import { action, makeObservable, observable, computed, flow } from 'mobx';
 import datePeriod, { datePeriodNumber } from '../constants/datePeriod';
 import transactionService from '../services/transaction';
