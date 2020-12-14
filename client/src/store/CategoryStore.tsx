@@ -78,6 +78,7 @@ export default class CategoryStore {
   addNewExpenditureCategory = (expenditureCategory: Category): void => {
     this.expenditureCategories = [...this.expenditureCategories, expenditureCategory];
     this.expenditureCategoryNames = this.expenditureCategories.map((item) => item.name);
+    socket.emit(event.UPDATE_EXPENDITURE_CATEGORIES, this.rootStore.accountbookStore.currentAccountbookId);
   };
 
   deleteIncomeCategory = async (incomeCategoryId: number): Promise<void> => {
@@ -101,6 +102,7 @@ export default class CategoryStore {
   deleteExpenditureCategoryById = (expenditureCategoryId: number): void => {
     this.expenditureCategories = this.expenditureCategories.filter((item) => item.id !== expenditureCategoryId);
     this.expenditureCategoryNames = this.expenditureCategories.map((item) => item.name);
+    socket.emit(event.UPDATE_EXPENDITURE_CATEGORIES, this.rootStore.accountbookStore.currentAccountbookId);
   };
 
   updateIncomeCategory = async (category: CategoryRequest, incomeCategoryId: number): Promise<void> => {
@@ -128,6 +130,7 @@ export default class CategoryStore {
       item.id === expenditureCategory.id ? expenditureCategory : item,
     );
     this.expenditureCategoryNames = this.expenditureCategories.map((item) => item.name);
+    socket.emit(event.UPDATE_EXPENDITURE_CATEGORIES, this.rootStore.accountbookStore.currentAccountbookId);
   };
 
   @computed

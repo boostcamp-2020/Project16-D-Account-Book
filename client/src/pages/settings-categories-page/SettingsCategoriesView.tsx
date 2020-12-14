@@ -59,8 +59,12 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
     socket.on(event.UPDATE_INCOME_CATEGORIES, () => {
       categoryStore.updateIncomeCategories(accountbookId);
     });
+    socket.on(event.UPDATE_EXPENDITURE_CATEGORIES, () => {
+      categoryStore.updateExpenditureCategories(accountbookId);
+    });
     return () => {
       socket.off(event.UPDATE_INCOME_CATEGORIES);
+      socket.off(event.UPDATE_EXPENDITURE_CATEGORIES);
     };
   }, [accountbookId]);
 

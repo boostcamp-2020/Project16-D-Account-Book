@@ -96,10 +96,15 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       updateTransactions();
       categoryStore.updateIncomeCategories(accountbookId);
     });
+    socket.on(event.UPDATE_EXPENDITURE_CATEGORIES, () => {
+      updateTransactions();
+      categoryStore.updateExpenditureCategories(accountbookId);
+    });
     return () => {
       socket.off(event.UPDATE_TRANSACTIONS);
       socket.off(event.UPDATE_ACCOUNTS);
       socket.off(event.UPDATE_INCOME_CATEGORIES);
+      socket.off(event.UPDATE_EXPENDITURE_CATEGORIES);
     };
   }, [accountbookId]);
 
