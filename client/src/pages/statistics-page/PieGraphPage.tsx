@@ -143,7 +143,7 @@ const PieGraphPage: React.FC<IPieGraphPage> = ({ changePage }: IPieGraphPage) =>
         <CategoryNoDependency
           id={99}
           color={color.NAVER_GREEN}
-          name={pieGraphStore.incomeMode ? text.SHOW_EXPENDITURE : text.SHOW_INCOME}
+          name={pieGraphStore.incomeMode ? text.SHOW_INCOME : text.SHOW_EXPENDITURE}
           onClick={switchIncomeExpenditure}
         ></CategoryNoDependency>
       </IncomeExpenditureSwitch>

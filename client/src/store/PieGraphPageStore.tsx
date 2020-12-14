@@ -143,9 +143,9 @@ export default class PieGraphPageStore {
   get filteredDate(): string {
     return `${this.startDate.getFullYear()}년 ${
       this.startDate.getMonth() + 1
-    }월 ${this.startDate.getDate()}일 ~ ${this.endDate.getFullYear()}년 ${
-      this.endDate.getMonth() + 1
-    }월 ${this.endDate.getDate()}일`;
+    }월 ${this.startDate.getDate()}일 ~ ${this.endDate.getFullYear()}년 ${this.endDate.getMonth() + 1}월 ${
+      this.endDate.getDate() - 1
+    }일`;
   }
 
   @computed
