@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SettingsSidebar from '../../components/common/settings-sidebar/SettingsSidebar';
 import Preview from '../../components/common/preview/Preview';
 import InputText from '../../components/common/inputs/input-text/InputText';
-import { DODGER_BLUE, MODAL_GRAY } from '../../constants/color';
+import { DODGER_BLUE } from '../../constants/color';
 import useStore from '../../hook/use-store/useStore';
 import useGetParam from '../../hook/use-get-param/useGetParam';
 import { observer } from 'mobx-react';
@@ -109,9 +109,11 @@ const SettingsAccountbookPage: React.FC = () => {
       ) : (
         <SettingsBody>
           <ConfirmButton onClick={updateAccountbook}>완료</ConfirmButton>
-          <PreviewWrapper>
-            <Preview title={title} description={description} color={inputColor} onChange={onChange} />
-          </PreviewWrapper>
+          <SettingsItemWrapper>
+            <PreviewWrapper>
+              <Preview title={title} description={description} color={inputColor} onChange={onChange} />
+            </PreviewWrapper>
+          </SettingsItemWrapper>
           {isAdmin ? (
             <SettingsItemWrapper>
               <Label>가계부 별칭</Label>
