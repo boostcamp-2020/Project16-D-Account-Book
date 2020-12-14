@@ -25,7 +25,7 @@ const Wrapper = styled.div<{ itemColor: string; bgColor: string }>`
 interface SettingProps {
   id: number;
   bgColor: string;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const AccountbookElimination = ({ id, bgColor, onClick }: SettingProps): JSX.Element => {
