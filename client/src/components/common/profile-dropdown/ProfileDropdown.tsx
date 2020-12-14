@@ -6,10 +6,6 @@ import useStore from '../../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import authService from '../../../services/auth';
 
-interface ProfileDropdownProps {
-  src: string;
-}
-
 const Menu = styled.div`
   color: black;
   padding: 12px 16px;
@@ -40,7 +36,7 @@ const ProfileDropdownWrapper = styled.div`
   }
 `;
 
-const ProfileDropdown = ({ src }: ProfileDropdownProps): JSX.Element => {
+const ProfileDropdown = (): JSX.Element => {
   const { userStore } = useStore().rootStore;
 
   const logout = async () => {
