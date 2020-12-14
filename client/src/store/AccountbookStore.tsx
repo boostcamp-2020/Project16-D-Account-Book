@@ -9,6 +9,9 @@ export default class AccountStore {
   @observable
   accountbooks: Accountbook[] = [];
 
+  @observable
+  accountbook: Accountbook | undefined = undefined;
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeObservable(this);
@@ -18,5 +21,9 @@ export default class AccountStore {
   updateAccountbooks = async (): Promise<void> => {
     const accountbooks = await accountbookService.getAccountbooks();
     this.accountbooks = accountbooks;
+  };
+
+  updateAccountbook = async (accountbook: Accountbook): Promise<void> => {
+    this.accountbook = accountbook;
   };
 }
