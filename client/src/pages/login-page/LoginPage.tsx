@@ -111,4 +111,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default observer(LoginPage);
+export default LoginPage;
