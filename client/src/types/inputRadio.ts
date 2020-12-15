@@ -36,11 +36,11 @@ export const graphChangeChecker: IInputRadio = {
   left: {
     id: 'pie',
     value: 'pie',
-    label: '카테고리별 지출',
+    label: '카테고리별 통계',
   },
   right: {
     id: 'line',
     value: 'line',
-    label: '일별 지출',
+    label: '월별 통계',
   },
 };

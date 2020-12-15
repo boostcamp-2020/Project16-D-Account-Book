@@ -125,11 +125,11 @@ const PieGraphPage: React.FC<IPieGraphPage> = ({ changePage }: IPieGraphPage) =>
           </PieGraphWrapper>
           <BarChartWrapper>
             <BarChartHeaderWrapper>
-              <BarChartHeader>{pieGraphStore.incomeMode ? text.TOTAL_EXPENDITURE : text.TOTAL_INCOME}</BarChartHeader>
+              <BarChartHeader>{pieGraphStore.incomeMode ? text.TOTAL_INCOME : text.TOTAL_EXPENDITURE}</BarChartHeader>
               <BarChartHeader>
                 {pieGraphStore.incomeMode
-                  ? '-' + numberWithCommas(pieGraphStore.totalValue)
-                  : '+' + numberWithCommas(pieGraphStore.totalValue)}
+                  ? '+' + numberWithCommas(pieGraphStore.totalValue)
+                  : '-' + numberWithCommas(pieGraphStore.totalValue)}
               </BarChartHeader>
             </BarChartHeaderWrapper>
             <BarChartList>
@@ -144,7 +144,7 @@ const PieGraphPage: React.FC<IPieGraphPage> = ({ changePage }: IPieGraphPage) =>
         <CategoryNoDependency
           id={99}
           color={color.NAVER_GREEN}
-          name={pieGraphStore.incomeMode ? text.SHOW_INCOME : text.SHOW_EXPENDITURE}
+          name={pieGraphStore.incomeMode ? text.SHOW_EXPENDITURE : text.SHOW_INCOME}
           onClick={switchIncomeExpenditure}
         ></CategoryNoDependency>
       </IncomeExpenditureSwitch>
