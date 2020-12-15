@@ -8,11 +8,6 @@ import { GRAY } from '../../../constants/color';
 import { useHistory } from 'react-router-dom';
 import useStore from '../../../hook/use-store/useStore';
 import { Link } from 'react-router-dom';
-
-interface SidebarProps {
-  smallAccountbooks: { id: number; color: string }[];
-}
-
 interface SidebarWrapperProps {
   show: boolean;
 }

@@ -103,8 +103,6 @@ const FormModalFilter = (): JSX.Element => {
                 key={`item${userAccountbook.id}`}
                 onChange={() => setCheckedUserAccountbookId(userAccountbook.id)}
                 provider={userAccountbook.user.provider}
-                userAccountbookId={userAccountbook.id}
-                userId={userAccountbook.user.id}
                 email={userAccountbook.user.email}
                 profileUrl={userAccountbook.user.profileUrl}
               />

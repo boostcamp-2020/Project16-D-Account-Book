@@ -62,7 +62,7 @@ interface Props {
   userAccountbookId: number;
 }
 
-const UserItem = ({ email, nickname, profileUrl, type, userId, userAccountbookId, provider }: Props): JSX.Element => {
+const UserItem = ({ email, profileUrl, type, userId, userAccountbookId, provider }: Props): JSX.Element => {
   const accountbookId = useGetParam();
   const { socialStore, userStore } = useStore().rootStore;
   const isAdmin = userStore.isAdmin(accountbookId);
