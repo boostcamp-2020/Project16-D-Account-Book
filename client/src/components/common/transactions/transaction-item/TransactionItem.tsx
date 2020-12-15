@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import Category from '../../category/Category';
 import { numberWithCommas } from '../../../../utils/number';
@@ -113,4 +113,4 @@ const TransactionItem = ({ transaction }: TrasnsactionItemProps): JSX.Element =>
   );
 };
 
-export default TransactionItem;
+export default memo(TransactionItem);

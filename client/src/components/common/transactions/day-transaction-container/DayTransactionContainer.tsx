@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import Income, { isIncome } from '../../../../types/income';
 import Expenditure from '../../../../types/expenditure';
@@ -75,4 +75,4 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
   );
 };
 
-export default DayTransactionContainer;
+export default memo(DayTransactionContainer);
