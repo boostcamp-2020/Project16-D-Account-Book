@@ -3,6 +3,7 @@ export interface User {
   provider: string;
   nickname: string;
   profileUrl: string;
+  email: string;
   userAccountbooks: UserAuthorType[];
 }
 
