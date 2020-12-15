@@ -4,10 +4,10 @@ import styled, { keyframes } from 'styled-components';
 
 const SVGAnimation = () => keyframes`
 0%{
-  transform:translateY(3%);
+  transform:translateY(6%);
 }
 100%{
-  transform:translateY(-3%);
+  transform:translateY(0%);
 }
 `;
 

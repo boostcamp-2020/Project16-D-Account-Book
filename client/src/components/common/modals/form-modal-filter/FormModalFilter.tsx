@@ -4,7 +4,7 @@ import ModalBackground from '../modal-background/ModalBackground';
 import FormModalWrapper from '../form-modal-template/FormModalWrapper';
 import FormModalHeader from '../form-modal-header/FormModalHeader';
 import useStore from '../../../../hook/use-store/useStore';
-import { useObserver } from 'mobx-react';
+import { observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
 
 const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Element => {
@@ -30,7 +30,7 @@ const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Elem
     }
   }, []);
 
-  return useObserver(() => (
+  return (
     <>
       <ModalBackground show={true} closeModal={closeModal} position="absolute">
         <FormModalWrapper>
@@ -46,7 +46,7 @@ const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Elem
         </FormModalWrapper>
       </ModalBackground>
     </>
-  ));
+  );
 };
 
-export default FormModalFilter;
+export default observer(FormModalFilter);

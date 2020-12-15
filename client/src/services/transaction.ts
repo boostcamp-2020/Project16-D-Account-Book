@@ -4,6 +4,7 @@ import Income, { IncomeRequest } from '../types/income';
 import Expenditure, { ExpenditureRequest } from '../types/expenditure';
 import querystring from 'querystring';
 import { getIncomeCategoriesHandler } from '../__dummy-data__/api/category/getIncome';
+import { MMSType } from '../types/TransactionForm';
 
 const transactionAPIAddress = {
   getTransactions: '/api/transactions',
@@ -13,6 +14,7 @@ const transactionAPIAddress = {
   patchExpenditure: '/api/transactions/expenditure',
   deleteIncome: '/api/transactions/income',
   deleteExpenditure: '/api/transactions/expenditure',
+  textParsing: '/api/transactions/text-parsing',
 };
 
 export default {
@@ -35,7 +37,7 @@ export default {
     const requestURL = transactionAPIAddress.getTransactions + `?${query}`;
 
     const item = sessionStorage.getItem(requestURL);
-    if (item === null) {
+    if (item === null || item === undefined) {
       yield undefined;
     } else {
       yield JSON.parse(item) as Array<Income | Expenditure>;
@@ -106,7 +108,7 @@ export default {
 
   deleteIncome: async (incomeId: number): Promise<number> => {
     try {
-      const response = await instance.delete(transactionAPIAddress.deleteIncome + `/${incomeId}`);
+      await instance.delete(transactionAPIAddress.deleteIncome + `/${incomeId}`);
       return incomeId;
     } catch (e) {
       throw new Error('정상적으로 삭제되지 않았습니다.');
@@ -114,10 +116,16 @@ export default {
   },
   deleteExpenditure: async (expenditureId: number): Promise<number> => {
     try {
-      const response = await instance.delete(transactionAPIAddress.deleteExpenditure + `/${expenditureId}`);
+      await instance.delete(transactionAPIAddress.deleteExpenditure + `/${expenditureId}`);
       return expenditureId;
     } catch (e) {
       throw new Error('정상적으로 삭제되지 않았습니다.');
     }
+  },
+  parsingMMS: async (text: string): Promise<MMSType> => {
+    const response = await instance.post(transactionAPIAddress.textParsing, {
+      text: text,
+    });
+    return response.data;
   },
 };

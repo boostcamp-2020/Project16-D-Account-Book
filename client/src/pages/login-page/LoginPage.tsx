@@ -4,7 +4,7 @@ import LargeKakaoLoginButton from '../../components/login-button/kakao-login-but
 import SmallKakaoLoginButton from '../../components/login-button/kakao-login-button/SmallKakaoLoginButton';
 import LargeNaverLoginButton from '../../components/login-button/naver-login-button/LargeNaverLoginButton';
 import SmallNaverLoginButton from '../../components/login-button/naver-login-button/SmallNaverLoginButton';
-import { useObserver } from 'mobx-react';
+import { observer } from 'mobx-react';
 import { v4 } from 'uuid';
 
 const MainContainer = styled.div`
@@ -68,7 +68,7 @@ const Title = styled.div`
 `;
 
 const LoginPage: React.FC = () => {
-  return useObserver(() => (
+  return (
     <MainContainer>
       <Title>
         Manage <br />
@@ -108,7 +108,7 @@ const LoginPage: React.FC = () => {
         </a>
       </SmallLoginButtonContainer>
     </MainContainer>
-  ));
+  );
 };
 
-export default LoginPage;
+export default observer(LoginPage);

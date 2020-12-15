@@ -20,7 +20,7 @@ const FormModalTransaction: React.FC = () => {
   const expenditureCategory = rootStore.categoryStore.expenditureOptions;
   const accounts = rootStore.accountStore.accountOptions;
 
-  const [inputs, changes] = UseTransactionForm();
+  const [inputs, changes, dispatch] = UseTransactionForm();
 
   const { show } = toggle;
   const modalToggle = (): void => {
@@ -46,6 +46,10 @@ const FormModalTransaction: React.FC = () => {
   }
 
   const expenditureClick = () => {
+    if (mmsMode) {
+      return;
+    }
+
     try {
       const expenditure = convertToExpenditure(inputs, id);
       rootStore.transactionStore.createExpenditure(expenditure);
@@ -56,6 +60,10 @@ const FormModalTransaction: React.FC = () => {
     }
   };
   const incomeClick = () => {
+    if (mmsMode) {
+      return;
+    }
+
     try {
       const income = convertToIncome(inputs, id);
       rootStore.transactionStore.createIncome(income);
@@ -64,6 +72,10 @@ const FormModalTransaction: React.FC = () => {
     } finally {
       modalToggle();
     }
+  };
+
+  const MMSToggle = (): void => {
+    setMMSMode(!mmsMode);
   };
 
   return (
@@ -79,7 +91,11 @@ const FormModalTransaction: React.FC = () => {
           }}
           sms={true}
         />
-        {!mmsMode ? <TransactionInputList inputs={inputListInputs} changes={changes} /> : <MMSInput />}
+        {!mmsMode ? (
+          <TransactionInputList inputs={inputListInputs} changes={changes} />
+        ) : (
+          <MMSInput MMSToggle={MMSToggle} dispatch={dispatch} />
+        )}
       </FormModalWrapper>
     </ModalBackground>
   );
