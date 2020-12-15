@@ -52,9 +52,12 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
   const updateCategoryFormStore = rootStore.modalStore.updateCategoryFormStore;
 
   useEffect(() => {
-    categoryStore.isLoading = true;
     categoryStore.updateIncomeCategories(accountbookId);
     categoryStore.updateExpenditureCategories(accountbookId);
+    categoryStore.isLoading = false;
+    return () => {
+      categoryStore.isLoading = true;
+    };
   }, []);
 
   useEffect(() => {
