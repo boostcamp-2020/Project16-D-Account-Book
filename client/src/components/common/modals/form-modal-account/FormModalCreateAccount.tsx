@@ -19,6 +19,26 @@ import CheckFailText from '../../check/check-text/CheckFailText';
 import CheckNoAction from '../../check/check-no-action/CheckNoAction';
 import CheckNoActionText from '../../check/check-text/CheckNoActionText';
 
+interface CheckNameType {
+  (First: React.ReactChild, Second: React.ReactChild, Third: React.ReactChild): React.ReactChild;
+}
+
+function formModalCheckNameMessage<T>(check: boolean, name: string): CheckNameType<T> {
+  return function nameTemplate(
+    First: React.ReactChild,
+    Second: React.ReactChild,
+    Third: React.ReactChild,
+  ): React.ReactChild {
+    if (!check) {
+      return Third;
+    }
+    if (name) {
+      return First;
+    }
+    return Second;
+  };
+}
+
 const FormModalAccount: React.FC = () => {
   const { rootStore } = useStore();
   const id = useGetParam();
@@ -61,65 +81,60 @@ const FormModalAccount: React.FC = () => {
     }
   };
 
+  const messageWithCheckAndName = formModalCheckNameMessage<IFormModalHeaderProps>(check, name);
+
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
-        {check ? (
-          name ? (
-            <FormModalHeader
-              modalName={formModal.CREATE_ACCOUNT_MODAL_NAME}
-              blueName={'생성'}
-              closeModal={modalToggle}
-              clickBlue={onCreate}
-            />
-          ) : (
-            <FormModalHeader
-              modalName={formModal.CREATE_ACCOUNT_MODAL_NAME}
-              closeModal={modalToggle}
-              disabledName={'생성'}
-            />
-          )
-        ) : (
+        {messageWithCheckAndName(
+          <FormModalHeader
+            modalName={formModal.CREATE_ACCOUNT_MODAL_NAME}
+            blueName={'생성'}
+            closeModal={modalToggle}
+            clickBlue={onCreate}
+          />,
           <FormModalHeader
             modalName={formModal.CREATE_ACCOUNT_MODAL_NAME}
             closeModal={modalToggle}
             disabledName={'생성'}
-          />
+          />,
+          <FormModalHeader
+            modalName={formModal.CREATE_ACCOUNT_MODAL_NAME}
+            closeModal={modalToggle}
+            disabledName={'생성'}
+          />,
         )}
+
         <FormModalItem>
           <AccountPreview name={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
           <FormModalLabel>{formModal.ACCOUNT_LABEL_NAME}</FormModalLabel>
-          {check ? (
-            name ? (
-              <InputText
-                maxLength={8}
-                placeholder={formModal.ACCOUNT_PLACEHOLDER}
-                value={name}
-                onChange={onChangeName}
-                focusColor={LIGHT_GREEN}
-              />
-            ) : (
-              <InputText
-                maxLength={8}
-                placeholder={formModal.ACCOUNT_PLACEHOLDER}
-                value={name}
-                onChange={onChangeName}
-              />
-            )
-          ) : (
+          {messageWithCheckAndName(
+            <InputText
+              maxLength={8}
+              placeholder={formModal.ACCOUNT_PLACEHOLDER}
+              value={name}
+              onChange={onChangeName}
+              focusColor={LIGHT_GREEN}
+            />,
+            <InputText
+              maxLength={8}
+              placeholder={formModal.ACCOUNT_PLACEHOLDER}
+              value={name}
+              onChange={onChangeName}
+            />,
             <InputText
               maxLength={8}
               placeholder={formModal.ACCOUNT_PLACEHOLDER}
               value={name}
               onChange={onChangeName}
               focusColor={FAIL_RED}
-            />
+            />,
           )}
-          {check ? name ? <CheckSuccess /> : <CheckNoAction /> : <CheckFail />}
+          {messageWithCheckAndName(<CheckSuccess />, <CheckNoAction />, <CheckFail />)}
         </FormModalItem>
-        {check ? name ? <CheckSuccessText /> : <CheckNoActionText /> : <CheckFailText />}
+        {messageWithCheckAndName(<CheckSuccessText />, <CheckNoActionText />, <CheckFailText />)}
       </FormModalWrapper>
     </ModalBackground>
   );
