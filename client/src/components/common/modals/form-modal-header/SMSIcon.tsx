@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { GRAY } from '../../../../constants/color';
+import { GRAY, MINT } from '../../../../constants/color';
 import { SMS_DESCRIPTION } from '../../../../constants/formModal';
 
 const SMSWrapper = styled.div`
@@ -8,6 +8,10 @@ const SMSWrapper = styled.div`
   height: 24px;
   margin-right: 1em;
   cursor: pointer;
+
+  &:hover {
+    fill: ${MINT};
+  }
 `;
 
 const QuestionWrapper = styled.div`
