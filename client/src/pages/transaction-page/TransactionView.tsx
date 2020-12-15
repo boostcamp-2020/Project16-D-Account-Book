@@ -112,6 +112,21 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
     updateTransactions();
   }, [query, accountbookId]);
 
+  useEffect(() => {
+    window.addEventListener('scroll', infiniteScroll);
+    return () => window.removeEventListener('scroll', infiniteScroll);
+  }, []);
+
+  const infiniteScroll = () => {
+    const scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+    const scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+    const clientHeight = document.documentElement.clientHeight;
+    if (scrollTop + clientHeight >= scrollHeight) {
+      transactionStore.prevItems = transactionStore.items;
+      transactionStore.items += 10;
+    }
+  };
+
   return (
     <>
       {filterFormStore.show && <FormModalFilter accountbookId={accountbookId} />}
