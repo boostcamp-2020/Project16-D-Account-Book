@@ -32,10 +32,6 @@ const ContentItemWrapper = styled.div<{ isIncome?: boolean }>`
   &:nth-child(1) {
     width: 12%;
     justify-content: flex-start;
-    @media only screen and (max-width: 768px) {
-      width: 20%;
-      padding-left: 10px;
-    }
   }
   &:nth-child(2) {
     flex-direction: column;
