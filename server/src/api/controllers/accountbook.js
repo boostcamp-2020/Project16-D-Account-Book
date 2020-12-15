@@ -13,6 +13,7 @@ const updateAccountbook = async (ctx) => {
   const accountbookData = ctx.request.body;
   const updatedAccountbook = await accountbookService.updateAccountbook(accountbookId, accountbookData);
   ctx.body = updatedAccountbook;
+};
 
 const createAccountbook = async (ctx) => {
   const accountbookData = ctx.request.body;
