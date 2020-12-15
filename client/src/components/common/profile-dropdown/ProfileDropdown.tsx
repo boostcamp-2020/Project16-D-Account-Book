@@ -30,6 +30,7 @@ const DropdownWrapper = styled.div`
 const ProfileDropdownWrapper = styled.div`
   position: relative;
   display: inline-block;
+  font-family: 'Spoqa Han Sans';
 
   &:hover ${DropdownWrapper} {
     display: block;
