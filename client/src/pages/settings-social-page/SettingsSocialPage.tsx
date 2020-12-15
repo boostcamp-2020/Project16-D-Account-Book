@@ -10,6 +10,7 @@ import useGetParam from '../../hook/use-get-param/useGetParam';
 import Spinner from '../../components/common/spinner/Spinner';
 import { observer } from 'mobx-react';
 import ConfirmModal from '../../components/common/modals/confirm-modal/ConfirmModal';
+import AlertModal from '../../components/common/modals/alert-modal/AlertModal';
 
 const SettingsPageWrapper = styled.div`
   font-family: 'Spoqa Han Sans';
@@ -38,6 +39,7 @@ const SettingsSocialPage: React.FC = () => {
   return (
     <>
       {modalStore.confirmStore.show && <ConfirmModal />}
+      {modalStore.alertStore.show && <AlertModal />}
       <SettingsPageWrapper>
         <SettingsSidebar currentpage={'social'} />
         {socialStore.isLoading ? (
