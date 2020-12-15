@@ -26,6 +26,13 @@ const ViewWrapper = styled.div`
     text-decoration: none;
   }
 `;
+const HeaderWrapper = styled.div`
+  display: flex;
+`;
+const EmailWrapper = styled.div`
+  margin-right: 1rem;
+  font-family: 'Spoqa Han Sans';
+`;
 
 const AccountbookSelectionPage: React.FC = () => {
   const { rootStore } = useStore();
@@ -48,7 +55,10 @@ const AccountbookSelectionPage: React.FC = () => {
   return (
     <>
       <HeaderNavigationRightTopWrapper>
-        <ProfileDropdown />
+        <HeaderWrapper>
+          <EmailWrapper>{userStore.email}</EmailWrapper>
+          <ProfileDropdown />
+        </HeaderWrapper>
       </HeaderNavigationRightTopWrapper>
       {createAccountbookFormStore.show && <FormModalCreateAccountbook />}
       {giveAdminStore.show && <GiveAdminModal />}
