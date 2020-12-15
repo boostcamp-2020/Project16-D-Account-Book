@@ -56,10 +56,10 @@ const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<numbe
   return [totalIncome, totalExpenditure];
 };
 
-const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
+const InfiniteScrollTestView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
   const { dateStore, transactionStore, modalStore } = rootStore;
-  const { filterFormStore } = rootStore.modalStore;
+  const { formFilterStore } = rootStore.modalStore;
   const { createTransactionFormStore, updateTransactionFormStore } = modalStore;
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
@@ -80,8 +80,8 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       incomeCategory: income_category,
       expenditureCategory: expenditure_category,
     });
-    filterFormStore.query = query;
-    filterFormStore.setFilterInfo();
+    formFilterStore.query = query;
+    formFilterStore.setFilterInfo();
   };
 
   useEffect(() => {
@@ -99,13 +99,13 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
 
   return (
     <>
-      {filterFormStore.show && <FormModalFilter accountbookId={accountbookId} />}
+      {formFilterStore.show && <FormModalFilter accountbookId={accountbookId} />}
       {createTransactionFormStore.show && <FormModalCreateTransaction />}
       {updateTransactionFormStore.show && <FormModalUpdateTransaction />}
       <Sidebar />
       <MenuNavigation />
       <HeaderNavigationRightTopWrapper>
-        <HeaderNavigation currentPage={'transaction'} />
+        <HeaderNavigation currentPage={'calendar'} />
       </HeaderNavigationRightTopWrapper>
       <ViewWrapper>
         <TransactionHeaderWrapper>
@@ -136,4 +136,4 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   );
 };
 
-export default observer(TransactionView);
+export default observer(InfiniteScrollTestView);

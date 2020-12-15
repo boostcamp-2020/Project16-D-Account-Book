@@ -19,6 +19,9 @@ export default class CategoryStore {
   @observable
   expenditureCategoryNames: string[] = [];
 
+  @observable
+  isLoading = true;
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeObservable(this);
@@ -44,6 +47,7 @@ export default class CategoryStore {
     }
     const { value: refreshedValue } = yield generator.next();
     this.changeIncomeCategories(refreshedValue);
+    this.isLoading = false;
   });
 
   updateExpenditureCategories = flow(function* (this: CategoryStore, id: number) {
@@ -54,6 +58,7 @@ export default class CategoryStore {
     }
     const { value: refreshedValue } = yield generator.next();
     this.changeExpenditureCategories(refreshedValue);
+    this.isLoading = false;
   });
 
   createIncomeCategory = async (incomeCategory: CategoryRequest): Promise<void> => {

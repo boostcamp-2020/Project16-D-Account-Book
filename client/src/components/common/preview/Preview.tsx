@@ -24,14 +24,16 @@ const PreviewContent = styled.div<PreviewContentProps>`
   word-wrap: break-word;
   border-radius: 10px;
 `;
+
 const PreviewContentName = styled.p<PreviewContentProps>`
   color: ${(props) => props.color};
   height: 25px;
   :nth-child(1) {
     font-weight: bold;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
 `;
+
 const Preview: React.FC<PreviewProps> = ({ title, description, color, onChange }: PreviewProps) => {
   const fontColor = getTextColor(color);
   return (
