@@ -58,13 +58,12 @@ const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<numbe
 
 const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
-  const { dateStore, transactionStore, modalStore } = rootStore;
+  const { dateStore, transactionStore, modalStore, accountStore, categoryStore } = rootStore;
   const { filterFormStore } = rootStore.modalStore;
   const { createTransactionFormStore, updateTransactionFormStore } = modalStore;
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
   const updateTransactions = () => {
-    transactionStore.accountbookId = accountbookId;
     if (!query) {
       transactionStore.isFilterMode = false;
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
@@ -88,8 +87,23 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
     socket.on(event.UPDATE_TRANSACTIONS, () => {
       updateTransactions();
     });
+    socket.on(event.UPDATE_ACCOUNTS, () => {
+      updateTransactions();
+      accountStore.updateAccounts(accountbookId);
+    });
+    socket.on(event.UPDATE_INCOME_CATEGORIES, () => {
+      updateTransactions();
+      categoryStore.updateIncomeCategories(accountbookId);
+    });
+    socket.on(event.UPDATE_EXPENDITURE_CATEGORIES, () => {
+      updateTransactions();
+      categoryStore.updateExpenditureCategories(accountbookId);
+    });
     return () => {
       socket.off(event.UPDATE_TRANSACTIONS);
+      socket.off(event.UPDATE_ACCOUNTS);
+      socket.off(event.UPDATE_INCOME_CATEGORIES);
+      socket.off(event.UPDATE_EXPENDITURE_CATEGORIES);
     };
   }, [accountbookId]);
 

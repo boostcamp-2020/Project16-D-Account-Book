@@ -10,6 +10,9 @@ export default class AccountbookStore {
   accountbooks: Accountbook[] = [];
 
   @observable
+  currentAccountbookId = 0;
+
+  @observable
   accountbook: Accountbook | undefined = undefined;
 
   @observable
