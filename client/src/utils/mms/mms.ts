@@ -21,6 +21,6 @@ const getHourMinute = (time: string): [hour: number, minute: number] => {
   return [parseInt(stringHourMinute[0]), parseInt(stringHourMinute[1])];
 };
 
-export const findAccountByName = (name: string, categories: Account[]): Account | undefined => {
-  return categories.find((category) => category.name.startsWith(name));
+export const findAccountByName = (name: string, accounts: Account[]): Account | undefined => {
+  return accounts.find((account) => account.name.startsWith(name));
 };

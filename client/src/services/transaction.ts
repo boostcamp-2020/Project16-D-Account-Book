@@ -3,7 +3,6 @@ import { getFormattedDate } from '../utils/date';
 import Income, { IncomeRequest } from '../types/income';
 import Expenditure, { ExpenditureRequest } from '../types/expenditure';
 import querystring from 'querystring';
-import { getIncomeCategoriesHandler } from '../__dummy-data__/api/category/getIncome';
 import { MMSType } from '../types/TransactionForm';
 
 const transactionAPIAddress = {
@@ -17,6 +16,15 @@ const transactionAPIAddress = {
   textParsing: '/api/transactions/text-parsing',
 };
 
+export const createGetTransactionQuery = (accountbook_id, start_date, end_date) => {
+  const query = querystring.stringify({
+    accountbook_id,
+    start_date: getFormattedDate({ date: start_date, format: '.' }),
+    end_date: getFormattedDate({ date: end_date, format: '.' }),
+  });
+  return transactionAPIAddress.getTransactions + `?${query}`;
+};
+
 export default {
   getTransactions: async function* (
     accountbookId: number,
@@ -25,17 +33,7 @@ export default {
     beforeStartDate?: Date,
     afterEndDate?: Date,
   ): AsyncGenerator<Array<Income | Expenditure> | undefined> {
-    const formattedStartDate = getFormattedDate({ date: startDate, format: '.' });
-    const foramttedEndDate = getFormattedDate({ date: endDate, format: '.' });
-    const gap = endDate.valueOf() - startDate.valueOf();
-
-    const query = querystring.stringify({
-      accountbook_id: accountbookId,
-      start_date: formattedStartDate,
-      end_date: foramttedEndDate,
-    });
-    const requestURL = transactionAPIAddress.getTransactions + `?${query}`;
-
+    const requestURL = createGetTransactionQuery(accountbookId, startDate, endDate);
     const item = sessionStorage.getItem(requestURL);
     if (item === null || item === undefined) {
       yield undefined;
@@ -45,14 +43,7 @@ export default {
 
     // 이전 달 업데이트
     if (beforeStartDate !== undefined) {
-      const beforeMonthQuery =
-        transactionAPIAddress.getTransactions +
-        `?` +
-        querystring.stringify({
-          accountbook_id: accountbookId,
-          start_date: getFormattedDate({ date: beforeStartDate, format: '.' }),
-          end_date: formattedStartDate,
-        });
+      const beforeMonthQuery = createGetTransactionQuery(accountbookId, beforeStartDate, startDate);
       instance.get(beforeMonthQuery).then((response) => {
         sessionStorage.setItem(beforeMonthQuery, JSON.stringify(response.data));
       });
@@ -60,27 +51,14 @@ export default {
 
     // 다음 달 미리 캐싱
     if (afterEndDate !== undefined) {
-      const beforeMonthQuery =
-        transactionAPIAddress.getTransactions +
-        `?` +
-        querystring.stringify({
-          accountbook_id: accountbookId,
-          start_date: foramttedEndDate,
-          end_date: getFormattedDate({ date: afterEndDate, format: '.' }),
-        });
+      const nextMonthQuery = createGetTransactionQuery(accountbookId, endDate, afterEndDate);
 
-      instance.get(beforeMonthQuery).then((response) => {
-        sessionStorage.setItem(beforeMonthQuery, JSON.stringify(response.data));
+      instance.get(nextMonthQuery).then((response) => {
+        sessionStorage.setItem(nextMonthQuery, JSON.stringify(response.data));
       });
     }
 
-    const response = await instance.get(transactionAPIAddress.getTransactions, {
-      params: {
-        accountbook_id: accountbookId,
-        start_date: formattedStartDate,
-        end_date: foramttedEndDate,
-      },
-    });
+    const response = await instance.get(requestURL);
 
     //캐시 업데이트
     sessionStorage.setItem(requestURL, JSON.stringify(response.data));
