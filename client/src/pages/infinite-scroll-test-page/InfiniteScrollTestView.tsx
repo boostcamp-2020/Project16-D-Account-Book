@@ -58,13 +58,12 @@ const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<numbe
 
 const InfiniteScrollTestView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
-  const { dateStore, transactionStore, modalStore } = rootStore;
-  const { formFilterStore } = rootStore.modalStore;
+  const { dateStore, transactionStore, modalStore, accountStore, categoryStore } = rootStore;
+  const { filterFormStore } = rootStore.modalStore;
   const { createTransactionFormStore, updateTransactionFormStore } = modalStore;
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
   const updateTransactions = () => {
-    transactionStore.accountbookId = accountbookId;
     if (!query) {
       transactionStore.isFilterMode = false;
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
@@ -80,16 +79,31 @@ const InfiniteScrollTestView: React.FC<Props> = ({ accountbookId, query }: Props
       incomeCategory: income_category,
       expenditureCategory: expenditure_category,
     });
-    formFilterStore.query = query;
-    formFilterStore.setFilterInfo();
+    filterFormStore.query = query;
+    filterFormStore.setFilterInfo();
   };
 
   useEffect(() => {
     socket.on(event.UPDATE_TRANSACTIONS, () => {
       updateTransactions();
     });
+    socket.on(event.UPDATE_ACCOUNTS, () => {
+      updateTransactions();
+      accountStore.updateAccounts(accountbookId);
+    });
+    socket.on(event.UPDATE_INCOME_CATEGORIES, () => {
+      updateTransactions();
+      categoryStore.updateIncomeCategories(accountbookId);
+    });
+    socket.on(event.UPDATE_EXPENDITURE_CATEGORIES, () => {
+      updateTransactions();
+      categoryStore.updateExpenditureCategories(accountbookId);
+    });
     return () => {
       socket.off(event.UPDATE_TRANSACTIONS);
+      socket.off(event.UPDATE_ACCOUNTS);
+      socket.off(event.UPDATE_INCOME_CATEGORIES);
+      socket.off(event.UPDATE_EXPENDITURE_CATEGORIES);
     };
   }, [accountbookId]);
 
@@ -99,13 +113,13 @@ const InfiniteScrollTestView: React.FC<Props> = ({ accountbookId, query }: Props
 
   return (
     <>
-      {formFilterStore.show && <FormModalFilter accountbookId={accountbookId} />}
+      {filterFormStore.show && <FormModalFilter accountbookId={accountbookId} />}
       {createTransactionFormStore.show && <FormModalCreateTransaction />}
       {updateTransactionFormStore.show && <FormModalUpdateTransaction />}
       <Sidebar />
       <MenuNavigation />
       <HeaderNavigationRightTopWrapper>
-        <HeaderNavigation currentPage={'calendar'} />
+        <HeaderNavigation currentPage={'transaction'} />
       </HeaderNavigationRightTopWrapper>
       <ViewWrapper>
         <TransactionHeaderWrapper>
