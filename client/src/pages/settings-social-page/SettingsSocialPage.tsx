@@ -10,7 +10,9 @@ import useGetParam from '../../hook/use-get-param/useGetParam';
 import Spinner from '../../components/common/spinner/Spinner';
 import { observer } from 'mobx-react';
 
-const SettingsPageWrapper = styled.div``;
+const SettingsPageWrapper = styled.div`
+  font-family: 'Spoqa Han Sans';
+`;
 
 const Description = styled.div`
   margin-bottom: 5px;
@@ -22,8 +24,7 @@ const ContentWrapper = styled.div`
 
 const SettingsSocialPage: React.FC = () => {
   const accountbookId = useGetParam();
-  const { socialStore, userStore } = useStore().rootStore;
-  const isAdmin = userStore.isAdmin(accountbookId);
+  const { socialStore } = useStore().rootStore;
 
   useEffect(() => {
     socialStore.findUsers(accountbookId);

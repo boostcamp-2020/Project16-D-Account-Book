@@ -18,6 +18,7 @@ import { graphChangeChecker } from '../../types/inputRadio';
 export const PieGraphPageWrapper = styled.div`
   margin: 0 auto;
   width: 80%;
+  font-family: 'Spoqa Han Sans';
 `;
 export const PieHeaderFilter = styled.div`
   display: flex;

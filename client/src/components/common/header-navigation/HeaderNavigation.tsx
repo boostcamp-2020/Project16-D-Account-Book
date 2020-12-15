@@ -14,6 +14,7 @@ const NavigationItem = styled.div<{ currentPage: string }>`
   width: 24%;
   padding-top: 4px;
   text-align: center;
+  font-family: 'Spoqa Han Sans';
   &:nth-child(1) a {
     color: ${({ currentPage }) => (currentPage == 'transaction' ? BLUE : 'black')};
     font-weight: ${({ currentPage }) => (currentPage == 'transaction' ? 'bold' : 'normal')};
@@ -46,9 +47,6 @@ const NavigationItem = styled.div<{ currentPage: string }>`
   }
 `;
 
-const sampleProfileImage =
-  'https://media.istockphoto.com/vectors/profile-icon-man-icon-with-circle-shape-on-gray-background-vector-id1033334196?k=6&m=1033334196&s=170667a&w=0&h=wijawNlDG-1XWl-uXkYPKfJCv4mlNHb_QkqgtMwNSHY=';
-
 interface HeaderNavigationProps {
   currentPage: string;
 }
@@ -73,7 +71,7 @@ const HeaderNavigation = ({ currentPage }: HeaderNavigationProps): JSX.Element =
         </Link>
       </NavigationItem>
       <NavigationItem currentPage={''}>
-        <ProfileDropdown src={sampleProfileImage} />
+        <ProfileDropdown />
       </NavigationItem>
     </NavigationWrapper>
   );

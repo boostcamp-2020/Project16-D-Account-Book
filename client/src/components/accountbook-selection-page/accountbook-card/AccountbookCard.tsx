@@ -40,7 +40,7 @@ const ElementWrapper = styled.div`
 `;
 
 const TitleWrapper = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 500;
   padding-bottom: 10px;
 `;

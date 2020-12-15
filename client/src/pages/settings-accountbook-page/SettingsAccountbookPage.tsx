@@ -11,6 +11,7 @@ import Accountbook from '../../types/accountbook';
 import Spinner from '../../components/common/spinner/Spinner';
 
 const SettingsAccountbookPageWrapper = styled.div`
+  font-family: 'Spoqa Han Sans';
   display: flex;
 `;
 

@@ -18,6 +18,7 @@ const InputTextContainer = styled.input.attrs((props) => ({
   font-size: 1rem;
   border-radius: 5px;
   border: 1px solid lightgray;
+  font-family: 'Spoqa Han Sans';
   &:focus {
     outline: none;
     border: ${({ focusColor }) => (focusColor ? focusColor : LIGHT_BLUE)} 0.5px solid;

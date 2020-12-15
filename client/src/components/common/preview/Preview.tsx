@@ -8,12 +8,10 @@ interface PreviewProps {
   description?: string;
   onChange: (color: { hex: string }) => void;
 }
-
 const PreviewWrapper = styled.div`
   display: flex;
   align-items: flex-end;
 `;
-
 interface PreviewContentProps {
   color: string;
 }
@@ -48,5 +46,4 @@ const Preview: React.FC<PreviewProps> = ({ title, description, color, onChange }
     </PreviewWrapper>
   );
 };
-
 export default Preview;

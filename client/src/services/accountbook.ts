@@ -1,11 +1,12 @@
 import instance from '../api/axios';
-import Accountbook from '../types/accountbook';
+import Accountbook, { CreateAccountbookBody } from '../types/accountbook';
 import renameKey from '../utils/renameObjectKey';
 
 const accountbookAPIAddress = {
   getAccountbooks: '/api/accountbooks',
   updateAccountbook: '/api/accountbooks',
   deleteAccountbook: '/api/accountbooks',
+  createAccountbook: '/api/accountbooks',
 };
 
 export default {
@@ -29,5 +30,10 @@ export default {
   },
   deleteAccountbook: async (accountbookId: number): Promise<void> => {
     await instance.delete(`${accountbookAPIAddress.deleteAccountbook}/${accountbookId}`);
+  },
+  createAccountbook: async ({ title, color, description }: CreateAccountbookBody): Promise<Accountbook> => {
+    let { data } = await instance.post(accountbookAPIAddress.createAccountbook, { title, color, description });
+    data = renameKey(data, 'accountbook.title', 'title');
+    return data;
   },
 };
