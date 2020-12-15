@@ -170,7 +170,11 @@ export default class PieGraphPageStore {
 
   @computed
   get totalValue(): number {
-    return this.transactions.reduce((acc, curr) => {
+    const transactions: Array<Income | Expenditure> = this.incomeMode
+      ? getOnlyIncome(this.transactions)
+      : getOnlyExpenditure(this.transactions);
+
+    return transactions.reduce((acc, curr) => {
       return acc + curr.amount;
     }, 0);
   }

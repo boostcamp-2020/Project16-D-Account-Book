@@ -4,6 +4,7 @@ import Query from '../types/query';
 import BoxChartValue from '../types/boxChartValue';
 import { transaction } from 'mobx';
 import { ICategoryValue } from '../types/category';
+import { memo } from 'react';
 
 export const filtering = (
   transactions: Array<Income | Expenditure>,
@@ -147,7 +148,6 @@ const getTopOfFiveList = (
 
 export function getTopFiveCategory(transactions: Array<Income | Expenditure>): BoxChartValue[] {
   const [memorized, totalValue] = getCategoryList(transactions);
-
   if (totalValue === 0) {
     return [];
   }
