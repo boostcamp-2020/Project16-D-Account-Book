@@ -73,6 +73,7 @@ const updateAccountbook = async (accountbookId, accountbookData) => {
   );
   const updatedAccountbook = await getAccountbookByAccountbookId(accountbookData.id);
   return updatedAccountbook;
+};
 
 const createAccountbook = async ({ userId, title, description, color }) => {
   const newAccountbook = await db.accountbook.create({
