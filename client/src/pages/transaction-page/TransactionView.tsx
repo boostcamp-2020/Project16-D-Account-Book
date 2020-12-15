@@ -17,6 +17,7 @@ import FormModalCreateTransaction from '../../components/common/modals/form-moda
 import FormModalUpdateTransaction from '../../components/common/modals/form-modal-transaction/FormModalUpdateTransaction';
 import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
 import socket, { event } from '../../socket';
+import { sortByRecentDate } from '../../utils/sortByRecentDate';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -144,7 +145,9 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
             <Amount text={'지출'} amount={totalExpenditure} />
           </AmountWrapper>
         </TransactionHeaderWrapper>
-        <AllTransactionContainer transactions={transactionStore.transactions} />
+        <AllTransactionContainer
+          transactions={sortByRecentDate(transactionStore.transactions).slice(0, transactionStore.items)}
+        />
       </ViewWrapper>
     </>
   );
