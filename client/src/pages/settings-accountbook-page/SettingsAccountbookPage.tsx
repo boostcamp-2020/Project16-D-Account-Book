@@ -59,7 +59,6 @@ const SettingsAccountbookPage: React.FC = () => {
   const [inputColor, setInputColor] = useState<string>('#000000');
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  console.log(accountbookStore.isLoading + ' ' + inputColor);
 
   useEffect(() => {
     const loadAccountbooks = async () => {
