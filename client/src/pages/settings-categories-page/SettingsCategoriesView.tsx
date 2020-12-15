@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 import FormModalCategory from '../../components/common/modals/form-modal-category/FormModalCreateCategory';
 import FormModalUpdateCategory from '../../components/common/modals/form-modal-category/FormModalUpdateCategory';
 import socket, { event } from '../../socket';
+import Spinner from '../../components/common/spinner/Spinner';
 
 const SettingsCategoryViewWrapper = styled.div`
   position: absolute;
@@ -51,6 +52,7 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
   const updateCategoryFormStore = rootStore.modalStore.updateCategoryFormStore;
 
   useEffect(() => {
+    categoryStore.isLoading = true;
     categoryStore.updateIncomeCategories(accountbookId);
     categoryStore.updateExpenditureCategories(accountbookId);
   }, []);
@@ -109,6 +111,8 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
   const setIncomeFlagFalse = (): void => {
     createCategoryFormStore.setIncomeFlagFalse();
   };
+
+  if (categoryStore.isLoading) return <Spinner />;
 
   return (
     <SettingsCategoryViewWrapper>

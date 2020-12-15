@@ -5,7 +5,7 @@ import { IInputRadio } from '../../../../types/inputRadio';
 const InputRadioWrapper = styled.div`
   display: inline-flex;
   align-items: center;
-  z-index: 6;
+  z-index: 2;
 `;
 
 interface InputRadioProps {

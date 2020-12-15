@@ -56,14 +56,15 @@ const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<numbe
   return [totalIncome, totalExpenditure];
 };
 
-const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
+const InfiniteScrollTestView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
-  const { dateStore, transactionStore, modalStore, accountStore, categoryStore } = rootStore;
-  const { filterFormStore } = rootStore.modalStore;
+  const { dateStore, transactionStore, modalStore } = rootStore;
+  const { formFilterStore } = rootStore.modalStore;
   const { createTransactionFormStore, updateTransactionFormStore } = modalStore;
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
   const updateTransactions = () => {
+    transactionStore.accountbookId = accountbookId;
     if (!query) {
       transactionStore.isFilterMode = false;
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
@@ -79,31 +80,16 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       incomeCategory: income_category,
       expenditureCategory: expenditure_category,
     });
-    filterFormStore.query = query;
-    filterFormStore.setFilterInfo();
+    formFilterStore.query = query;
+    formFilterStore.setFilterInfo();
   };
 
   useEffect(() => {
     socket.on(event.UPDATE_TRANSACTIONS, () => {
       updateTransactions();
     });
-    socket.on(event.UPDATE_ACCOUNTS, () => {
-      updateTransactions();
-      accountStore.updateAccounts(accountbookId);
-    });
-    socket.on(event.UPDATE_INCOME_CATEGORIES, () => {
-      updateTransactions();
-      categoryStore.updateIncomeCategories(accountbookId);
-    });
-    socket.on(event.UPDATE_EXPENDITURE_CATEGORIES, () => {
-      updateTransactions();
-      categoryStore.updateExpenditureCategories(accountbookId);
-    });
     return () => {
       socket.off(event.UPDATE_TRANSACTIONS);
-      socket.off(event.UPDATE_ACCOUNTS);
-      socket.off(event.UPDATE_INCOME_CATEGORIES);
-      socket.off(event.UPDATE_EXPENDITURE_CATEGORIES);
     };
   }, [accountbookId]);
 
@@ -113,13 +99,13 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
 
   return (
     <>
-      {filterFormStore.show && <FormModalFilter accountbookId={accountbookId} />}
+      {formFilterStore.show && <FormModalFilter accountbookId={accountbookId} />}
       {createTransactionFormStore.show && <FormModalCreateTransaction />}
       {updateTransactionFormStore.show && <FormModalUpdateTransaction />}
       <Sidebar />
       <MenuNavigation />
       <HeaderNavigationRightTopWrapper>
-        <HeaderNavigation currentPage={'transaction'} />
+        <HeaderNavigation currentPage={'calendar'} />
       </HeaderNavigationRightTopWrapper>
       <ViewWrapper>
         <TransactionHeaderWrapper>
@@ -150,4 +136,4 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   );
 };
 
-export default observer(TransactionView);
+export default observer(InfiniteScrollTestView);

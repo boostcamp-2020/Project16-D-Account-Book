@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 import FormModalAccount from '../../components/common/modals/form-modal-account/FormModalCreateAccount';
 import FormModalUpdateAccount from '../../components/common/modals/form-modal-account/FormModalUpdateAccount';
 import socket, { event } from '../../socket';
+import Spinner from '../../components/common/spinner/Spinner';
 
 const SettingsAccountViewWrapper = styled.div`
   position: absolute;
@@ -50,6 +51,7 @@ const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
   const { show } = rootStore.modalStore.updateAccountFormStore;
 
   useEffect(() => {
+    accountStore.isLoading = true;
     accountStore.updateAccounts(accountbookId);
   }, []);
 
@@ -67,6 +69,8 @@ const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
       <Account key={item.id} id={item.id} name={item.name} color={item.color} shadow={true} />
     </AccountItemWrapper>
   ));
+
+  if (accountStore.isLoading) return <Spinner />;
 
   return (
     <SettingsAccountViewWrapper>

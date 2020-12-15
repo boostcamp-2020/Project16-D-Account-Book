@@ -1,3 +1,4 @@
+import { waitFor } from '@testing-library/react';
 import CategoryStore from '../../store/CategoryStore';
 import RootStore from '../../store/RootStore';
 import dummyExpenditure from '../../__dummy-data__/api/category/getExpenditure';
@@ -15,6 +16,7 @@ describe('카테고리 스토어 테스트', () => {
     result.forEach((item) => {
       expect(dummyIncome.sort()).toContainEqual(item);
     });
+    
   });
   test('server을 통해 expenditure category data를 받을 수 있다.', async () => {
     const id = 1;

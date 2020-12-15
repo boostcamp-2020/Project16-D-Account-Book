@@ -4,7 +4,11 @@ import SettingsSidebar from '../../components/common/settings-sidebar/SettingsSi
 import Preview from '../../components/common/preview/Preview';
 import InputText from '../../components/common/inputs/input-text/InputText';
 import { DODGER_BLUE } from '../../constants/color';
-import { startDateChecker } from '../../types/inputRadio';
+import useStore from '../../hook/use-store/useStore';
+import useGetParam from '../../hook/use-get-param/useGetParam';
+import { observer } from 'mobx-react';
+import Accountbook from '../../types/accountbook';
+import Spinner from '../../components/common/spinner/Spinner';
 
 const SettingsAccountbookPageWrapper = styled.div`
   font-family: 'Spoqa Han Sans';
@@ -27,10 +31,11 @@ const SettingsItemWrapper = styled.div`
   margin-top: 50px;
 `;
 
-const Label = styled.div`
+const Label = styled.div<{ color?: string }>`
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 10px;
+  color: ${({ color }) => color};
 `;
 
 interface ConfirmButtonProps {
@@ -45,11 +50,30 @@ const ConfirmButton = styled.p<ConfirmButtonProps>`
   color: ${DODGER_BLUE};
 `;
 
-const SettingsAccountbookPage = (): JSX.Element => {
-  const [inputColor, setInputColor] = useState<string>('black');
-  const [title, setTitle] = useState<string>('가계부 1');
-  const [description, setDescription] = useState<string>('부스트캠프 커넥트 재단 가계부');
-  const { name, left, right } = startDateChecker;
+const SettingsAccountbookPage: React.FC = () => {
+  const accountbookId = useGetParam();
+  const { userStore, accountbookStore } = useStore().rootStore;
+
+  const isAdmin = userStore.isAdmin(accountbookId);
+
+  const [inputColor, setInputColor] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+
+  useEffect(() => {
+    accountbookStore.isLoading = true;
+    const loadAccountbooks = async () => {
+      await accountbookStore.updateAccountbooks();
+      const [accountbook] = accountbookStore.accountbooks.filter(
+        (accountbook) => accountbook.accountbookId === accountbookId,
+      );
+      accountbookStore.updateAccountbookSettings(accountbook);
+      setTitle((accountbookStore.accountbook as Accountbook).title);
+      setDescription((accountbookStore.accountbook as Accountbook).description);
+      setInputColor((accountbookStore.accountbook as Accountbook).color);
+    };
+    loadAccountbooks();
+  }, []);
 
   const onChange = (color: { hex: string }): void => {
     setInputColor(color.hex);
@@ -63,35 +87,69 @@ const SettingsAccountbookPage = (): JSX.Element => {
     setDescription(e.target.value);
   };
 
+  const convertToAccountbook = (title, inputColor, description, accountbookId) => {
+    return {
+      id: (accountbookStore.accountbook as Accountbook).id,
+      title: title,
+      color: inputColor,
+      description: description,
+      accountbookId,
+    };
+  };
+
+  const updateAccountbook = (): void => {
+    const accountbook = convertToAccountbook(title, inputColor, description, accountbookId);
+    accountbookStore.updateAccountbook(accountbook);
+  };
+
   return (
     <SettingsAccountbookPageWrapper>
       <SettingsSidebar currentpage={'accountbook'} />
-      <SettingsBody>
-        <ConfirmButton>완료</ConfirmButton>
-        <PreviewWrapper>
-          <Preview title={title} description={description} color={inputColor} onChange={onChange} />
-        </PreviewWrapper>
-        <SettingsItemWrapper>
-          <Label>가계부 별칭</Label>
-          <InputText
-            maxLength={15}
-            placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
-            value={title}
-            onChange={onChangeTitle}
-          />
-        </SettingsItemWrapper>
-        <SettingsItemWrapper>
-          <Label>가계부 설명</Label>
-          <InputText
-            maxLength={30}
-            placeholder={'가계부에 대한 설명을 기재해주세요.'}
-            value={description}
-            onChange={onChangeDescription}
-          />
-        </SettingsItemWrapper>
-      </SettingsBody>
+      {accountbookStore.isLoading ? (
+        <Spinner />
+      ) : (
+        <SettingsBody>
+          <ConfirmButton onClick={updateAccountbook}>완료</ConfirmButton>
+          <SettingsItemWrapper>
+            <PreviewWrapper>
+              <Preview title={title} description={description} color={inputColor} onChange={onChange} />
+            </PreviewWrapper>
+          </SettingsItemWrapper>
+          {isAdmin ? (
+            <SettingsItemWrapper>
+              <Label>가계부 별칭</Label>
+              <InputText
+                maxLength={15}
+                placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
+                value={title}
+                onChange={onChangeTitle}
+              />
+            </SettingsItemWrapper>
+          ) : (
+            <SettingsItemWrapper>
+              <Label color={'#e4e4e4'}>가계부 별칭</Label>
+              <InputText
+                maxLength={15}
+                placeholder={'최대 15자의 가계부 별칭을 작성해주세요.'}
+                value={title}
+                onChange={onChangeTitle}
+                disabled={true}
+              />
+            </SettingsItemWrapper>
+          )}
+          <SettingsItemWrapper>
+            <Label>가계부 설명</Label>
+            <InputText
+              maxLength={30}
+              placeholder={'가계부에 대한 설명을 기재해주세요.'}
+              value={description}
+              onChange={onChangeDescription}
+            />
+          </SettingsItemWrapper>
+        </SettingsBody>
+      )}
     </SettingsAccountbookPageWrapper>
   );
 };
 
-export default SettingsAccountbookPage;
+export default observer(SettingsAccountbookPage);

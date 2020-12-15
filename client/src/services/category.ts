@@ -24,7 +24,7 @@ export default {
     //캐시 리턴
 
     const item = sessionStorage.getItem(requestURL);
-    if (item === null) {
+    if (item === null || item === undefined) {
       yield undefined;
     } else {
       yield JSON.parse(item) as Category[];
@@ -47,7 +47,7 @@ export default {
       });
     //캐시 리턴
     const item = sessionStorage.getItem(requestURL);
-    if (item === null) {
+    if (item === null || item === undefined) {
       yield undefined;
     } else {
       yield JSON.parse(item) as Category[];

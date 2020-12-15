@@ -11,7 +11,7 @@ import InputText from '../../inputs/input-text/InputText';
 import formModal from '../../../../constants/formModal';
 import useGetParam from '../../../../hook/use-get-param/useGetParam';
 import { convertToAccount } from '../formUtils';
-import { BLACK } from '../../../../constants/color';
+import { BLACK, LIGHT_GREEN, FAIL_RED } from '../../../../constants/color';
 import CheckSuccess from '../../check/check-success/CheckSuccess';
 import CheckFail from '../../check/check-fail/CheckFail';
 import CheckSuccessText from '../../check/check-text/CheckSuccessText';
@@ -91,7 +91,32 @@ const FormModalAccount: React.FC = () => {
         </FormModalItem>
         <FormModalItem>
           <FormModalLabel>{formModal.ACCOUNT_LABEL_NAME}</FormModalLabel>
-          <InputText maxLength={8} placeholder={formModal.ACCOUNT_PLACEHOLDER} value={name} onChange={onChangeName} />
+          {check ? (
+            name ? (
+              <InputText
+                maxLength={8}
+                placeholder={formModal.ACCOUNT_PLACEHOLDER}
+                value={name}
+                onChange={onChangeName}
+                focusColor={LIGHT_GREEN}
+              />
+            ) : (
+              <InputText
+                maxLength={8}
+                placeholder={formModal.ACCOUNT_PLACEHOLDER}
+                value={name}
+                onChange={onChangeName}
+              />
+            )
+          ) : (
+            <InputText
+              maxLength={8}
+              placeholder={formModal.ACCOUNT_PLACEHOLDER}
+              value={name}
+              onChange={onChangeName}
+              focusColor={FAIL_RED}
+            />
+          )}
           {check ? name ? <CheckSuccess /> : <CheckNoAction /> : <CheckFail />}
         </FormModalItem>
         {check ? name ? <CheckSuccessText /> : <CheckNoActionText /> : <CheckFailText />}

@@ -14,6 +14,9 @@ export default class AccountStore {
   @observable
   accountNames: string[] = [];
 
+  @observable
+  isLoading = true;
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeObservable(this);
@@ -33,6 +36,7 @@ export default class AccountStore {
     }
     const { value: refreshedValue } = yield generator.next();
     this.changeAccounts(refreshedValue);
+    this.isLoading = false;
   });
 
   createAccount = async (account: AccountRequest): Promise<void> => {

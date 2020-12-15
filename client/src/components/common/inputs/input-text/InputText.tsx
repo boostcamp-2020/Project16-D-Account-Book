@@ -5,11 +5,13 @@ import { LIGHT_BLUE } from '../../../../constants/color';
 interface InputType {
   type: string | number;
   maxLength: number;
+  focusColor: string | undefined;
 }
 
 const InputTextContainer = styled.input.attrs((props) => ({
   type: 'text',
   maxLength: props.maxLength,
+  disabled: props.disabled,
 }))<InputType>`
   width: 100%;
   padding: 15px 10px;
@@ -19,8 +21,8 @@ const InputTextContainer = styled.input.attrs((props) => ({
   font-family: 'Spoqa Han Sans';
   &:focus {
     outline: none;
-    border: 0.5px solid ${LIGHT_BLUE};
-    box-shadow: 0px 0px 2.5px 2.5px ${LIGHT_BLUE};
+    border: ${({ focusColor }) => (focusColor ? focusColor : LIGHT_BLUE)} 0.5px solid;
+    box-shadow: ${({ focusColor }) => (focusColor ? focusColor : LIGHT_BLUE)} 0px 0px 2.5px 2.5px;
   }
 `;
 
@@ -29,15 +31,26 @@ interface InputTextProps {
   value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   maxLength?: number;
+  disabled?: boolean;
+  focusColor?: string;
 }
 
-const InputText: React.FC<InputTextProps> = ({ maxLength, placeholder, value, onChange }: InputTextProps) => {
+const InputText: React.FC<InputTextProps> = ({
+  maxLength,
+  placeholder,
+  value,
+  onChange,
+  disabled,
+  focusColor,
+}: InputTextProps) => {
   return (
     <InputTextContainer
       maxLength={maxLength}
       value={value}
       placeholder={placeholder}
       onChange={onChange}
+      disabled={disabled}
+      focusColor={focusColor}
     ></InputTextContainer>
   );
 };

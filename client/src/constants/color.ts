@@ -13,6 +13,7 @@ export const BLACK = '#000000';
 export const NAVER_GREEN = '#2EA043';
 export const FAIL_RED = '#ff2111';
 export const ORANGE = '#F39807';
+export const MINT = '#1ABC9C';
 
 const color = {
   BLUE,
@@ -30,6 +31,7 @@ const color = {
   NAVER_GREEN,
   FAIL_RED,
   ORANGE,
+  MINT,
 };
 
 export default color;
