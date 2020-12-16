@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ProfileImage from '../../common/profile-image/ProfileImage';
-import AdminSettingButton from '../admin-setting-button/AdmingSettingButton';
+import AdminSettingButton from '../admin-setting-button/AdminSettingButton';
 import DeleteButton from '../delete-button/DeleteButton';
 import { GRAY, LIGHT_GREEN } from '../../../constants/color';
 import AddButton from '../add-button/AddButton';
