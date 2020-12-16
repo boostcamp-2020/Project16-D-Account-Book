@@ -1,6 +1,5 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const id = [1, 2, 3, 4, 5, 6, 7, 8];
     const name = ['식사', '생활', '경조사', '교육', '주거/통신', '술/유흥', '문화/여가', '교통'];
     const color = ['#1E90FF', '#0048BA', '#B0BF1A', '#7CB9E8', '#C9FFE5', '#B284BE', '#84DE02', '#D3212D'];
     // eslint-disable-next-line camelcase
@@ -19,12 +18,41 @@ module.exports = {
     // eslint-disable-next-line camelcase
     const deleted_at = [null, null, null, null, null, null, null, null, null, null];
 
-    const bulkData = id.map((item, index) => {
+    let id = 0;
+
+    const bulkData = name.map((item, index) => {
+      id += 1;
       return {
-        id: id[index],
+        id,
         name: name[index],
         color: color[index],
-        accountbook_id: accountbook_id[index],
+        accountbook_id: 1,
+        created_at: created_at[index],
+        deleted_at: deleted_at[index],
+        updated_at: created_at[index],
+      };
+    });
+
+    const bulkData2 = name.map((item, index) => {
+      id += 1;
+      return {
+        id,
+        name: name[index],
+        color: color[index],
+        accountbook_id: 2,
+        created_at: created_at[index],
+        deleted_at: deleted_at[index],
+        updated_at: created_at[index],
+      };
+    });
+
+    const bulkData3 = name.map((item, index) => {
+      id += 1;
+      return {
+        id,
+        name: name[index],
+        color: color[index],
+        accountbook_id: 3,
         created_at: created_at[index],
         deleted_at: deleted_at[index],
         updated_at: created_at[index],
@@ -32,6 +60,8 @@ module.exports = {
     });
 
     await queryInterface.bulkInsert('expenditure_category', bulkData);
+    await queryInterface.bulkInsert('expenditure_category', bulkData2);
+    await queryInterface.bulkInsert('expenditure_category', bulkData3);
   },
 
   down: async (queryInterface, Sequelize) => {
