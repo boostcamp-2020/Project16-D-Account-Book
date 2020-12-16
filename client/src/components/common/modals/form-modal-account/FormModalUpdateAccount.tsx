@@ -64,6 +64,10 @@ function nothingChange(check: boolean, name: string, noChange: boolean): boolean
 }
 
 function normalPass(check, noChange, name, colorCheck) {
+  if (colorCheck) {
+    return true;
+  }
+
   if (!check) {
     return false;
   }
@@ -76,7 +80,7 @@ function normalPass(check, noChange, name, colorCheck) {
     return false;
   }
 
-  if ((name || colorCheck) && !noChange) {
+  if (name && !noChange) {
     return true;
   }
 }
