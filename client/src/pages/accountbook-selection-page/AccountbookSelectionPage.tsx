@@ -36,7 +36,7 @@ const EmailWrapper = styled.div`
 
 const AccountbookSelectionPage: React.FC = () => {
   const { rootStore } = useStore();
-  const { accountbookStore } = rootStore;
+  const { accountbookStore, userStore } = rootStore;
   const {
     deleteAccountbookByAdminStore,
     deleteAccountbookByUserStore,
