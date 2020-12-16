@@ -86,9 +86,9 @@ const immutableTransaction = (transactions: ITransaction[]): ITransaction[] => {
 
 export const gatherByDate = (transactions: ITransaction[]): ITransaction[] => {
   const ans: ITransaction[] = [];
-  const map = new Map<number, number>();
+  const map = new Map<string, number>();
   transactions.forEach((transaction) => {
-    const timeValue = transaction.date.valueOf();
+    const timeValue = transaction.date.toDateString();
     if (!map.has(timeValue)) {
       map.set(timeValue, transaction.value);
     } else {

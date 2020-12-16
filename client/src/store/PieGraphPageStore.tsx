@@ -6,7 +6,7 @@ import { action, makeObservable, observable, computed, flow } from 'mobx';
 import datePeriod, { datePeriodNumber } from '../constants/datePeriod';
 import transactionService from '../services/transaction';
 import PieChartValue from '../types/pieChartValue';
-import { getOnlyIncome, getTopFiveCategory, getOnlyExpenditure } from '../utils/filter';
+import { getOnlyIncome, getTopEightCategory, getOnlyExpenditure } from '../utils/filter';
 import BoxChartValue from '../types/boxChartValue';
 import { CancellablePromise } from 'mobx/dist/api/flow';
 import getSWRGenerator from '../utils/generator/getSWRGenerator';
@@ -154,7 +154,7 @@ export default class PieGraphPageStore {
       ? getOnlyIncome(this.transactions)
       : getOnlyExpenditure(this.transactions);
 
-    const topOfFive = getTopFiveCategory(targetTransactions);
+    const topOfFive = getTopEightCategory(targetTransactions);
     return topOfFive;
   }
 
@@ -164,7 +164,7 @@ export default class PieGraphPageStore {
       ? getOnlyIncome(this.transactions)
       : getOnlyExpenditure(this.transactions);
 
-    const topOfFive = getTopFiveCategory(targetTransactions);
+    const topOfFive = getTopEightCategory(targetTransactions);
     return topOfFive;
   }
 
