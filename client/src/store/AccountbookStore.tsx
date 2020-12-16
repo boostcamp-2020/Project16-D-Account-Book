@@ -63,4 +63,9 @@ export default class AccountbookStore {
       authority: true,
     });
   };
+
+  @action
+  setIsLoading = (isLoading: boolean): void => {
+    this.isLoading = isLoading;
+  };
 }

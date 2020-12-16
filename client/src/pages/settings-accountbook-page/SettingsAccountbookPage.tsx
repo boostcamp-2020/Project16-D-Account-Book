@@ -70,11 +70,11 @@ const SettingsAccountbookPage: React.FC = () => {
       setTitle((accountbookStore.accountbook as Accountbook).title);
       setDescription((accountbookStore.accountbook as Accountbook).description);
       setInputColor((accountbookStore.accountbook as Accountbook).color);
-      accountbookStore.isLoading = false;
+      accountbookStore.setIsLoading(false);
     };
     loadAccountbooks();
     return () => {
-      accountbookStore.isLoading = true;
+      accountbookStore.setIsLoading(true);
     };
   }, []);
 
