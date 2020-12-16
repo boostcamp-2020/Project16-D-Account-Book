@@ -23,7 +23,7 @@ interface CheckNameType {
   (First: React.ReactChild, Second: React.ReactChild, Third: React.ReactChild): React.ReactChild;
 }
 
-function formModalCheckNameMessage<T>(check: boolean, name: string): CheckNameType<T> {
+function formModalCheckNameMessage(check: boolean, name: string): CheckNameType {
   return function nameTemplate(
     First: React.ReactChild,
     Second: React.ReactChild,
@@ -81,7 +81,7 @@ const FormModalAccount: React.FC = () => {
     }
   };
 
-  const messageWithCheckAndName = formModalCheckNameMessage<IFormModalHeaderProps>(check, name);
+  const messageWithCheckAndName = formModalCheckNameMessage(check, name);
 
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
