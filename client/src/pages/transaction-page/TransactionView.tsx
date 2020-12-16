@@ -125,7 +125,6 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
     const scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
     const clientHeight = document.documentElement.clientHeight;
     if (scrollTop + clientHeight + 1 >= scrollHeight) {
-      transactionStore.prevItems = transactionStore.items;
       transactionStore.items += 10;
     }
   };

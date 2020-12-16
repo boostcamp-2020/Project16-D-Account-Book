@@ -20,9 +20,6 @@ export default class TransactionStore {
   isLoading = true;
 
   @observable
-  prevItems = 0;
-
-  @observable
   items = 20;
 
   @observable
