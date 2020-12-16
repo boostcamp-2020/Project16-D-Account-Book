@@ -66,6 +66,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
 
   const updateTransactions = () => {
     if (!query) {
+      transactionStore.setIsFilterMode(false);
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
       return;
     }

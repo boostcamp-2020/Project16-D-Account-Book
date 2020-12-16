@@ -215,4 +215,9 @@ export default class TransactionStore {
   setIsLoading = (isLoading: boolean): void => {
     this.isLoading = isLoading;
   };
+
+  @action
+  setIsFilterMode = (isFilterMode: boolean): void => {
+    this.isFilterMode = isFilterMode;
+  };
 }
