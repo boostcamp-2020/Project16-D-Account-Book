@@ -29,7 +29,7 @@ module.exports = {
     // eslint-disable-next-line camelcase
     const accountbook_id = [1, 1, 1, 1, 2, 2, 2, 2, 1, 1];
     // eslint-disable-next-line camelcase
-    const user_id = [1, 2, 3, 4, 1, 2, 3, 4, 5, 6];
+    const user_id = [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6];
     // eslint-disable-next-line camelcase
     const created_at = [
       '2020-11-02',
