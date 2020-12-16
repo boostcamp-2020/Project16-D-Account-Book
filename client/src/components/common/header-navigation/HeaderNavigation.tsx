@@ -20,14 +20,10 @@ const NavigationItem = styled.div<{ currentPage: string }>`
     font-weight: ${({ currentPage }) => (currentPage == 'transaction' ? 'bold' : 'normal')};
   }
   &:nth-child(2) a {
-    color: ${({ currentPage }) => (currentPage == 'calendar' ? BLUE : 'black')};
-    font-weight: ${({ currentPage }) => (currentPage == 'calendar' ? 'bold' : 'normal')};
-  }
-  &:nth-child(3) a {
     color: ${({ currentPage }) => (currentPage == 'statistics' ? BLUE : 'black')};
     font-weight: ${({ currentPage }) => (currentPage == 'statistics' ? 'bold' : 'normal')};
   }
-  &:nth-child(4) a {
+  &:nth-child(3) a {
     width: 28%;
     display: flex;
     flex-direction: row-reverse;
@@ -58,11 +54,6 @@ const HeaderNavigation = ({ currentPage }: HeaderNavigationProps): JSX.Element =
       <NavigationItem currentPage={currentPage}>
         <Link to={`/accountbooks/${id}`} className="text">
           <span className="text">내역</span>
-        </Link>
-      </NavigationItem>
-      <NavigationItem currentPage={currentPage}>
-        <Link to={`/accountbooks/${id}/test`} className="text">
-          <span className="text">달력</span>
         </Link>
       </NavigationItem>
       <NavigationItem currentPage={currentPage}>
