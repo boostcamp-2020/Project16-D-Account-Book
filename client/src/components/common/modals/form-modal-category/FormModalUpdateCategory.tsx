@@ -19,6 +19,7 @@ import CheckFailText from '../../check/check-text/CheckFailText';
 import CheckNoActionText from '../../check/check-text/CheckNoActionText';
 import CheckNoAction from '../../check/check-no-action/CheckNoAction';
 import { LIGHT_GREEN, FAIL_RED } from '../../../../constants/color';
+import { nameCheckValidationHeader, nameCheckValidationMessage } from '../form-modal-account/FormModalUpdateAccount';
 
 const FormModalUpdateCategory: React.FC = () => {
   const { rootStore } = useStore();
@@ -115,6 +116,9 @@ const FormModalUpdateCategory: React.FC = () => {
     }
   };
 
+  const validationHeader = nameCheckValidationHeader(check, noChange, name, colorCheck);
+  const validationMessage = nameCheckValidationMessage(check, name, noChange);
+
   const deleteExpenditureCategory = (): void => {
     try {
       if (expenditureCategoryId !== undefined) {
@@ -146,34 +150,19 @@ const FormModalUpdateCategory: React.FC = () => {
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
-        {check || noChange ? (
-          (name && !noChange) || (name && colorCheck) ? (
-            <FormModalHeader
-              modalName={
-                updateCategoryFormStore.incomeFlag
-                  ? formModal.UPDATE_INCOME_CATEGORY_MODAL_NAME
-                  : formModal.UPDATE_EXPENDITURE_CATEGORY_MODAL_NAME
-              }
-              blueName={'완료'}
-              redName={'삭제'}
-              closeModal={modalToggle}
-              clickBlue={updateCategoryFormStore.incomeFlag ? updateIncomeCategory : updateExpenditureCategory}
-              clickRed={updateCategoryFormStore.incomeFlag ? deleteIncomeCategory : deleteExpenditureCategory}
-            />
-          ) : (
-            <FormModalHeader
-              modalName={
-                updateCategoryFormStore.incomeFlag
-                  ? formModal.UPDATE_INCOME_CATEGORY_MODAL_NAME
-                  : formModal.UPDATE_EXPENDITURE_CATEGORY_MODAL_NAME
-              }
-              redName={'삭제'}
-              closeModal={modalToggle}
-              clickRed={updateCategoryFormStore.incomeFlag ? deleteIncomeCategory : deleteExpenditureCategory}
-              disabledName={'완료'}
-            />
-          )
-        ) : (
+        {validationHeader(
+          <FormModalHeader
+            modalName={
+              updateCategoryFormStore.incomeFlag
+                ? formModal.UPDATE_INCOME_CATEGORY_MODAL_NAME
+                : formModal.UPDATE_EXPENDITURE_CATEGORY_MODAL_NAME
+            }
+            blueName={'완료'}
+            redName={'삭제'}
+            closeModal={modalToggle}
+            clickBlue={updateCategoryFormStore.incomeFlag ? updateIncomeCategory : updateExpenditureCategory}
+            clickRed={updateCategoryFormStore.incomeFlag ? deleteIncomeCategory : deleteExpenditureCategory}
+          />,
           <FormModalHeader
             modalName={
               updateCategoryFormStore.incomeFlag
@@ -184,70 +173,44 @@ const FormModalUpdateCategory: React.FC = () => {
             closeModal={modalToggle}
             clickRed={updateCategoryFormStore.incomeFlag ? deleteIncomeCategory : deleteExpenditureCategory}
             disabledName={'완료'}
-          />
+          />,
         )}
         <FormModalItem>
           <CategoryPreview name={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
           <FormModalLabel>{formModal.CATEGORY_LABEL_NAME}</FormModalLabel>
-          {check ? (
-            name && !noChange ? (
-              <InputText
-                maxLength={8}
-                placeholder={formModal.CATEGORY_PLACEHOLDER}
-                value={name}
-                onChange={onChangeName}
-                focusColor={LIGHT_GREEN}
-              />
-            ) : (
-              <InputText
-                maxLength={8}
-                placeholder={formModal.CATEGORY_PLACEHOLDER}
-                value={name}
-                onChange={onChangeName}
-              />
-            )
-          ) : !noChange ? (
+          {validationMessage(
+            <InputText
+              maxLength={8}
+              placeholder={formModal.CATEGORY_PLACEHOLDER}
+              value={name}
+              onChange={onChangeName}
+              focusColor={LIGHT_GREEN}
+            />,
             <InputText
               maxLength={8}
               placeholder={formModal.CATEGORY_PLACEHOLDER}
               value={name}
               onChange={onChangeName}
               focusColor={FAIL_RED}
-            />
-          ) : (
+            />,
             <InputText
               maxLength={8}
               placeholder={formModal.CATEGORY_PLACEHOLDER}
               value={name}
               onChange={onChangeName}
-            />
+            />,
+            <InputText
+              maxLength={8}
+              placeholder={formModal.CATEGORY_PLACEHOLDER}
+              value={name}
+              onChange={onChangeName}
+            />,
           )}
-
-          {check ? (
-            name && !noChange ? (
-              <CheckSuccess />
-            ) : (
-              <CheckNoAction />
-            )
-          ) : !noChange ? (
-            <CheckFail />
-          ) : (
-            <CheckNoAction />
-          )}
+          {validationMessage(<CheckSuccess />, <CheckFail />, <CheckNoAction />, <CheckNoAction />)}
         </FormModalItem>
-        {check ? (
-          name && !noChange ? (
-            <CheckSuccessText />
-          ) : (
-            <CheckNoActionText />
-          )
-        ) : !noChange ? (
-          <CheckFailText />
-        ) : (
-          <CheckNoActionText />
-        )}
+        {validationMessage(<CheckSuccessText />, <CheckFailText />, <CheckNoActionText />, <CheckNoActionText />)}
       </FormModalWrapper>
     </ModalBackground>
   );
