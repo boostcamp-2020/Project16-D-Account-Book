@@ -17,7 +17,7 @@ module.exports = {
       },
       {
         id: 3,
-        title: '테스트 가계부',
+        title: '데모용 가계부',
         created_at: '2020-11-23',
         updated_at: '2020-11-23',
         deleted_at: null,
