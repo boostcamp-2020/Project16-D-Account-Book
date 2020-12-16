@@ -18,7 +18,6 @@ import FormModalUpdateTransaction from '../../components/common/modals/form-moda
 import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
 import socket, { event } from '../../socket';
 import { sortByRecentDate } from '../../utils/sortByRecentDate';
-import _ from 'lodash';
 
 const ViewWrapper = styled.div`
   width: 70%;
