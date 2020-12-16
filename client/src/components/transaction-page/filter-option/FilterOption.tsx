@@ -4,6 +4,7 @@ import CancelButton from './CancelButton';
 import Query from '../../../types/query';
 import { getFormattedDate } from '../../../utils/date';
 import { useHistory } from 'react-router-dom';
+import useStore from '../../../hook/use-store/useStore';
 
 const Wrapper = styled.div`
   display: flex;
@@ -50,10 +51,12 @@ const getOptionText = (account: string, incomeCategory: string, expenditureCateg
 };
 
 const FilterOption: React.FC<Props> = ({ query, accountbookId }: Props) => {
+  const { transactionStore } = useStore().rootStore;
   const { startDate, endDate, account, incomeCategory, expenditureCategory } = query;
   const history = useHistory();
 
   const onClickCancel = () => {
+    transactionStore.isFilterMode = false;
     history.push(`/accountbooks/${accountbookId}`);
   };
 
