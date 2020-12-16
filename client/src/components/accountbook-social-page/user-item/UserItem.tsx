@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProfileImage from '../../common/profile-image/ProfileImage';
 import AdminSettingButton from '../admin-setting-button/AdmingSettingButton';
 import DeleteButton from '../delete-button/DeleteButton';
 import { GRAY, LIGHT_GREEN } from '../../../constants/color';
@@ -17,6 +16,12 @@ const UserItemWrapper = styled.div<{ type: string | undefined }>`
   padding-top: 0.8rem;
   border-bottom: 1px solid ${GRAY};
   color: ${({ type }) => (type === 'admin' ? LIGHT_GREEN : 'black')};
+`;
+
+const ProfileImage = styled.img`
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
 `;
 
 const Cell = styled.div`
@@ -62,7 +67,7 @@ interface Props {
   userAccountbookId: number;
 }
 
-const UserItem = ({ email, nickname, profileUrl, type, userId, userAccountbookId, provider }: Props): JSX.Element => {
+const UserItem = ({ email, profileUrl, type, userId, userAccountbookId, provider }: Props): JSX.Element => {
   const accountbookId = useGetParam();
   const { socialStore, userStore } = useStore().rootStore;
   const isAdmin = userStore.isAdmin(accountbookId);
