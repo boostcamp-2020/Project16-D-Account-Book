@@ -51,8 +51,11 @@ const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
   const { show } = rootStore.modalStore.updateAccountFormStore;
 
   useEffect(() => {
-    accountStore.isLoading = true;
     accountStore.updateAccounts(accountbookId);
+    accountStore.isLoading = false;
+    return () => {
+      accountStore.isLoading = true;
+    };
   }, []);
 
   useEffect(() => {

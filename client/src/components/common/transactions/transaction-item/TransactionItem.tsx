@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import Category from '../../category/Category';
 import { numberWithCommas } from '../../../../utils/number';
@@ -32,10 +32,6 @@ const ContentItemWrapper = styled.div<{ isIncome?: boolean }>`
   &:nth-child(1) {
     width: 12%;
     justify-content: flex-start;
-    @media only screen and (max-width: 768px) {
-      width: 20%;
-      padding-left: 10px;
-    }
   }
   &:nth-child(2) {
     flex-direction: column;
@@ -117,4 +113,4 @@ const TransactionItem = ({ transaction }: TrasnsactionItemProps): JSX.Element =>
   );
 };
 
-export default TransactionItem;
+export default memo(TransactionItem);

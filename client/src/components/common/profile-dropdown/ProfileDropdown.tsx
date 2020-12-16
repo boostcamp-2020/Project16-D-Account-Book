@@ -45,6 +45,7 @@ const ProfileDropdown = (): JSX.Element => {
     if (responseStatus === 200) {
       userStore.deleteUser();
       window.location.href = '/login';
+      window.sessionStorage.clear();
     }
   };
 

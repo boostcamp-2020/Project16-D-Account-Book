@@ -59,7 +59,7 @@ export default class DateStore {
       });
     } catch (error) {
       if (error.response.data.message) {
-        alert(error.response.data.message);
+        this.rootStore.modalStore.alertStore.alert(error.response.data.message);
       }
     }
   };

@@ -17,6 +17,7 @@ import FormModalCreateTransaction from '../../components/common/modals/form-moda
 import FormModalUpdateTransaction from '../../components/common/modals/form-modal-transaction/FormModalUpdateTransaction';
 import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
 import socket, { event } from '../../socket';
+import { sortByRecentDate } from '../../utils/sortByRecentDate';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -65,7 +66,6 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
 
   const updateTransactions = () => {
     if (!query) {
-      transactionStore.isFilterMode = false;
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
       return;
     }
@@ -111,6 +111,24 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
     updateTransactions();
   }, [query, accountbookId]);
 
+  useEffect(() => {
+    window.addEventListener('scroll', infiniteScroll);
+    return () => window.removeEventListener('scroll', infiniteScroll);
+  }, []);
+
+  useEffect(() => {
+    transactionStore.items = 20;
+  }, [query, accountbookId, dateStore.startDate]);
+
+  const infiniteScroll = () => {
+    const scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+    const scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+    const clientHeight = document.documentElement.clientHeight;
+    if (scrollTop + clientHeight + 1 >= scrollHeight) {
+      transactionStore.items += 10;
+    }
+  };
+
   return (
     <>
       {filterFormStore.show && <FormModalFilter accountbookId={accountbookId} />}
@@ -144,7 +162,9 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
             <Amount text={'지출'} amount={totalExpenditure} />
           </AmountWrapper>
         </TransactionHeaderWrapper>
-        <AllTransactionContainer transactions={transactionStore.transactions} />
+        <AllTransactionContainer
+          transactions={sortByRecentDate(transactionStore.transactions).slice(0, transactionStore.items)}
+        />
       </ViewWrapper>
     </>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import Income, { isIncome } from '../../../../types/income';
 import Expenditure from '../../../../types/expenditure';
@@ -49,9 +49,24 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
   const month = new Date(transactions[0].date).getMonth() + 1;
   const date = new Date(transactions[0].date).getDate();
   const day = days[new Date(transactions[0].date).getDay()];
-  const totalAmount = transactions.reduce((sum, transaction) => {
+  let totalAmount = transactions.reduce((sum, transaction) => {
     return isIncome(transaction) ? sum + transaction.amount : sum - transaction.amount;
   }, 0);
+
+  for (let i = transactionStore.items; i < transactionStore.transactions.length; i++) {
+    if (
+      new Date(transactions[0].date).getMonth() == new Date(transactionStore.transactions[i].date).getMonth() &&
+      new Date(transactions[0].date).getDate() == new Date(transactionStore.transactions[i].date).getDate()
+    ) {
+      if (isIncome(transactionStore.transactions[i])) {
+        totalAmount += transactionStore.transactions[i].amount;
+      } else {
+        totalAmount -= transactionStore.transactions[i].amount;
+      }
+    } else {
+      break;
+    }
+  }
 
   return (
     <Container>
@@ -75,4 +90,4 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
   );
 };
 
-export default DayTransactionContainer;
+export default memo(DayTransactionContainer);

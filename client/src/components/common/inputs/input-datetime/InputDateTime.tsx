@@ -19,7 +19,14 @@ interface InputDateTimeProps {
 }
 
 const InputDateTime: React.FC<InputDateTimeProps> = ({ value, onChange }: InputDateTimeProps) => {
-  return <InputDateTimeWrapper value={value} onChange={onChange} />;
+  let currentDate;
+  if (value) {
+    const date = new Date(new Date(value as string).getTime() + 1000 * 60 * 60 * 9);
+    currentDate = date.toISOString().substring(0, date.toISOString().length - 1);
+  } else {
+    currentDate = value;
+  }
+  return <InputDateTimeWrapper value={currentDate} onChange={onChange} />;
 };
 
 export default InputDateTime;

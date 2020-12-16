@@ -1,4 +1,4 @@
-import { observable, makeObservable, runInAction, action, computed, flow } from 'mobx';
+import { observable, makeObservable, action, flow } from 'mobx';
 import Income, { IncomeRequest, isIncome } from '../types/income';
 import Expenditure, { ExpenditureRequest } from '../types/expenditure';
 import CsvTransaction from '../types/csvTransaction';
@@ -7,7 +7,6 @@ import RootStore from './RootStore';
 import { filtering } from '../utils/filter';
 import Query from '../types/query';
 import { CancellablePromise } from 'mobx/dist/api/flow';
-import { getFirstDateOfNextMonth, getFirstDateOfPreviousMonth } from '../utils/date';
 import socket, { event } from '../socket';
 import getSWRGenerator from '../utils/generator/getSWRGenerator';
 export default class TransactionStore {
@@ -19,6 +18,9 @@ export default class TransactionStore {
 
   @observable
   isLoading = true;
+
+  @observable
+  items = 20;
 
   @observable
   csvTransactions: Array<CsvTransaction> = [];

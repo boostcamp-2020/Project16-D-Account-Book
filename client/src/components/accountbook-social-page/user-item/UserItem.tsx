@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import AdminSettingButton from '../admin-setting-button/AdmingSettingButton';
+import AdminSettingButton from '../admin-setting-button/AdminSettingButton';
 import DeleteButton from '../delete-button/DeleteButton';
 import { GRAY, LIGHT_GREEN } from '../../../constants/color';
 import AddButton from '../add-button/AddButton';
@@ -70,24 +70,34 @@ interface Props {
 const UserItem = ({ email, profileUrl, type, userId, userAccountbookId, provider }: Props): JSX.Element => {
   const accountbookId = useGetParam();
   const { socialStore, userStore } = useStore().rootStore;
+  const { confirmStore } = useStore().rootStore.modalStore;
   const isAdmin = userStore.isAdmin(accountbookId);
 
   const onClickAdd = () => {
-    if (confirm(socialPage.ADD_CONFIRM_MESSAGE)) {
-      socialStore.addUser({ accountbookId, userId });
-    }
+    confirmStore.confirm({
+      text: socialPage.ADD_CONFIRM_MESSAGE,
+      callback: () => {
+        socialStore.addUser({ accountbookId, userId });
+      },
+    });
   };
 
   const onClickDelete = () => {
-    if (confirm(socialPage.DELETE_CONFIRM_MESSAGE)) {
-      socialStore.deleteUser({ accountbookId, userId });
-    }
+    confirmStore.confirm({
+      text: socialPage.DELETE_CONFIRM_MESSAGE,
+      callback: () => {
+        socialStore.deleteUser({ accountbookId, userId });
+      },
+    });
   };
 
   const onClickAdminSetting = () => {
-    if (confirm(socialPage.GIVE_ADMIN_CONFIRM_MESSAGE)) {
-      socialStore.giveAdmin(userAccountbookId, 1, accountbookId);
-    }
+    confirmStore.confirm({
+      text: [socialPage.GIVE_ADMIN_CONFIRM_MESSAGE1, socialPage.GIVE_ADMIN_CONFIRM_MESSAGE2],
+      callback: () => {
+        socialStore.giveAdmin(userAccountbookId, 1, accountbookId);
+      },
+    });
   };
 
   const firstButton = () => {

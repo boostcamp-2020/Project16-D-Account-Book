@@ -2,9 +2,7 @@ import Income, { isIncome } from '../types/income';
 import Expenditure from '../types/expenditure';
 import Query from '../types/query';
 import BoxChartValue from '../types/boxChartValue';
-import { transaction } from 'mobx';
 import { ICategoryValue } from '../types/category';
-import { memo } from 'react';
 
 export const filtering = (
   transactions: Array<Income | Expenditure>,
@@ -125,7 +123,7 @@ const getCategoryList = (
   return [memorized, totalValue];
 };
 
-const getTopOfFiveList = (
+const getTopOfEight = (
   categoryList: ICategoryValue[],
   totalValue: number,
 ): [topOfFive: BoxChartValue[], remain: BoxChartValue[]] => {
@@ -143,10 +141,10 @@ const getTopOfFiveList = (
     return 0;
   });
 
-  return [categoryListWithRatio.slice(0, 5), categoryListWithRatio.slice(5)];
+  return [categoryListWithRatio.slice(0, 8), categoryListWithRatio.slice(8)];
 };
 
-export function getTopFiveCategory(transactions: Array<Income | Expenditure>): BoxChartValue[] {
+export function getTopEightCategory(transactions: Array<Income | Expenditure>): BoxChartValue[] {
   const [memorized, totalValue] = getCategoryList(transactions);
   if (totalValue === 0) {
     return [];
@@ -154,10 +152,10 @@ export function getTopFiveCategory(transactions: Array<Income | Expenditure>): B
 
   const categoryList = Array.from(memorized).map(([name, value]) => value);
 
-  const [topOfFive, remain] = getTopOfFiveList(categoryList, totalValue);
+  const [topOfEight, remain] = getTopOfEight(categoryList, totalValue);
 
-  if (categoryList.length > 5) {
-    const endOfFive = topOfFive[4];
+  if (categoryList.length > 8) {
+    const endOfFive = topOfEight[4];
     endOfFive.title = '기타';
 
     remain.forEach((transaction) => {
@@ -167,7 +165,7 @@ export function getTopFiveCategory(transactions: Array<Income | Expenditure>): B
     endOfFive.ratio = (endOfFive.value * 100) / totalValue;
   }
 
-  topOfFive.sort(function (transactionPrev: BoxChartValue, transactionNext: BoxChartValue) {
+  topOfEight.sort(function (transactionPrev: BoxChartValue, transactionNext: BoxChartValue) {
     if (transactionPrev.ratio > transactionNext.ratio) {
       return -1;
     }
@@ -177,5 +175,5 @@ export function getTopFiveCategory(transactions: Array<Income | Expenditure>): B
     return 1;
   });
 
-  return topOfFive;
+  return topOfEight;
 }
