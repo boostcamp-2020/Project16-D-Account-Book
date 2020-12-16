@@ -22,7 +22,10 @@
 
 ## 배포 Link :exclamation:
 
-- [http://moa.r-e.kr/](http://moa.r-e.kr/)
+[http://moa.r-e.kr/](http://moa.r-e.kr/)
+> - Chrome을 사용해주세요.
+> 
+> - 현재 네이버 로그인은 서비스 검수 요청 중에 있습니다. 카카오 로그인을 사용해주세요.
 
 <br><br><br>
 
@@ -40,7 +43,7 @@
 > 선정 이유가 궁금하다면 [**여기**](https://www.notion.so/158a594255e243d396b841adeb329c35)로!
 
 <div align="center">
-  <img src="https://i.imgur.com/kdvp91a.png"/>
+  <img src="https://i.imgur.com/udWMf33.png"/>
 </div>
 <br><br><br>
 

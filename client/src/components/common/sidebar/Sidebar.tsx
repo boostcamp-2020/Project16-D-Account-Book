@@ -2,12 +2,12 @@ import React, { useState, memo, useEffect } from 'react';
 import styled from 'styled-components';
 import HomeButton from '../home-button/HomeButton';
 import HamburgerButton from '../hamburger-button/HamburgerButton';
-import PlusButton from '../plus-button/PlusButton';
 import SmallAccountbookItem from '../small-accountbook-item/SmallAccountbookItem';
 import { GRAY } from '../../../constants/color';
 import { useHistory } from 'react-router-dom';
 import useStore from '../../../hook/use-store/useStore';
 import { Link } from 'react-router-dom';
+
 interface SidebarWrapperProps {
   show: boolean;
 }
@@ -80,7 +80,6 @@ const Sidebar = (): JSX.Element => {
         <ChildrenWrapper>
           <HomeButton show={isOpen} onClick={() => history.push(`/`)} />
           {SmallAccountbooks}
-          <PlusButton show={isOpen} />
         </ChildrenWrapper>
       </SidebarWrapper>
     </div>
