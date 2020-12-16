@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { LIGHT_GRAY, GRAY, BLUE } from '../../../../constants/color';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import useGetParam from '../../../../hook/use-get-param/useGetParam';
 
 const SettingsSidebarBodyWrapper = styled.div`
@@ -23,36 +23,6 @@ const SettingsSidebarMenuItem = styled.div<SettingsSidebarMenuItemProps>`
     background-color: ${LIGHT_GRAY};
     border: 1px solid ${GRAY};
   }
-  text-decoration: none;
-  color: inherit;
-
-  &:visited {
-    text-decoration: none;
-  }
-
-  &:nth-child(1) {
-    color: ${({ currentpage }) => (currentpage == 'accountbook' ? BLUE : 'black')};
-    font-weight: ${({ currentpage }) => (currentpage == 'accountbook' ? 'bold' : 'normal')};
-  }
-  &:nth-child(2) {
-    color: ${({ currentpage }) => (currentpage == 'categories' ? BLUE : 'black')};
-    font-weight: ${({ currentpage }) => (currentpage == 'categories' ? 'bold' : 'normal')};
-  }
-  &:nth-child(3) {
-    color: ${({ currentpage }) => (currentpage == 'accounts' ? BLUE : 'black')};
-    font-weight: ${({ currentpage }) => (currentpage == 'accounts' ? 'bold' : 'normal')};
-  }
-  &:nth-child(4) {
-    color: ${({ currentpage }) => (currentpage == 'social' ? BLUE : 'black')};
-    font-weight: ${({ currentpage }) => (currentpage == 'social' ? 'bold' : 'normal')};
-  }
-  &:nth-child(5) {
-    color: ${({ currentpage }) => (currentpage == 'csv' ? BLUE : 'black')};
-    font-weight: ${({ currentpage }) => (currentpage == 'csv' ? 'bold' : 'normal')};
-  }
-`;
-
-const StyledLink = styled(Link)<SettingsSidebarMenuItemProps>`
   text-decoration: none;
   color: inherit;
 

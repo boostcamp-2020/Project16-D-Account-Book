@@ -45,6 +45,10 @@ const TitleWrapper = styled.div`
   padding-bottom: 10px;
 `;
 
+const Description = styled.div`
+  height: 25px;
+`;
+
 const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
   const { userStore } = useStore().rootStore;
   const {
@@ -81,7 +85,7 @@ const AccountbookCard = (accountbook: Accountbook): JSX.Element => {
         </ElementWrapper>
       </HeaderWrapper>
       <TitleWrapper>{accountbook.title}</TitleWrapper>
-      {accountbook.description}
+      <Description>{accountbook.description}</Description>
     </AccountbookWrapper>
   );
 };

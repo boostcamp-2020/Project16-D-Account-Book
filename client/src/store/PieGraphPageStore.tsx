@@ -6,7 +6,7 @@ import { action, makeObservable, observable, computed, flow } from 'mobx';
 import datePeriod, { datePeriodNumber } from '../constants/datePeriod';
 import transactionService from '../services/transaction';
 import PieChartValue from '../types/pieChartValue';
-import { getOnlyIncome, getTopFiveCategory, getOnlyExpenditure } from '../utils/filter';
+import { getOnlyIncome, getTopEightCategory, getOnlyExpenditure } from '../utils/filter';
 import BoxChartValue from '../types/boxChartValue';
 import { CancellablePromise } from 'mobx/dist/api/flow';
 import getSWRGenerator from '../utils/generator/getSWRGenerator';
@@ -46,9 +46,11 @@ export default class PieGraphPageStore {
   changeSelectedDate = (selectedType: string, accountbookId: number): void => {
     this.selectedDate = selectedType;
     const prevDate = this.getBeforeDateByPeriod(this.endDate, selectedType);
+    this.startDate = prevDate;
     this.dateChange(prevDate, this.endDate, accountbookId);
     if (selectedType === datePeriod.ALL) {
-      this.dateChange(new Date(0), new Date(), accountbookId);
+      this.startDate = new Date(0);
+      this.dateChange(this.startDate, this.endDate, accountbookId);
     }
   };
 
@@ -56,13 +58,16 @@ export default class PieGraphPageStore {
   moveToPrev = (accountbookId: number): void => {
     const endDate = this.startDate;
     const startDate = this.getBeforeDateByPeriod(endDate, this.selectedDate);
+    this.startDate = startDate;
+    this.endDate = endDate;
     this.dateChange(startDate, endDate, accountbookId);
   };
 
   @action
   moveToNext = (accountbookId: number): void => {
-    const nextDate = this.getNextDateByPeriod(this.endDate, this.selectedDate);
-    this.dateChange(this.endDate, nextDate, accountbookId);
+    this.startDate = this.endDate;
+    this.endDate = this.getNextDateByPeriod(this.endDate, this.selectedDate);
+    this.dateChange(this.startDate, this.endDate, accountbookId);
   };
 
   @action
@@ -89,8 +94,6 @@ export default class PieGraphPageStore {
   };
 
   _dateChange = flow(function* (this: PieGraphPageStore, startDate: Date, endDate: Date, accountbookId: number) {
-    this.startDate = startDate;
-    this.endDate = endDate;
     const beforeDate = this.getBeforeDateByPeriod(this.startDate, this.selectedDate);
     const afterDate = this.getNextDateByPeriod(this.endDate, this.selectedDate);
     const generation = getSWRGenerator(accountbookId, startDate, endDate, beforeDate, afterDate);
@@ -140,9 +143,9 @@ export default class PieGraphPageStore {
   get filteredDate(): string {
     return `${this.startDate.getFullYear()}년 ${
       this.startDate.getMonth() + 1
-    }월 ${this.startDate.getDate()}일 ~ ${this.endDate.getFullYear()}년 ${
-      this.endDate.getMonth() + 1
-    }월 ${this.endDate.getDate()}일`;
+    }월 ${this.startDate.getDate()}일 ~ ${this.endDate.getFullYear()}년 ${this.endDate.getMonth() + 1}월 ${
+      this.endDate.getDate() - 1
+    }일`;
   }
 
   @computed
@@ -151,7 +154,7 @@ export default class PieGraphPageStore {
       ? getOnlyIncome(this.transactions)
       : getOnlyExpenditure(this.transactions);
 
-    const topOfFive = getTopFiveCategory(targetTransactions);
+    const topOfFive = getTopEightCategory(targetTransactions);
     return topOfFive;
   }
 
@@ -161,13 +164,17 @@ export default class PieGraphPageStore {
       ? getOnlyIncome(this.transactions)
       : getOnlyExpenditure(this.transactions);
 
-    const topOfFive = getTopFiveCategory(targetTransactions);
+    const topOfFive = getTopEightCategory(targetTransactions);
     return topOfFive;
   }
 
   @computed
   get totalValue(): number {
-    return this.transactions.reduce((acc, curr) => {
+    const transactions: Array<Income | Expenditure> = this.incomeMode
+      ? getOnlyIncome(this.transactions)
+      : getOnlyExpenditure(this.transactions);
+
+    return transactions.reduce((acc, curr) => {
       return acc + curr.amount;
     }, 0);
   }

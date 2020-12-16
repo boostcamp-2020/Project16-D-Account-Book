@@ -61,7 +61,9 @@ const HeaderNavigation = ({ currentPage }: HeaderNavigationProps): JSX.Element =
         </Link>
       </NavigationItem>
       <NavigationItem currentPage={currentPage}>
-        <span className="text">달력</span>
+        <Link to={`/accountbooks/${id}/test`} className="text">
+          <span className="text">달력</span>
+        </Link>
       </NavigationItem>
       <NavigationItem currentPage={currentPage}>
         <Link to={`/accountbooks/${id}/statistics`} className="text">

@@ -11,6 +11,7 @@ const UserAuthorityGuardHOC = (HOC: React.ComponentType<any>): React.FC => {
     const accountbookId = useGetParam();
 
     useSocket();
+
     const flag = userStore.isUserAdmin(accountbookId);
 
     if (userStore.accountAuthorList === null) {

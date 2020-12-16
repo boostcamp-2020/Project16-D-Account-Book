@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Options } from '../../../../types/dropdownOptions';
 import SingleInputDropdown from '../../inputs/single-input-dropdown/SingleInputDropdown';
 import SelectPaymentMethod from '../../inputs/select-payment-method/SelectPaymentMethod';
 import MultiInputDropdownWithCheckBox from '../../inputs/multi-input-dropdown/MultiInputDropdownWithCheckBox';
 import { MODAL_WHITE } from '../../../../constants/color';
 import useStore from '../../../../hook/use-store/useStore';
-import { useObserver } from 'mobx-react';
+import { observer } from 'mobx-react';
 
 const ItemWrapper = styled.div`
   background-color: ${MODAL_WHITE};
@@ -36,7 +35,7 @@ const DateRange = styled.div`
 const FormModalFilter: React.FC = () => {
   const { filterFormStore } = useStore().rootStore.modalStore;
 
-  return useObserver(() => (
+  return (
     <ItemWrapper>
       <InputWrapper>
         <InputLabel>기간</InputLabel>
@@ -78,7 +77,7 @@ const FormModalFilter: React.FC = () => {
         />
       </InputWrapper>
     </ItemWrapper>
-  ));
+  );
 };
 
-export default FormModalFilter;
+export default observer(FormModalFilter);

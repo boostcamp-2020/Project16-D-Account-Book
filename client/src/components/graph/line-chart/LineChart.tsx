@@ -12,7 +12,6 @@ import {
   createXAxis,
   createYAxis,
   createDotPosition,
-  valueFitUnit,
 } from './lineChartUtils';
 
 interface IProps {
@@ -95,7 +94,7 @@ const LineChart: React.FC<IProps> = ({ transactions }: IProps) => {
       {xAxis.map((x, id) => {
         return <XAxisDraw key={id} y={calculateXAxisYPosition(id)} gap={chartGap} xEnd={viewX} />;
       })}
-      {yAxis.map((x, id) => {
+      {yAxis.map((x) => {
         return <LineChartText key={x.position} x={chartGap + x.position} y={viewY - chartGap / 2} value={x.date} />;
       })}
 

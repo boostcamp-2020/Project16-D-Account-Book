@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
 import useStore from '../../../hook/use-store/useStore';
 import { convertToAccountObj } from '../modals/formUtils';
 import { SingleAccount } from '../../../types/account';
+
 const AccountWrapper = styled.div<{ bgColor: string; textColor: string; shadow?: boolean; preview?: string }>`
   width: 17vw;
   height: 10vw;
@@ -48,4 +49,4 @@ const Account = (singleAccount: SingleAccount): JSX.Element => {
   );
 };
 
-export default Account;
+export default memo(Account);

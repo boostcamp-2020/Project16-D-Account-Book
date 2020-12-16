@@ -18,6 +18,7 @@ import CheckSuccessText from '../../check/check-text/CheckSuccessText';
 import CheckFailText from '../../check/check-text/CheckFailText';
 import CheckNoActionText from '../../check/check-text/CheckNoActionText';
 import CheckNoAction from '../../check/check-no-action/CheckNoAction';
+import { LIGHT_GREEN, FAIL_RED } from '../../../../constants/color';
 
 const FormModalUpdateCategory: React.FC = () => {
   const { rootStore } = useStore();
@@ -190,7 +191,40 @@ const FormModalUpdateCategory: React.FC = () => {
         </FormModalItem>
         <FormModalItem>
           <FormModalLabel>{formModal.CATEGORY_LABEL_NAME}</FormModalLabel>
-          <InputText maxLength={8} placeholder={formModal.CATEGORY_PLACEHOLDER} value={name} onChange={onChangeName} />
+          {check ? (
+            name && !noChange ? (
+              <InputText
+                maxLength={8}
+                placeholder={formModal.CATEGORY_PLACEHOLDER}
+                value={name}
+                onChange={onChangeName}
+                focusColor={LIGHT_GREEN}
+              />
+            ) : (
+              <InputText
+                maxLength={8}
+                placeholder={formModal.CATEGORY_PLACEHOLDER}
+                value={name}
+                onChange={onChangeName}
+              />
+            )
+          ) : !noChange ? (
+            <InputText
+              maxLength={8}
+              placeholder={formModal.CATEGORY_PLACEHOLDER}
+              value={name}
+              onChange={onChangeName}
+              focusColor={FAIL_RED}
+            />
+          ) : (
+            <InputText
+              maxLength={8}
+              placeholder={formModal.CATEGORY_PLACEHOLDER}
+              value={name}
+              onChange={onChangeName}
+            />
+          )}
+
           {check ? (
             name && !noChange ? (
               <CheckSuccess />

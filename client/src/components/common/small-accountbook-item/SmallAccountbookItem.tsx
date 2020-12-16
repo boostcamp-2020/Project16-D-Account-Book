@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
-import { LIGHT_GRAY } from '../../../constants/color';
 
 interface SmallAccountbookItemWrapperProps {
   bgColor: string;
@@ -20,7 +19,7 @@ const AccountbookDescription = styled.div<{ textColor: string }>`
   color: ${({ textColor }) => textColor};
   padding: 10px 14px;
   display: block;
-  font-size: 0.8em;
+  font-size: 0.7em;
 `;
 
 const AccountbookViewWrapper = styled.div<{ bgColor: string }>`
@@ -59,6 +58,7 @@ const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>
 
   .text {
     text-align: center;
+    font-size: 0.8em;
   }
 
   &:hover ${AccountbookViewWrapper} {
@@ -69,20 +69,27 @@ const SmallAccountbookItemWrapper = styled.div<SmallAccountbookItemWrapperProps>
 `;
 
 interface SmallAccountbookItemProps {
-  id: number;
+  title: string;
   bgColor: string;
+  description: string;
   show: boolean;
   onClick?: () => void;
 }
 
-const SmallAccountbookItem = ({ id, bgColor, show, onClick }: SmallAccountbookItemProps): JSX.Element => {
+const SmallAccountbookItem = ({
+  title,
+  bgColor,
+  description,
+  show,
+  onClick,
+}: SmallAccountbookItemProps): JSX.Element => {
   const textColor = getTextColor(bgColor);
   return (
     <SmallAccountbookItemWrapper bgColor={bgColor} textColor={textColor} show={show} onClick={onClick}>
-      <div className="text">{id}</div>
+      <div className="text">{title[0]}</div>
       <AccountbookViewWrapper bgColor={bgColor}>
-        <AccountbookName textColor={textColor}>가계부 {id}</AccountbookName>
-        <AccountbookDescription textColor={textColor}>가계부 {id}에 대한 설명입니다.</AccountbookDescription>
+        <AccountbookName textColor={textColor}>{title}</AccountbookName>
+        <AccountbookDescription textColor={textColor}>{description}</AccountbookDescription>
       </AccountbookViewWrapper>
     </SmallAccountbookItemWrapper>
   );

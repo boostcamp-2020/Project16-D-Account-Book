@@ -48,6 +48,33 @@ const getAccountbooksByUserId = async (userId) => {
   return accountbooks;
 };
 
+const getAccountbookByAccountbookId = async (userAccountbookId) => {
+  const accountbook = await db.userAccountbook.findOne({
+    where: {
+      id: userAccountbookId,
+    },
+    attributes: ['id', 'authority', 'description', 'color', 'accountbookId'],
+    include: [
+      {
+        model: db.accountbook,
+        attributes: ['title'],
+      },
+    ],
+    raw: true,
+  });
+  return accountbook;
+};
+
+const updateAccountbook = async (accountbookId, accountbookData) => {
+  await db.accountbook.update({ title: accountbookData.title }, { where: { id: accountbookId } });
+  await db.userAccountbook.update(
+    { color: accountbookData.color, description: accountbookData.description },
+    { where: { id: accountbookData.id } },
+  );
+  const updatedAccountbook = await getAccountbookByAccountbookId(accountbookData.id);
+  return updatedAccountbook;
+};
+
 const createAccountbook = async ({ userId, title, description, color }) => {
   const newAccountbook = await db.accountbook.create({
     title,
@@ -74,6 +101,7 @@ const deleteAccountbook = async (accountbookId, userId) => {
 module.exports = {
   getAccountbookById,
   getAccountbooksByUserId,
+  updateAccountbook,
   deleteAccountbook,
   createAccountbook,
 };

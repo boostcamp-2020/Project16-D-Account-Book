@@ -5,7 +5,6 @@ import HeaderNavigation from '../../components/common/header-navigation/HeaderNa
 import ChangeDateContainer from '../../components/common/change-date-container/ChangeDateContainer';
 import Amount from '../../components/common/amount/Amonut';
 import AllTransactionContainer from '../../components/common/transactions/all-transaction-container/AllTransactionContainer';
-import { smallAccountbookItems } from '../../__dummy-data__/components/smallAccountbookItem/dummyData';
 import MenuNavigation from '../../components/common/menu-navigation/MenuNavigation';
 import useStore from '../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
@@ -18,6 +17,7 @@ import FormModalCreateTransaction from '../../components/common/modals/form-moda
 import FormModalUpdateTransaction from '../../components/common/modals/form-modal-transaction/FormModalUpdateTransaction';
 import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
 import socket, { event } from '../../socket';
+import { sortByRecentDate } from '../../utils/sortByRecentDate';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -59,13 +59,12 @@ const calcTotalAmount = (transactions: Array<Income | Expenditure>): Array<numbe
 
 const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   const { rootStore } = useStore();
-  const { dateStore, transactionStore, modalStore } = rootStore;
+  const { dateStore, transactionStore, modalStore, accountStore, categoryStore } = rootStore;
   const { filterFormStore } = rootStore.modalStore;
   const { createTransactionFormStore, updateTransactionFormStore } = modalStore;
   const [totalIncome, totalExpenditure] = calcTotalAmount(transactionStore.transactions);
 
   const updateTransactions = () => {
-    transactionStore.accountbookId = accountbookId;
     if (!query) {
       transactionStore.isFilterMode = false;
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
@@ -89,8 +88,23 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
     socket.on(event.UPDATE_TRANSACTIONS, () => {
       updateTransactions();
     });
+    socket.on(event.UPDATE_ACCOUNTS, () => {
+      updateTransactions();
+      accountStore.updateAccounts(accountbookId);
+    });
+    socket.on(event.UPDATE_INCOME_CATEGORIES, () => {
+      updateTransactions();
+      categoryStore.updateIncomeCategories(accountbookId);
+    });
+    socket.on(event.UPDATE_EXPENDITURE_CATEGORIES, () => {
+      updateTransactions();
+      categoryStore.updateExpenditureCategories(accountbookId);
+    });
     return () => {
       socket.off(event.UPDATE_TRANSACTIONS);
+      socket.off(event.UPDATE_ACCOUNTS);
+      socket.off(event.UPDATE_INCOME_CATEGORIES);
+      socket.off(event.UPDATE_EXPENDITURE_CATEGORIES);
     };
   }, [accountbookId]);
 
@@ -98,12 +112,27 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
     updateTransactions();
   }, [query, accountbookId]);
 
+  useEffect(() => {
+    window.addEventListener('scroll', infiniteScroll);
+    return () => window.removeEventListener('scroll', infiniteScroll);
+  }, []);
+
+  const infiniteScroll = () => {
+    const scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+    const scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+    const clientHeight = document.documentElement.clientHeight;
+    if (scrollTop + clientHeight >= scrollHeight) {
+      transactionStore.prevItems = transactionStore.items;
+      transactionStore.items += 10;
+    }
+  };
+
   return (
     <>
       {filterFormStore.show && <FormModalFilter accountbookId={accountbookId} />}
       {createTransactionFormStore.show && <FormModalCreateTransaction />}
       {updateTransactionFormStore.show && <FormModalUpdateTransaction />}
-      <Sidebar smallAccountbooks={smallAccountbookItems} />
+      <Sidebar />
       <MenuNavigation />
       <HeaderNavigationRightTopWrapper>
         <HeaderNavigation currentPage={'transaction'} />
@@ -131,7 +160,9 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
             <Amount text={'지출'} amount={totalExpenditure} />
           </AmountWrapper>
         </TransactionHeaderWrapper>
-        <AllTransactionContainer transactions={transactionStore.transactions} />
+        <AllTransactionContainer
+          transactions={sortByRecentDate(transactionStore.transactions).slice(0, transactionStore.items)}
+        />
       </ViewWrapper>
     </>
   );

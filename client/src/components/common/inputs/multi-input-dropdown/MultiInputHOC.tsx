@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Options } from '../select/Select';
 import InputDropDown from '../input-drop-down/InputDropDown';
 import useMultiDropDown from '../../../../hook/use-drop-down/useMultiDropDown';
-import { useObserver } from 'mobx-react';
 
 interface Props {
   placeholder: string;

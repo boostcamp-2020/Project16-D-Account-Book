@@ -1,14 +1,12 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import styled from 'styled-components';
 import HomeButton from '../home-button/HomeButton';
 import HamburgerButton from '../hamburger-button/HamburgerButton';
-import PlusButton from '../plus-button/PlusButton';
 import SmallAccountbookItem from '../small-accountbook-item/SmallAccountbookItem';
 import { GRAY } from '../../../constants/color';
-
-interface SidebarProps {
-  smallAccountbooks: { id: number; color: string }[];
-}
+import { useHistory } from 'react-router-dom';
+import useStore from '../../../hook/use-store/useStore';
+import { Link } from 'react-router-dom';
 
 interface SidebarWrapperProps {
   show: boolean;
@@ -39,14 +37,39 @@ const HamburgerButtonWrapper = styled.div`
   z-index: 10;
 `;
 
-const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+
+  &:visited {
+    text-decoration: none;
+  }
+`;
+
+const Sidebar = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleButton = (): void => {
     setIsOpen(!isOpen);
   };
+  const history = useHistory();
 
-  const SmallAccountbooks = smallAccountbooks.map((item) => (
-    <SmallAccountbookItem key={item.id} id={item.id} bgColor={item.color} show={isOpen} />
+  const { rootStore } = useStore();
+  const { accountbookStore } = rootStore;
+
+  useEffect(() => {
+    accountbookStore.updateAccountbooks();
+  }, []);
+
+  const SmallAccountbooks = accountbookStore.accountbooks.map((item) => (
+    <StyledLink to={`/accountbooks/${item.accountbookId}`} key={item.id}>
+      <SmallAccountbookItem
+        key={item.id}
+        title={item.title}
+        bgColor={item.color}
+        description={item.description}
+        show={isOpen}
+      />
+    </StyledLink>
   ));
   return (
     <div>
@@ -55,9 +78,8 @@ const Sidebar = ({ smallAccountbooks }: SidebarProps): JSX.Element => {
       </HamburgerButtonWrapper>
       <SidebarWrapper show={isOpen}>
         <ChildrenWrapper>
-          <HomeButton show={isOpen} />
+          <HomeButton show={isOpen} onClick={() => history.push(`/`)} />
           {SmallAccountbooks}
-          <PlusButton show={isOpen} />
         </ChildrenWrapper>
       </SidebarWrapper>
     </div>
