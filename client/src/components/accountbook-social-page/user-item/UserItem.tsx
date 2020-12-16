@@ -27,18 +27,28 @@ const Cell = styled.div`
     margin-right: 1rem;
   }
   &:nth-child(2) {
+    padding-top: 0.4rem;
+
     width: 45%;
   }
   &:nth-child(3) {
+    padding-top: 0.4rem;
+
     width: 12%;
   }
   &:nth-child(4) {
+    padding-top: 0.4rem;
+
     width: 25%;
   }
   &:nth-child(5) {
+    padding-top: 0.4rem;
+
     width: 6%;
   }
   &:nth-child(6) {
+    padding-top: 0.4rem;
+
     width: 6%;
   }
 `;
