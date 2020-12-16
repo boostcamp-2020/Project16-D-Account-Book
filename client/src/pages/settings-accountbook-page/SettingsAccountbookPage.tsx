@@ -70,12 +70,8 @@ const SettingsAccountbookPage: React.FC = () => {
       setTitle((accountbookStore.accountbook as Accountbook).title);
       setDescription((accountbookStore.accountbook as Accountbook).description);
       setInputColor((accountbookStore.accountbook as Accountbook).color);
-      accountbookStore.isLoading = false;
     };
     loadAccountbooks();
-    return () => {
-      accountbookStore.isLoading = true;
-    };
   }, []);
 
   const onChange = (color: { hex: string }): void => {

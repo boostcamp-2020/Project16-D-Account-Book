@@ -42,12 +42,6 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
   const { transactionStore } = useStore().rootStore;
   const sameDateTransactions = calcSameDateTransactions(transactions);
 
-  useEffect(() => {
-    return () => {
-      transactionStore.isLoading = true;
-    };
-  }, []);
-
   if (transactionStore.isLoading) return <Spinner />;
   if (transactions.length == 0) return <NotFoundTransaction />;
 

@@ -68,6 +68,8 @@ export default class TransactionStore {
     if (cached.value !== undefined) {
       this.isLoading = false;
       this.transactions = cached.value;
+    } else {
+      this.isLoading = true;
     }
     const refreshedData = yield generation.next();
     this.isLoading = false;
