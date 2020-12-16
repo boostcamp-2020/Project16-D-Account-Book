@@ -32,7 +32,7 @@ const FormModalFilter = ({ accountbookId }: { accountbookId: number }): JSX.Elem
 
   return (
     <>
-      <ModalBackground show={true} closeModal={closeModal} position="absolute">
+      <ModalBackground show={true} closeModal={closeModal}>
         <FormModalWrapper>
           <FormModalHeader
             modalName={'필터'}
