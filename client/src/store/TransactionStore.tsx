@@ -205,4 +205,14 @@ export default class TransactionStore {
     this.deleteExpenditureById(expenditure.id);
     this.addNewTransaction(expenditure);
   };
+
+  @action
+  setItems = (items: number): void => {
+    this.items = items;
+  };
+
+  @action
+  setIsLoading = (isLoading: boolean): void => {
+    this.isLoading = isLoading;
+  };
 }

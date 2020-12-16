@@ -117,7 +117,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   }, []);
 
   useEffect(() => {
-    transactionStore.items = 20;
+    transactionStore.setItems(20);
   }, [query, accountbookId, dateStore.startDate]);
 
   const infiniteScroll = () => {
@@ -125,7 +125,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
     const scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
     const clientHeight = document.documentElement.clientHeight;
     if (scrollTop + clientHeight + 1 >= scrollHeight) {
-      transactionStore.items += 10;
+      transactionStore.setItems(transactionStore.items + 10);
     }
   };
 

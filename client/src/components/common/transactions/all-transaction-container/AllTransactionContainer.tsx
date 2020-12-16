@@ -53,7 +53,7 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
 
   useEffect(() => {
     return () => {
-      transactionStore.isLoading = true;
+      transactionStore.setIsLoading(true);
     };
   }, []);
 
