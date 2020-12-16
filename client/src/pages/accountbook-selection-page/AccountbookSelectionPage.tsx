@@ -29,7 +29,7 @@ const ViewWrapper = styled.div`
 
 const AccountbookSelectionPage: React.FC = () => {
   const { rootStore } = useStore();
-  const { accountbookStore, userStore } = rootStore;
+  const { accountbookStore } = rootStore;
   const {
     deleteAccountbookByAdminStore,
     deleteAccountbookByUserStore,

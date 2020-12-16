@@ -16,7 +16,7 @@ const transactionAPIAddress = {
   textParsing: '/api/transactions/text-parsing',
 };
 
-export const createGetTransactionQuery = (accountbook_id, start_date, end_date) => {
+export const createGetTransactionQuery = (accountbook_id: number, start_date: Date, end_date: Date): string => {
   const query = querystring.stringify({
     accountbook_id,
     start_date: getFormattedDate({ date: start_date, format: '.' }),

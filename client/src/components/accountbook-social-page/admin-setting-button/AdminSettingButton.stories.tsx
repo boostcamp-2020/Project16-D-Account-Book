@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminSettingButton from './AdmingSettingButton';
+import AdminSettingButton from './AdminSettingButton';
 import styled from 'styled-components';
 
 export default {

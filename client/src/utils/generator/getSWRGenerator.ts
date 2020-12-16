@@ -2,7 +2,7 @@ import transactionService from '../../services/transaction';
 import { Income } from '../../types/income';
 import { Expenditure } from '../../types/expenditure';
 import { getFirstDateOfNextMonth, getFirstDateOfPreviousMonth } from '../date';
-import accountbook from '../../services/accountbook';
+
 const getSWRGenerator = (
   accountbookId: number,
   startDate: Date,

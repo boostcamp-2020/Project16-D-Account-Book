@@ -8,7 +8,7 @@ export const getDateString = (date: string, time: string): string => {
   currentTime.setDate(day);
   currentTime.setHours(hour);
   currentTime.setMinutes(minute);
-  return currentTime.toISOString().replace(/Z/g, '');
+  return currentTime.toISOString();
 };
 
 const getMonthDay = (date: string): [month: number, day: number] => {

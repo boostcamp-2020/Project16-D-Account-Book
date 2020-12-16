@@ -51,21 +51,11 @@ interface Props {
   provider: string;
   email: string;
   profileUrl: string;
-  userId: number;
   type?: string;
-  userAccountbookId: number;
   onChange: () => void;
 }
 
-const UserItemWithRadio = ({
-  email,
-  profileUrl,
-  type,
-  userId,
-  userAccountbookId,
-  provider,
-  onChange,
-}: Props): JSX.Element => {
+const UserItemWithRadio = ({ email, profileUrl, type, provider, onChange }: Props): JSX.Element => {
   return (
     <UserItemWrapper type={type}>
       <Cell>

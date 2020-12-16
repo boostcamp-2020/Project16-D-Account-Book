@@ -25,8 +25,9 @@ const ModalBody = styled.div`
 `;
 
 const PreviewWrapper = styled.div`
+  margin: 0 auto;
   margin-top: 1rem;
-  width: 90%;
+  width: 80%;
 `;
 
 const Label = styled.div`
@@ -36,6 +37,7 @@ const Label = styled.div`
 `;
 
 const ContentWrapper = styled.div`
+  margin: 0 auto;
   margin-top: 1rem;
   width: 80%;
 `;

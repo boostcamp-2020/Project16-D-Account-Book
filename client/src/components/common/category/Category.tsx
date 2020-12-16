@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { getTextColor } from '../../../utils/color';
 import useStore from '../../../hook/use-store/useStore';
@@ -67,4 +67,4 @@ const Category = (singleCategory: SingleCategory): JSX.Element => {
   );
 };
 
-export default Category;
+export default memo(Category);
