@@ -26,6 +26,7 @@ export default class AccountbookStore {
   @action
   updateAccountbooks = async (): Promise<void> => {
     const accountbooks = await accountbookService.getAccountbooks();
+    this.isLoading = false;
     this.accountbooks = accountbooks;
   };
 
