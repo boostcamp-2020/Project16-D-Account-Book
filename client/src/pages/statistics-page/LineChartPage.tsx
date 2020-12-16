@@ -47,6 +47,7 @@ const LineChartPage: React.FC<ILineChartPage> = ({ changePage }: ILineChartPage)
   if (!lineChartStore.isLoaded) {
     return <Spinner />;
   }
+
   return (
     <PieGraphPageWrapper>
       <PieHeaderFilter>
