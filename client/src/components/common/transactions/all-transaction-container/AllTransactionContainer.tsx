@@ -7,7 +7,6 @@ import Spinner from '../../spinner/Spinner';
 import useStore from '../../../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
-
 interface Props {
   transactions: Array<Income | Expenditure>;
 }
