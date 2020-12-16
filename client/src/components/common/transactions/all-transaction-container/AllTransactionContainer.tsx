@@ -7,6 +7,7 @@ import Spinner from '../../spinner/Spinner';
 import useStore from '../../../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
+import { RED } from '../../../../constants/color';
 interface Props {
   transactions: Array<Income | Expenditure>;
 }
@@ -16,7 +17,7 @@ const Count = styled.div`
   margin-bottom: 5px;
   color: grey;
   .number {
-    color: red;
+    color: ${RED};
   }
 `;
 
@@ -62,7 +63,9 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
 
   return (
     <>
-      <Count>총 [ {transactionStore.transactions.length} ]개</Count>
+      <Count>
+        [총 <span className="number">{transactionStore.transactions.length}</span>개]
+      </Count>
       {sameDateTransactions.map((transactions) => {
         return (
           <div key={isIncome(transactions[0]) ? `income${transactions[0].id}` : `expenditure${transactions[0].id}`}>

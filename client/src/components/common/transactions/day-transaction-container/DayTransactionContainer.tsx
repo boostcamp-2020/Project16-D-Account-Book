@@ -6,7 +6,6 @@ import { numberWithCommas } from '../../../../utils/number';
 import { RED, BLUE, GRAY } from '../../../../constants/color';
 import TransactionItem from '../transaction-item/TransactionItem';
 import useStore from '../../../../hook/use-store/useStore';
-import { sortByRecentDate } from '../../../../utils/sortByRecentDate';
 
 const Container = styled.div`
   display: flex;
