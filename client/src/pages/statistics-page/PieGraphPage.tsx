@@ -14,6 +14,7 @@ import { text } from '../../constants/pieGraphPage';
 import color from '../../constants/color';
 import InputRadio from '../../components/common/inputs/input-radio/InputRadio';
 import { graphChangeChecker } from '../../types/inputRadio';
+import Spinner from '../../components/common/spinner/Spinner';
 
 export const PieGraphPageWrapper = styled.div`
   margin: 0 auto;
@@ -94,6 +95,11 @@ const PieGraphPage: React.FC<IPieGraphPage> = ({ changePage }: IPieGraphPage) =>
   const switchIncomeExpenditure = (): void => {
     pieGraphStore.switchIncomeMode();
   };
+
+  if (pieGraphStore.isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <PieGraphPageWrapper>
       <PieHeaderFilter>
