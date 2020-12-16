@@ -2,9 +2,7 @@ import Income, { isIncome } from '../types/income';
 import Expenditure from '../types/expenditure';
 import Query from '../types/query';
 import BoxChartValue from '../types/boxChartValue';
-import { transaction } from 'mobx';
 import { ICategoryValue } from '../types/category';
-import { memo } from 'react';
 
 export const filtering = (
   transactions: Array<Income | Expenditure>,

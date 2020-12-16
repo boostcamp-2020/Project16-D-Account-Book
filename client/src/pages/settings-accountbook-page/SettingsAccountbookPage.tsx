@@ -56,12 +56,11 @@ const SettingsAccountbookPage: React.FC = () => {
 
   const isAdmin = userStore.isAdmin(accountbookId);
 
-  const [inputColor, setInputColor] = useState<string>('');
+  const [inputColor, setInputColor] = useState<string>('#000000');
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
 
   useEffect(() => {
-    accountbookStore.isLoading = true;
     const loadAccountbooks = async () => {
       await accountbookStore.updateAccountbooks();
       const [accountbook] = accountbookStore.accountbooks.filter(
@@ -71,8 +70,12 @@ const SettingsAccountbookPage: React.FC = () => {
       setTitle((accountbookStore.accountbook as Accountbook).title);
       setDescription((accountbookStore.accountbook as Accountbook).description);
       setInputColor((accountbookStore.accountbook as Accountbook).color);
+      accountbookStore.isLoading = false;
     };
     loadAccountbooks();
+    return () => {
+      accountbookStore.isLoading = true;
+    };
   }, []);
 
   const onChange = (color: { hex: string }): void => {

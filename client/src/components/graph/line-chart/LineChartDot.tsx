@@ -27,7 +27,7 @@ const initialVibrate = (yWidth: number, gap: number) => keyframes`
 }
 `;
 
-const goToDefault = (yWidth: number, gap: number, y: number) => keyframes`
+const goToDefault = (yWidth: number, gap: number) => keyframes`
 0%{
   cy:${yWidth + gap};
 }
@@ -43,16 +43,10 @@ const Circle = styled.circle<ICircle>`
         return initialVibrate(props.width, props.gap);
       }}
       0.3s ease alternate 4,
-    ${(props) => goToDefault(props.width, props.gap, props.cy)} 0.5s ease 1.2s;
+    ${(props) => goToDefault(props.width, props.gap)} 0.5s ease 1.2s;
 `;
 
 const G = styled.g``;
-
-const Text = styled.text`
-  color: lightgray;
-  font-size: 0.6em;
-  font-weight: bold;
-`;
 
 const Foreign = styled.foreignObject`
   font-size: 0.6em;
@@ -74,7 +68,7 @@ const Foreign = styled.foreignObject`
     border-color: #555 transparent transparent transparent;
   }
 `;
-const LineChartDot: React.FC<ILineChartDot> = ({ x, y, date, value, yWidth, gap }: ILineChartDot) => {
+const LineChartDot: React.FC<ILineChartDot> = ({ x, y, value, yWidth, gap }: ILineChartDot) => {
   const [r, setR] = useState<number>(6);
   const [show, setShow] = useState<boolean>(false);
 

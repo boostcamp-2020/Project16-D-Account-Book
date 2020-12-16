@@ -10,7 +10,7 @@ const TextSmall = styled.p`
   margin: 0;
 `;
 
-const CategoryNoDependency: React.FC<SingleCategory> = ({ id = 1, name, color, shadow, onClick }: SingleCategory) => {
+const CategoryNoDependency: React.FC<SingleCategory> = ({ name, color, shadow, onClick }: SingleCategory) => {
   const textColor = getTextColor(color);
   return (
     <CategoryWrapper bgColor={color} textColor={textColor} shadow={shadow} onClick={onClick}>

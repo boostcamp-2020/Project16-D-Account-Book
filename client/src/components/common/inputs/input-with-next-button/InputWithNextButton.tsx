@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import InputText from '../input-text/InputText';
 import PrevButton from '../../back-button/PreviousButton';
 import NextButton from '../../next-button/NextButton';
 

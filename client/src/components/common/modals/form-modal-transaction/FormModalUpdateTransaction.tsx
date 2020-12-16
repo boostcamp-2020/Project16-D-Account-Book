@@ -37,7 +37,7 @@ const FormModalUpdateTransaction: React.FC = () => {
       items: accounts,
       selected: inputs.accounts,
     },
-    date: inputs.date.replace(/Z/g, ''),
+    date: inputs.date,
   };
   changes.classify = undefined;
 

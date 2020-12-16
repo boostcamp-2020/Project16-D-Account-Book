@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Options } from '../../../../types/dropdownOptions';
 import SingleInputDropdown from '../../inputs/single-input-dropdown/SingleInputDropdown';
 import SelectPaymentMethod from '../../inputs/select-payment-method/SelectPaymentMethod';
 import MultiInputDropdownWithCheckBox from '../../inputs/multi-input-dropdown/MultiInputDropdownWithCheckBox';
