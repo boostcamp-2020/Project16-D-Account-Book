@@ -14,6 +14,7 @@ import LineChart from '../../components/graph/line-chart/LineChart';
 import { text } from '../../constants/pieGraphPage';
 import color from '../../constants/color';
 import { numberWithCommas } from '../../utils/number';
+import Spinner from '../../components/common/spinner/Spinner';
 
 interface ILineChartPage {
   changePage: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -42,6 +43,10 @@ const LineChartPage: React.FC<ILineChartPage> = ({ changePage }: ILineChartPage)
   useEffect(() => {
     lineChartStore.loadTransactions(id);
   }, []);
+
+  if (!lineChartStore.isLoaded) {
+    return <Spinner />;
+  }
   return (
     <PieGraphPageWrapper>
       <PieHeaderFilter>
@@ -54,7 +59,7 @@ const LineChartPage: React.FC<ILineChartPage> = ({ changePage }: ILineChartPage)
         <NotFoundTransaction />
       ) : (
         <>
-          <LineChart transactions={lineChartStore.monthlyTransactions} />
+          {<LineChart transactions={lineChartStore.monthlyTransactions} />}
           <LineChartTotalValueWrapper>
             <LineChartTotalValue>
               {lineChartStore.incomeMode ? `${text.TOTAL_INCOME} : ` : `${text.TOTAL_EXPENDITURE} : `}

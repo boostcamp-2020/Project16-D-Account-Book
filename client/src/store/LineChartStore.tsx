@@ -18,6 +18,9 @@ export default class LineChartStore {
   incomeMode = false;
 
   @observable
+  isLoaded = false;
+
+  @observable
   currentDate: Date;
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
@@ -84,8 +87,12 @@ export default class LineChartStore {
     const { value: cachedValue } = yield generation.next();
     if (cachedValue !== undefined) {
       this.transactions = cachedValue;
+      this.isLoaded = true;
+    } else {
+      this.isLoaded = false;
     }
     const { value: refreshedValue } = yield generation.next();
+    this.isLoaded = true;
     this.transactions = refreshedValue;
   });
 
