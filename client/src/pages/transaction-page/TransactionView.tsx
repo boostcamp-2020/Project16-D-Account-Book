@@ -18,6 +18,7 @@ import FormModalUpdateTransaction from '../../components/common/modals/form-moda
 import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
 import socket, { event } from '../../socket';
 import { sortByRecentDate } from '../../utils/sortByRecentDate';
+import _ from 'lodash';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -121,11 +122,16 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   }, [query, accountbookId, dateStore.startDate]);
 
   const infiniteScroll = () => {
-    const scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
     const scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-    const clientHeight = document.documentElement.clientHeight;
-    if (scrollTop + clientHeight + 1 >= scrollHeight) {
-      transactionStore.items += 10;
+    if (scrollTop > transactionStore.lastScrollTop) {
+      // down scroll일 때만 렌더링 여부 검사
+      const scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+      const clientHeight = document.documentElement.clientHeight;
+      if (scrollTop + clientHeight + 1 >= scrollHeight) {
+        transactionStore.items += 10;
+      }
+      transactionStore.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      console.log(transactionStore.items);
     }
   };
 
