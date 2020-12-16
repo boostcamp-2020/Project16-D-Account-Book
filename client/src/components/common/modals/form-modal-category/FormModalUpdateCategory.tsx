@@ -19,7 +19,7 @@ import CheckFailText from '../../check/check-text/CheckFailText';
 import CheckNoActionText from '../../check/check-text/CheckNoActionText';
 import CheckNoAction from '../../check/check-no-action/CheckNoAction';
 import { LIGHT_GREEN, FAIL_RED } from '../../../../constants/color';
-import { nameCheckValidationHeader, nameCheckValidationMessage } from '../form-modal-account/FormModalUpdateAccount';
+import { nameCheckValidationHeader, nameCheckValidationMessage } from '../../../../utils/form/validation';
 
 const FormModalUpdateCategory: React.FC = () => {
   const { rootStore } = useStore();
