@@ -11,6 +11,8 @@ import Accountbook from '../../types/accountbook';
 import Spinner from '../../components/common/spinner/Spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import BlueButton from '../../components/common/buttons/BlueButton';
+import RedButton from '../../components/common/buttons/RedButton';
 
 const SettingsAccountbookPageWrapper = styled.div`
   font-family: 'Spoqa Han Sans';
@@ -21,7 +23,7 @@ const SettingsBody = styled.div`
   position: absolute;
   top: 0%;
   left: 25%;
-  padding: 50px 50px;
+  padding: 25px 50px;
 `;
 
 const PreviewWrapper = styled.div`
@@ -30,7 +32,7 @@ const PreviewWrapper = styled.div`
 
 const SettingsItemWrapper = styled.div`
   width: 30vw;
-  margin-top: 50px;
+  margin-top: 7vh;
 `;
 
 const Label = styled.div<{ color?: string }>`
@@ -45,11 +47,23 @@ interface ConfirmButtonProps {
 }
 
 const ConfirmButton = styled.p<ConfirmButtonProps>`
-  position: fixed;
-  top: 0%;
-  right: 5%;
+  position: absolute;
+  top: 5%;
+  right: -50%;
   cursor: pointer;
+  font-size: 1.3rem;
   color: ${DODGER_BLUE};
+`;
+
+export const ModalButtonList = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ButtonWrapper = styled.div`
+  width: 10vw;
+  margin-top: 7vh;
+  margin-right: 3vw;
 `;
 
 const SettingsAccountbookPage: React.FC = () => {
@@ -113,7 +127,11 @@ const SettingsAccountbookPage: React.FC = () => {
     };
   };
   const notify = () =>
-    toast('✅ㅤ가계부 설정이 변경되었습니다.', { position: toast.POSITION.BOTTOM_CENTER, hideProgressBar: true });
+    toast('✅ㅤ가계부 설정이 변경되었습니다.', {
+      position: toast.POSITION.BOTTOM_CENTER,
+      hideProgressBar: true,
+      autoClose: 2000,
+    });
 
   const updateAccountbook = (): void => {
     const accountbook = convertToAccountbook(title, inputColor, description, accountbookId);
@@ -129,7 +147,6 @@ const SettingsAccountbookPage: React.FC = () => {
         <Spinner />
       ) : (
         <SettingsBody>
-          <ConfirmButton onClick={updateAccountbook}>완료</ConfirmButton>
           <SettingsItemWrapper>
             <PreviewWrapper>
               <Preview title={title} description={description} color={inputColor} onChange={onChange} />
@@ -166,6 +183,14 @@ const SettingsAccountbookPage: React.FC = () => {
               onChange={onChangeDescription}
             />
           </SettingsItemWrapper>
+          <ModalButtonList>
+            <ButtonWrapper>
+              <RedButton>초기화</RedButton>
+            </ButtonWrapper>
+            <ButtonWrapper>
+              <BlueButton onClick={updateAccountbook}>변경</BlueButton>
+            </ButtonWrapper>
+          </ModalButtonList>
         </SettingsBody>
       )}
     </SettingsAccountbookPageWrapper>
