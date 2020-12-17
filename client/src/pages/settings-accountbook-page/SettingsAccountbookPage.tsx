@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BlueButton from '../../components/common/buttons/BlueButton';
 import RedButton from '../../components/common/buttons/RedButton';
+import account from '../../services/account';
 
 const SettingsAccountbookPageWrapper = styled.div`
   font-family: 'Spoqa Han Sans';
@@ -65,6 +66,7 @@ const SettingsAccountbookPage: React.FC = () => {
   const [inputColor, setInputColor] = useState<string>(accountColor);
   const [title, setTitle] = useState<string>(accountTitle);
   const [description, setDescription] = useState<string>(accountDescription);
+  const [colorCheck, setColorCheck] = useState(false);
 
   useEffect(() => {
     const setCurrentAccountbook = () => {
@@ -93,14 +95,29 @@ const SettingsAccountbookPage: React.FC = () => {
 
   const onChange = (color: { hex: string }): void => {
     setInputColor(color.hex);
+    if (inputColor.toLowerCase() === (accountbookStore.accountbook as Accountbook).color.toLowerCase()) {
+      setColorCheck(false);
+    } else {
+      setColorCheck(true);
+    }
   };
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
+    if ((accountbookStore.accountbook as Accountbook).title === e.target.value) {
+      accountbookStore.setNoChangeTrue();
+    } else {
+      accountbookStore.setNoChangeFalse();
+    }
   };
 
   const onChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDescription(e.target.value);
+    if ((accountbookStore.accountbook as Accountbook).description === e.target.value) {
+      accountbookStore.setNoChangeTrue();
+    } else {
+      accountbookStore.setNoChangeFalse();
+    }
   };
 
   const convertToAccountbook = (title, inputColor, description, accountbookId) => {
@@ -177,10 +194,22 @@ const SettingsAccountbookPage: React.FC = () => {
           </SettingsItemWrapper>
           <ModalButtonList>
             <ButtonWrapper>
-              <RedButton onClick={returnAccountbook}>초기화</RedButton>
+              {accountbookStore.noChange && !colorCheck ? (
+                <RedButton onClick={returnAccountbook} disabled={'none'}>
+                  초기화
+                </RedButton>
+              ) : (
+                <RedButton onClick={returnAccountbook}>초기화</RedButton>
+              )}
             </ButtonWrapper>
             <ButtonWrapper>
-              <BlueButton onClick={updateAccountbook}>변경</BlueButton>
+              {accountbookStore.noChange && !colorCheck ? (
+                <BlueButton onClick={updateAccountbook} disabled={'none'}>
+                  변경
+                </BlueButton>
+              ) : (
+                <BlueButton onClick={updateAccountbook}>변경</BlueButton>
+              )}
             </ButtonWrapper>
           </ModalButtonList>
         </SettingsBody>
