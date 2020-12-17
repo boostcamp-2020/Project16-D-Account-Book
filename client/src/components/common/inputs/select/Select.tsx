@@ -16,6 +16,7 @@ interface SelectProps {
   itemClick?: (value: string) => void;
   showDropDown?: boolean;
   targetRef?: React.RefObject<HTMLElement>;
+  upper?: boolean;
 }
 
 interface SelectWrapperProps {
@@ -49,11 +50,12 @@ const Select: React.FC<SelectProps> = ({
   itemClick,
   showDropDown,
   targetRef,
+  upper = false,
 }: SelectProps) => {
   return (
     <SelectWrapper ref={targetRef as any}>
       <SelectTitle onClick={headerClick}>{defaultValue}</SelectTitle>
-      {showDropDown && <SelectList options={options} onClick={itemClick} />}
+      {showDropDown && <SelectList options={options} onClick={itemClick} upper={upper} />}
     </SelectWrapper>
   );
 };

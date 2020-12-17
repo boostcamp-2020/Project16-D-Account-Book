@@ -89,6 +89,7 @@ const MultiInputDropdownWithCheckBox: React.FC<Props> = ({
           header={displayHeader}
           onChange={selectChange}
           multi={true}
+          upper={true}
         />
       </DropdownWrapper>
     </ComponentWrapper>
