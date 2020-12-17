@@ -101,4 +101,9 @@ export default class AccountStore {
 
     return data;
   }
+
+  @action
+  setIsLoading = (isLoading: boolean): void => {
+    this.isLoading = isLoading;
+  };
 }

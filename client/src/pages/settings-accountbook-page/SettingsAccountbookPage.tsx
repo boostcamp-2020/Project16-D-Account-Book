@@ -74,9 +74,11 @@ const SettingsAccountbookPage: React.FC = () => {
       setDescription((accountbookStore.accountbook as Accountbook).description);
       setInputColor((accountbookStore.accountbook as Accountbook).color);
     };
+
     const loadAccountbooks = async () => {
       await accountbookStore.updateAccountbooks();
       setCurrentAccountbook();
+      accountbookStore.setIsLoading(false);
     };
 
     if (accountbookStore.accountbooks.length === 0) {

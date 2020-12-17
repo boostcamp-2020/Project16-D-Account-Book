@@ -6,10 +6,20 @@ import NotFoundTransaction from '../../not-found-transaction/NotFoundTransaction
 import Spinner from '../../spinner/Spinner';
 import useStore from '../../../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
-
+import styled from 'styled-components';
+import { RED } from '../../../../constants/color';
 interface Props {
   transactions: Array<Income | Expenditure>;
 }
+
+const Count = styled.div`
+  padding-left: 4px;
+  margin-bottom: 5px;
+  color: grey;
+  .number {
+    color: ${RED};
+  }
+`;
 
 const calcSameDateTransactions = (transactions: Array<Income | Expenditure>): Array<Array<Income | Expenditure>> => {
   const sameDateTransactions = [] as Array<Array<Income | Expenditure>>;
@@ -47,6 +57,9 @@ const AllTransactionContainer = ({ transactions }: Props): JSX.Element => {
 
   return (
     <>
+      <Count>
+        [총 <span className="number">{transactionStore.transactions.length}</span>개]
+      </Count>
       {sameDateTransactions.map((transactions) => {
         return (
           <div key={isIncome(transactions[0]) ? `income${transactions[0].id}` : `expenditure${transactions[0].id}`}>

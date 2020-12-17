@@ -2,7 +2,7 @@ import { observable, action, makeObservable, computed } from 'mobx';
 import RootStore from '../RootStore';
 import { dateOptions } from '../../__dummy-data__/store/filterFormStore';
 import datePeriod from '../../constants/datePeriod';
-import { getFormattedDate } from '../../utils/date';
+import { getFormattedDate, getDatePeriod } from '../../utils/date';
 import Options from '../../types/dropdownOptions';
 import { ParsedQuery } from 'query-string';
 
@@ -121,37 +121,7 @@ export default class FilterFormStore {
     this.selectedExpenditureCategories = expenditureCategory.length === 0 ? [] : expenditureCategory.split(' ');
     this.startDate.date = new Date(startDate);
     this.endDate.date = new Date(endDate);
-    const period = this.getDatePeriod(new Date(startDate), new Date(endDate));
+    const period = getDatePeriod(new Date(startDate), new Date(endDate));
     this.onChangeDate(period);
-  };
-
-  getDatePeriod = (startDate: Date, endDate: Date): string => {
-    let tempDate = new Date(startDate);
-    const day = 1000 * 60 * 60 * 24;
-    if (tempDate.setFullYear(tempDate.getFullYear() + 1) + day < endDate.getTime()) {
-      return datePeriod.ALL;
-    }
-
-    tempDate = new Date(startDate);
-    if (tempDate.setMonth(tempDate.getMonth() + 6) + day < endDate.getTime()) {
-      return datePeriod.LAST_ONE_YEAR;
-    }
-
-    tempDate = new Date(startDate);
-    if (tempDate.setMonth(tempDate.getMonth() + 3) + day < endDate.getTime()) {
-      return datePeriod.LAST_SIX_MONTH;
-    }
-
-    tempDate = new Date(startDate);
-    if (tempDate.setMonth(tempDate.getMonth() + 1) + day < endDate.getTime()) {
-      return datePeriod.LAST_THREE_MONTH;
-    }
-
-    tempDate = new Date(startDate);
-    if (tempDate.setDate(tempDate.getDate() + 7) < endDate.getTime()) {
-      return datePeriod.LAST_ONE_MONTH;
-    }
-
-    return datePeriod.LAST_ONE_WEEK;
   };
 }

@@ -22,19 +22,24 @@ const Cell = styled.div`
   }
   &:nth-child(2) {
     width: 45%;
+    padding-top: 0.6rem;
   }
   &:nth-child(3) {
     width: 27%;
     text-align: center;
+    padding-top: 0.6rem;
   }
   &:nth-child(4) {
     width: 10%;
+    padding-top: 0.6rem;
   }
   &:nth-child(5) {
     width: 6%;
+    padding-top: 0.6rem;
   }
   &:nth-child(6) {
     width: 6%;
+    padding-top: 0.6rem;
   }
 `;
 

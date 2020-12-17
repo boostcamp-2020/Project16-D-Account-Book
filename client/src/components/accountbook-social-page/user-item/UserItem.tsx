@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProfileImage from '../../common/profile-image/ProfileImage';
 import AdminSettingButton from '../admin-setting-button/AdminSettingButton';
 import DeleteButton from '../delete-button/DeleteButton';
 import { GRAY, LIGHT_GREEN } from '../../../constants/color';
@@ -19,6 +18,12 @@ const UserItemWrapper = styled.div<{ type: string | undefined }>`
   color: ${({ type }) => (type === 'admin' ? LIGHT_GREEN : 'black')};
 `;
 
+const ProfileImage = styled.img`
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+`;
+
 const Cell = styled.div`
   width: 15%;
   justify-content: center;
@@ -27,18 +32,28 @@ const Cell = styled.div`
     margin-right: 1rem;
   }
   &:nth-child(2) {
+    padding-top: 0.4rem;
+
     width: 45%;
   }
   &:nth-child(3) {
+    padding-top: 0.4rem;
+
     width: 12%;
   }
   &:nth-child(4) {
+    padding-top: 0.4rem;
+
     width: 25%;
   }
   &:nth-child(5) {
+    padding-top: 0.4rem;
+
     width: 6%;
   }
   &:nth-child(6) {
+    padding-top: 0.4rem;
+
     width: 6%;
   }
 `;

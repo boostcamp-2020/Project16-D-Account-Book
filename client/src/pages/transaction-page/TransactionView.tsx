@@ -66,6 +66,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
 
   const updateTransactions = () => {
     if (!query) {
+      transactionStore.setIsFilterMode(false);
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
       return;
     }
@@ -117,15 +118,19 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   }, []);
 
   useEffect(() => {
-    transactionStore.items = 20;
+    transactionStore.setItems(20);
   }, [query, accountbookId, dateStore.startDate]);
 
   const infiniteScroll = () => {
-    const scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
     const scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-    const clientHeight = document.documentElement.clientHeight;
-    if (scrollTop + clientHeight + 1 >= scrollHeight) {
-      transactionStore.items += 10;
+    if (scrollTop > transactionStore.lastScrollTop) {
+      // down scroll일 때만 렌더링 여부 검사
+      const scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+      const clientHeight = document.documentElement.clientHeight;
+      if (scrollTop + clientHeight + 1 >= scrollHeight) {
+        transactionStore.items += 10;
+      }
+      transactionStore.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     }
   };
 

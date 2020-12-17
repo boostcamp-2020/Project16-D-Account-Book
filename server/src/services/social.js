@@ -1,5 +1,4 @@
 const db = require('@models');
-const accountbookService = require('@services/accountbook');
 const { decodeTokenForValidation } = require('@utils/jwt-utils');
 
 const findUsersByEmail = async (email) => {

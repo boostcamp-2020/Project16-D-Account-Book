@@ -67,6 +67,7 @@ export const IncomeExpenditureSwitch = styled.div`
   position: fixed;
   right: 5%;
   bottom: 5%;
+  cursor: pointer;
 `;
 
 interface IPieGraphPage {
