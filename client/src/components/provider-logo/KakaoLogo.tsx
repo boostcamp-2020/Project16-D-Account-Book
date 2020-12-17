@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import kakaoLogo from '../../assets/images/kakao-abbreviation.png';
 
 const StyledDiv = styled.div`
+  margin-right: 0.5rem;
   img {
     width: 1.3rem;
     height: 1.3rem;
