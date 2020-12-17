@@ -18,6 +18,7 @@ import FormModalUpdateTransaction from '../../components/common/modals/form-moda
 import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
 import socket, { event } from '../../socket';
 import { sortByRecentDate } from '../../utils/sortByRecentDate';
+import TopButton from '../../components/top-button/TopButton';
 
 const ViewWrapper = styled.div`
   width: 70%;
@@ -120,6 +121,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   useEffect(() => {
     transactionStore.setItems(20);
     transactionStore.setLastScrollTop(0);
+    transactionStore.setShowTopButtonFalse();
   }, [query, accountbookId, dateStore.startDate]);
 
   const infiniteScroll = () => {
@@ -132,6 +134,9 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
         transactionStore.items += 10;
       }
       transactionStore.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      if (document.documentElement.scrollTop > document.documentElement.clientHeight) {
+        transactionStore.setShowTopButtonTrue();
+      }
     }
   };
 
@@ -142,6 +147,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       {updateTransactionFormStore.show && <FormModalUpdateTransaction />}
       <Sidebar />
       <MenuNavigation />
+      {transactionStore.showTopButton ? <TopButton width={24} height={24} /> : null}
       <HeaderNavigationRightTopWrapper>
         <HeaderNavigation currentPage={'transaction'} />
       </HeaderNavigationRightTopWrapper>
