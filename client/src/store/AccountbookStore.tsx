@@ -18,6 +18,9 @@ export default class AccountbookStore {
   @observable
   isLoading = true;
 
+  @observable
+  noChange = true;
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeObservable(this);
@@ -68,5 +71,15 @@ export default class AccountbookStore {
   @action
   setIsLoading = (isLoading: boolean): void => {
     this.isLoading = isLoading;
+  };
+
+  @action
+  setNoChangeTrue = (): void => {
+    this.noChange = true;
+  };
+
+  @action
+  setNoChangeFalse = (): void => {
+    this.noChange = false;
   };
 }
