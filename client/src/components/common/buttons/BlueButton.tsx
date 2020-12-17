@@ -12,8 +12,8 @@ const Wrapper = styled.div`
   cursor: pointer;
 `;
 
-const RedButton: React.FC<ModalCommonButton> = ({ children, onClick }: ModalCommonButton) => {
+const BlueButton: React.FC<ModalCommonButton> = ({ children, onClick }: ModalCommonButton) => {
   return <Wrapper onClick={onClick}>{children}</Wrapper>;
 };
 
-export default RedButton;
+export default BlueButton;
