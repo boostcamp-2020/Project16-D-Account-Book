@@ -73,11 +73,18 @@ const createExpenditureCategory = async ({ accountbookId, name, color }) => {
 
 const updateIncomeCategory = async (incomeCategoryId, { name, color }) => {
   const currentCategory = await db.incomeCategory.findOne({ where: { id: incomeCategoryId } });
-  const duplicateCategory = await db.incomeCategory.findOne({
+  let duplicatedCategory = await db.incomeCategory.findOne({
     where: { accountbookId: currentCategory.toJSON().accountbookId, name },
   });
-  if (duplicateCategory && duplicateCategory.toJSON().color.toLowerCase() === color.toLowerCase()) {
-    throw new Error('이미 존재하는 카테고리 입니다.');
+
+  if (duplicatedCategory) {
+    duplicatedCategory = duplicatedCategory.toJSON();
+    if (duplicatedCategory.id === +incomeCategoryId && duplicatedCategory.color.toLowerCase() === color.toLowerCase()) {
+      throw new Error('이미 존재하는 결제수단입니다.');
+    }
+    if (duplicatedCategory.id !== +incomeCategoryId) {
+      throw new Error('이미 존재하는 결제수단입니다.');
+    }
   }
 
   await db.incomeCategory.update(
@@ -95,11 +102,21 @@ const updateIncomeCategory = async (incomeCategoryId, { name, color }) => {
 
 const updateExpenditureCategory = async (expenditureCategoryId, { name, color }) => {
   const currentCategory = await db.expenditureCategory.findOne({ where: { id: expenditureCategoryId } });
-  const duplicateCategory = await db.expenditureCategory.findOne({
+  let duplicatedCategory = await db.expenditureCategory.findOne({
     where: { accountbookId: currentCategory.toJSON().accountbookId, name },
   });
-  if (duplicateCategory && duplicateCategory.toJSON().color.toLowerCase() === color.toLowerCase()) {
-    throw new Error('이미 존재하는 카테고리 입니다.');
+
+  if (duplicatedCategory) {
+    duplicatedCategory = duplicatedCategory.toJSON();
+    if (
+      duplicatedCategory.id === +expenditureCategoryId &&
+      duplicatedCategory.color.toLowerCase() === color.toLowerCase()
+    ) {
+      throw new Error('이미 존재하는 결제수단입니다.');
+    }
+    if (duplicatedCategory.id !== +expenditureCategoryId) {
+      throw new Error('이미 존재하는 결제수단입니다.');
+    }
   }
 
   await db.expenditureCategory.update(
