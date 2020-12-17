@@ -23,7 +23,7 @@ interface CheckNameType {
   (First: React.ReactChild, Second: React.ReactChild, Third: React.ReactChild): React.ReactChild;
 }
 
-function formModalCheckNameMessage(check: boolean, name: string): CheckNameType {
+export function formModalCheckNameMessage(check: boolean, name: string): CheckNameType {
   return function nameTemplate(
     First: React.ReactChild,
     Second: React.ReactChild,

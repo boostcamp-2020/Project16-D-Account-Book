@@ -52,10 +52,6 @@ const SettingsAccountsView: React.FC<Props> = ({ accountbookId }: Props) => {
 
   useEffect(() => {
     accountStore.updateAccounts(accountbookId);
-    accountStore.setIsLoading(false);
-    return () => {
-      accountStore.setIsLoading(true);
-    };
   }, []);
 
   useEffect(() => {

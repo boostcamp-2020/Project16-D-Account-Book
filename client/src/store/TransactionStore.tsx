@@ -72,6 +72,8 @@ export default class TransactionStore {
     if (cached.value !== undefined) {
       this.isLoading = false;
       this.transactions = cached.value;
+    } else {
+      this.isLoading = true;
       this.sortedTransactions = sortByRecentDate(this.transactions.slice());
     }
     const refreshedData = yield generation.next();

@@ -62,10 +62,18 @@ const findOrCreateUser = async (oauthUser) => {
       profileUrl: oauthUser.profileUrl,
     },
   });
+
   if (!isNew) {
     if (ourServiceUser.profileUrl !== oauthUser.profileUrl) {
       await db.user.update({ profileUrl: oauthUser.profileUrl }, { where: { id: ourServiceUser.id } });
     }
+  } else {
+    await ourServiceUser.createUserAccountbook({
+      description: '데모 참가자들을 위한 테스트 가계부입니다',
+      color: '#1E90FF',
+      authority: 0,
+      accountbookId: 1,
+    });
   }
 
   const ourServiceUserInfo = {

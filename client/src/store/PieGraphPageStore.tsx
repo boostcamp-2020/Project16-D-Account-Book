@@ -29,6 +29,9 @@ export default class PieGraphPageStore {
   @observable
   endDate: Date;
 
+  @observable
+  isLoading = true;
+
   transactionDebounceTimer: undefined | number;
   latestFindTransactions: CancellablePromise<void> | undefined;
 
@@ -41,6 +44,16 @@ export default class PieGraphPageStore {
 
     makeObservable(this);
   }
+
+  @action
+  loaded = (): void => {
+    this.isLoading = false;
+  };
+
+  @action
+  loading = (): void => {
+    this.isLoading = true;
+  };
 
   @action
   changeSelectedDate = (selectedType: string, accountbookId: number): void => {
@@ -100,8 +113,11 @@ export default class PieGraphPageStore {
     const { value: cachedValue } = yield generation.next();
     if (cachedValue !== undefined) {
       this.transactions = cachedValue;
+      this.loaded();
     }
+
     const { value: refreshedValue } = yield generation.next();
+    this.loaded();
     this.transactions = refreshedValue;
   });
 
@@ -118,8 +134,11 @@ export default class PieGraphPageStore {
     const { value: cachedValue } = yield generation.next();
     if (cachedValue !== undefined) {
       this.transactions = cachedValue;
+      this.loaded();
     }
+
     const { value: refreshedValue } = yield generation.next();
+    this.loaded();
     this.transactions = refreshedValue;
   });
 
