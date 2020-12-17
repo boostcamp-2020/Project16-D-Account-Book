@@ -23,6 +23,9 @@ export default class TransactionStore {
   items = 20;
 
   @observable
+  lastScrollTop = 0;
+
+  @observable
   csvTransactions: Array<CsvTransaction> = [];
 
   rootStore: RootStore;
