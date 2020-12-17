@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import SettingsSidebar from '../../components/common/settings-sidebar/SettingsSidebar';
 import Preview from '../../components/common/preview/Preview';
 import InputText from '../../components/common/inputs/input-text/InputText';
-import { DODGER_BLUE } from '../../constants/color';
 import useStore from '../../hook/use-store/useStore';
 import useGetParam from '../../hook/use-get-param/useGetParam';
 import { observer } from 'mobx-react';
@@ -40,19 +39,6 @@ const Label = styled.div<{ color?: string }>`
   font-weight: bold;
   margin-bottom: 10px;
   color: ${({ color }) => color};
-`;
-
-interface ConfirmButtonProps {
-  onClick?: () => void;
-}
-
-const ConfirmButton = styled.p<ConfirmButtonProps>`
-  position: absolute;
-  top: 5%;
-  right: -50%;
-  cursor: pointer;
-  font-size: 1.3rem;
-  color: ${DODGER_BLUE};
 `;
 
 export const ModalButtonList = styled.div`
