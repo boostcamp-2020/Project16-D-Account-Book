@@ -19,6 +19,7 @@
     "react-input-color": "^3.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "react-toastify": "^6.2.0",
     "socket.io-client": "^3.0.4",
     "styled-components": "^5.2.1",
     "uuid": "^8.3.2",
