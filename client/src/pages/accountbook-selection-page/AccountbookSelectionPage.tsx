@@ -10,6 +10,8 @@ import AccountbookDeleteByAdminModal from '../../components/common/modals/accoun
 import FormModalCreateAccountbook from '../../components/common/modals/form-modal-accountbook/FormModalCreateAccountbook';
 import ProfileDropdown from '../../components/common/profile-dropdown/ProfileDropdown';
 import HeaderNavigationRightTopWrapper from '../../components/common/header-navigation/HeaderNavigationRightTop';
+import NaverLogo from '../../components/provider-logo/NaverLogo';
+import KakaoLogo from '../../components/provider-logo/KakaoLogo';
 
 const ViewWrapper = styled.div`
   font-family: 'Spoqa Han Sans';
@@ -58,6 +60,7 @@ const AccountbookSelectionPage: React.FC = () => {
     <>
       <HeaderNavigationRightTopWrapper>
         <HeaderWrapper>
+          {userStore.provider === 'naver' ? <NaverLogo /> : <KakaoLogo />}
           <EmailWrapper>{userStore.email}</EmailWrapper>
           <ProfileDropdown />
         </HeaderWrapper>
