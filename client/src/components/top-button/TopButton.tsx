@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import MenuBackground from '../common/menu-navigation/menu-background/MenuBackground';
+import useStore from '../../hook/use-store/useStore';
 
 export const SvgWrapper = styled.svg<{ width: number; height: number }>`
   position: relative;
@@ -24,7 +25,11 @@ interface Props {
 }
 
 const TopButton: React.FC<Props> = ({ width, height }: Props) => {
+  const { rootStore } = useStore();
+  const { transactionStore } = rootStore;
   const scrollToTop = () => {
+    transactionStore.setShowTopButtonFalse();
+    transactionStore.lastScrollTop = 0;
     window.scrollTo(0, 0);
   };
   return (
