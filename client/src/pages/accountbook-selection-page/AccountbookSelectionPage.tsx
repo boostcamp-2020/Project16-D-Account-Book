@@ -28,7 +28,9 @@ const ViewWrapper = styled.div`
 `;
 const HeaderWrapper = styled.div`
   display: flex;
+  align-items: center;
 `;
+
 const EmailWrapper = styled.div`
   margin-right: 1rem;
   font-family: 'Spoqa Han Sans';
