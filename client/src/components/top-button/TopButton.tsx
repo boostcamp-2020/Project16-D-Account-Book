@@ -12,8 +12,8 @@ const NavigationWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: fixed;
-  right: 5%;
-  bottom: 2%;
+  right: 90px;
+  bottom: 30px;
   width: 40px;
   height: 40px;
 `;
