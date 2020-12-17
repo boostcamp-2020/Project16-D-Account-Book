@@ -225,4 +225,9 @@ export default class TransactionStore {
   setIsFilterMode = (isFilterMode: boolean): void => {
     this.isFilterMode = isFilterMode;
   };
+
+  @action
+  setLastScrollTop = (lastScrollTop: number): void => {
+    this.lastScrollTop = lastScrollTop;
+  };
 }
