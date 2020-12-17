@@ -119,6 +119,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
 
   useEffect(() => {
     transactionStore.setItems(20);
+    transactionStore.setLastScrollTop(0);
   }, [query, accountbookId, dateStore.startDate]);
 
   const infiniteScroll = () => {
