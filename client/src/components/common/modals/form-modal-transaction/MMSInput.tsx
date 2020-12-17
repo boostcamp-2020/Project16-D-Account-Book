@@ -6,20 +6,31 @@ import { FormActionType, FormChangeAction } from '../../../../types/TransactionF
 import { getDateString, findAccountByName } from '../../../../utils/mms/mms';
 import transactionService from '../../../../services/transaction';
 import useStore from '../../../../hook/use-store/useStore';
+
 const SmallArea = styled.div`
+  box-sizing: content-box;
   width: 70%;
   margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const TextBox = styled.textarea`
+  box-sizing: content-box;
   width: 100%;
+  margin: -0.7rem;
+  padding: 0.7rem 0.7rem 0 0.7rem;
   height: 400px;
-  margin: 10px auto;
+  margin-bottom: 10px;
   resize: none;
   border: 1px solid lightgray;
+  font-family: 'Spoqa Han Sans';
 `;
 
 const ButtonLayout = styled.div`
+  box-sizing: content-box;
+  font-family: 'Spoqa Han Sans';
   width: 100%;
   display: flex;
   flex-direction: row;

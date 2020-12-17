@@ -18,6 +18,9 @@ export default class UserStore {
   @observable
   profileUrl: string;
 
+  @observable
+  email: string;
+
   //현재 선택한 가계부의 admin 인가?
   // true: 어드민, false: 일반유저, null: 가계부의 구성원이 아님
   @observable
@@ -29,6 +32,7 @@ export default class UserStore {
     this.provider = '';
     this.nickname = '';
     this.profileUrl = '';
+    this.email = '';
     this.accountAuthorList = null;
     this.rootStore = rootStore;
   }
@@ -39,6 +43,7 @@ export default class UserStore {
     this.provider = user.provider;
     this.nickname = user.nickname;
     this.profileUrl = user.profileUrl;
+    this.email = user.email;
     this.accountAuthorList = user.userAccountbooks;
   };
 

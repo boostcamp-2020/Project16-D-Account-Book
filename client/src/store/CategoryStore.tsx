@@ -45,6 +45,9 @@ export default class CategoryStore {
     const { value: cachedValue } = yield generator.next();
     if (cachedValue !== undefined) {
       this.changeIncomeCategories(cachedValue);
+      this.isLoading = false;
+    } else {
+      this.isLoading = true;
     }
     const { value: refreshedValue } = yield generator.next();
     this.changeIncomeCategories(refreshedValue);
@@ -56,6 +59,9 @@ export default class CategoryStore {
     const { value: cachedValue } = yield generator.next();
     if (cachedValue !== undefined) {
       this.changeExpenditureCategories(cachedValue);
+      this.isLoading = false;
+    } else {
+      this.isLoading = true;
     }
     const { value: refreshedValue } = yield generator.next();
     this.changeExpenditureCategories(refreshedValue);
@@ -185,4 +191,9 @@ export default class CategoryStore {
 
     return data;
   }
+
+  @action
+  setIsLoading = (isLoading: boolean): void => {
+    this.isLoading = isLoading;
+  };
 }

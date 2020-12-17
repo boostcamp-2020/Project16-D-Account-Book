@@ -1,8 +1,10 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const id = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const authority = [true, false, false, false, false, true, false, false, false, false];
+    const id = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    const authority = [true, false, false, false, false, false, false, true, false, false, false, false];
     const description = [
+      '테스트용 accountbook',
+      '테스트용 accountbook',
       '테스트용 accountbook',
       '테스트용 accountbook',
       '테스트용 accountbook',
@@ -25,11 +27,13 @@ module.exports = {
       '#1E90FF',
       '#1E90FF',
       '#1E90FF',
+      '#1E90FF',
+      '#1E90FF',
     ];
     // eslint-disable-next-line camelcase
-    const accountbook_id = [1, 1, 1, 1, 2, 2, 2, 2, 1, 1];
+    const accountbook_id = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2];
     // eslint-disable-next-line camelcase
-    const user_id = [1, 2, 3, 4, 1, 2, 3, 4, 5, 6];
+    const user_id = [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6];
     // eslint-disable-next-line camelcase
     const created_at = [
       '2020-11-02',
@@ -42,9 +46,9 @@ module.exports = {
       '2020-11-02',
       '2020-11-02',
       '2020-11-02',
+      '2020-11-02',
+      '2020-11-02',
     ];
-    // eslint-disable-next-line camelcase
-    const deleted_at = [null, null, null, null, null, null, null, null, null, null];
 
     const bulkData = id.map((item, index) => {
       return {
@@ -55,7 +59,7 @@ module.exports = {
         accountbook_id: accountbook_id[index],
         user_id: user_id[index],
         created_at: created_at[index],
-        deleted_at: deleted_at[index],
+        deleted_at: null,
         updated_at: created_at[index],
       };
     });

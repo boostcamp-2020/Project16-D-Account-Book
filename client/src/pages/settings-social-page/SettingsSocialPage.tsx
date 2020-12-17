@@ -31,8 +31,7 @@ const SettingsSocialPage: React.FC = () => {
   useEffect(() => {
     socialStore.findUsers(accountbookId);
     return () => {
-      socialStore.searchSuccess = null;
-      socialStore.isLoading = true;
+      socialStore.setSearchSuccess(null);
     };
   }, []);
 

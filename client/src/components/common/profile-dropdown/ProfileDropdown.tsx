@@ -30,6 +30,8 @@ const DropdownWrapper = styled.div`
 const ProfileDropdownWrapper = styled.div`
   position: relative;
   display: inline-block;
+  font-family: 'Spoqa Han Sans';
+  padding-top: 5px;
 
   &:hover ${DropdownWrapper} {
     display: block;
@@ -44,6 +46,7 @@ const ProfileDropdown = (): JSX.Element => {
     if (responseStatus === 200) {
       userStore.deleteUser();
       window.location.href = '/login';
+      window.sessionStorage.clear();
     }
   };
 

@@ -3,21 +3,21 @@ module.exports = {
     await queryInterface.bulkInsert('accountbook', [
       {
         id: 1,
-        title: 'accountbook1',
+        title: '데모용 가계부',
         created_at: '2020-11-23',
         updated_at: '2020-11-23',
         deleted_at: null,
       },
       {
         id: 2,
-        title: 'accountbook2',
+        title: '동아리',
         created_at: '2020-11-23',
         updated_at: '2020-11-23',
         deleted_at: null,
       },
       {
         id: 3,
-        title: 'accountbook3',
+        title: '데모용 가계부',
         created_at: '2020-11-23',
         updated_at: '2020-11-23',
         deleted_at: null,

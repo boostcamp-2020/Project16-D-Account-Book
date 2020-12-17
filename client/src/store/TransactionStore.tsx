@@ -9,9 +9,13 @@ import Query from '../types/query';
 import { CancellablePromise } from 'mobx/dist/api/flow';
 import socket, { event } from '../socket';
 import getSWRGenerator from '../utils/generator/getSWRGenerator';
+import { sortByRecentDate } from '../utils/sortByRecentDate';
 export default class TransactionStore {
   @observable
   transactions: Array<Income | Expenditure> = [];
+
+  @observable
+  sortedTransactions: Array<Income | Expenditure> = [];
 
   @observable
   isFilterMode = false;
@@ -20,10 +24,10 @@ export default class TransactionStore {
   isLoading = true;
 
   @observable
-  prevItems = 0;
+  items = 20;
 
   @observable
-  items = 20;
+  lastScrollTop = 0;
 
   @observable
   csvTransactions: Array<CsvTransaction> = [];
@@ -68,10 +72,14 @@ export default class TransactionStore {
     if (cached.value !== undefined) {
       this.isLoading = false;
       this.transactions = cached.value;
+    } else {
+      this.isLoading = true;
+      this.sortedTransactions = sortByRecentDate(this.transactions.slice());
     }
     const refreshedData = yield generation.next();
     this.isLoading = false;
     this.transactions = refreshedData.value;
+    this.sortedTransactions = sortByRecentDate(this.transactions.slice());
   });
 
   filterTransactions = flow(function* (
@@ -88,10 +96,12 @@ export default class TransactionStore {
     if (cached.value !== undefined) {
       this.isLoading = false;
       this.transactions = filtering(cached.value, { account, incomeCategory, expenditureCategory });
+      this.sortedTransactions = sortByRecentDate(this.transactions.slice());
     }
     const refreshedData = yield generation.next();
     this.isLoading = false;
     this.transactions = filtering(refreshedData.value, { account, incomeCategory, expenditureCategory });
+    this.sortedTransactions = sortByRecentDate(this.transactions.slice());
     this.isFilterMode = true;
   });
 
@@ -199,5 +209,25 @@ export default class TransactionStore {
   updateExpenditureTransaction = (expenditure: Expenditure): void => {
     this.deleteExpenditureById(expenditure.id);
     this.addNewTransaction(expenditure);
+  };
+
+  @action
+  setItems = (items: number): void => {
+    this.items = items;
+  };
+
+  @action
+  setIsLoading = (isLoading: boolean): void => {
+    this.isLoading = isLoading;
+  };
+
+  @action
+  setIsFilterMode = (isFilterMode: boolean): void => {
+    this.isFilterMode = isFilterMode;
+  };
+
+  @action
+  setLastScrollTop = (lastScrollTop: number): void => {
+    this.lastScrollTop = lastScrollTop;
   };
 }

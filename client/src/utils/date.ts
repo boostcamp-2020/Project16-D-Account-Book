@@ -1,3 +1,4 @@
+import datePeriod from '../constants/datePeriod';
 /*
 TODO :
 윤년인지 판단해주는 함수
@@ -91,4 +92,68 @@ export const getFormattedDate = ({ date, format }: { date: Date; format: string 
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}${format}${month}${format}${day}`;
+};
+
+export const getDatePeriod = (startDate: Date, endDate: Date): string => {
+  if (isAllPeriod(startDate, endDate)) {
+    return datePeriod.ALL;
+  }
+
+  if (isLastOneYear(startDate, endDate)) {
+    return datePeriod.LAST_ONE_YEAR;
+  }
+
+  if (isLastOneSixMonth(startDate, endDate)) {
+    return datePeriod.LAST_SIX_MONTH;
+  }
+
+  if (isLastThreeMonth(startDate, endDate)) {
+    return datePeriod.LAST_THREE_MONTH;
+  }
+
+  if (isLastOneMonth(startDate, endDate)) {
+    return datePeriod.LAST_ONE_MONTH;
+  }
+
+  return datePeriod.LAST_ONE_WEEK;
+};
+
+export const isAllPeriod = (startDate: Date, endDate: Date): boolean => {
+  const tempDate = new Date(startDate);
+  if (tempDate.setFullYear(tempDate.getFullYear() + 1) + 1000 * 60 * 60 * 24 < endDate.getTime()) {
+    return true;
+  }
+  return false;
+};
+
+export const isLastOneYear = (startDate: Date, endDate: Date): boolean => {
+  const tempDate = new Date(startDate);
+  if (tempDate.setMonth(tempDate.getMonth() + 6) + 1000 * 60 * 60 * 24 < endDate.getTime()) {
+    return true;
+  }
+  return false;
+};
+
+export const isLastOneSixMonth = (startDate: Date, endDate: Date): boolean => {
+  const tempDate = new Date(startDate);
+  if (tempDate.setMonth(tempDate.getMonth() + 3) + 1000 * 60 * 60 * 24 < endDate.getTime()) {
+    return true;
+  }
+  return false;
+};
+
+export const isLastThreeMonth = (startDate: Date, endDate: Date): boolean => {
+  const tempDate = new Date(startDate);
+  if (tempDate.setMonth(tempDate.getMonth() + 1) + 1000 * 60 * 60 * 24 < endDate.getTime()) {
+    return true;
+  }
+  return false;
+};
+
+export const isLastOneMonth = (startDate: Date, endDate: Date): boolean => {
+  const tempDate = new Date(startDate);
+  if (tempDate.setDate(tempDate.getDate() + 7) < endDate.getTime()) {
+    return true;
+  }
+  return false;
 };

@@ -54,10 +54,6 @@ const SettingsCategoriesView: React.FC<Props> = ({ accountbookId }: Props) => {
   useEffect(() => {
     categoryStore.updateIncomeCategories(accountbookId);
     categoryStore.updateExpenditureCategories(accountbookId);
-    categoryStore.isLoading = false;
-    return () => {
-      categoryStore.isLoading = true;
-    };
   }, []);
 
   useEffect(() => {

@@ -14,6 +14,7 @@ import { text } from '../../constants/pieGraphPage';
 import color from '../../constants/color';
 import InputRadio from '../../components/common/inputs/input-radio/InputRadio';
 import { graphChangeChecker } from '../../types/inputRadio';
+import Spinner from '../../components/common/spinner/Spinner';
 
 export const PieGraphPageWrapper = styled.div`
   margin: 0 auto;
@@ -66,6 +67,7 @@ export const IncomeExpenditureSwitch = styled.div`
   position: fixed;
   right: 5%;
   bottom: 5%;
+  cursor: pointer;
 `;
 
 interface IPieGraphPage {
@@ -94,6 +96,11 @@ const PieGraphPage: React.FC<IPieGraphPage> = ({ changePage }: IPieGraphPage) =>
   const switchIncomeExpenditure = (): void => {
     pieGraphStore.switchIncomeMode();
   };
+
+  if (pieGraphStore.isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <PieGraphPageWrapper>
       <PieHeaderFilter>
@@ -125,11 +132,11 @@ const PieGraphPage: React.FC<IPieGraphPage> = ({ changePage }: IPieGraphPage) =>
           </PieGraphWrapper>
           <BarChartWrapper>
             <BarChartHeaderWrapper>
-              <BarChartHeader>{pieGraphStore.incomeMode ? text.TOTAL_EXPENDITURE : text.TOTAL_INCOME}</BarChartHeader>
+              <BarChartHeader>{pieGraphStore.incomeMode ? text.TOTAL_INCOME : text.TOTAL_EXPENDITURE}</BarChartHeader>
               <BarChartHeader>
                 {pieGraphStore.incomeMode
-                  ? '-' + numberWithCommas(pieGraphStore.totalValue)
-                  : '+' + numberWithCommas(pieGraphStore.totalValue)}
+                  ? '+' + numberWithCommas(pieGraphStore.totalValue)
+                  : '-' + numberWithCommas(pieGraphStore.totalValue)}
               </BarChartHeader>
             </BarChartHeaderWrapper>
             <BarChartList>
@@ -144,7 +151,7 @@ const PieGraphPage: React.FC<IPieGraphPage> = ({ changePage }: IPieGraphPage) =>
         <CategoryNoDependency
           id={99}
           color={color.NAVER_GREEN}
-          name={pieGraphStore.incomeMode ? text.SHOW_INCOME : text.SHOW_EXPENDITURE}
+          name={pieGraphStore.incomeMode ? text.SHOW_EXPENDITURE : text.SHOW_INCOME}
           onClick={switchIncomeExpenditure}
         ></CategoryNoDependency>
       </IncomeExpenditureSwitch>

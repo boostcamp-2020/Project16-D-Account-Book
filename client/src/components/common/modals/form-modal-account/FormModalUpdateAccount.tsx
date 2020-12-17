@@ -19,6 +19,7 @@ import CheckFailText from '../../check/check-text/CheckFailText';
 import CheckNoActionText from '../../check/check-text/CheckNoActionText';
 import CheckNoAction from '../../check/check-no-action/CheckNoAction';
 import { LIGHT_GREEN, FAIL_RED } from '../../../../constants/color';
+import { nameCheckValidationHeader, nameCheckValidationMessage } from '../../../../utils/form/validation';
 
 const FormModalUpdateAccount: React.FC = () => {
   const { rootStore } = useStore();
@@ -85,6 +86,8 @@ const FormModalUpdateAccount: React.FC = () => {
     }
   };
 
+  const nameCheckChangeValidation = nameCheckValidationHeader(check, noChange, name, colorCheck);
+  const nameCheckMessage = nameCheckValidationMessage(check, name, noChange);
   if (
     updateAccountFormStore.convertAccount?.name !== undefined &&
     updateAccountFormStore.convertAccount?.color !== undefined
@@ -92,33 +95,22 @@ const FormModalUpdateAccount: React.FC = () => {
     return (
       <ModalBackground show={show} closeModal={modalToggle}>
         <FormModalWrapper>
-          {check || noChange ? (
-            (name && !noChange) || (name && colorCheck) ? (
-              <FormModalHeader
-                modalName={formModal.UPDATE_ACCOUNT_MODAL_NAME}
-                blueName={'완료'}
-                redName={'삭제'}
-                closeModal={modalToggle}
-                clickRed={deleteAccount}
-                clickBlue={updateAccount}
-              />
-            ) : (
-              <FormModalHeader
-                modalName={formModal.UPDATE_ACCOUNT_MODAL_NAME}
-                closeModal={modalToggle}
-                redName={'삭제'}
-                clickRed={deleteAccount}
-                disabledName={'완료'}
-              />
-            )
-          ) : (
+          {nameCheckChangeValidation(
+            <FormModalHeader
+              modalName={formModal.UPDATE_ACCOUNT_MODAL_NAME}
+              blueName={'완료'}
+              redName={'삭제'}
+              closeModal={modalToggle}
+              clickRed={deleteAccount}
+              clickBlue={updateAccount}
+            />,
             <FormModalHeader
               modalName={formModal.UPDATE_ACCOUNT_MODAL_NAME}
               closeModal={modalToggle}
               redName={'삭제'}
               clickRed={deleteAccount}
               disabledName={'완료'}
-            />
+            />,
           )}
 
           <FormModalItem>
@@ -126,62 +118,37 @@ const FormModalUpdateAccount: React.FC = () => {
           </FormModalItem>
           <FormModalItem>
             <FormModalLabel>{formModal.ACCOUNT_LABEL_NAME}</FormModalLabel>
-            {check ? (
-              name && !noChange ? (
-                <InputText
-                  maxLength={8}
-                  placeholder={formModal.ACCOUNT_PLACEHOLDER}
-                  value={name}
-                  onChange={onChangeName}
-                  focusColor={LIGHT_GREEN}
-                />
-              ) : (
-                <InputText
-                  maxLength={8}
-                  placeholder={formModal.ACCOUNT_PLACEHOLDER}
-                  value={name}
-                  onChange={onChangeName}
-                />
-              )
-            ) : !noChange ? (
+            {nameCheckMessage(
+              <InputText
+                maxLength={8}
+                placeholder={formModal.ACCOUNT_PLACEHOLDER}
+                value={name}
+                onChange={onChangeName}
+                focusColor={LIGHT_GREEN}
+              />,
               <InputText
                 maxLength={8}
                 placeholder={formModal.ACCOUNT_PLACEHOLDER}
                 value={name}
                 onChange={onChangeName}
                 focusColor={FAIL_RED}
-              />
-            ) : (
+              />,
               <InputText
                 maxLength={8}
                 placeholder={formModal.ACCOUNT_PLACEHOLDER}
                 value={name}
                 onChange={onChangeName}
-              />
+              />,
+              <InputText
+                maxLength={8}
+                placeholder={formModal.ACCOUNT_PLACEHOLDER}
+                value={name}
+                onChange={onChangeName}
+              />,
             )}
-            {check ? (
-              name && !noChange ? (
-                <CheckSuccess />
-              ) : (
-                <CheckNoAction />
-              )
-            ) : !noChange ? (
-              <CheckFail />
-            ) : (
-              <CheckNoAction />
-            )}
+            {nameCheckMessage(<CheckSuccess />, <CheckFail />, <CheckNoAction />, <CheckNoAction />)}
           </FormModalItem>
-          {check ? (
-            name && !noChange ? (
-              <CheckSuccessText />
-            ) : (
-              <CheckNoActionText />
-            )
-          ) : !noChange ? (
-            <CheckFailText />
-          ) : (
-            <CheckNoActionText />
-          )}
+          {nameCheckMessage(<CheckSuccessText />, <CheckFailText />, <CheckNoActionText />, <CheckNoActionText />)}
         </FormModalWrapper>
       </ModalBackground>
     );

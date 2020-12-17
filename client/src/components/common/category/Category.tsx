@@ -29,7 +29,7 @@ export const CategoryWrapper = styled.div<{
   overflow: hidden;
   text-overflow: ellipsis;
   pointer-events: ${({ preview }) => preview};
-
+  cursor: pointer;
   &:hover {
     box-shadow: ${({ shadow }) => (shadow === true ? '2px 3px 7px gray' : 0)};
   }

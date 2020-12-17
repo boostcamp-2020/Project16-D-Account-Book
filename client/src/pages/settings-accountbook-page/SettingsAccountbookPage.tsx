@@ -56,13 +56,16 @@ const SettingsAccountbookPage: React.FC = () => {
 
   const isAdmin = userStore.isAdmin(accountbookId);
 
-  const [inputColor, setInputColor] = useState<string>('#000000');
-  const [title, setTitle] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
+  const accountColor = accountbookStore.accountbook?.color || '#000000';
+  const accountTitle = accountbookStore.accountbook?.title || '';
+  const accountDescription = accountbookStore.accountbook?.description || '';
+
+  const [inputColor, setInputColor] = useState<string>(accountColor);
+  const [title, setTitle] = useState<string>(accountTitle);
+  const [description, setDescription] = useState<string>(accountDescription);
 
   useEffect(() => {
-    const loadAccountbooks = async () => {
-      await accountbookStore.updateAccountbooks();
+    const setCurrentAccountbook = () => {
       const [accountbook] = accountbookStore.accountbooks.filter(
         (accountbook) => accountbook.accountbookId === accountbookId,
       );
@@ -70,12 +73,20 @@ const SettingsAccountbookPage: React.FC = () => {
       setTitle((accountbookStore.accountbook as Accountbook).title);
       setDescription((accountbookStore.accountbook as Accountbook).description);
       setInputColor((accountbookStore.accountbook as Accountbook).color);
-      accountbookStore.isLoading = false;
     };
-    loadAccountbooks();
-    return () => {
-      accountbookStore.isLoading = true;
+
+    const loadAccountbooks = async () => {
+      await accountbookStore.updateAccountbooks();
+      setCurrentAccountbook();
+      accountbookStore.setIsLoading(false);
     };
+
+    if (accountbookStore.accountbooks.length === 0) {
+      loadAccountbooks();
+      return;
+    }
+
+    setCurrentAccountbook();
   }, []);
 
   const onChange = (color: { hex: string }): void => {

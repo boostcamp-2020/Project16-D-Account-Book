@@ -26,6 +26,7 @@ export default class AccountbookStore {
   @action
   updateAccountbooks = async (): Promise<void> => {
     const accountbooks = await accountbookService.getAccountbooks();
+    this.isLoading = false;
     this.accountbooks = accountbooks;
   };
 
@@ -62,5 +63,10 @@ export default class AccountbookStore {
       accountbookId: accountbook.accountbookId as number,
       authority: true,
     });
+  };
+
+  @action
+  setIsLoading = (isLoading: boolean): void => {
+    this.isLoading = isLoading;
   };
 }

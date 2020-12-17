@@ -18,6 +18,7 @@ import CheckSuccessText from '../../check/check-text/CheckSuccessText';
 import CheckFailText from '../../check/check-text/CheckFailText';
 import CheckNoAction from '../../check/check-no-action/CheckNoAction';
 import CheckNoActionText from '../../check/check-text/CheckNoActionText';
+import { formModalCheckNameMessage } from '../form-modal-account/FormModalCreateAccount';
 
 const FormModalCategory: React.FC = () => {
   const { rootStore } = useStore();
@@ -81,33 +82,22 @@ const FormModalCategory: React.FC = () => {
     }
   };
 
+  const checkAndName = formModalCheckNameMessage(check, name);
+
   return (
     <ModalBackground show={show} closeModal={modalToggle}>
       <FormModalWrapper>
-        {check ? (
-          name ? (
-            <FormModalHeader
-              modalName={
-                incomeFlag
-                  ? formModal.CREATE_INCOME_CATEGORY_MODAL_NAME
-                  : formModal.CREATE_EXPENDITURE_CATEGORY_MODAL_NAME
-              }
-              blueName={'생성'}
-              closeModal={modalToggle}
-              clickBlue={incomeFlag ? onCreateIncomeCategory : onCreateExpenditureCategory}
-            />
-          ) : (
-            <FormModalHeader
-              modalName={
-                incomeFlag
-                  ? formModal.CREATE_INCOME_CATEGORY_MODAL_NAME
-                  : formModal.CREATE_EXPENDITURE_CATEGORY_MODAL_NAME
-              }
-              closeModal={modalToggle}
-              disabledName={'생성'}
-            />
-          )
-        ) : (
+        {checkAndName(
+          <FormModalHeader
+            modalName={
+              incomeFlag
+                ? formModal.CREATE_INCOME_CATEGORY_MODAL_NAME
+                : formModal.CREATE_EXPENDITURE_CATEGORY_MODAL_NAME
+            }
+            blueName={'생성'}
+            closeModal={modalToggle}
+            clickBlue={incomeFlag ? onCreateIncomeCategory : onCreateExpenditureCategory}
+          />,
           <FormModalHeader
             modalName={
               incomeFlag
@@ -116,42 +106,48 @@ const FormModalCategory: React.FC = () => {
             }
             closeModal={modalToggle}
             disabledName={'생성'}
-          />
+          />,
+          <FormModalHeader
+            modalName={
+              incomeFlag
+                ? formModal.CREATE_INCOME_CATEGORY_MODAL_NAME
+                : formModal.CREATE_EXPENDITURE_CATEGORY_MODAL_NAME
+            }
+            closeModal={modalToggle}
+            disabledName={'생성'}
+          />,
         )}
+
         <FormModalItem>
           <CategoryPreview name={name} color={inputColor} onChange={onChange} />
         </FormModalItem>
         <FormModalItem>
           <FormModalLabel>{formModal.CATEGORY_LABEL_NAME}</FormModalLabel>
-          {check ? (
-            name ? (
-              <InputText
-                maxLength={8}
-                placeholder={formModal.CATEGORY_PLACEHOLDER}
-                value={name}
-                onChange={onChangeName}
-                focusColor={LIGHT_GREEN}
-              />
-            ) : (
-              <InputText
-                maxLength={8}
-                placeholder={formModal.CATEGORY_PLACEHOLDER}
-                value={name}
-                onChange={onChangeName}
-              />
-            )
-          ) : (
+          {checkAndName(
+            <InputText
+              maxLength={8}
+              placeholder={formModal.CATEGORY_PLACEHOLDER}
+              value={name}
+              onChange={onChangeName}
+              focusColor={LIGHT_GREEN}
+            />,
+            <InputText
+              maxLength={8}
+              placeholder={formModal.CATEGORY_PLACEHOLDER}
+              value={name}
+              onChange={onChangeName}
+            />,
             <InputText
               maxLength={8}
               placeholder={formModal.CATEGORY_PLACEHOLDER}
               value={name}
               onChange={onChangeName}
               focusColor={FAIL_RED}
-            />
+            />,
           )}
-          {check ? name ? <CheckSuccess /> : <CheckNoAction /> : <CheckFail />}
+          {checkAndName(<CheckSuccess />, <CheckNoAction />, <CheckFail />)}
         </FormModalItem>
-        {check ? name ? <CheckSuccessText /> : <CheckNoActionText /> : <CheckFailText />}
+        {checkAndName(<CheckSuccessText />, <CheckNoActionText />, <CheckFailText />)}
       </FormModalWrapper>
     </ModalBackground>
   );
