@@ -24,9 +24,12 @@ interface Props {
 }
 
 const TopButton: React.FC<Props> = ({ width, height }: Props) => {
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <NavigationWrapper>
-      <MenuBackground>
+      <MenuBackground onClick={scrollToTop}>
         <SvgWrapper width={width} height={height}>
           <svg version="1.1" id="Capa_1" viewBox="0 0 512 512">
             <g>
