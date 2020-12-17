@@ -44,7 +44,7 @@ const LineChartPage: React.FC<ILineChartPage> = ({ changePage }: ILineChartPage)
     lineChartStore.loadTransactions(id);
   }, []);
 
-  if (!lineChartStore.isLoaded) {
+  if (!lineChartStore.isLoading) {
     return <Spinner />;
   }
 

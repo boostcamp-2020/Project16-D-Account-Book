@@ -18,7 +18,7 @@ export default class LineChartStore {
   incomeMode = false;
 
   @observable
-  isLoaded = false;
+  isLoading = false;
 
   @observable
   currentDate: Date;
@@ -87,12 +87,12 @@ export default class LineChartStore {
     const { value: cachedValue } = yield generation.next();
     if (cachedValue !== undefined) {
       this.transactions = cachedValue;
-      this.isLoaded = true;
+      this.isLoading = true;
     } else {
-      this.isLoaded = false;
+      this.isLoading = false;
     }
     const { value: refreshedValue } = yield generation.next();
-    this.isLoaded = true;
+    this.isLoading = true;
     this.transactions = refreshedValue;
   });
 
