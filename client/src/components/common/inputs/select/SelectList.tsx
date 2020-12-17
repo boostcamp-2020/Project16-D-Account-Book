@@ -20,7 +20,7 @@ const ListUL = styled.ul<IListUL>`
   position: absolute;
   overflow-y: scroll;
   max-height: 250px;
-  transform: ${(props) => (props.upper ? 'translateY(-20px)' : 'translateY(20px)')};
+  transform: ${(props) => (props.upper ? 'translateY(-14px)' : 'translateY(14px)')};
   border: 1px solid lightgray;
   border-radius: 4px;
   box-sizing: border-box;
