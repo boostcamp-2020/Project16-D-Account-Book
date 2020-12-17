@@ -90,4 +90,14 @@ export default class DateStore {
       this.rootStore.userStore.changeAuthority(accountbookId, false);
     });
   };
+
+  @action
+  setSearchSuccess = (searchSuccess: boolean | null): void => {
+    this.searchSuccess = searchSuccess;
+  };
+
+  @action
+  setIsLoading = (isLoading: boolean): void => {
+    this.isLoading = isLoading;
+  };
 }

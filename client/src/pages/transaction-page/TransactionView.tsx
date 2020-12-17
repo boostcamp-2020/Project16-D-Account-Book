@@ -66,6 +66,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
 
   const updateTransactions = () => {
     if (!query) {
+      transactionStore.setIsFilterMode(false);
       transactionStore.findTransactions(accountbookId, dateStore.startDate, dateStore.endDate);
       return;
     }
@@ -117,7 +118,7 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   }, []);
 
   useEffect(() => {
-    transactionStore.items = 20;
+    transactionStore.setItems(20);
   }, [query, accountbookId, dateStore.startDate]);
 
   const infiniteScroll = () => {
@@ -130,7 +131,6 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
         transactionStore.items += 10;
       }
       transactionStore.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-      console.log(transactionStore.items);
     }
   };
 

@@ -53,16 +53,15 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
     return isIncome(transaction) ? sum + transaction.amount : sum - transaction.amount;
   }, 0);
 
+  // 스크롤 아래에 있는 보이지않는 내역 데이터들의 amount 계산
+  const AllTransactions = transactionStore.sortedTransactions.slice();
   for (let i = transactionStore.items; i < transactionStore.transactions.length; i++) {
-    if (
-      new Date(transactions[0].date).getMonth() == new Date(transactionStore.transactions[i].date).getMonth() &&
-      new Date(transactions[0].date).getDate() == new Date(transactionStore.transactions[i].date).getDate()
-    ) {
-      if (isIncome(transactionStore.transactions[i])) {
-        totalAmount += transactionStore.transactions[i].amount;
-      } else {
-        totalAmount -= transactionStore.transactions[i].amount;
-      }
+    const nextItem = AllTransactions[i];
+    const currentItemDate = new Date(transactions[0].date);
+    const nextItemDate = new Date(AllTransactions[i].date);
+
+    if (currentItemDate.getMonth() == nextItemDate.getMonth() && currentItemDate.getDate() == nextItemDate.getDate()) {
+      totalAmount = totalAmount + (isIncome(nextItem) ? nextItem.amount : -nextItem.amount);
     } else {
       break;
     }

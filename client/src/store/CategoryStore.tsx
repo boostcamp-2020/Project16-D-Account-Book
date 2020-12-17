@@ -185,4 +185,9 @@ export default class CategoryStore {
 
     return data;
   }
+
+  @action
+  setIsLoading = (isLoading: boolean): void => {
+    this.isLoading = isLoading;
+  };
 }
