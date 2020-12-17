@@ -135,10 +135,13 @@ const getTopOfEight = (
   });
 
   categoryListWithRatio.sort(function (a, b) {
-    if (a.value < b.value) {
+    if (a.value > b.value) {
       return -1;
     }
-    return 0;
+    if (a.value == b.value) {
+      return 0;
+    }
+    return 1;
   });
 
   return [categoryListWithRatio.slice(0, 8), categoryListWithRatio.slice(8)];
@@ -155,14 +158,14 @@ export function getTopEightCategory(transactions: Array<Income | Expenditure>): 
   const [topOfEight, remain] = getTopOfEight(categoryList, totalValue);
 
   if (categoryList.length > 8) {
-    const endOfFive = topOfEight[4];
-    endOfFive.title = '기타';
+    const endOEight = topOfEight[7];
+    endOEight.title = '기타';
 
     remain.forEach((transaction) => {
-      endOfFive.value += transaction.value;
+      endOEight.value += transaction.value;
     });
 
-    endOfFive.ratio = (endOfFive.value * 100) / totalValue;
+    endOEight.ratio = (endOEight.value * 100) / totalValue;
   }
 
   topOfEight.sort(function (transactionPrev: BoxChartValue, transactionNext: BoxChartValue) {
