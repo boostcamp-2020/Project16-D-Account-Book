@@ -55,7 +55,7 @@ const DayTransactionContainer = ({ transactions }: Props): JSX.Element => {
 
   // 스크롤 아래에 있는 보이지않는 내역 데이터들의 amount 계산
   const AllTransactions = transactionStore.sortedTransactions.slice();
-  for (let i = transactionStore.items; i < transactionStore.transactions.length; i++) {
+  for (let i = transactionStore.items; i < transactionStore.sortedTransactions.length; i++) {
     const nextItem = AllTransactions[i];
     const currentItemDate = new Date(transactions[0].date);
     const nextItemDate = new Date(AllTransactions[i].date);
