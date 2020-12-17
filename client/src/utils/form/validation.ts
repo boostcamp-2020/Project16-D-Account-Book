@@ -48,10 +48,6 @@ function normalPass(check, noChange, name, colorCheck) {
     return true;
   }
 
-  // if (name && colorCheck && noChange) {
-  //   return true;
-  // }
-
   if (!check) {
     return false;
   }
