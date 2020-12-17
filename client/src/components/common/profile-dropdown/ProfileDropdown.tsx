@@ -30,6 +30,7 @@ const DropdownWrapper = styled.div`
 const ProfileDropdownWrapper = styled.div`
   position: relative;
   display: inline-block;
+  padding-top: 5px;
 
   &:hover ${DropdownWrapper} {
     display: block;
