@@ -125,6 +125,12 @@ const SettingsAccountbookPage: React.FC = () => {
     notify();
   };
 
+  const returnAccountbook = (): void => {
+    setTitle((accountbookStore.accountbook as Accountbook).title);
+    setDescription((accountbookStore.accountbook as Accountbook).description);
+    setInputColor((accountbookStore.accountbook as Accountbook).color);
+  };
+
   return (
     <SettingsAccountbookPageWrapper>
       <ToastContainer pauseOnFocusLoss={false} />
@@ -171,7 +177,7 @@ const SettingsAccountbookPage: React.FC = () => {
           </SettingsItemWrapper>
           <ModalButtonList>
             <ButtonWrapper>
-              <RedButton>초기화</RedButton>
+              <RedButton onClick={returnAccountbook}>초기화</RedButton>
             </ButtonWrapper>
             <ButtonWrapper>
               <BlueButton onClick={updateAccountbook}>변경</BlueButton>
