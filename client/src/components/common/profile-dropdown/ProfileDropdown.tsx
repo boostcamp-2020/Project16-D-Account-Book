@@ -25,6 +25,7 @@ const DropdownWrapper = styled.div`
   min-width: 160px;
   box-shadow: 0px 4px 8px 0px;
   z-index: 1;
+  text-align: center;
 `;
 
 const ProfileDropdownWrapper = styled.div`
@@ -32,6 +33,7 @@ const ProfileDropdownWrapper = styled.div`
   display: inline-block;
   font-family: 'Spoqa Han Sans';
   padding-top: 5px;
+  /* font-size: 1rem !important; */
 
   &:hover ${DropdownWrapper} {
     display: block;
