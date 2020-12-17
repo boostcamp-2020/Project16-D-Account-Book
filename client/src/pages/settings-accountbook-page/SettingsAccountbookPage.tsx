@@ -140,6 +140,8 @@ const SettingsAccountbookPage: React.FC = () => {
     const accountbook = convertToAccountbook(title, inputColor, description, accountbookId);
     accountbookStore.updateAccountbook(accountbook);
     notify();
+    accountbookStore.setNoChangeTrue();
+    setColorCheck(false);
   };
 
   const returnAccountbook = (): void => {
