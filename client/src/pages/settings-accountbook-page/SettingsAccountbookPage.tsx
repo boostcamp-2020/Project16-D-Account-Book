@@ -9,6 +9,8 @@ import useGetParam from '../../hook/use-get-param/useGetParam';
 import { observer } from 'mobx-react';
 import Accountbook from '../../types/accountbook';
 import Spinner from '../../components/common/spinner/Spinner';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SettingsAccountbookPageWrapper = styled.div`
   font-family: 'Spoqa Han Sans';
@@ -110,14 +112,18 @@ const SettingsAccountbookPage: React.FC = () => {
       accountbookId,
     };
   };
+  const notify = () =>
+    toast('✅ㅤ가계부 설정이 변경되었습니다.', { position: toast.POSITION.BOTTOM_CENTER, hideProgressBar: true });
 
   const updateAccountbook = (): void => {
     const accountbook = convertToAccountbook(title, inputColor, description, accountbookId);
     accountbookStore.updateAccountbook(accountbook);
+    notify();
   };
 
   return (
     <SettingsAccountbookPageWrapper>
+      <ToastContainer />
       <SettingsSidebar currentpage={'accountbook'} />
       {accountbookStore.isLoading ? (
         <Spinner />
