@@ -123,7 +123,7 @@ const SettingsAccountbookPage: React.FC = () => {
 
   return (
     <SettingsAccountbookPageWrapper>
-      <ToastContainer />
+      <ToastContainer pauseOnFocusLoss={false} />
       <SettingsSidebar currentpage={'accountbook'} />
       {accountbookStore.isLoading ? (
         <Spinner />
