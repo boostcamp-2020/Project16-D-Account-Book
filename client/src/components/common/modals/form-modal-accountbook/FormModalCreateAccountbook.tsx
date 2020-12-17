@@ -16,6 +16,7 @@ const FormModalWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   min-height: 400px;
+  font-family: 'Spoqa Han Sans';
 `;
 
 const ModalBody = styled.div`

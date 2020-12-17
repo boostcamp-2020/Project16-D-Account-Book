@@ -27,7 +27,7 @@ const decodeTokenForValidation = async (token) => {
   });
   let user = await db.user.findOne({
     where: { id: decodedToken.userId },
-    attributes: ['id', 'provider', 'nickname', 'profileUrl', 'token'],
+    attributes: ['id', 'provider', 'nickname', 'profileUrl', 'token', 'email'],
     include: {
       model: db.userAccountbook,
       attributes: ['authority', 'accountbookId'],
