@@ -33,7 +33,7 @@ const ProfileDropdownWrapper = styled.div`
   display: inline-block;
   font-family: 'Spoqa Han Sans';
   padding-top: 5px;
-  /* font-size: 1rem !important; */
+  font-size: 1rem !important;
 
   &:hover ${DropdownWrapper} {
     display: block;
