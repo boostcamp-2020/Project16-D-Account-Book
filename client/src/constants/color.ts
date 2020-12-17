@@ -15,6 +15,7 @@ export const FAIL_RED = '#ff2111';
 export const ORANGE = '#F39807';
 export const MINT = '#1ABC9C';
 export const DISABLED_GRAY = '#E4E4E4';
+export const WHITE = '#FFFFFF';
 
 const color = {
   BLUE,
@@ -34,6 +35,7 @@ const color = {
   ORANGE,
   MINT,
   DISABLED_GRAY,
+  WHITE,
 };
 
 export default color;
