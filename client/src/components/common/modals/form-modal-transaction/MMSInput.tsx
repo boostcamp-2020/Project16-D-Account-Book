@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import color from '../../../../constants/color';
 import { InputListWrapper, InputWrapper } from './TransactionInputList';
 import { FormActionType, FormChangeAction } from '../../../../types/TransactionForm';
-import { getDateString, findAccountByName } from '../../../../utils/mms/mms';
+import { getDateString, findAccountByName, correctionCardName } from '../../../../utils/mms/mms';
 import transactionService from '../../../../services/transaction';
 import useStore from '../../../../hook/use-store/useStore';
 
@@ -91,6 +91,7 @@ const MMSInput: React.FC<IMMSInput> = ({ dispatch, MMSToggle }: IMMSInput) => {
         alert('처리할 수 없는 결제 내역입니다.');
         return;
       }
+      response.cardname = correctionCardName(response.cardname);
       const selectedCategory = findAccountByName(response.cardname, accountStore.accounts);
       if (selectedCategory === undefined) {
         alert('카드 이름을 찾을 수 없습니다. 직접 입력해주세요!');
