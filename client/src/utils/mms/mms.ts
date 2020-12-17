@@ -24,3 +24,12 @@ const getHourMinute = (time: string): [hour: number, minute: number] => {
 export const findAccountByName = (name: string, accounts: Account[]): Account | undefined => {
   return accounts.find((account) => account.name.startsWith(name));
 };
+
+export const correctionCardName = (cardName: string): string => {
+  if (['kb', 'KB'].includes(cardName)) {
+    return '국민';
+  } else if (['nh', 'NH'].includes(cardName)) {
+    return '농협';
+  }
+  return cardName;
+};
