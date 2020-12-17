@@ -13,8 +13,12 @@ const Wrapper = styled.div<{ disabled?: string }>`
   pointer-events: ${({ disabled }) => disabled};
 `;
 
-const RedButton: React.FC<ModalCommonButton> = ({ children, onClick }: ModalCommonButton) => {
-  return <Wrapper onClick={onClick}>{children}</Wrapper>;
+const RedButton: React.FC<ModalCommonButton> = ({ children, onClick, disabled }: ModalCommonButton) => {
+  return (
+    <Wrapper onClick={onClick} disabled={disabled}>
+      {children}
+    </Wrapper>
+  );
 };
 
 export default RedButton;
