@@ -42,6 +42,14 @@ export const MultiInputDropDownDefault: React.FC = () => {
   );
 };
 
+export const MultiInputDropDownDefaultUpper: React.FC = () => {
+  return (
+    <SmallDiv style={{ position: 'absolute', top: '50%' }}>
+      <MultiInputDropDown placeholder={'multi'} items={dummyOptions} />
+    </SmallDiv>
+  );
+};
+
 export const MultiInputDropdownWithCheckBoxDefault: React.FC = () => {
   return (
     <SmallDiv>
