@@ -95,6 +95,9 @@ const SettingsAccountbookPage: React.FC = () => {
 
   const onChange = (color: { hex: string }): void => {
     setInputColor(color.hex);
+    if (accountbookStore.accountbook === undefined) {
+      return;
+    }
     if (inputColor.toLowerCase() === (accountbookStore.accountbook as Accountbook).color.toLowerCase()) {
       setColorCheck(false);
     } else {
