@@ -6,6 +6,8 @@ import { getOnlyIncome, getOnlyExpenditure } from '../utils/filter';
 import ITransaction from '../types/lineChartValue';
 import { CancellablePromise } from 'mobx/dist/api/flow';
 import getSWRGenerator from '../utils/generator/getSWRGenerator';
+import { getFirstDateOfNextMonth, getFirstDateOfPreviousMonth } from '../utils/date';
+
 type IncomeExpenditure = Income | Expenditure;
 
 export default class LineChartStore {
@@ -34,19 +36,13 @@ export default class LineChartStore {
 
   @action
   nextMonth = (accountbookId: number): void => {
-    const newDate = new Date();
-    newDate.setDate(1);
-    newDate.setMonth(this.currentDate.getMonth() + 1);
-    this.currentDate = newDate;
+    this.currentDate = getFirstDateOfNextMonth(this.currentDate);
     this.getTransactions(accountbookId);
   };
 
   @action
   prevMonth = (accountbookId: number): void => {
-    const newDate = new Date();
-    newDate.setDate(1);
-    newDate.setMonth(this.currentDate.getMonth() - 1);
-    this.currentDate = newDate;
+    this.currentDate = getFirstDateOfPreviousMonth(this.currentDate);
     this.getTransactions(accountbookId);
   };
 

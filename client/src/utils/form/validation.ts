@@ -44,7 +44,7 @@ function nothingChange(check: boolean, name: string, noChange: boolean): boolean
 }
 
 function normalPass(check, noChange, name, colorCheck) {
-  if (colorCheck) {
+  if (colorCheck && name && noChange) {
     return true;
   }
 
