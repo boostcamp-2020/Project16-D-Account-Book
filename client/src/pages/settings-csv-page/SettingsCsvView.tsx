@@ -8,6 +8,7 @@ import Expenditure from '../../types/expenditure';
 import Income from '../../types/income';
 import { toJS } from 'mobx';
 import { csvHeaders, fileName } from '../../constants/csv';
+import { getFormattedDateForCSV } from '../../utils/date';
 
 interface Props {
   accountbookId: number;
@@ -50,14 +51,14 @@ const SettingsCsvView: React.FC<Props> = ({ accountbookId }: Props) => {
           return {
             amount: -item.amount,
             account: (item as Expenditure).place,
-            date: new Date(item.date as string),
+            date: getFormattedDateForCSV(new Date(item.date as string)),
             memo: item.memo,
           };
         } else {
           return {
             amount: item.amount,
             account: (item as Income).content,
-            date: new Date(item.date as string),
+            date: getFormattedDateForCSV(new Date(item.date as string)),
             memo: item.memo,
           };
         }

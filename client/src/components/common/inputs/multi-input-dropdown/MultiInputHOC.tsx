@@ -14,7 +14,7 @@ interface createPlaceHolder {
   (set: Set<string>, items: Options[]): string;
 }
 
-export default function MultiInputDropDownHOC(createPlaceName: createPlaceHolder): React.FC<Props> {
+export default function MultiInputDropDownHOC(createPlaceName: createPlaceHolder, upper = false): React.FC<Props> {
   const MultiInputDropDown: React.FC<Props> = ({ placeholder, items, onChange, defaultValue }: Props) => {
     const [selected, setSelected, selectChange] = useMultiDropDown(onChange, defaultValue);
 
@@ -32,6 +32,7 @@ export default function MultiInputDropDownHOC(createPlaceName: createPlaceHolder
         header={displayHeader}
         onChange={selectChange}
         multi={true}
+        upper={upper}
       />
     );
   };

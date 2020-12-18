@@ -8,6 +8,8 @@ import useGetParam from '../../../hook/use-get-param/useGetParam';
 import useStore from '../../../hook/use-store/useStore';
 import { observer } from 'mobx-react';
 import socialPage from '../../../constants/socialPage';
+import KakaoLogo from '../../provider-logo/KakaoLogo';
+import NaverLogo from '../../provider-logo/NaverLogo';
 
 const UserItemWrapper = styled.div<{ type: string | undefined }>`
   display: flex;
@@ -133,7 +135,7 @@ const UserItem = ({ email, profileUrl, type, userId, userAccountbookId, provider
         <ProfileImage src={profileUrl} />
       </Cell>
       <Cell>{email}</Cell>
-      <Cell>{provider}</Cell>
+      <Cell>{provider === 'naver' ? <NaverLogo /> : <KakaoLogo />}</Cell>
       <Cell />
       <Cell>
         <ButtonWrapper>{firstButton()}</ButtonWrapper>

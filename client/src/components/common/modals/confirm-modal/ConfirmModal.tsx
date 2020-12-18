@@ -19,6 +19,7 @@ export const ModalContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  font-family: 'Spoqa Han Sans';
   .textbox {
     display: flex;
     flex-direction: column;

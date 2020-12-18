@@ -10,6 +10,7 @@ interface InputDropDownProps {
   selectValue?: string[] | undefined | string;
   onChange?: (value: string) => void;
   multi?: boolean;
+  upper?: boolean;
 }
 
 const InputDropDown: React.FC<InputDropDownProps> = ({
@@ -18,6 +19,7 @@ const InputDropDown: React.FC<InputDropDownProps> = ({
   selectValue,
   onChange,
   multi = false,
+  upper = false,
 }: InputDropDownProps) => {
   const [show, setShow] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -48,6 +50,7 @@ const InputDropDown: React.FC<InputDropDownProps> = ({
       itemClick={clickItem}
       headerClick={clickHeader}
       targetRef={ref}
+      upper={upper}
     />
   );
 };

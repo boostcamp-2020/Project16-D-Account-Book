@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import DayTransactionContainer from '../day-transaction-container/DayTransactionContainer';
 import Income, { isIncome } from '../../../../types/income';
 import Expenditure from '../../../../types/expenditure';
