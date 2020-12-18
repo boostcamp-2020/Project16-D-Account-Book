@@ -121,9 +121,17 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
   useEffect(() => {
     transactionStore.setItems(20);
     transactionStore.setLastScrollTop(0);
-    transactionStore.setShowTopButtonFalse();
+    if (document.documentElement.scrollTop <= document.documentElement.clientHeight) {
+      transactionStore.setShowTopButtonFalse();
+    }
+    console.log(transactionStore.showTopButton);
   }, [query, accountbookId, dateStore.startDate]);
 
+  useEffect(() => {
+    transactionStore.setShowTopButtonFalse();
+    transactionStore.lastScrollTop = 0;
+    window.scrollTo(0, 0);
+  }, [query]);
   const infiniteScroll = () => {
     const scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
     if (scrollTop > transactionStore.lastScrollTop) {
@@ -137,6 +145,9 @@ const TransactionView: React.FC<Props> = ({ accountbookId, query }: Props) => {
       if (document.documentElement.scrollTop > document.documentElement.clientHeight) {
         transactionStore.setShowTopButtonTrue();
       }
+    }
+    if (document.documentElement.scrollTop <= document.documentElement.clientHeight) {
+      transactionStore.setShowTopButtonFalse();
     }
   };
 

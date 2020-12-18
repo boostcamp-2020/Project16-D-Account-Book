@@ -12,7 +12,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BlueButton from '../../components/common/buttons/BlueButton';
 import RedButton from '../../components/common/buttons/RedButton';
-import account from '../../services/account';
 
 const SettingsAccountbookPageWrapper = styled.div`
   font-family: 'Spoqa Han Sans';
