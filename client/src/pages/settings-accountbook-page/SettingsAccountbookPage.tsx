@@ -3,12 +3,16 @@ import styled from 'styled-components';
 import SettingsSidebar from '../../components/common/settings-sidebar/SettingsSidebar';
 import Preview from '../../components/common/preview/Preview';
 import InputText from '../../components/common/inputs/input-text/InputText';
-import { DODGER_BLUE } from '../../constants/color';
 import useStore from '../../hook/use-store/useStore';
 import useGetParam from '../../hook/use-get-param/useGetParam';
 import { observer } from 'mobx-react';
 import Accountbook from '../../types/accountbook';
 import Spinner from '../../components/common/spinner/Spinner';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import BlueButton from '../../components/common/buttons/BlueButton';
+import RedButton from '../../components/common/buttons/RedButton';
+import account from '../../services/account';
 
 const SettingsAccountbookPageWrapper = styled.div`
   font-family: 'Spoqa Han Sans';
@@ -19,7 +23,7 @@ const SettingsBody = styled.div`
   position: absolute;
   top: 0%;
   left: 25%;
-  padding: 50px 50px;
+  padding: 25px 50px;
 `;
 
 const PreviewWrapper = styled.div`
@@ -28,7 +32,7 @@ const PreviewWrapper = styled.div`
 
 const SettingsItemWrapper = styled.div`
   width: 30vw;
-  margin-top: 50px;
+  margin-top: 7vh;
 `;
 
 const Label = styled.div<{ color?: string }>`
@@ -38,16 +42,15 @@ const Label = styled.div<{ color?: string }>`
   color: ${({ color }) => color};
 `;
 
-interface ConfirmButtonProps {
-  onClick?: () => void;
-}
+export const ModalButtonList = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
-const ConfirmButton = styled.p<ConfirmButtonProps>`
-  position: fixed;
-  top: 0%;
-  right: 5%;
-  cursor: pointer;
-  color: ${DODGER_BLUE};
+const ButtonWrapper = styled.div`
+  width: 10vw;
+  margin-top: 7vh;
+  margin-right: 3vw;
 `;
 
 const SettingsAccountbookPage: React.FC = () => {
@@ -63,6 +66,7 @@ const SettingsAccountbookPage: React.FC = () => {
   const [inputColor, setInputColor] = useState<string>(accountColor);
   const [title, setTitle] = useState<string>(accountTitle);
   const [description, setDescription] = useState<string>(accountDescription);
+  const [colorCheck, setColorCheck] = useState(false);
 
   useEffect(() => {
     const setCurrentAccountbook = () => {
@@ -91,14 +95,29 @@ const SettingsAccountbookPage: React.FC = () => {
 
   const onChange = (color: { hex: string }): void => {
     setInputColor(color.hex);
+    if (inputColor.toLowerCase() === (accountbookStore.accountbook as Accountbook).color.toLowerCase()) {
+      setColorCheck(false);
+    } else {
+      setColorCheck(true);
+    }
   };
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
+    if ((accountbookStore.accountbook as Accountbook).title === e.target.value) {
+      accountbookStore.setNoChangeTrue();
+    } else {
+      accountbookStore.setNoChangeFalse();
+    }
   };
 
   const onChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDescription(e.target.value);
+    if ((accountbookStore.accountbook as Accountbook).description === e.target.value) {
+      accountbookStore.setNoChangeTrue();
+    } else {
+      accountbookStore.setNoChangeFalse();
+    }
   };
 
   const convertToAccountbook = (title, inputColor, description, accountbookId) => {
@@ -110,20 +129,37 @@ const SettingsAccountbookPage: React.FC = () => {
       accountbookId,
     };
   };
+  const notify = () =>
+    toast('✅ㅤ가계부 설정이 변경되었습니다.', {
+      position: toast.POSITION.BOTTOM_CENTER,
+      hideProgressBar: true,
+      autoClose: 2000,
+    });
 
   const updateAccountbook = (): void => {
     const accountbook = convertToAccountbook(title, inputColor, description, accountbookId);
     accountbookStore.updateAccountbook(accountbook);
+    notify();
+    accountbookStore.setNoChangeTrue();
+    setColorCheck(false);
+  };
+
+  const returnAccountbook = (): void => {
+    setTitle((accountbookStore.accountbook as Accountbook).title);
+    setDescription((accountbookStore.accountbook as Accountbook).description);
+    setInputColor((accountbookStore.accountbook as Accountbook).color);
+    accountbookStore.setNoChangeTrue();
+    setColorCheck(false);
   };
 
   return (
     <SettingsAccountbookPageWrapper>
+      <ToastContainer pauseOnFocusLoss={false} />
       <SettingsSidebar currentpage={'accountbook'} />
       {accountbookStore.isLoading ? (
         <Spinner />
       ) : (
         <SettingsBody>
-          <ConfirmButton onClick={updateAccountbook}>완료</ConfirmButton>
           <SettingsItemWrapper>
             <PreviewWrapper>
               <Preview title={title} description={description} color={inputColor} onChange={onChange} />
@@ -160,6 +196,26 @@ const SettingsAccountbookPage: React.FC = () => {
               onChange={onChangeDescription}
             />
           </SettingsItemWrapper>
+          <ModalButtonList>
+            <ButtonWrapper>
+              {accountbookStore.noChange && !colorCheck ? (
+                <RedButton onClick={returnAccountbook} disabled={'none'}>
+                  초기화
+                </RedButton>
+              ) : (
+                <RedButton onClick={returnAccountbook}>초기화</RedButton>
+              )}
+            </ButtonWrapper>
+            <ButtonWrapper>
+              {accountbookStore.noChange && !colorCheck ? (
+                <BlueButton onClick={updateAccountbook} disabled={'none'}>
+                  변경
+                </BlueButton>
+              ) : (
+                <BlueButton onClick={updateAccountbook}>변경</BlueButton>
+              )}
+            </ButtonWrapper>
+          </ModalButtonList>
         </SettingsBody>
       )}
     </SettingsAccountbookPageWrapper>

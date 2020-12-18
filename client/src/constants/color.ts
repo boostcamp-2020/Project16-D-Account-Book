@@ -15,6 +15,7 @@ export const NAVER_GREEN = '#2EA043';
 export const FAIL_RED = '#ff2111';
 export const ORANGE = '#F39807';
 export const MINT = '#1ABC9C';
+export const DISABLED_GRAY = '#E4E4E4';
 export const WHITE = '#ffffff';
 
 const color = {
@@ -35,6 +36,7 @@ const color = {
   FAIL_RED,
   ORANGE,
   MINT,
+  DISABLED_GRAY,
   WHITE,
 };
 

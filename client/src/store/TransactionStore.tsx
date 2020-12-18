@@ -30,6 +30,9 @@ export default class TransactionStore {
   lastScrollTop = 0;
 
   @observable
+  showTopButton = false;
+
+  @observable
   csvTransactions: Array<CsvTransaction> = [];
 
   rootStore: RootStore;
@@ -229,5 +232,15 @@ export default class TransactionStore {
   @action
   setLastScrollTop = (lastScrollTop: number): void => {
     this.lastScrollTop = lastScrollTop;
+  };
+
+  @action
+  setShowTopButtonTrue = (): void => {
+    this.showTopButton = true;
+  };
+
+  @action
+  setShowTopButtonFalse = (): void => {
+    this.showTopButton = false;
   };
 }
