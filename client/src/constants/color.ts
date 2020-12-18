@@ -3,6 +3,7 @@ export const LIGHT_BLUE = '#b3d1f3';
 export const RED = '#F35454';
 export const GRAY = '#E8E8E8';
 export const DEEP_GRAY = '#7f7f7f';
+export const MEDIUM_GRAY = '#E4E4E4';
 export const LIGHT_GRAY = '#f6f8fa';
 export const MODAL_GRAY = '#5E5E5E';
 export const MODAL_RED = '#E74C3C';
@@ -14,6 +15,7 @@ export const NAVER_GREEN = '#2EA043';
 export const FAIL_RED = '#ff2111';
 export const ORANGE = '#F39807';
 export const MINT = '#1ABC9C';
+export const WHITE = '#ffffff';
 
 const color = {
   BLUE,
@@ -21,6 +23,7 @@ const color = {
   RED,
   GRAY,
   DEEP_GRAY,
+  MEDIUM_GRAY,
   LIGHT_GRAY,
   MODAL_GRAY,
   MODAL_RED,
@@ -32,6 +35,7 @@ const color = {
   FAIL_RED,
   ORANGE,
   MINT,
+  WHITE,
 };
 
 export default color;

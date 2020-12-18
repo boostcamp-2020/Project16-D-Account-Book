@@ -9,6 +9,7 @@ import { ModalContentWrapper } from '../confirm-modal/ConfirmModal';
 export const ModalContentText = styled.p`
   text-align: center;
   height: 10px;
+  font-family: 'Spoqa Han Sans';
 `;
 
 const ModalButtonList = styled.div`

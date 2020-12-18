@@ -23,6 +23,7 @@ const SidebarWrapper = styled.div<SidebarWrapperProps>`
   z-index: 0;
   transition: all ease 0.3s 0s;
   padding-top: 40px;
+  font-family: 'Spoqa Han Sans';
 `;
 
 const ChildrenWrapper = styled.div`

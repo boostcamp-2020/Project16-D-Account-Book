@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import color from '../../../../constants/color';
 import { InputListWrapper, InputWrapper } from './TransactionInputList';
 import { FormActionType, FormChangeAction } from '../../../../types/TransactionForm';
-import { getDateString, findAccountByName } from '../../../../utils/mms/mms';
+import { getDateString, findAccountByName, correctionCardName } from '../../../../utils/mms/mms';
 import transactionService from '../../../../services/transaction';
 import useStore from '../../../../hook/use-store/useStore';
 
@@ -25,6 +25,9 @@ const TextBox = styled.textarea`
   margin-bottom: 10px;
   resize: none;
   border: 1px solid lightgray;
+  &:focus {
+    outline: none;
+  }
   font-family: 'Spoqa Han Sans';
 `;
 
@@ -41,15 +44,32 @@ const ButtonLayout = styled.div`
 
 interface IButtons {
   backgroundColor: string;
+  isTranslateButton: boolean;
+  mmsText?: string;
 }
 const Buttons = styled.button<IButtons>`
   width: 40%;
   padding: 10px 10px;
   border-radius: 50px;
   border: 0px;
-  color: white;
-  cursor: pointer;
+  color: ${({ isTranslateButton, mmsText }) => {
+    if (isTranslateButton) {
+      return mmsText ? color.WHITE : color.MEDIUM_GRAY;
+    } else {
+      return 'white';
+    }
+  }};
+  cursor: ${({ isTranslateButton, mmsText }) => {
+    if (isTranslateButton) {
+      return mmsText ? 'pointer' : 'default';
+    } else {
+      return 'pointer';
+    }
+  }};
   background-color: ${(props) => props.backgroundColor};
+  &:focus {
+    outline: none;
+  }
 `;
 
 interface IMMSInput {
@@ -71,6 +91,7 @@ const MMSInput: React.FC<IMMSInput> = ({ dispatch, MMSToggle }: IMMSInput) => {
         alert('처리할 수 없는 결제 내역입니다.');
         return;
       }
+      response.cardname = correctionCardName(response.cardname);
       const selectedCategory = findAccountByName(response.cardname, accountStore.accounts);
       if (selectedCategory === undefined) {
         alert('카드 이름을 찾을 수 없습니다. 직접 입력해주세요!');
@@ -111,10 +132,15 @@ const MMSInput: React.FC<IMMSInput> = ({ dispatch, MMSToggle }: IMMSInput) => {
         <SmallArea>
           <TextBox placeholder="메시지를 입력하세요" value={mmsText} onChange={textChange} />
           <ButtonLayout>
-            <Buttons backgroundColor={color.MODAL_RED} onClick={MMSToggle}>
+            <Buttons backgroundColor={color.MODAL_RED} isTranslateButton={false} onClick={MMSToggle}>
               취소
             </Buttons>
-            <Buttons backgroundColor={color.MINT} onClick={clickConfirm}>
+            <Buttons
+              backgroundColor={mmsText ? color.MINT : color.DEEP_GRAY}
+              mmsText={mmsText}
+              isTranslateButton={true}
+              onClick={clickConfirm}
+            >
               변환
             </Buttons>
           </ButtonLayout>

@@ -2,7 +2,7 @@ import datePeriod from '../constants/datePeriod';
 /*
 TODO :
 윤년인지 판단해주는 함수
-월변경 컴포넌트에서 필요할 줄 알고 만들었는데, 생각해보니 사용되지 않네요.. 
+월변경 컴포넌트에서 필요할 줄 알고 만들었는데, 생각해보니 사용되지 않네요..
 혹시나 다른 기능에서 필요할까봐 삭제하지 않았습니다.
 */
 export const isLeapYear = (year: number): boolean => {
@@ -12,7 +12,7 @@ export const isLeapYear = (year: number): boolean => {
 /*
 TODO :
 월의 말일인지 판단해주는 함수입니다.
-월변경 컴포넌트에서 필요할 줄 알고 만들었는데, 생각해보니 사용되지 않네요.. 
+월변경 컴포넌트에서 필요할 줄 알고 만들었는데, 생각해보니 사용되지 않네요..
 혹시나 다른 기능에서 필요할까봐 삭제하지 않았습니다.
 */
 export const isEndOfMonth = (year: number, month: number, day: number): boolean => {
@@ -31,7 +31,7 @@ export const isEndOfMonth = (year: number, month: number, day: number): boolean 
 /*
 TODO :
 월의 말일을 리턴해주는 함수입니다.
-월변경 컴포넌트에서 필요할 줄 알고 만들었는데, 생각해보니 사용되지 않네요.. 
+월변경 컴포넌트에서 필요할 줄 알고 만들었는데, 생각해보니 사용되지 않네요..
 혹시나 다른 기능에서 필요할까봐 삭제하지 않았습니다.
 */
 export const getEndOfMonth = (year: number, month: number): number => {
@@ -92,6 +92,15 @@ export const getFormattedDate = ({ date, format }: { date: Date; format: string 
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}${format}${month}${format}${day}`;
+};
+
+export const getFormattedDateForCSV = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hour = String(date.getHours()).padStart(2, '0');
+  const minute = String(date.getMinutes()).padStart(2, '0');
+  return year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
 };
 
 export const getDatePeriod = (startDate: Date, endDate: Date): string => {
