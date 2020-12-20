@@ -22,13 +22,7 @@
 
 ## 데모 영상
 
-[여기를 클릭 :click](https://www.youtube.com/watch?v=5-2lMAnBslY&feature=youtu.be)
-
-## 데모 영상
-
-<div>
-    <iframe width="900" height="506" src="https://www.youtube.com/embed/5-2lMAnBslY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
+[여기를 클릭 🎥](https://www.youtube.com/watch?v=5-2lMAnBslY&feature=youtu.be)
 
 ## 배포 Link :exclamation:
 
