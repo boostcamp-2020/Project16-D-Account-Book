@@ -22,7 +22,11 @@
 
 ## 데모 영상
 
-[여기를 클릭 🎥](https://www.youtube.com/watch?v=5-2lMAnBslY&feature=youtu.be)
+<a href="https://www.youtube.com/watch?v=5-2lMAnBslY&feature=youtu.be" target="_blank">
+  <img src="https://i.imgur.com/ESwleGX.png" width="600">
+</a>
+
+<br><br><br>
 
 ## 배포 Link :exclamation:
 
