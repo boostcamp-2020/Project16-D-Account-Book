@@ -19,8 +19,8 @@
 개인의 입출금 및 가계 재정을 시각화하고 분석할 수 있을 뿐만 아니라 공동 가계부까지 관리할 수 있는 웹 서비스입니다.
 
 <br><br><br>
-
-## 데모 영상
+ 
+## 데모 영상 🎥
 
 <a href="https://www.youtube.com/watch?v=5-2lMAnBslY&feature=youtu.be" target="_blank">
   <img src="https://i.imgur.com/ESwleGX.png" width="600">
