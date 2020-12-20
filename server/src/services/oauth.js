@@ -70,7 +70,7 @@ const findOrCreateUser = async (oauthUser) => {
   } else {
     await ourServiceUser.createUserAccountbook({
       description: '데모 참가자들을 위한 테스트 가계부입니다',
-      color: '#1E90FF',
+      color: '#e8d8f2',
       authority: 0,
       accountbookId: 1,
     });
