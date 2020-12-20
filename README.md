@@ -30,8 +30,6 @@
     <iframe width="900" height="506" src="https://www.youtube.com/embed/5-2lMAnBslY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-<div style="background-image: url("https://www.youtube.com/embed/5-2lMAnBslY");"></div>
-
 ## 배포 Link :exclamation:
 
 [http://moa.r-e.kr/](http://moa.r-e.kr/)
