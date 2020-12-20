@@ -26,7 +26,9 @@
 
 ## 데모 영상
 
-<iframe width="900" height="506" src="https://www.youtube.com/embed/5-2lMAnBslY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div>
+    <iframe width="900" height="506" src="https://www.youtube.com/embed/5-2lMAnBslY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ## 배포 Link :exclamation:
 
