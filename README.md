@@ -19,13 +19,23 @@
 개인의 입출금 및 가계 재정을 시각화하고 분석할 수 있을 뿐만 아니라 공동 가계부까지 관리할 수 있는 웹 서비스입니다.
 
 <br><br><br>
+ 
+## 데모 영상 🎥
+
+<a href="https://www.youtube.com/watch?v=5-2lMAnBslY&feature=youtu.be" target="_blank">
+  <img src="https://i.imgur.com/ESwleGX.png" width="600">
+</a>
+
+<br><br><br>
 
 ## 배포 Link :exclamation:
 
 [http://moa.r-e.kr/](http://moa.r-e.kr/)
 > - Chrome을 사용해주세요.
 > 
-> - 현재 네이버 로그인은 서비스 검수 요청 중에 있습니다. 카카오 로그인을 사용해주세요.
+> - 카카오 로그인을 권장드립니다. 카카오 계정으로 회원가입 시, 모든 정보 제공에 동의해주셔야 정상적으로 회원가입이 이루어집니다.
+> - 모든 정보 제공에 동의하지 않아 `{"message":"Cannot read property 'match' of undefined"}`와 같은 에러 메세지가 뜨시는 경우, [여기](https://github.com/boostcamp-2020/Project16-D-Account-Book/wiki/kakao-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%98%A4%EB%A5%98-%EB%B0%9C%EC%83%9D-%EC%8B%9C-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95)를 참고해주세요.
+> - 현재 네이버 로그인은 서비스 검수 요청 중에 있습니다. 네이버 로그인을 하시고 싶은 분들은 테스터 아이디를 신청해주시기 바랍니다. 테스터 아이디 신청 방법은 [여기](https://github.com/boostcamp-2020/Project16-D-Account-Book/wiki/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%85%8C%EC%8A%A4%ED%84%B0-%EC%95%84%EC%9D%B4%EB%94%94-%EC%8B%A0%EC%B2%AD-%EB%B0%A9%EB%B2%95)를 참고해주세요.
 
 <br><br><br>
 
